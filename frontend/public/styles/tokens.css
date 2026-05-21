@@ -1,0 +1,135 @@
+/* ShadowBlade · Design tokens
+ * Vibe: minimalist, professional, efficient, modern enterprise SaaS, tech-feel, trustworthy.
+ * Palette: deep blue (authority) + dark gray (calm focus) + white (clarity) + cyan-green accent (action).
+ */
+
+:root {
+  /* ── Brand palette ───────────────────────────────────────────────────── */
+  --sb-navy-950: #060c1a;
+  --sb-navy-900: #0a1428;
+  --sb-navy-800: #0f1d3a;
+  --sb-navy-700: #142a55;
+  --sb-navy-600: #1f3a72;
+  --sb-navy-500: #2c528f;
+
+  --sb-graphite-950: #0c1118;
+  --sb-graphite-900: #11161f;
+  --sb-graphite-800: #161c28;
+  --sb-graphite-700: #1d2535;
+  --sb-graphite-600: #2a3447;
+  --sb-graphite-500: #3a455c;
+  --sb-graphite-400: #5a667f;
+  --sb-graphite-300: #8590a8;
+  --sb-graphite-200: #b6bdcc;
+  --sb-graphite-100: #d8dde5;
+  --sb-graphite-50:  #eef0f4;
+
+  --sb-mist-50:  #f7f8fb;
+  --sb-mist-100: #eef1f6;
+
+  --sb-accent-50:  #e6fbf6;
+  --sb-accent-100: #c5f4e8;
+  --sb-accent-300: #6ee2c5;
+  --sb-accent-500: #22d3b7;     /* primary cyan-green action */
+  --sb-accent-600: #14b59a;
+  --sb-accent-700: #0d8f7a;
+  --sb-accent-900: #064f44;
+
+  --sb-status-running: #38bdf8;
+  --sb-status-queued:  #fbbf24;
+  --sb-status-done:    #22d3b7;
+  --sb-status-review:  #a78bfa;
+  --sb-status-draft:   #94a3b8;
+  --sb-status-failed:  #f87171;
+
+  /* ── Semantic surface (dark cockpit) ─────────────────────────────────── */
+  --sb-bg:           var(--sb-navy-950);
+  --sb-bg-elevated: #0b1428;
+  --sb-surface:      var(--sb-graphite-900);
+  --sb-surface-1:    var(--sb-graphite-800);
+  --sb-surface-2:    var(--sb-graphite-700);
+  --sb-border:       rgba(255, 255, 255, 0.06);
+  --sb-border-strong:rgba(255, 255, 255, 0.12);
+  --sb-grid:         rgba(34, 211, 183, 0.04);
+
+  --sb-text:         #f7f9fc;
+  --sb-text-muted:   var(--sb-graphite-300);
+  --sb-text-faint:   var(--sb-graphite-400);
+  --sb-text-invert:  var(--sb-navy-900);
+
+  /* ── Type ────────────────────────────────────────────────────────────── */
+  --sb-font-display: "Inter Display", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sb-font-body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sb-font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --sb-text-xs:   11px;
+  --sb-text-sm:   12px;
+  --sb-text-base: 13px;
+  --sb-text-md:   14px;
+  --sb-text-lg:   16px;
+  --sb-text-xl:   20px;
+  --sb-text-2xl:  26px;
+  --sb-text-3xl:  34px;
+  --sb-text-4xl:  44px;
+  --sb-text-5xl:  56px;
+
+  --sb-leading-tight: 1.15;
+  --sb-leading-snug:  1.35;
+  --sb-leading-base:  1.55;
+
+  --sb-tracking-tight: -0.022em;
+  --sb-tracking-wide:  0.08em;
+
+  /* ── Radius + Space ──────────────────────────────────────────────────── */
+  --sb-radius-xs: 4px;
+  --sb-radius-sm: 6px;
+  --sb-radius:    10px;
+  --sb-radius-lg: 14px;
+  --sb-radius-xl: 20px;
+  --sb-radius-pill: 999px;
+
+  --sb-space-1:  4px;
+  --sb-space-2:  8px;
+  --sb-space-3:  12px;
+  --sb-space-4:  16px;
+  --sb-space-5:  20px;
+  --sb-space-6:  24px;
+  --sb-space-8:  32px;
+  --sb-space-10: 40px;
+  --sb-space-12: 48px;
+  --sb-space-16: 64px;
+  --sb-space-20: 80px;
+
+  /* ── Shadow + Motion ─────────────────────────────────────────────────── */
+  --sb-shadow-sm:   0 1px 2px rgba(6, 10, 22, 0.4);
+  --sb-shadow:      0 8px 24px -8px rgba(6, 10, 22, 0.55), 0 2px 4px rgba(6, 10, 22, 0.4);
+  --sb-shadow-lg:   0 24px 48px -16px rgba(6, 10, 22, 0.65), 0 8px 16px -8px rgba(6, 10, 22, 0.5);
+  --sb-glow-accent: 0 0 0 1px rgba(34, 211, 183, 0.35), 0 8px 32px -8px rgba(34, 211, 183, 0.35);
+
+  --sb-ease-out:   cubic-bezier(0.16, 0.84, 0.44, 1);
+  --sb-ease-in-out:cubic-bezier(0.83, 0, 0.17, 1);
+  --sb-dur-fast:   140ms;
+  --sb-dur:        220ms;
+  --sb-dur-slow:   420ms;
+
+  /* ── Layout ──────────────────────────────────────────────────────────── */
+  --sb-sidebar-w: 248px;
+  --sb-topbar-h:  60px;
+  --sb-rail-w:    64px;
+  --sb-container: 1280px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="auto"] {
+    --sb-bg: var(--sb-mist-50);
+    --sb-bg-elevated: #ffffff;
+    --sb-surface: #ffffff;
+    --sb-surface-1: var(--sb-mist-50);
+    --sb-surface-2: var(--sb-mist-100);
+    --sb-border: rgba(15, 26, 47, 0.08);
+    --sb-border-strong: rgba(15, 26, 47, 0.16);
+    --sb-text: var(--sb-navy-900);
+    --sb-text-muted: var(--sb-graphite-500);
+    --sb-text-faint: var(--sb-graphite-400);
+  }
+}

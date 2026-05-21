@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShadowBlade · Enterprise AI Video Cloud</title>
+    <meta
+      name="description"
+      content="ShadowBlade turns a brief into a ready-to-ship marketing, training or product video in minutes. Built for enterprise."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-marketing {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+      .sb-marketing__nav {
+        display: flex;
+        align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        width: 100%;
+      }
+      .sb-marketing__nav a.link {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-md);
+      }
+      .sb-marketing__nav a.link:hover { color: var(--sb-text); }
+      .sb-marketing__nav .spacer { flex: 1; }
+
+      .sb-hero {
+        max-width: var(--sb-container);
+        width: 100%;
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-12) var(--sb-space-20);
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: var(--sb-space-16);
+        align-items: center;
+      }
+      .sb-hero__copy h1 {
+        font-family: var(--sb-font-display);
+        font-size: clamp(40px, 5vw, 64px);
+        line-height: 1.04;
+        letter-spacing: -0.025em;
+        margin: var(--sb-space-4) 0 var(--sb-space-5);
+        font-weight: 600;
+      }
+      .sb-hero__copy h1 span {
+        background: linear-gradient(90deg, #22d3b7 0%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .sb-hero__lead {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-lg);
+        max-width: 52ch;
+        margin-bottom: var(--sb-space-8);
+      }
+      .sb-hero__cta { display: flex; gap: var(--sb-space-3); flex-wrap: wrap; }
+      .sb-hero__proof {
+        margin-top: var(--sb-space-10);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-6);
+        border-top: 1px solid var(--sb-border);
+        padding-top: var(--sb-space-6);
+      }
+      .sb-hero__proof b {
+        display: block;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        letter-spacing: -0.02em;
+      }
+      .sb-hero__proof span {
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-faint);
+      }
+
+      .sb-hero__art {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        border-radius: 24px;
+        background: radial-gradient(circle at 30% 20%, rgba(34, 211, 183, 0.18), transparent 55%),
+          linear-gradient(160deg, rgba(15, 26, 47, 0.95), rgba(6, 12, 26, 0.95));
+        border: 1px solid var(--sb-border);
+        overflow: hidden;
+        box-shadow: var(--sb-shadow-lg);
+      }
+      .sb-hero__art svg { width: 100%; height: 100%; }
+
+      .sb-logos {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-16);
+        display: grid;
+        gap: var(--sb-space-5);
+      }
+      .sb-logos__title {
+        font-size: var(--sb-text-xs);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--sb-text-faint);
+        text-align: center;
+      }
+      .sb-logos__row {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--sb-space-8);
+        align-items: center;
+        opacity: 0.7;
+      }
+      .sb-logos__row span {
+        font-family: var(--sb-font-display);
+        font-weight: 700;
+        font-size: var(--sb-text-lg);
+        letter-spacing: 0.04em;
+        color: var(--sb-graphite-200);
+        text-align: center;
+      }
+
+      .sb-features {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-20);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-5);
+      }
+      .sb-feature {
+        padding: var(--sb-space-6);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22, 30, 48, 0.85), rgba(11, 18, 32, 0.85));
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .sb-feature__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: rgba(34, 211, 183, 0.12);
+        color: var(--sb-accent-300);
+      }
+      .sb-feature h3 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+      }
+      .sb-feature p {
+        margin: 0;
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-md);
+      }
+
+      @media (max-width: 920px) {
+        .sb-hero { grid-template-columns: 1fr; padding: var(--sb-space-8); }
+        .sb-features { grid-template-columns: 1fr; padding: 0 var(--sb-space-8) var(--sb-space-12); }
+        .sb-logos__row { grid-template-columns: repeat(3, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sb-marketing">
+      <header class="sb-marketing__nav">
+        <a class="sb-brand" href="index.html">
+          <div class="sb-brand__mark">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#m-grad)" />
+              <defs>
+                <linearGradient id="m-grad" x1="4" y1="4" x2="20" y2="20">
+                  <stop offset="0%" stop-color="#22D3B7"/>
+                  <stop offset="100%" stop-color="#38BDF8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
+        </a>
+        <span class="spacer"></span>
+        <a class="link" href="#">Product</a>
+        <a class="link" href="#">Templates</a>
+        <a class="link" href="#">Customers</a>
+        <a class="link" href="#">Pricing</a>
+        <a class="link" href="#">Docs</a>
+        <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+        <a class="sb-btn sb-btn--primary" href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          Open workspace
+        </a>
+      </header>
+
+      <section class="sb-hero">
+        <div class="sb-hero__copy">
+          <span class="sb-eyebrow">Enterprise AI video cloud</span>
+          <h1>From brief to broadcast-ready video in <span>4 minutes</span>.</h1>
+          <p class="sb-hero__lead">
+            ShadowBlade is the AI pipeline marketing, training, and product teams
+            run their video factory on. Write a brief, choose a template, and
+            the studio scripts, voices, edits, captions, and renders the cut —
+            on brand, on guideline, on schedule.
+          </p>
+          <div class="sb-hero__cta">
+            <a class="sb-btn sb-btn--primary" href="dashboard.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              Open the workspace
+            </a>
+            <a class="sb-btn sb-btn--ghost" href="studio.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              Watch a 90-second tour
+            </a>
+          </div>
+
+          <div class="sb-hero__proof">
+            <div><b>4.8&nbsp;min</b><span>Average time to first cut</span></div>
+            <div><b>92%</b><span>Reviewer approval rate</span></div>
+            <div><b>$168k</b><span>Saved per quarter vs. agency</span></div>
+          </div>
+        </div>
+
+        <div class="sb-hero__art" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0F2A4A"/>
+                <stop offset="100%" stop-color="#06101F"/>
+              </linearGradient>
+              <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.85"/>
+              </linearGradient>
+              <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1A2842"/>
+                <stop offset="100%" stop-color="#0B1326"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="600" fill="url(#bg)"/>
+
+            <!-- decorative grid -->
+            <g stroke="rgba(255,255,255,0.04)">
+              <path d="M0 100H600M0 200H600M0 300H600M0 400H600M0 500H600"/>
+              <path d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600"/>
+            </g>
+
+            <!-- pipeline ring -->
+            <g transform="translate(300 300)">
+              <circle r="160" fill="none" stroke="url(#ring)" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.7"/>
+              <circle r="120" fill="none" stroke="rgba(34,211,183,0.35)" stroke-width="1"/>
+              <circle r="80"  fill="none" stroke="rgba(34,211,183,0.2)" stroke-width="1"/>
+            </g>
+
+            <!-- center play -->
+            <g transform="translate(300 300)">
+              <circle r="46" fill="url(#card)" stroke="rgba(34,211,183,0.5)"/>
+              <path d="M-12 -16L20 0L-12 16Z" fill="#22D3B7"/>
+            </g>
+
+            <!-- node 1: brief -->
+            <g transform="translate(110 130)">
+              <rect width="180" height="64" rx="10" fill="url(#card)" stroke="rgba(255,255,255,0.08)"/>
+              <text x="14" y="24" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="1.5">STEP 01</text>
+              <text x="14" y="46" fill="#F7F9FC" font-family="Inter" font-size="14" font-weight="600">Brief &amp; brand</text>
+            </g>
+
+            <!-- node 2: storyboard -->
+            <g transform="translate(360 110)">
+              <rect width="180" height="64" rx="10" fill="url(#card)" stroke="rgba(255,255,255,0.08)"/>
+              <text x="14" y="24" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="1.5">STEP 02</text>
+              <text x="14" y="46" fill="#F7F9FC" font-family="Inter" font-size="14" font-weight="600">Storyboard &amp; voice</text>
+            </g>
+
+            <!-- node 3: render -->
+            <g transform="translate(390 410)">
+              <rect width="180" height="64" rx="10" fill="url(#card)" stroke="rgba(255,255,255,0.08)"/>
+              <text x="14" y="24" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="1.5">STEP 03</text>
+              <text x="14" y="46" fill="#F7F9FC" font-family="Inter" font-size="14" font-weight="600">Render &amp; review</text>
+            </g>
+
+            <!-- node 4: publish -->
+            <g transform="translate(80 410)">
+              <rect width="180" height="64" rx="10" fill="url(#card)" stroke="rgba(255,255,255,0.08)"/>
+              <text x="14" y="24" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="1.5">STEP 04</text>
+              <text x="14" y="46" fill="#F7F9FC" font-family="Inter" font-size="14" font-weight="600">Publish &amp; analyse</text>
+            </g>
+
+            <!-- connectors -->
+            <g stroke="rgba(34,211,183,0.45)" stroke-width="1" fill="none" stroke-dasharray="3 4">
+              <path d="M200 194 Q 250 240 280 270"/>
+              <path d="M450 174 Q 380 220 322 274"/>
+              <path d="M480 410 Q 400 360 322 326"/>
+              <path d="M170 410 Q 240 360 280 326"/>
+            </g>
+
+            <!-- floating chip · render ETA -->
+            <g transform="translate(440 300)">
+              <rect width="120" height="40" rx="8" fill="rgba(8,14,28,0.85)" stroke="rgba(34,211,183,0.6)"/>
+              <circle cx="14" cy="20" r="4" fill="#22D3B7"/>
+              <text x="26" y="17" fill="#8590A8" font-family="Inter" font-size="9">RENDERING</text>
+              <text x="26" y="32" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">ETA 64s</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="sb-logos">
+        <div class="sb-logos__title">Trusted by enterprise teams at</div>
+        <div class="sb-logos__row">
+          <span>HELIOS</span><span>NORTHWIND</span><span>UMBRA·CO</span>
+          <span>FABRIK</span><span>QUANTA</span><span>POLARIS</span>
+        </div>
+      </section>
+
+      <section class="sb-features">
+        <article class="sb-feature">
+          <div class="sb-feature__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+          </div>
+          <h3>Brand-locked output</h3>
+          <p>Every cut is rendered against your brand kit — colour, type, voice, intro, outro, legal — so nothing off-guideline ever reaches review.</p>
+        </article>
+        <article class="sb-feature">
+          <div class="sb-feature__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h3>4-minute first cut</h3>
+          <p>The pipeline parallelises scripting, voiceover, b-roll, captions, and composition so producers ship in the time they used to take to brief.</p>
+        </article>
+        <article class="sb-feature">
+          <div class="sb-feature__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+          </div>
+          <h3>SOC&nbsp;2 &amp; SSO</h3>
+          <p>Role-based reviews, audit log, SSO, regional render. The same control plane your IT team already trusts for the rest of the stack.</p>
+        </article>
+      </section>
+
+      <footer class="sb-footer">
+        <span>© 2026 ShadowBlade Labs</span>
+        <span>Status · all systems normal · v0.1</span>
+      </footer>
+    </main>
+  </body>
+</html>

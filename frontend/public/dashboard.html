@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+  </head>
+  <body data-route="dashboard">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Dashboard</b>
+          </div>
+          <label class="sb-topbar__search" aria-label="Search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" placeholder="Search projects, assets, templates…" />
+            <kbd>⌘K</kbd>
+          </label>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Notifications">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 004 0"/></svg>
+            </button>
+            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Help">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 2-2.5 2.5-2.5 4M12 17h.01"/></svg>
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              New video
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Workspace overview</div>
+                <h1>Welcome back, Ava.</h1>
+                <p class="sb-page-head__lead">
+                  6 cuts shipped this week. 2 running now. The pipeline is on schedule for the Tuesday product launch.
+                </p>
+              </div>
+              <div class="sb-page-head__actions">
+                <button class="sb-btn sb-btn--ghost">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+                  Refresh
+                </button>
+                <button class="sb-btn sb-btn--primary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                  Resume last project
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid" aria-label="Key results">
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+                Renders this month
+              </div>
+              <div class="sb-kpi__value">387 <small>/ 1,000</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 12.4% vs last month</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[10,14,12,18,22,28,26,34,38,40]"></svg>
+            </article>
+
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                Time to first cut
+              </div>
+              <div class="sb-kpi__value">4.8 <small>min</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 31% faster</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[12,11,9,9,7,8,6,6,5,4.8]"></svg>
+            </article>
+
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4L19 7"/></svg>
+                Approval rate
+              </div>
+              <div class="sb-kpi__value">92 <small>%</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 6 pts</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[80,82,84,85,84,87,88,89,90,92]"></svg>
+            </article>
+
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5A3.5 3.5 0 006 8.5 3.5 3.5 0 009.5 12h5a3.5 3.5 0 010 7H6"/></svg>
+                Saved vs agency
+              </div>
+              <div class="sb-kpi__value">$168k <small>/qtr</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 21%</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[80,90,110,120,140,150,160,162,165,168]"></svg>
+            </article>
+          </section>
+
+          <section class="sb-grid-2-1">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div>
+                  <div class="sb-card__title">In flight · pipeline run</div>
+                  <div class="sb-card__subtitle">Spring product launch — wearable hub · 28s · 9:16</div>
+                </div>
+                <div class="sb-card__head-actions">
+                  <span class="sb-pill sb-pill--running">Rendering</span>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Open in Studio</button>
+                </div>
+              </header>
+              <div class="sb-card__body">
+                <div class="sb-stages">
+                  <div class="sb-stage sb-stage--succeeded">
+                    <span class="sb-stage__index">✓</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">Script</div>
+                      <div class="sb-stage__log">6 scenes · 142 words · brand-tone score 0.94</div>
+                    </div>
+                    <div class="sb-stage__meta">8.4s</div>
+                  </div>
+                  <div class="sb-stage sb-stage--succeeded">
+                    <span class="sb-stage__index">✓</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">Storyboard</div>
+                      <div class="sb-stage__log">6/6 boards rendered · editorial style</div>
+                    </div>
+                    <div class="sb-stage__meta">12.1s</div>
+                  </div>
+                  <div class="sb-stage sb-stage--succeeded">
+                    <span class="sb-stage__index">✓</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">Voiceover</div>
+                      <div class="sb-stage__log">alloy-en-female · 4 takes · -14 LUFS</div>
+                    </div>
+                    <div class="sb-stage__meta">18.6s</div>
+                  </div>
+                  <div class="sb-stage sb-stage--succeeded">
+                    <span class="sb-stage__index">✓</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">B-roll match</div>
+                      <div class="sb-stage__log">18 clips matched · CC license filter on</div>
+                    </div>
+                    <div class="sb-stage__meta">41.0s</div>
+                  </div>
+                  <div class="sb-stage sb-stage--running">
+                    <span class="sb-stage__index">●</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">Composition</div>
+                      <div class="sb-stage__log">62% · waiting on overlay #3 · 1280×2272</div>
+                    </div>
+                    <div class="sb-stage__meta">ETA 0:64</div>
+                  </div>
+                  <div class="sb-stage">
+                    <span class="sb-stage__index">06</span>
+                    <div class="sb-stage__body">
+                      <div class="sb-stage__title">Render to MP4</div>
+                      <div class="sb-stage__log">queued behind 2 rush jobs · H.264 high · 60 fps</div>
+                    </div>
+                    <div class="sb-stage__meta">queued</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Approvals waiting on you</div>
+                <div class="sb-card__head-actions">
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">See all</button>
+                </div>
+              </header>
+              <div class="sb-card__body sb-stack">
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(167,139,250,0.18);color:#a78bfa">SE</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Onboarding · SE bootcamp</div>
+                    <div class="sb-stage__log">Marcus Lee · 2 comments · 96s</div>
+                  </div>
+                  <div class="sb-stage__meta">
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">Review</button>
+                  </div>
+                </div>
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(56,189,248,0.18);color:#38BDF8">CP</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">AI Copilot · product demo</div>
+                    <div class="sb-stage__log">Priya Rao · revision 3 · 60s</div>
+                  </div>
+                  <div class="sb-stage__meta">
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Open</button>
+                  </div>
+                </div>
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(34,211,183,0.18);color:#22d3b7">SR</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Series C teaser · TikTok</div>
+                    <div class="sb-stage__log">Diego Alvarez · ready to publish</div>
+                  </div>
+                  <div class="sb-stage__meta">
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">Approve</button>
+                  </div>
+                </div>
+                <div class="sb-divider"></div>
+                <div class="sb-stage">
+                  <span class="sb-stage__index">📌</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Brand guideline drift</div>
+                    <div class="sb-stage__log">2 cuts use #20D2B5 — should be #22D3B7. Auto-fix available.</div>
+                  </div>
+                  <div class="sb-stage__meta">
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Resolve</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section>
+            <header class="sb-page-head__row" style="margin-bottom:var(--sb-space-4)">
+              <div>
+                <h2 style="margin:0;font-family:var(--sb-font-display);font-size:var(--sb-text-xl);font-weight:600">Recent projects</h2>
+                <p style="margin:4px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">38 total · sorted by last touched</p>
+              </div>
+              <div class="sb-page-head__actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">All</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Marketing</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Training</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Demos</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Social</button>
+              </div>
+            </header>
+
+            <div class="sb-grid-3" id="project-grid"></div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Workspace · Acme Marketing Cloud · region eu-central-1</span>
+          <span>Pipeline healthy · 4 workers · last sync just now</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="project-card-tpl">
+      <article class="sb-project">
+        <div class="sb-project__cover">
+          <span class="sb-pill"></span>
+          <span class="sb-aspect-tag"></span>
+          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"></svg>
+        </div>
+        <div class="sb-project__body">
+          <div class="sb-project__name"></div>
+          <div class="sb-meter"><i></i></div>
+          <div class="sb-project__meta">
+            <span class="meta-owner"></span>
+            <span class="meta-time"></span>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script src="scripts/charts.js"></script>
+    <script>
+      const COVERS = {
+        'wearable-hub':
+          '<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F3A72"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g1)"/><circle cx="240" cy="90" r="70" fill="rgba(34,211,183,0.18)"/><circle cx="240" cy="90" r="44" fill="rgba(34,211,183,0.32)"/><circle cx="240" cy="90" r="20" fill="#22D3B7"/><text x="20" y="44" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">Wearable Hub</text><text x="20" y="64" fill="#8590A8" font-family="Inter" font-size="10">SPRING LAUNCH · TEASER</text>',
+        'bootcamp':
+          '<defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#162844"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g2)"/><g stroke="rgba(255,255,255,0.08)"><path d="M0 60H320M0 120H320"/></g><g transform="translate(28 56)"><rect width="80" height="68" rx="8" fill="rgba(34,211,183,0.18)"/><rect x="100" width="80" height="68" rx="8" fill="rgba(56,189,248,0.18)"/><rect x="200" width="80" height="68" rx="8" fill="rgba(167,139,250,0.18)"/></g><text x="20" y="40" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">SE Bootcamp</text>',
+        'copilot':
+          '<defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#093d54"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g3)"/><circle cx="160" cy="100" r="40" fill="none" stroke="#22D3B7" stroke-width="1.5"/><circle cx="160" cy="100" r="64" fill="none" stroke="rgba(34,211,183,0.4)" stroke-width="1.2" stroke-dasharray="3 4"/><circle cx="160" cy="100" r="14" fill="#22D3B7"/><text x="20" y="40" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">AI Copilot · Demo</text>',
+        'series-c':
+          '<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0E2E4A"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g4)"/><text x="160" y="110" fill="#22D3B7" font-family="Inter Display" font-size="48" font-weight="700" text-anchor="middle">Series C</text><text x="160" y="138" fill="#8590A8" font-family="Inter" font-size="11" text-anchor="middle" letter-spacing="3">ANNOUNCING · TIKTOK</text>',
+        'helios':
+          '<defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0B2F4C"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g5)"/><g transform="translate(230 30)"><circle r="42" fill="rgba(56,189,248,0.18)"/><circle r="22" fill="rgba(56,189,248,0.4)"/></g><text x="20" y="100" fill="#F7F9FC" font-family="Inter Display" font-size="20" font-weight="700">Helios Logistics</text><text x="20" y="124" fill="#8590A8" font-family="Inter" font-size="11">Q3 CUSTOMER STORY</text>',
+        'gdpr':
+          '<defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f2238"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g6)"/><g transform="translate(28 28)" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect width="60" height="80" rx="6"/><path d="M10 24h40M10 40h40M10 56h28"/></g><text x="108" y="80" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">GDPR · refresher</text><text x="108" y="100" fill="#8590A8" font-family="Inter" font-size="11">COMPLIANCE TRAINING · 3 MIN</text>',
+      };
+
+      async function loadProjects() {
+        const fallback = {
+          items: [
+            { id: 101, name: 'Spring product launch — wearable hub', status: 'rendering', progress: 0.62, aspect_ratio: '9:16', duration_seconds: 28, owner: 'Ava Chen', updated_at: '9 min ago', cover: 'wearable-hub' },
+            { id: 102, name: 'Onboarding · Sales engineering bootcamp', status: 'review', progress: 1.0, aspect_ratio: '16:9', duration_seconds: 96, owner: 'Marcus Lee', updated_at: '44 min ago', cover: 'bootcamp' },
+            { id: 103, name: 'AI Copilot — 60s product demo', status: 'scripting', progress: 0.18, aspect_ratio: '16:9', duration_seconds: 60, owner: 'Priya Rao', updated_at: '3 hr ago', cover: 'copilot' },
+            { id: 104, name: 'TikTok teaser — Series C announcement', status: 'done', progress: 1.0, aspect_ratio: '9:16', duration_seconds: 15, owner: 'Diego Alvarez', updated_at: 'Yesterday', cover: 'series-c' },
+            { id: 105, name: 'Q3 customer story — Helios Logistics', status: 'draft', progress: 0.04, aspect_ratio: '16:9', duration_seconds: 75, owner: 'Ava Chen', updated_at: '2 min ago', cover: 'helios' },
+            { id: 106, name: 'Compliance refresher — GDPR essentials', status: 'draft', progress: 0.0, aspect_ratio: '16:9', duration_seconds: 180, owner: 'Marcus Lee', updated_at: '12 hr ago', cover: 'gdpr' },
+          ],
+        };
+        try {
+          const res = await fetch('/api/v1/projects');
+          if (res.ok) return res.json();
+        } catch (_) {}
+        return fallback;
+      }
+
+      function fmtUpdated(value) {
+        if (!value) return '';
+        if (typeof value === 'string' && !value.includes('T')) return value;
+        const date = new Date(value);
+        const diff = (Date.now() - date.getTime()) / 60000;
+        if (diff < 1) return 'just now';
+        if (diff < 60) return `${Math.round(diff)} min ago`;
+        if (diff < 60 * 24) return `${Math.round(diff / 60)} hr ago`;
+        return date.toLocaleDateString();
+      }
+
+      const tpl = document.getElementById('project-card-tpl');
+      const grid = document.getElementById('project-grid');
+
+      loadProjects().then(({ items }) => {
+        items.forEach((p) => {
+          const node = tpl.content.firstElementChild.cloneNode(true);
+          node.querySelector('.sb-project__name').textContent = p.name;
+          const pill = node.querySelector('.sb-pill');
+          pill.classList.add(`sb-pill--${p.status}`);
+          pill.textContent = p.status;
+          node.querySelector('.sb-aspect-tag').textContent = `${p.aspect_ratio} · ${p.duration_seconds}s`;
+          node.querySelector('.sb-meter i').style.width = `${Math.round(p.progress * 100)}%`;
+          node.querySelector('.meta-owner').textContent = p.owner;
+          node.querySelector('.meta-time').textContent = fmtUpdated(p.updated_at);
+          node.querySelector('svg').innerHTML = COVERS[p.cover] || '';
+          grid.appendChild(node);
+        });
+      });
+    </script>
+  </body>
+</html>
