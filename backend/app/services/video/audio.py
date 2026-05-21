@@ -120,4 +120,46 @@ def loop_input_args(path: str | Path, duration: float) -> list[str]:
     return ["-stream_loop", "-1", "-t", f"{max(0.1, duration):.3f}", "-i", str(path)]
 
 
-__all__ = ["AudioBus", "build_voice_bgm_mix", "build_voice_only", "loop_input_args"]
+def adapt_bus_to_voice_loudness(
+    bus: AudioBus,
+    voice_lufs: float,
+    *,
+    voice_target: float | None = None,
+) -> AudioBus:
+    """Tune the ducking threshold and BGM gain to the measured voice loudness.
+
+    Heuristic:
+        - threshold = voice_lufs + 6 dB (BGM compresses when voice is ≥ 6dB
+          above its long-term average — i.e. on a syllable, not a breath).
+        - bgm_gain  = -10 dB relative to the target voice loudness, so the
+          BGM sits comfortably below the voice even before ducking kicks in.
+        - ratio adapts: voice quieter than -22 LUFS gets a stronger duck.
+    """
+    target = voice_target if voice_target is not None else bus.target_lufs
+    delta = target - voice_lufs
+    threshold = voice_lufs + 6.0
+    bgm_gain = max(-28.0, min(-6.0, target - 10.0))
+    ratio = 4.0 if voice_lufs > -22 else 8.0
+    return AudioBus(
+        target_lufs=bus.target_lufs,
+        target_tp=bus.target_tp,
+        voice_gain_db=max(-6.0, min(12.0, delta)),
+        bgm_gain_db=bgm_gain,
+        duck_threshold_db=threshold,
+        duck_ratio=ratio,
+        duck_attack_ms=bus.duck_attack_ms,
+        duck_release_ms=bus.duck_release_ms,
+        fade_in=bus.fade_in,
+        fade_out=bus.fade_out,
+        sample_rate=bus.sample_rate,
+        channels=bus.channels,
+    )
+
+
+__all__ = [
+    "AudioBus",
+    "build_voice_bgm_mix",
+    "build_voice_only",
+    "loop_input_args",
+    "adapt_bus_to_voice_loudness",
+]

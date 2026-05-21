@@ -33,7 +33,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
-from app.services.video.audio import AudioBus, build_voice_bgm_mix, build_voice_only
+from app.services.video.audio import (
+    AudioBus,
+    adapt_bus_to_voice_loudness,
+    build_voice_bgm_mix,
+    build_voice_only,
+)
 from app.services.video.beat import BeatGrid, detect_beats
 from app.services.video.color import compose_color_chain
 from app.services.video.speed import SpeedSpec, atempo_chain, setpts_expr
@@ -116,6 +121,7 @@ class MixRequest:
     color_look: str | None = None  # "natural" / "warm" / ... / None
     lut_path: str | None = None
     auto_white_balance: bool = False
+    adaptive_bgm_mix: bool = False
 
 
 @dataclass(slots=True)
@@ -353,7 +359,15 @@ class MixPipeline:
         graph_parts.append(f"{last_v}format=yuv420p[vout]")
         last_v = "[vout]"
 
-        # Audio: pick the right mix path
+        # Audio: optionally measure voice loudness for adaptive ducking
+        voice_loudness: float | None = None
+        if request.adaptive_bgm_mix and request.voice_path and request.bgm_path:
+            try:
+                from app.services.video.probe import measure_loudness as _ml
+
+                voice_loudness, _tp, _lra = await _ml(request.voice_path)
+            except RuntimeError as exc:
+                warnings.append(f"voice loudness probe failed: {exc}")
         audio_out_label = self._build_audio(
             graph_parts=graph_parts,
             voice_idx=voice_idx,
@@ -363,6 +377,7 @@ class MixPipeline:
             kit=kit,
             target_lufs=request.target_lufs,
             warnings=warnings,
+            voice_loudness=voice_loudness,
         )
 
         filter_graph = ";".join(graph_parts)
@@ -483,12 +498,19 @@ class MixPipeline:
         kit: BrandKit,
         target_lufs: float | None,
         warnings: list[str],
+        voice_loudness: float | None = None,
     ) -> str:
         """Wire audio inputs into the filter graph; return final audio label."""
         bus = AudioBus(
             target_lufs=target_lufs if target_lufs is not None else kit.target_lufs,
             target_tp=kit.target_tp,
         )
+        if voice_loudness is not None:
+            bus = adapt_bus_to_voice_loudness(bus, voice_loudness)
+            warnings.append(
+                f"adaptive BGM mix: voice ≈ {voice_loudness:.1f} LUFS → "
+                f"duck thr {bus.duck_threshold_db:.1f}dB, ratio {bus.duck_ratio:.1f}"
+            )
         if voice_idx is not None and bgm_idx is not None:
             graph_parts.append(
                 build_voice_bgm_mix(

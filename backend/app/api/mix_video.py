@@ -46,6 +46,7 @@ class CuePayload(BaseModel):
     start: float
     end: float
     text: str
+    subtext: str = ""
 
 
 class BrandPayload(BaseModel):
@@ -82,6 +83,8 @@ class MixVideoRequest(BaseModel):
     color_look: str | None = None  # "warm" | "cool" | "cinematic" | "punchy" | "mono" | "vintage"
     lut_path: str | None = None
     auto_white_balance: bool = False
+    srt_path: str | None = None
+    adaptive_bgm_mix: bool = False
 
 
 class SubtitleIssuePayload(BaseModel):
@@ -153,7 +156,11 @@ def _build_mix_request(body: MixVideoRequest) -> MixRequest:
         )
         for c in body.clips
     ]
-    cues = [Cue(c.start, c.end, c.text) for c in body.cues]
+    cues = [Cue(c.start, c.end, c.text, subtext=c.subtext) for c in body.cues]
+    if body.srt_path and not cues:
+        from app.services.video.subtitle import load_srt
+
+        cues = load_srt(body.srt_path)
     return MixRequest(
         project_id=body.project_id,
         clips=clips,
@@ -174,6 +181,7 @@ def _build_mix_request(body: MixVideoRequest) -> MixRequest:
         color_look=body.color_look,
         lut_path=body.lut_path,
         auto_white_balance=body.auto_white_balance,
+        adaptive_bgm_mix=body.adaptive_bgm_mix,
     )
 
 

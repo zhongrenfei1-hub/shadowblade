@@ -31,10 +31,21 @@ class Cue:
     start: float
     end: float
     text: str
+    subtext: str = ""
 
     @property
     def duration(self) -> float:
         return max(0.001, self.end - self.start)
+
+
+def load_srt(path):
+    """Read an SRT file and return parsed cues."""
+    from pathlib import Path as _P
+
+    p = _P(path)
+    if not p.exists():
+        raise FileNotFoundError(f"SRT not found: {p}")
+    return parse_srt(p.read_text(encoding="utf-8"))
 
 
 from enum import Enum
