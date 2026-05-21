@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Audit log · ShadowBlade</title>
+    <title>审计日志 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="Audit log · ShadowBlade" />
-    <meta property="og:description" content="Tamper-evident, retained 7 years, streamable to your SIEM. Every event in the workspace." />
+    <meta property="og:title" content="审计日志 · ShadowBlade" />
+    <meta property="og:description" content="防篡改、保留 7 年、可流式接入 SIEM。工作空间的每一条事件。" />
     <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
@@ -109,18 +109,18 @@
 
       <div class="sb-shell__main">
         <header class="sb-topbar">
-          <nav class="sb-breadcrumb" aria-label="Breadcrumb">
+          <nav class="sb-breadcrumb" aria-label="面包屑导航">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <a href="settings.html" style="color:var(--sb-text-muted)">设置</a>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Audit log</b>
+            <b>审计日志</b>
           </nav>
-          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">LIVE</span>
+          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">实时</span>
           <div class="sb-topbar__actions">
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Export CSV
+              导出 CSV
             </button>
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4L19 7"/></svg>
@@ -128,7 +128,7 @@
             </button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
-              Refresh
+              刷新
             </button>
           </div>
         </header>
@@ -137,94 +137,94 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Settings · Audit log</div>
-                <h1>Every event in the workspace.</h1>
+                <div class="sb-eyebrow">设置 · 审计日志</div>
+                <h1>工作空间的每一条事件。</h1>
                 <p class="sb-page-head__lead">
-                  Tamper-evident, retained 7 years, streamable to your SIEM. Filter by actor, resource, verb, or time window.
+                  防篡改、保留 7 年、可流式接入 SIEM。按操作者、资源、动作或时间窗筛选。
                 </p>
               </div>
             </div>
           </section>
 
           <section class="sb-kpi-grid">
-            <article class="sb-kpi"><div class="sb-kpi__label">Events today</div><div class="sb-kpi__value">2,148</div><span class="sb-kpi__delta sb-kpi__delta--up">▲ 9% vs avg</span></article>
-            <article class="sb-kpi"><div class="sb-kpi__label">Retention</div><div class="sb-kpi__value">7 yr</div><span class="sb-kpi__delta sb-kpi__delta--up">SOC 2 Type II</span></article>
-            <article class="sb-kpi"><div class="sb-kpi__label">SIEM sink</div><div class="sb-kpi__value">Splunk</div><span class="sb-kpi__delta sb-kpi__delta--up">Streaming · last 0.4 s</span></article>
-            <article class="sb-kpi"><div class="sb-kpi__label">Log integrity</div><div class="sb-kpi__value">100%</div><span class="sb-kpi__delta sb-kpi__delta--up">Hash chain verified</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">今日事件</div><div class="sb-kpi__value">2,148</div><span class="sb-kpi__delta sb-kpi__delta--up">▲ 9% 较日均</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">保留期</div><div class="sb-kpi__value">7 年</div><span class="sb-kpi__delta sb-kpi__delta--up">SOC 2 Type II</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">SIEM 接收端</div><div class="sb-kpi__value">Splunk</div><span class="sb-kpi__delta sb-kpi__delta--up">实时流式 · 0.4 秒前</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">日志完整性</div><div class="sb-kpi__value">100%</div><span class="sb-kpi__delta sb-kpi__delta--up">哈希链已校验</span></article>
           </section>
 
           <article class="sb-card">
             <div class="sb-audit-filter">
-              <select aria-label="Actor"><option>Any actor</option><option>Ava Chen</option><option>Priya Rao</option><option>Marcus Lee</option><option>Diego Alvarez</option><option>system</option></select>
-              <select aria-label="Resource"><option>Any resource</option><option>project</option><option>render</option><option>brand-kit</option><option>workspace</option><option>seat</option></select>
-              <select aria-label="Verb"><option>Any verb</option><option>create</option><option>update</option><option>delete</option><option>auth</option><option>render</option></select>
-              <select aria-label="Window"><option>Last 1 hour</option><option selected>Last 24 hours</option><option>Last 7 days</option><option>Custom</option></select>
+              <select aria-label="操作者"><option>所有操作者</option><option>Ava Chen</option><option>Priya Rao</option><option>Marcus Lee</option><option>Diego Alvarez</option><option>system</option></select>
+              <select aria-label="资源"><option>所有资源</option><option>project</option><option>render</option><option>brand-kit</option><option>workspace</option><option>seat</option></select>
+              <select aria-label="动作"><option>所有动作</option><option>create</option><option>update</option><option>delete</option><option>auth</option><option>render</option></select>
+              <select aria-label="时间窗"><option>近 1 小时</option><option selected>近 24 小时</option><option>近 7 天</option><option>自定义</option></select>
               <span style="flex:1"></span>
-              <input type="search" aria-label="Search events" placeholder="Search event ID, IP, actor…" style="min-width:260px" />
+              <input type="search" aria-label="搜索事件" placeholder="搜索事件 ID、IP、操作者…" style="min-width:260px" />
             </div>
 
             <div class="sb-card__body sb-card__body--flush">
               <div class="sb-audit-row" style="background:rgba(255,255,255,0.025);font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.08em;color:var(--sb-text-faint);font-weight:600;padding-top:10px;padding-bottom:10px">
-                <div>Time</div><div>Actor</div><div>Event</div><div style="text-align:right">Context</div>
+                <div>时间</div><div>操作者</div><div>事件</div><div style="text-align:right">上下文</div>
               </div>
               <div class="sb-audit-row">
                 <time>14:13:24.802</time>
                 <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
-                <div class="action"><span class="verb verb--render">render</span> started run <code>#901</code> on project <code>spring-launch</code> · priority rush</div>
+                <div class="action"><span class="verb verb--render">render</span> 在项目 <code>spring-launch</code> 上启动 run <code>#901</code> · 加急优先级</div>
                 <div class="meta">vpn-ofc-01 · evt_a3b8…f209</div>
               </div>
               <div class="sb-audit-row">
                 <time>14:11:02.041</time>
                 <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3d2c5f,#1b1230);color:#a78bfa">PR</div><b>Priya Rao</b></div>
-                <div class="action"><span class="verb verb--update">update</span> project <code>spring-launch</code> · CTA copy changed (12 chars)</div>
+                <div class="action"><span class="verb verb--update">update</span> 项目 <code>spring-launch</code> · CTA 文案已修改（12 个字符）</div>
                 <div class="meta">vpn-ofc-01 · evt_71c4…d822</div>
               </div>
               <div class="sb-audit-row">
                 <time>14:08:02.118</time>
                 <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div><b>Diego Alvarez</b></div>
-                <div class="action"><span class="verb verb--update">update</span> rush priority requested on <code>spring-launch</code> · approved by Ava Chen</div>
+                <div class="action"><span class="verb verb--update">update</span> 对 <code>spring-launch</code> 申请加急 · 已由 Ava Chen 批准</div>
                 <div class="meta">mobile · evt_4f12…b801</div>
               </div>
               <div class="sb-audit-row">
                 <time>13:58:14.910</time>
                 <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
-                <div class="action"><span class="verb verb--render">render</span> run <code>#896</code> succeeded · MP4 8.4 MB · webhook delivered to acme.example.com (200)</div>
+                <div class="action"><span class="verb verb--render">render</span> run <code>#896</code> 成功 · MP4 8.4 MB · Webhook 已投递至 acme.example.com (200)</div>
                 <div class="meta">gpu-cluster-1 · evt_38d9…0014</div>
               </div>
               <div class="sb-audit-row">
                 <time>13:42:02.811</time>
                 <div class="actor"><div class="av">ML</div><b>Marcus Lee</b></div>
-                <div class="action"><span class="verb verb--auth">auth</span> signed in via Okta SAML · MFA · WebAuthn</div>
+                <div class="action"><span class="verb verb--auth">auth</span> 通过 Okta SAML 登录 · MFA · WebAuthn</div>
                 <div class="meta">88.214.xx.xx · evt_902f…1188</div>
               </div>
               <div class="sb-audit-row">
                 <time>13:18:38.420</time>
                 <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
-                <div class="action"><span class="verb verb--update">update</span> brand-kit <code>acme-core</code> v3 published · 187 cuts marked for re-evaluation</div>
+                <div class="action"><span class="verb verb--update">update</span> 品牌套件 <code>acme-core</code> v3 已发布 · 187 条成片标记待重新评估</div>
                 <div class="meta">vpn-ofc-01 · evt_61aa…77c3</div>
               </div>
               <div class="sb-audit-row">
                 <time>12:09:55.001</time>
                 <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
-                <div class="action"><span class="verb verb--render">render</span> run <code>#894</code> failed at compose · ENOSPC on tmpfs · auto-retry queued</div>
+                <div class="action"><span class="verb verb--render">render</span> run <code>#894</code> 在合成阶段失败 · tmpfs 空间不足（ENOSPC） · 已自动重试入队</div>
                 <div class="meta">gpu-cluster-2 · evt_b011…ffe2</div>
               </div>
               <div class="sb-audit-row">
                 <time>11:46:14.330</time>
                 <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div><b>Diego Alvarez</b></div>
-                <div class="action"><span class="verb verb--update">update</span> approved cut for <code>series-c-teaser</code> · published to TikTok shelf</div>
+                <div class="action"><span class="verb verb--update">update</span> 批准 <code>series-c-teaser</code> 的成片 · 已发布至 TikTok 货架</div>
                 <div class="meta">mobile · evt_77f0…0b14</div>
               </div>
               <div class="sb-audit-row">
                 <time>10:18:22.110</time>
                 <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
-                <div class="action"><span class="verb verb--create">create</span> project <code>helios-q3-story</code> · template case-study · brand kit acme-core</div>
+                <div class="action"><span class="verb verb--create">create</span> 项目 <code>helios-q3-story</code> · 模板 case-study · 品牌套件 acme-core</div>
                 <div class="meta">vpn-ofc-01 · evt_2c4e…aa01</div>
               </div>
               <div class="sb-audit-row">
                 <time>09:02:14.601</time>
                 <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
-                <div class="action"><span class="verb verb--auth">auth</span> SCIM sync · Okta · 24 members confirmed · 0 changes</div>
+                <div class="action"><span class="verb verb--auth">auth</span> SCIM 同步 · Okta · 24 位成员确认 · 0 项变更</div>
                 <div class="meta">eu-central-1 · evt_905a…4422</div>
               </div>
             </div>
@@ -232,8 +232,8 @@
         </main>
 
         <footer class="sb-footer">
-          <span>Hash chain · last block 14:13:24 · integrity OK · 2,148 events today</span>
-          <span>Streaming to splunk-prod-eu · last delivery 0.4 s</span>
+          <span>哈希链 · 最近区块 14:13:24 · 完整性正常 · 今日 2,148 条事件</span>
+          <span>正在流式投递至 splunk-prod-eu · 最近 0.4 秒</span>
         </footer>
       </div>
     </div>

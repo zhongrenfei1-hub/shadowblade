@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ShadowBlade · Status</title>
+    <title>ShadowBlade · 服务状态</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="ShadowBlade · Status" />
-    <meta property="og:description" content="Live render-queue, pipeline, and edge health for the ShadowBlade workspace." />
+    <meta property="og:title" content="ShadowBlade · 服务状态" />
+    <meta property="og:description" content="ShadowBlade 工作空间的渲染队列、流水线、边缘节点实时健康状态。" />
     <meta property="og:image" content="/showcase/brand/og-image.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/brand/og-image.svg" />
@@ -135,91 +135,91 @@
         <div class="sb-brand__mark">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgs)"/><defs><linearGradient id="mgs" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
         </div>
-        <div class="sb-brand__name"><b>ShadowBlade</b><span>Status</span></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>服务状态</span></div>
       </a>
       <span class="spacer"></span>
-      <a class="link" href="index.html">Product</a>
-      <a class="link" href="pricing.html">Pricing</a>
-      <a class="link" href="customer-story.html">Customers</a>
-      <a class="link" href="#">Subscribe</a>
-      <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+      <a class="link" href="index.html">产品</a>
+      <a class="link" href="pricing.html">价格</a>
+      <a class="link" href="customer-story.html">客户案例</a>
+      <a class="link" href="#">订阅</a>
+      <a class="sb-btn sb-btn--ghost" href="dashboard.html">登录</a>
     </header>
 
     <section class="sb-status-banner">
       <div class="card">
         <div class="dot"></div>
         <div>
-          <h1>All systems normal</h1>
-          <p>Render pipeline · API · web · storage all operating within SLA. No incidents in the last 30 days.</p>
+          <h1>全部系统正常</h1>
+          <p>渲染流水线 · API · Web · 存储均在 SLA 范围内运行。近 30 天无事故。</p>
         </div>
         <div class="meta">
-          Updated <b style="color:var(--sb-text)">just now</b><br/>
+          更新于 <b style="color:var(--sb-text)">刚刚</b><br/>
           <span style="font-family:var(--sb-font-mono)">eu-central-1 · us-east-1 · ap-south-1</span>
         </div>
       </div>
     </section>
 
     <section class="sb-status-grid">
-      <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);letter-spacing:0.1em;text-transform:uppercase">Last 60 minutes · per region</div>
+      <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);letter-spacing:0.1em;text-transform:uppercase">近 60 分钟 · 按区域</div>
       <article class="sb-status-row">
-        <div><div class="name">Web app</div><div class="desc">app.shadowblade.io · dashboard, studio, library</div></div>
+        <div><div class="name">Web 应用</div><div class="desc">app.shadowblade.io · 工作台、编辑器、资源库</div></div>
         <div class="sb-status-uptime" id="u-web"></div>
         <div class="pct">100.00%</div>
       </article>
       <article class="sb-status-row">
-        <div><div class="name">API · v1</div><div class="desc">api.shadowblade.io/v1 · render, projects, assets</div></div>
+        <div><div class="name">API · v1</div><div class="desc">api.shadowblade.io/v1 · 渲染、项目、素材</div></div>
         <div class="sb-status-uptime" id="u-api"></div>
         <div class="pct">99.98%</div>
       </article>
       <article class="sb-status-row">
-        <div><div class="name">Render pipeline</div><div class="desc">script · storyboard · TTS · b-roll · compose · render</div></div>
+        <div><div class="name">渲染流水线</div><div class="desc">脚本 · 分镜 · TTS · 空镜素材 · 合成 · 渲染</div></div>
         <div class="sb-status-uptime" id="u-render"></div>
         <div class="pct">99.94%</div>
       </article>
       <article class="sb-status-row">
-        <div><div class="name">Asset storage</div><div class="desc">video, audio, brand kits · S3-compatible · multi-region</div></div>
+        <div><div class="name">素材存储</div><div class="desc">视频、音频、品牌套件 · S3 兼容 · 多区域</div></div>
         <div class="sb-status-uptime" id="u-storage"></div>
         <div class="pct">100.00%</div>
       </article>
       <article class="sb-status-row">
-        <div><div class="name">SSO &amp; SCIM</div><div class="desc">Okta · Microsoft Entra · Google Workspace · custom SAML</div></div>
+        <div><div class="name">SSO &amp; SCIM</div><div class="desc">Okta · Microsoft Entra · Google Workspace · 自定义 SAML</div></div>
         <div class="sb-status-uptime" id="u-auth"></div>
         <div class="pct">100.00%</div>
       </article>
       <article class="sb-status-row">
-        <div><div class="name">Webhooks</div><div class="desc">delivery for render.completed · render.failed · review.requested</div></div>
+        <div><div class="name">Webhook</div><div class="desc">投递 render.completed · render.failed · review.requested</div></div>
         <div class="sb-status-uptime" id="u-hook"></div>
         <div class="pct">99.92%</div>
       </article>
     </section>
 
     <section class="sb-status-incident">
-      <h2>Recent incidents · last 30 days</h2>
+      <h2>近 30 天事故</h2>
       <div class="item">
         <div class="row">
-          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">Resolved</span>
-          <b>Render queue latency briefly above SLA · eu-central-1</b>
+          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">已解决</span>
+          <b>渲染队列延迟短暂超出 SLA · eu-central-1</b>
           <time>2026-05-04 · 02:14 → 02:38 UTC</time>
         </div>
         <p style="margin:8px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">
-          Spot-instance reclaim spiked queue depth to 14. Auto-scale absorbed within 24 min; no failed renders, no data loss. Post-mortem published.
+          Spot 实例回收导致队列深度峰值 14。自动伸缩在 24 分钟内吸收；无渲染失败，无数据丢失。已发布事故复盘。
         </p>
       </div>
       <div class="item">
         <div class="row">
-          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">Resolved</span>
-          <b>SSO callback delay for Microsoft Entra customers</b>
+          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">已解决</span>
+          <b>Microsoft Entra 客户的 SSO 回调延迟</b>
           <time>2026-04-22 · 09:02 → 09:11 UTC</time>
         </div>
         <p style="margin:8px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">
-          Upstream MS IDP latency spiked. ShadowBlade auth gateway fell back to cached metadata; sessions established with retry. Zero failed logins.
+          上游 MS IDP 延迟突增。ShadowBlade 鉴权网关回退到缓存元数据；会话经重试建立。0 次登录失败。
         </p>
       </div>
     </section>
 
     <footer class="sb-footer">
-      <span>Status retains 18 months · subscribe via email, SMS, RSS, or Slack</span>
-      <span>SLA · 99.9% web · 99.9% API · 99.5% render</span>
+      <span>服务状态保留 18 个月 · 支持邮件、短信、RSS、Slack 订阅</span>
+      <span>SLA · Web 99.9% · API 99.9% · 渲染 99.5%</span>
     </footer>
 
     <script>

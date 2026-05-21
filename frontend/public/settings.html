@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Settings · ShadowBlade</title>
+    <title>设置 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="Settings · ShadowBlade" />
-    <meta property="og:description" content="Pipeline, security, billing, and integrations — workspace-wide controls." />
+    <meta property="og:title" content="设置 · ShadowBlade" />
+    <meta property="og:description" content="流水线、安全、计费、集成——工作空间级控制面。" />
     <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
@@ -72,15 +72,15 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <span>Workspace</span>
+            <span>工作空间</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Settings</b>
+            <b>设置</b>
           </div>
           <div class="sb-topbar__actions">
-            <button class="sb-btn sb-btn--ghost">Discard</button>
+            <button class="sb-btn sb-btn--ghost">放弃</button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-              Save changes
+              保存修改
             </button>
           </div>
         </header>
@@ -89,10 +89,10 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Workspace settings</div>
-                <h1>Settings</h1>
+                <div class="sb-eyebrow">工作空间设置</div>
+                <h1>设置</h1>
                 <p class="sb-page-head__lead">
-                  Pipeline, security, billing, and integrations. Changes apply workspace-wide and write to the audit log.
+                  流水线、安全、计费、集成。所有改动覆盖整个工作空间，并写入审计日志。
                 </p>
               </div>
             </div>
@@ -100,35 +100,35 @@
 
           <section class="sb-settings">
             <nav class="sb-side-nav">
-              <a href="#general" class="active">General</a>
-              <a href="#render">Render &amp; quality</a>
-              <a href="#security">Security &amp; SSO</a>
-              <a href="#billing">Billing</a>
-              <a href="#integrations">Integrations</a>
-              <a href="#api">API &amp; webhooks</a>
-              <a href="#advanced">Advanced</a>
+              <a href="#general" class="active">通用</a>
+              <a href="#render">渲染与质量</a>
+              <a href="#security">安全与 SSO</a>
+              <a href="#billing">计费</a>
+              <a href="#integrations">集成</a>
+              <a href="#api">API 与 Webhook</a>
+              <a href="#advanced">高级</a>
             </nav>
 
             <div class="sb-stack">
               <article class="sb-card" id="general">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">General</div>
+                  <div class="sb-card__title">通用</div>
                 </header>
                 <div class="sb-card__body sb-card__body--flush">
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-name-label">Workspace name</div><div class="sb-row__sub">Shown in the sidebar and on every export.</div></div>
+                    <div><div class="sb-row__title" id="sb-set-name-label">工作空间名称</div><div class="sb-row__sub">显示在侧边栏，以及每次导出。</div></div>
                     <input aria-labelledby="sb-set-name-label" style="width:260px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-size:var(--sb-text-md)" value="Acme Marketing Cloud" />
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-region-label">Region</div><div class="sb-row__sub">All assets and renders stay in this region.</div></div>
-                    <select aria-labelledby="sb-set-region-label" style="width:260px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-size:var(--sb-text-md)"><option>eu-central-1 · Frankfurt</option><option>us-east-1 · Virginia</option><option>ap-south-1 · Mumbai</option></select>
+                    <div><div class="sb-row__title" id="sb-set-region-label">区域</div><div class="sb-row__sub">所有素材和渲染都保留在此区域。</div></div>
+                    <select aria-labelledby="sb-set-region-label" style="width:260px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-size:var(--sb-text-md)"><option>eu-central-1 · 法兰克福</option><option>us-east-1 · 弗吉尼亚</option><option>ap-south-1 · 孟买</option></select>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-kit-label">Default brand kit</div><div class="sb-row__sub">Used when a new project is started without selecting a kit.</div></div>
-                    <select aria-labelledby="sb-set-kit-label" style="width:260px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-size:var(--sb-text-md)"><option>Acme · Core</option><option>Acme · Field events</option></select>
+                    <div><div class="sb-row__title" id="sb-set-kit-label">默认品牌套件</div><div class="sb-row__sub">未指定套件时，新建项目默认使用。</div></div>
+                    <select aria-labelledby="sb-set-kit-label" style="width:260px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-size:var(--sb-text-md)"><option>Acme · Core</option><option>Acme · 现场活动</option></select>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title">Public preview links</div><div class="sb-row__sub">Lets reviewers without a seat watch unfinished cuts via a signed URL.</div></div>
+                    <div><div class="sb-row__title">公开预览链接</div><div class="sb-row__sub">允许无席位的审核员通过签名 URL 查看未完成成片。</div></div>
                     <div class="sb-toggle on" role="switch" aria-checked="true"></div>
                   </div>
                 </div>
@@ -136,73 +136,73 @@
 
               <article class="sb-card" id="render">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Render &amp; quality</div>
+                  <div class="sb-card__title">渲染与质量</div>
                 </header>
                 <div class="sb-card__body sb-card__body--flush">
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-codec-label">Default codec</div><div class="sb-row__sub">H.264 covers every consumer surface; H.265 for broadcast.</div></div>
-                    <select aria-labelledby="sb-set-codec-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>H.264 (recommended)</option><option>H.265 / HEVC</option><option>ProRes 422 HQ</option></select>
+                    <div><div class="sb-row__title" id="sb-set-codec-label">默认编码</div><div class="sb-row__sub">H.264 覆盖所有 C 端平台；H.265 用于广播。</div></div>
+                    <select aria-labelledby="sb-set-codec-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>H.264（推荐）</option><option>H.265 / HEVC</option><option>ProRes 422 HQ</option></select>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-loudness-label">Loudness target</div><div class="sb-row__sub">EBU R128 default; matches every major social platform.</div></div>
-                    <select aria-labelledby="sb-set-loudness-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>-14 LUFS (recommended)</option><option>-16 LUFS</option><option>-23 LUFS · broadcast</option></select>
+                    <div><div class="sb-row__title" id="sb-set-loudness-label">响度目标</div><div class="sb-row__sub">默认 EBU R128，匹配所有主流社交平台。</div></div>
+                    <select aria-labelledby="sb-set-loudness-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>-14 LUFS（推荐）</option><option>-16 LUFS</option><option>-23 LUFS · 广播</option></select>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title">Auto-render on approval</div><div class="sb-row__sub">Final MP4 is rendered the moment the last reviewer approves.</div></div>
-                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="Auto-render on approval"></div>
+                    <div><div class="sb-row__title">批准后自动渲染</div><div class="sb-row__sub">最后一位审核员批准的瞬间渲染最终 MP4。</div></div>
+                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="批准后自动渲染"></div>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title">Watermark drafts</div><div class="sb-row__sub">Subtle "DRAFT" added to unpublished cuts shared externally.</div></div>
-                    <div class="sb-toggle" role="switch" aria-checked="false" tabindex="0" aria-label="Watermark drafts"></div>
+                    <div><div class="sb-row__title">为草稿打水印</div><div class="sb-row__sub">外部分享的未发布成片添加淡淡的「DRAFT」水印。</div></div>
+                    <div class="sb-toggle" role="switch" aria-checked="false" tabindex="0" aria-label="为草稿打水印"></div>
                   </div>
                 </div>
               </article>
 
               <article class="sb-card" id="security">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Security &amp; SSO</div>
+                  <div class="sb-card__title">安全与 SSO</div>
                   <div class="sb-card__head-actions"><span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">SOC 2 Type II</span></div>
                 </header>
                 <div class="sb-card__body sb-card__body--flush">
                   <div class="sb-row">
-                    <div><div class="sb-row__title">SSO provider</div><div class="sb-row__sub">SAML 2.0 enforced for the workspace.</div></div>
-                    <span class="sb-pill" style="color:var(--sb-text-muted)">Okta · Connected</span>
+                    <div><div class="sb-row__title">SSO 提供方</div><div class="sb-row__sub">工作空间强制 SAML 2.0。</div></div>
+                    <span class="sb-pill" style="color:var(--sb-text-muted)">Okta · 已连接</span>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title">Require MFA</div><div class="sb-row__sub">Webauthn or TOTP — applies to all members.</div></div>
-                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="Require MFA"></div>
+                    <div><div class="sb-row__title">强制 MFA</div><div class="sb-row__sub">Webauthn 或 TOTP——对所有成员生效。</div></div>
+                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="强制 MFA"></div>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title" id="sb-set-session-label">Session length</div><div class="sb-row__sub">Auto-logout after inactivity.</div></div>
-                    <select aria-labelledby="sb-set-session-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>12 hours</option><option>8 hours</option><option>4 hours</option><option>1 hour</option></select>
+                    <div><div class="sb-row__title" id="sb-set-session-label">会话时长</div><div class="sb-row__sub">空闲后自动登出。</div></div>
+                    <select aria-labelledby="sb-set-session-label" style="width:200px;padding:8px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>12 小时</option><option>8 小时</option><option>4 小时</option><option>1 小时</option></select>
                   </div>
                   <div class="sb-row">
-                    <div><div class="sb-row__title">IP allow-list</div><div class="sb-row__sub">Restrict workspace access to known office and VPN ranges.</div></div>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Configure</button>
+                    <div><div class="sb-row__title">IP 白名单</div><div class="sb-row__sub">将工作空间访问限制在已知办公室和 VPN 网段。</div></div>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">配置</button>
                   </div>
                 </div>
               </article>
 
               <article class="sb-card" id="billing">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Billing</div>
+                  <div class="sb-card__title">计费</div>
                 </header>
                 <div class="sb-card__body sb-stack">
                   <div class="sb-grid-3">
                     <div>
-                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Plan</div>
-                      <div style="font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600">Scale</div>
-                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">$4,200 / mo · annual</div>
+                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">套餐</div>
+                      <div style="font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600">规模版</div>
+                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">$4,200/月 · 年付</div>
                     </div>
                     <div>
-                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Seats</div>
+                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">席位</div>
                       <div style="font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600">24 / 24</div>
-                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">+$120/mo per added seat</div>
+                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">额外 +$120/月/席</div>
                     </div>
                     <div>
-                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Renders this cycle</div>
+                      <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">本周期渲染</div>
                       <div style="font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600">387 / 1,000</div>
-                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">38.7% of quota</div>
+                      <div style="color:var(--sb-text-faint);font-size:var(--sb-text-sm)">已用 38.7%</div>
                     </div>
                   </div>
                   <div class="sb-meter"><i style="width:38.7%"></i></div>
@@ -211,13 +211,13 @@
 
               <article class="sb-card" id="api">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">API &amp; webhooks</div>
+                  <div class="sb-card__title">API 与 Webhook</div>
                   <div class="sb-card__head-actions">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">New token</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">新建 Token</button>
                   </div>
                 </header>
                 <div class="sb-card__body sb-stack">
-                  <div style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">Trigger a render from CI · payload posts back to your webhook when the cut is ready.</div>
+                  <div style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">从 CI 触发渲染 · 成片就绪时回调你的 Webhook。</div>
                   <pre>POST https://api.shadowblade.io/v1/projects/101/render
 Authorization: Bearer sk_live_•••••••••••••••••
 Content-Type: application/json
@@ -235,8 +235,8 @@ Content-Type: application/json
         </main>
 
         <footer class="sb-footer">
-          <span>Last change · 2026-05-20 14:12 UTC by Ava Chen</span>
-          <span>Audit log streaming live</span>
+          <span>最近变更 · 2026-05-20 14:12 UTC，Ava Chen</span>
+          <span>审计日志实时流式</span>
         </footer>
       </div>
     </div>

@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Studio · ShadowBlade</title>
+    <title>编辑器 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="Studio · ShadowBlade" />
-    <meta property="og:description" content="Edit a scene, see the timeline, review live." />
+    <meta property="og:title" content="编辑器 · ShadowBlade" />
+    <meta property="og:description" content="编辑场景、查看时间线、实时审阅。" />
     <meta property="og:image" content="/showcase/screens/screen-studio.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-studio.svg" />
@@ -180,23 +180,23 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <span>Projects</span>
+            <span>项目</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Spring product launch — wearable hub</b>
+            <b>春季产品发布 — 智能腕环</b>
           </div>
-          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">Rendering 62%</span>
+          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">渲染中 62%</span>
           <div class="sb-topbar__actions">
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Export MP4
+              导出 MP4
             </button>
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-              Share for review
+              分享给审核员
             </button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
-              Re-render with edits
+              重新渲染含修改
             </button>
           </div>
         </header>
@@ -205,25 +205,25 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Studio · marketing · 9:16 · 28 s</div>
-                <h1>Spring product launch — wearable hub</h1>
+                <div class="sb-eyebrow">编辑器 · 营销 · 9:16 · 28 秒</div>
+                <h1>春季产品发布 — 智能腕环</h1>
                 <p class="sb-page-head__lead">
-                  Six scenes. Voice: Alloy · EN female. Brand kit: Acme · Core. The composition is rendering at 62% — caption and music will lock when stage 5 finishes.
+                  6 个场景。配音：Alloy · EN 女声。品牌套件：Acme · Core。合成已到 62%——字幕与音乐将在阶段 5 完成时锁定。
                 </p>
               </div>
             </div>
           </section>
 
           <section class="sb-studio">
-            <!-- LEFT · Scene navigator + brief -->
+            <!-- 左 · 场景导航 + 简报 -->
             <div class="sb-stack">
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Scenes</div>
+                  <div class="sb-card__title">场景</div>
                   <div class="sb-card__head-actions">
                     <button class="sb-btn sb-btn--ghost sb-btn--sm">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                      Add
+                      新增
                     </button>
                   </div>
                 </header>
@@ -232,53 +232,53 @@
 
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Brief</div>
+                  <div class="sb-card__title">简报</div>
                 </header>
                 <div class="sb-card__body sb-brief-fields">
                   <div class="sb-field">
-                    <label for="sb-studio-goal">Goal</label>
+                    <label for="sb-studio-goal">目标</label>
                     <select id="sb-studio-goal">
-                      <option>Drive pre-orders for new wearable</option>
-                      <option>Awareness boost</option>
+                      <option>带动新款腕环预订</option>
+                      <option>提升认知</option>
                     </select>
                   </div>
                   <div class="sb-field">
-                    <label for="sb-studio-audience">Audience</label>
-                    <input id="sb-studio-audience" value="Fitness-curious knowledge workers, 28–42, US/EU" />
+                    <label for="sb-studio-audience">受众</label>
+                    <input id="sb-studio-audience" value="对健身感兴趣的知识工作者，28–42 岁，美国/欧盟" />
                   </div>
                   <div class="sb-field__row">
                     <div class="sb-field">
-                      <label for="sb-studio-ratio">Ratio</label>
-                      <select id="sb-studio-ratio"><option>9:16 Vertical</option><option>16:9 Wide</option><option>1:1 Square</option></select>
+                      <label for="sb-studio-ratio">画幅</label>
+                      <select id="sb-studio-ratio"><option>9:16 竖屏</option><option>16:9 宽屏</option><option>1:1 方形</option></select>
                     </div>
                     <div class="sb-field">
-                      <label for="sb-studio-length">Length</label>
-                      <select id="sb-studio-length"><option>15 s</option><option selected>28 s</option><option>45 s</option><option>60 s</option></select>
+                      <label for="sb-studio-length">时长</label>
+                      <select id="sb-studio-length"><option>15 秒</option><option selected>28 秒</option><option>45 秒</option><option>60 秒</option></select>
                     </div>
                   </div>
                   <div class="sb-field">
-                    <label for="sb-studio-tone">Tone</label>
-                    <input id="sb-studio-tone" value="Confident, plainspoken, never breathless" />
+                    <label for="sb-studio-tone">语态</label>
+                    <input id="sb-studio-tone" value="自信、直白、不浮夸" />
                   </div>
                   <div class="sb-field">
-                    <label for="sb-studio-cta">Call to action</label>
-                    <input id="sb-studio-cta" value="Pre-order — first 1,000 ship free" />
+                    <label for="sb-studio-cta">行动指令</label>
+                    <input id="sb-studio-cta" value="预订——前 1,000 名免运费" />
                   </div>
                 </div>
               </article>
             </div>
 
-            <!-- CENTER · Preview canvas -->
+            <!-- 中 · 预览画布 -->
             <div class="sb-stack">
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Preview · Scene 04 / 06</div>
+                  <div class="sb-card__title">预览 · 场景 04 / 06</div>
                   <div class="sb-card__head-actions">
                     <div class="sb-tabs">
-                      <button class="sb-tab sb-tab--active">Preview</button>
-                      <button class="sb-tab">Script</button>
-                      <button class="sb-tab">Captions</button>
-                      <button class="sb-tab">Music</button>
+                      <button class="sb-tab sb-tab--active">预览</button>
+                      <button class="sb-tab">脚本</button>
+                      <button class="sb-tab">字幕</button>
+                      <button class="sb-tab">音乐</button>
                     </div>
                   </div>
                 </header>
@@ -319,13 +319,13 @@
                     <div class="sb-stage-canvas__corner">9:16 · 1080×1920</div>
                   </div>
                   <div class="sb-transport">
-                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Previous scene">
+                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="上一场景">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5v14M5 12l9-7v14l-9-7z"/></svg>
                     </button>
-                    <button class="sb-btn sb-btn--primary sb-btn--icon" aria-label="Play">
+                    <button class="sb-btn sb-btn--primary sb-btn--icon" aria-label="播放">
                       <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
                     </button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Next scene">
+                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="下一场景">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5v14M19 12l-9-7v14l9-7z"/></svg>
                     </button>
                     <span class="sb-transport__time">0:16.8</span>
@@ -337,11 +337,11 @@
 
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Timeline</div>
+                  <div class="sb-card__title">时间线</div>
                   <div class="sb-card__head-actions">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Snap</button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Ripple</button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Zoom 100%</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">吸附</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">连锁</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">缩放 100%</button>
                   </div>
                 </header>
                 <div class="sb-card__body">
@@ -350,67 +350,67 @@
                       <span>0:00</span><span>0:04</span><span>0:08</span><span>0:12</span><span>0:16</span><span>0:20</span><span>0:24</span><span>0:28</span>
                     </div>
                     <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">Video</span>
-                      <div class="sb-timeline__block" style="width:14%">Cold open</div>
-                      <div class="sb-timeline__block" style="width:18%">Hero</div>
-                      <div class="sb-timeline__block" style="width:16%">Detail · screen</div>
-                      <div class="sb-timeline__block" style="width:18%">Lifestyle</div>
-                      <div class="sb-timeline__block" style="width:18%">Battery + tap</div>
+                      <span class="sb-timeline__track-label">视频</span>
+                      <div class="sb-timeline__block" style="width:14%">开场</div>
+                      <div class="sb-timeline__block" style="width:18%">主镜头</div>
+                      <div class="sb-timeline__block" style="width:16%">细节 · 屏幕</div>
+                      <div class="sb-timeline__block" style="width:18%">生活场景</div>
+                      <div class="sb-timeline__block" style="width:18%">电量 + 点击</div>
                       <div class="sb-timeline__block" style="width:14%">CTA</div>
                       <div class="sb-timeline__playhead" style="left:60%"></div>
                     </div>
                     <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">Voice</span>
-                      <div class="sb-timeline__block sb-timeline__block--voice" style="width:96%">Alloy · EN female · -14 LUFS · "Your day, on time…"</div>
+                      <span class="sb-timeline__track-label">配音</span>
+                      <div class="sb-timeline__block sb-timeline__block--voice" style="width:96%">Alloy · EN 女声 · -14 LUFS · 「Your day, on time…」</div>
                     </div>
                     <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">Captions</span>
+                      <span class="sb-timeline__track-label">字幕</span>
                       <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">12pt · Inter</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">Bold accent</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:16%">Number pop</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">Inline</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">CTA reveal</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">加粗强调</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:16%">数字弹出</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">行内</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">CTA 揭示</div>
                     </div>
                     <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">Music</span>
-                      <div class="sb-timeline__block sb-timeline__block--music" style="width:96%">Pulse · upbeat · ducked -8 dB under voice</div>
+                      <span class="sb-timeline__track-label">音乐</span>
+                      <div class="sb-timeline__block sb-timeline__block--music" style="width:96%">Pulse · 上扬节奏 · 配音下方 duck -8 dB</div>
                     </div>
                   </div>
                 </div>
               </article>
             </div>
 
-            <!-- RIGHT · Inspector + reviews -->
+            <!-- 右 · 详情面板 + 审阅 -->
             <div class="sb-stack">
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Inspector · Scene 04</div>
+                  <div class="sb-card__title">详情 · 场景 04</div>
                 </header>
                 <div class="sb-card__body sb-brief-fields">
                   <div class="sb-field">
-                    <label for="sb-studio-scene-script">Scene script</label>
-                    <textarea id="sb-studio-scene-script">Eight hours, one charge. Twelve metrics. Three taps. Your day, on time — without lifting a wrist.</textarea>
+                    <label for="sb-studio-scene-script">场景脚本</label>
+                    <textarea id="sb-studio-scene-script">续航 8 小时，一次充电。十二项指标。三次点击。Your day, on time — without lifting a wrist.</textarea>
                   </div>
                   <div class="sb-field__row">
                     <div class="sb-field">
-                      <label for="sb-studio-visual-style">Visual style</label>
-                      <select id="sb-studio-visual-style"><option>Editorial · still</option><option>Cinematic dolly</option><option>UI motion</option></select>
+                      <label for="sb-studio-visual-style">视觉风格</label>
+                      <select id="sb-studio-visual-style"><option>编辑 · 静态</option><option>电影感推拉</option><option>UI 动效</option></select>
                     </div>
                     <div class="sb-field">
-                      <label for="sb-studio-pace">Pace</label>
-                      <select id="sb-studio-pace"><option>Steady</option><option>Quick cut</option><option>Hold</option></select>
+                      <label for="sb-studio-pace">节奏</label>
+                      <select id="sb-studio-pace"><option>平稳</option><option>快剪</option><option>停留</option></select>
                     </div>
                   </div>
                   <div class="sb-field">
-                    <label id="sb-studio-broll-label">B-roll</label>
+                    <label id="sb-studio-broll-label">空镜素材</label>
                     <div role="group" aria-labelledby="sb-studio-broll-label" style="display:flex;gap:6px;flex-wrap:wrap">
                       <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">wrist-shot.mp4</span>
                       <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">desk-scene.mp4</span>
-                      <button class="sb-btn sb-btn--ghost sb-btn--sm">+ swap</button>
+                      <button class="sb-btn sb-btn--ghost sb-btn--sm">+ 替换</button>
                     </div>
                   </div>
                   <div class="sb-field">
-                    <label for="sb-studio-caption">On-screen caption</label>
+                    <label for="sb-studio-caption">画面字幕</label>
                     <input id="sb-studio-caption" value="Your day, on time" />
                   </div>
                 </div>
@@ -418,9 +418,9 @@
 
               <article class="sb-card">
                 <header class="sb-card__head">
-                  <div class="sb-card__title">Review thread</div>
+                  <div class="sb-card__title">审阅讨论</div>
                   <div class="sb-card__head-actions">
-                    <span class="sb-pill sb-pill--review">2 open</span>
+                    <span class="sb-pill sb-pill--review">2 条未决</span>
                   </div>
                 </header>
                 <div class="sb-card__body sb-stack">
@@ -428,29 +428,29 @@
                     <div class="sb-comment__head">
                       <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px">PR</div>
                       <b>Priya Rao</b>
-                      <time>3 min ago</time>
+                      <time>3 分钟前</time>
                     </div>
                     <div class="sb-comment__body">
-                      Let's swap "without lifting a wrist" — it tests poorly with the US audience. Try "without breaking stride."
+                      把「without lifting a wrist」换掉——在美国受众测试中表现不佳。试试「without breaking stride」。
                     </div>
-                    <div class="sb-comment__cite">scene 04 · script · word 18-22</div>
+                    <div class="sb-comment__cite">场景 04 · 脚本 · 词 18-22</div>
                   </div>
                   <div class="sb-comment">
                     <div class="sb-comment__head">
                       <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px;background:linear-gradient(135deg,#3d2c5f,#1b1230);color:var(--sb-status-review)">DA</div>
                       <b>Diego Alvarez</b>
-                      <time>11 min ago</time>
+                      <time>11 分钟前</time>
                     </div>
                     <div class="sb-comment__body">
-                      Music duck is a touch aggressive on the CTA — bump to -6 dB?
+                      CTA 处的音乐 duck 有点过——提到 -6 dB？
                     </div>
-                    <div class="sb-comment__cite">music · 0:24 → 0:28</div>
+                    <div class="sb-comment__cite">音乐 · 0:24 → 0:28</div>
                   </div>
                   <div class="sb-divider"></div>
-                  <textarea aria-label="Reply to review thread" class="sb-field" style="padding:10px 12px;border-radius:8px;border:1px solid var(--sb-border);background:rgba(11,18,32,0.7);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-md);min-height:60px" placeholder="Reply, or @mention to assign…"></textarea>
+                  <textarea aria-label="回复审阅讨论" class="sb-field" style="padding:10px 12px;border-radius:8px;border:1px solid var(--sb-border);background:rgba(11,18,32,0.7);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-md);min-height:60px" placeholder="回复，或 @ 提及分派…"></textarea>
                   <div style="display:flex;justify-content:flex-end;gap:8px">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Save draft</button>
-                    <button class="sb-btn sb-btn--primary sb-btn--sm">Send reply</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">存为草稿</button>
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">发送回复</button>
                   </div>
                 </div>
               </article>
@@ -459,8 +459,8 @@
         </main>
 
         <footer class="sb-footer">
-          <span>Auto-saved 12 sec ago · v17 by Ava Chen</span>
-          <span>Brand kit · Acme · Core · drift score 0.02</span>
+          <span>自动保存于 12 秒前 · v17 由 Ava Chen 编辑</span>
+          <span>品牌套件 · Acme · Core · 偏移评分 0.02</span>
         </footer>
       </div>
     </div>
@@ -479,12 +479,12 @@
     <script src="scripts/shell.js"></script>
     <script>
       const SCENES = [
-        { i: '01', t: 'Cold open', log: 'Black → quick logo flash', dur: '4.0s', state: 'succeeded' },
-        { i: '02', t: 'Hero shot', log: 'Wearable rotates 360°', dur: '5.0s', state: 'succeeded' },
-        { i: '03', t: 'Detail · screen', log: 'UI macro · health rings', dur: '4.5s', state: 'succeeded' },
-        { i: '04', t: 'Lifestyle', log: 'Knowledge-worker desk POV', dur: '5.0s', state: 'running' },
-        { i: '05', t: 'Battery + tap', log: '7-day arc + tap demo', dur: '5.0s', state: '' },
-        { i: '06', t: 'CTA', log: '"Pre-order — first 1,000 ship free"', dur: '4.5s', state: '' },
+        { i: '01', t: '开场', log: '黑屏 → Logo 闪现', dur: '4.0 秒', state: 'succeeded' },
+        { i: '02', t: '主镜头', log: '腕环 360° 旋转', dur: '5.0 秒', state: 'succeeded' },
+        { i: '03', t: '细节 · 屏幕', log: 'UI 微距 · 健康环', dur: '4.5 秒', state: 'succeeded' },
+        { i: '04', t: '生活场景', log: '知识工作者桌面主观视角', dur: '5.0 秒', state: 'running' },
+        { i: '05', t: '电量 + 点击', log: '7 天续航弧 + 点击演示', dur: '5.0 秒', state: '' },
+        { i: '06', t: 'CTA', log: '「预订——前 1,000 名免运费」', dur: '4.5 秒', state: '' },
       ];
       const tpl = document.getElementById('scene-tpl');
       const list = document.getElementById('scene-list');

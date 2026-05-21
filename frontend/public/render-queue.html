@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Render queue · ShadowBlade</title>
+    <title>渲染队列 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="Render queue · ShadowBlade" />
-    <meta property="og:description" content="Live render farm — priorities, workers, ETAs, and throughput at a glance." />
+    <meta property="og:title" content="渲染队列 · ShadowBlade" />
+    <meta property="og:description" content="实时渲染农场——优先级、worker、ETA、吞吐量一目了然。" />
     <meta property="og:image" content="/showcase/screens/screen-queue.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-queue.svg" />
@@ -89,22 +89,22 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <span>Pipeline</span>
+            <span>流水线</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Render queue</b>
+            <b>渲染队列</b>
           </div>
           <div class="sb-topbar__actions">
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-              Schedule a window
+              安排窗口
             </button>
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-              Cost report
+              成本报告
             </button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5h14v14H5z"/></svg>
-              Pause queue
+              暂停队列
             </button>
           </div>
         </header>
@@ -113,10 +113,10 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Pipeline · render cluster</div>
-                <h1>5 jobs · 2 running</h1>
+                <div class="sb-eyebrow">流水线 · 渲染集群</div>
+                <h1>5 个任务 · 2 个运行中</h1>
                 <p class="sb-page-head__lead">
-                  Cluster is at 78% utilisation. ETA for last queued job: 22 min. Next billing checkpoint at midnight UTC.
+                  集群利用率 78%。末位任务预计 22 分钟。下一次计费检查点 UTC 午夜。
                 </p>
               </div>
             </div>
@@ -124,37 +124,37 @@
 
           <section class="sb-kpi-grid">
             <article class="sb-kpi">
-              <div class="sb-kpi__label">Cluster utilisation</div>
+              <div class="sb-kpi__label">集群利用率</div>
               <div class="sb-kpi__value">78<small>%</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">3 of 4 workers busy</span>
+              <span class="sb-kpi__delta sb-kpi__delta--up">4 个 worker 中 3 个繁忙</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[40,55,60,52,68,72,75,78]"></svg>
             </article>
             <article class="sb-kpi">
-              <div class="sb-kpi__label">Avg render time</div>
-              <div class="sb-kpi__value">3:48 <small>min</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 12% faster</span>
+              <div class="sb-kpi__label">平均渲染耗时</div>
+              <div class="sb-kpi__value">3:48 <small>分钟</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 提速 12%</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[6,5.5,5,4.6,4.2,4,3.9,3.8]"></svg>
             </article>
             <article class="sb-kpi">
-              <div class="sb-kpi__label">Jobs today</div>
+              <div class="sb-kpi__label">今日任务</div>
               <div class="sb-kpi__value">42</div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 18% vs avg</span>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 18% 较日均</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[12,18,22,28,32,36,40,42]"></svg>
             </article>
             <article class="sb-kpi">
-              <div class="sb-kpi__label">Spend today</div>
-              <div class="sb-kpi__value">$184 <small>/ $400 budget</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">46% of cap</span>
+              <div class="sb-kpi__label">今日支出</div>
+              <div class="sb-kpi__value">$184 <small>/ 预算 $400</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">已用 46%</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[20,40,60,82,110,140,168,184]"></svg>
             </article>
           </section>
 
           <article class="sb-card">
             <header class="sb-card__head">
-              <div class="sb-card__title">Render cluster</div>
+              <div class="sb-card__title">渲染集群</div>
               <div class="sb-card__head-actions">
-                <span class="sb-pill sb-pill--running">4 workers · eu-central-1</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Auto-scale settings</button>
+                <span class="sb-pill sb-pill--running">4 个 worker · eu-central-1</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">自动伸缩设置</button>
               </div>
             </header>
             <div class="sb-card__body">
@@ -167,10 +167,10 @@
                   <div class="sb-worker__usage">
                     <div>GPU<b>91%</b></div>
                     <div>VRAM<b>38G</b></div>
-                    <div>Temp<b>67°C</b></div>
+                    <div>温度<b>67°C</b></div>
                   </div>
                   <div class="sb-meter"><i style="width:91%"></i></div>
-                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Running · AI Copilot · scene 4 / 12</div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">运行中 · AI Copilot · 场景 4 / 12</div>
                 </article>
                 <article class="sb-worker">
                   <div class="sb-worker__head">
@@ -180,10 +180,10 @@
                   <div class="sb-worker__usage">
                     <div>GPU<b>72%</b></div>
                     <div>VRAM<b>22G</b></div>
-                    <div>Temp<b>61°C</b></div>
+                    <div>温度<b>61°C</b></div>
                   </div>
                   <div class="sb-meter"><i style="width:72%"></i></div>
-                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Compiling captions · helios</div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">编译字幕 · helios</div>
                 </article>
                 <article class="sb-worker">
                   <div class="sb-worker__head">
@@ -193,10 +193,10 @@
                   <div class="sb-worker__usage">
                     <div>GPU<b>88%</b></div>
                     <div>VRAM<b>41G</b></div>
-                    <div>Temp<b>71°C</b></div>
+                    <div>温度<b>71°C</b></div>
                   </div>
                   <div class="sb-meter"><i style="width:88%"></i></div>
-                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Rush · wearable hub · final pass</div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">加急 · 智能腕环 · 终版</div>
                 </article>
                 <article class="sb-worker">
                   <div class="sb-worker__head">
@@ -206,10 +206,10 @@
                   <div class="sb-worker__usage">
                     <div>GPU<b>0%</b></div>
                     <div>VRAM<b>0G</b></div>
-                    <div>Temp<b>42°C</b></div>
+                    <div>温度<b>42°C</b></div>
                   </div>
                   <div class="sb-meter"><i style="width:0%"></i></div>
-                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Warm · idle 12s · ready for next pull</div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">热机 · 空闲 12 秒 · 等待下一任务</div>
                 </article>
               </div>
             </div>
@@ -217,10 +217,10 @@
 
           <article class="sb-card">
             <header class="sb-card__head">
-              <div class="sb-card__title">Queue</div>
+              <div class="sb-card__title">队列</div>
               <div class="sb-card__head-actions">
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Reorder</button>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Filter</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重排</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">筛选</button>
               </div>
             </header>
             <div class="sb-card__body sb-card__body--flush" id="queue"></div>
@@ -228,8 +228,8 @@
         </main>
 
         <footer class="sb-footer">
-          <span>Worker pool v1.4.2 · region eu-central-1</span>
-          <span>Auto-scale 1–8 · spot pricing $0.92/hr</span>
+          <span>Worker 池 v1.4.2 · 区域 eu-central-1</span>
+          <span>自动伸缩 1–8 · Spot 定价 $0.92/小时</span>
         </footer>
       </div>
     </div>
@@ -246,12 +246,13 @@
     <script src="scripts/shell.js"></script>
     <script src="scripts/charts.js"></script>
     <script>
+      const PRI_LABEL = { rush: '加急', high: '高', normal: '常规', low: '低' };
       const QUEUE = [
-        { name: 'Spring product launch — wearable hub', stage: 'gpu-cluster-3 · Compose 62% · scene 4', priority: 'rush', progress: 0.62, eta: 'ETA 0:64' },
-        { name: 'AI Copilot — 60s product demo', stage: 'gpu-cluster-1 · TTS pass · scene 8', priority: 'high', progress: 0.31, eta: 'ETA 2:22' },
-        { name: 'Onboarding · Sales engineering bootcamp', stage: 'Waiting · brand-kit assets', priority: 'normal', progress: 0.0, eta: 'ETA 10:12' },
-        { name: 'Press quote · Series C announcement', stage: 'Waiting · render slot', priority: 'normal', progress: 0.0, eta: 'ETA 12:20' },
-        { name: 'Compliance refresher — GDPR essentials', stage: 'Waiting · batch window', priority: 'low', progress: 0.0, eta: 'ETA 22:20' },
+        { name: '春季产品发布 — 智能腕环', stage: 'gpu-cluster-3 · 合成 62% · 场景 4', priority: 'rush', progress: 0.62, eta: '预计 0:64' },
+        { name: 'AI Copilot — 60 秒产品演示', stage: 'gpu-cluster-1 · TTS 阶段 · 场景 8', priority: 'high', progress: 0.31, eta: '预计 2:22' },
+        { name: '入职培训 · 销售工程师训练营', stage: '等待 · 品牌套件素材', priority: 'normal', progress: 0.0, eta: '预计 10:12' },
+        { name: '媒体引述 · C 轮发布', stage: '等待 · 渲染槽位', priority: 'normal', progress: 0.0, eta: '预计 12:20' },
+        { name: '合规复训 — GDPR 要点', stage: '等待 · 批处理窗口', priority: 'low', progress: 0.0, eta: '预计 22:20' },
       ];
       const tpl = document.getElementById('qrow-tpl');
       const list = document.getElementById('queue');
@@ -260,7 +261,7 @@
         node.querySelector('b').textContent = q.name;
         node.querySelector('span').textContent = q.stage;
         const pri = node.querySelector('.sb-priority');
-        pri.textContent = q.priority;
+        pri.textContent = PRI_LABEL[q.priority] || q.priority;
         pri.classList.add(`sb-priority--${q.priority}`);
         node.querySelector('.sb-meter i').style.width = `${Math.round(q.progress * 100)}%`;
         node.querySelector('.sb-queue-row__eta').textContent = q.eta;

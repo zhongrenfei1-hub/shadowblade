@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Developer console · ShadowBlade</title>
+    <title>开发者控制台 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -128,22 +128,22 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <a href="settings.html" style="color:var(--sb-text-muted)">设置</a>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Developer console</b>
+            <b>开发者控制台</b>
           </div>
           <div class="sb-topbar__actions">
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
-              Replay last failure
+              重新发送上次失败
             </button>
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
-              New webhook
+              新建 Webhook
             </button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              New API key
+              新建 API 密钥
             </button>
           </div>
         </header>
@@ -152,37 +152,37 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Settings · Developer console</div>
-                <h1>API keys, webhooks, replay.</h1>
+                <div class="sb-eyebrow">设置 · 开发者控制台</div>
+                <h1>API 密钥、Webhook、重新发送。</h1>
                 <p class="sb-page-head__lead">
-                  Signed payloads · 30-day delivery retries · replay from anywhere in the log. The control room behind the integrations marketplace.
+                  签名载荷 · 30 天投递重试 · 可从日志任意位置重新发送。集成市场背后的指挥中心。
                 </p>
               </div>
             </div>
           </section>
 
           <section class="sb-kpi-grid">
-            <article class="sb-stat-tile"><div class="label">Webhooks today</div><div class="v">2,402</div></article>
-            <article class="sb-stat-tile"><div class="label">Delivery success</div><div class="v">99.94<small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">%</small></div></article>
-            <article class="sb-stat-tile"><div class="label">Median delivery</div><div class="v">412 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">ms</small></div></article>
-            <article class="sb-stat-tile"><div class="label">Active API keys</div><div class="v">7 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">of 25 cap</small></div></article>
+            <article class="sb-stat-tile"><div class="label">今日 Webhook</div><div class="v">2,402</div></article>
+            <article class="sb-stat-tile"><div class="label">投递成功率</div><div class="v">99.94<small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">%</small></div></article>
+            <article class="sb-stat-tile"><div class="label">投递耗时中位数</div><div class="v">412 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">毫秒</small></div></article>
+            <article class="sb-stat-tile"><div class="label">活跃 API 密钥</div><div class="v">7 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">/ 上限 25</small></div></article>
           </section>
 
           <div class="sb-dev-tabs">
-            <button class="active">Webhook deliveries</button>
-            <button>API keys</button>
-            <button>Replay queue</button>
-            <button>Rate limits</button>
+            <button class="active">Webhook 投递</button>
+            <button>API 密钥</button>
+            <button>重发队列</button>
+            <button>限流</button>
           </div>
 
           <section class="sb-dev-layout">
             <article class="sb-card">
               <header class="sb-card__head">
-                <div class="sb-card__title">Recent deliveries</div>
+                <div class="sb-card__title">最近投递</div>
                 <div class="sb-card__head-actions">
-                  <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">2,398 OK</span>
-                  <span class="sb-pill" style="color:var(--sb-status-queued);background:rgba(251,191,36,0.12)">3 retrying</span>
-                  <span class="sb-pill" style="color:var(--sb-status-failed);background:rgba(248,113,113,0.12)">1 failed</span>
+                  <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">2,398 成功</span>
+                  <span class="sb-pill" style="color:var(--sb-status-queued);background:rgba(251,191,36,0.12)">3 重试中</span>
+                  <span class="sb-pill" style="color:var(--sb-status-failed);background:rgba(248,113,113,0.12)">1 失败</span>
                 </div>
               </header>
               <div class="sb-card__body sb-card__body--flush">
@@ -190,69 +190,69 @@
                   <span class="status s2xx">200</span>
                   <div>
                     <b>render.completed</b> · run #901 · spring-launch
-                    <div class="meta">acme.example.com/hooks/sb · 412 ms · 4 KB payload</div>
+                    <div class="meta">acme.example.com/hooks/sb · 412 毫秒 · 4 KB 载荷</div>
                   </div>
-                  <time>0.3 s ago</time>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                  <time>0.3 秒前</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看详情</button>
                 </div>
                 <div class="sb-hook-row">
                   <span class="status s2xx">200</span>
                   <div>
                     <b>review.requested</b> · run #896 · SE bootcamp
-                    <div class="meta">acme.example.com/hooks/sb · 388 ms · 3 KB</div>
+                    <div class="meta">acme.example.com/hooks/sb · 388 毫秒 · 3 KB</div>
                   </div>
-                  <time>14 s ago</time>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                  <time>14 秒前</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看详情</button>
                 </div>
                 <div class="sb-hook-row">
                   <span class="status s2xx">200</span>
                   <div>
-                    <b>render.started</b> · run #902 · AI Copilot demo
-                    <div class="meta">slack.com/hook/T01… · 244 ms</div>
+                    <b>render.started</b> · run #902 · AI Copilot 演示
+                    <div class="meta">slack.com/hook/T01… · 244 毫秒</div>
                   </div>
-                  <time>1 min ago</time>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                  <time>1 分钟前</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看详情</button>
                 </div>
                 <div class="sb-hook-row">
                   <span class="status s4xx">429</span>
                   <div>
                     <b>render.queued</b> · run #903
-                    <div class="meta">acme.example.com/hooks/sb · rate-limited · retry in 18 s</div>
+                    <div class="meta">acme.example.com/hooks/sb · 被限流 · 18 秒后重试</div>
                   </div>
-                  <time>2 min ago</time>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                  <time>2 分钟前</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看详情</button>
                 </div>
                 <div class="sb-hook-row">
                   <span class="status s5xx">502</span>
                   <div>
-                    <b>render.failed</b> · run #894 · helios story
-                    <div class="meta">acme.example.com/hooks/sb · bad gateway · retries exhausted</div>
+                    <b>render.failed</b> · run #894 · helios 故事
+                    <div class="meta">acme.example.com/hooks/sb · 网关错误 · 重试已用尽</div>
                   </div>
-                  <time>14 min ago</time>
-                  <button class="sb-btn sb-btn--primary sb-btn--sm">Replay</button>
+                  <time>14 分钟前</time>
+                  <button class="sb-btn sb-btn--primary sb-btn--sm">重新发送</button>
                 </div>
                 <div class="sb-hook-row">
                   <span class="status s2xx">200</span>
                   <div>
-                    <b>review.approved</b> · run #888 · series-c teaser
-                    <div class="meta">tiktok.com/api/upload · 1,802 ms · 8.4 MB upload</div>
+                    <b>review.approved</b> · run #888 · C 轮预告
+                    <div class="meta">tiktok.com/api/upload · 1,802 毫秒 · 8.4 MB 上传</div>
                   </div>
-                  <time>1 hr ago</time>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                  <time>1 小时前</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看详情</button>
                 </div>
               </div>
             </article>
 
             <article class="sb-card">
               <header class="sb-card__head">
-                <div class="sb-card__title">Payload · render.completed</div>
+                <div class="sb-card__title">载荷 · render.completed</div>
                 <div class="sb-card__head-actions">
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Copy</button>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Resign</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">复制</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">重新签名</button>
                 </div>
               </header>
               <div class="sb-card__body">
-                <pre class="sb-payload"><span class="c">// Signed via HMAC-SHA256 · X-ShadowBlade-Signature header</span>
+                <pre class="sb-payload"><span class="c">// 通过 HMAC-SHA256 签名 · X-ShadowBlade-Signature 请求头</span>
 {
   <span class="k">"event"</span>:        <span class="s">"render.completed"</span>,
   <span class="k">"workspace"</span>:    <span class="s">"acme"</span>,
@@ -284,59 +284,59 @@
 
           <article class="sb-card">
             <header class="sb-card__head">
-              <div class="sb-card__title">API keys · 7 active</div>
+              <div class="sb-card__title">API 密钥 · 7 个活跃</div>
               <div class="sb-card__head-actions">
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate all</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">全部重置</button>
               </div>
             </header>
             <div class="sb-card__body sb-card__body--flush">
               <div class="sb-key-row">
                 <div>
-                  <b>CI · render-on-push</b>
+                  <b>CI · 推送即渲染</b>
                   <span class="key">sk_live_•••••••••••••••••6f12</span>
                 </div>
-                <span class="scope write">write</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                <span class="scope write">写入</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
               </div>
               <div class="sb-key-row">
                 <div>
-                  <b>Marketing dashboard · BI export</b>
+                  <b>营销仪表盘 · BI 导出</b>
                   <span class="key">sk_live_•••••••••••••••••a4d8</span>
                 </div>
-                <span class="scope read">read</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                <span class="scope read">只读</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
               </div>
               <div class="sb-key-row">
                 <div>
-                  <b>Slack bot</b>
+                  <b>Slack 机器人</b>
                   <span class="key">sk_live_•••••••••••••••••2c89</span>
                 </div>
-                <span class="scope read">read</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                <span class="scope read">只读</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
               </div>
               <div class="sb-key-row">
                 <div>
-                  <b>Internal · L&amp;D Notion sync</b>
+                  <b>内部 · L&amp;D Notion 同步</b>
                   <span class="key">sk_live_•••••••••••••••••0033</span>
                 </div>
-                <span class="scope write">write</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                <span class="scope write">写入</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
               </div>
               <div class="sb-key-row">
                 <div>
-                  <b>Procurement (Helios) · BYOC</b>
+                  <b>采购（Helios）· BYOC</b>
                   <span class="key">sk_live_•••••••••••••••••ff21</span>
                 </div>
-                <span class="scope admin">admin</span>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                <span class="scope admin">管理员</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
               </div>
             </div>
           </article>
         </main>
 
         <footer class="sb-footer">
-          <span>Webhook deliveries retained 30 days · keys hashed at rest</span>
-          <span>SDKs · <a href="docs.html" style="color:var(--sb-accent-300)">docs.html</a> · TypeScript · Python · Go · Rust</span>
+          <span>Webhook 投递保留 30 天 · 密钥静态散列存储</span>
+          <span>SDK · <a href="docs.html" style="color:var(--sb-accent-300)">docs.html</a> · TypeScript · Python · Go · Rust</span>
         </footer>
       </div>
     </div>

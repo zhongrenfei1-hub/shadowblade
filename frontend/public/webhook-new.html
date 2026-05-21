@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>New webhook · ShadowBlade</title>
+    <title>新建 Webhook · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -80,18 +80,18 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <a href="settings.html" style="color:var(--sb-text-muted)">设置</a>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <a href="dev-console.html" style="color:var(--sb-text-muted)">Developer console</a>
+            <a href="dev-console.html" style="color:var(--sb-text-muted)">开发者控制台</a>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>New webhook</b>
+            <b>新建 Webhook</b>
           </div>
           <div class="sb-topbar__actions">
-            <a class="sb-btn sb-btn--ghost" href="dev-console.html">Cancel</a>
-            <button class="sb-btn sb-btn--ghost">Test delivery</button>
+            <a class="sb-btn sb-btn--ghost" href="dev-console.html">取消</a>
+            <button class="sb-btn sb-btn--ghost">测试投递</button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
-              Create webhook
+              创建 Webhook
             </button>
           </div>
         </header>
@@ -100,10 +100,10 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Developer console · new webhook</div>
-                <h1>Listen for pipeline events.</h1>
+                <div class="sb-eyebrow">开发者控制台 · 新建 Webhook</div>
+                <h1>监听流水线事件。</h1>
                 <p class="sb-page-head__lead">
-                  Pick an endpoint, choose the events you care about, and we'll sign every payload with HMAC-SHA256. Failed deliveries retry for 30 days.
+                  选择端点，挑选关心的事件，我们会用 HMAC-SHA256 签名每一个载荷。失败投递在 30 天内自动重试。
                 </p>
               </div>
             </div>
@@ -111,20 +111,20 @@
 
           <section class="sb-wf-grid">
             <article class="sb-card">
-              <header class="sb-card__head"><div class="sb-card__title">Configure</div></header>
+              <header class="sb-card__head"><div class="sb-card__title">配置</div></header>
               <div class="sb-card__body sb-wf-form">
-                <label>Endpoint name<input value="Acme · render notifier" /></label>
+                <label>端点名称<input value="Acme · 渲染通知器" /></label>
                 <label>URL<input type="url" value="https://acme.example.com/hooks/sb" /></label>
-                <label>Secret · HMAC-SHA256
+                <label>密钥 · HMAC-SHA256
                   <div style="display:flex;gap:8px">
                     <input value="whsec_••••••••••••••••" style="flex:1" readonly />
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Copy</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">重置</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">复制</button>
                   </div>
                 </label>
 
                 <div>
-                  <div style="font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--sb-text-faint);font-weight:600;margin-bottom:8px">Events</div>
+                  <div style="font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--sb-text-faint);font-weight:600;margin-bottom:8px">事件</div>
                   <div class="sb-event-grid">
                     <label class="sb-event"><input type="checkbox" checked /><div><b>render.queued</b><span>render.queued</span></div></label>
                     <label class="sb-event"><input type="checkbox" checked /><div><b>render.started</b><span>render.started</span></div></label>
@@ -137,12 +137,12 @@
                   </div>
                 </div>
 
-                <label>Custom headers<textarea placeholder="X-Acme-Source: shadowblade">X-Acme-Source: shadowblade
+                <label>自定义请求头<textarea placeholder="X-Acme-Source: shadowblade">X-Acme-Source: shadowblade
 X-Acme-Env: production</textarea></label>
 
                 <div style="display:flex;gap:8px;align-items:center">
                   <label style="display:flex;align-items:center;gap:8px;font-size:var(--sb-text-sm);text-transform:none;letter-spacing:0;color:var(--sb-text-muted)">
-                    <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--sb-accent-500)" /> Enable on save
+                    <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--sb-accent-500)" /> 保存后立即启用
                   </label>
                 </div>
               </div>
@@ -150,16 +150,16 @@ X-Acme-Env: production</textarea></label>
 
             <div class="sb-stack">
               <article class="sb-wf-test">
-                <b>Test delivery</b>
-                <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">We'll POST a real <code>render.completed</code> payload to your endpoint. The response shows up in your <a href="dev-console.html" style="color:var(--sb-accent-300)">delivery log</a> within a second.</p>
+                <b>测试投递</b>
+                <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">我们会向你的端点 POST 一个真实的 <code>render.completed</code> 载荷。响应会在一秒内出现在你的 <a href="dev-console.html" style="color:var(--sb-accent-300)">投递日志</a>。</p>
                 <button class="sb-btn sb-btn--primary" style="width:max-content">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                  Send test payload
+                  发送测试载荷
                 </button>
               </article>
 
               <article class="sb-card">
-                <header class="sb-card__head"><div class="sb-card__title">Sample payload</div></header>
+                <header class="sb-card__head"><div class="sb-card__title">示例载荷</div></header>
                 <div class="sb-card__body">
                   <pre class="sb-wf-preview">POST <span class="s">"https://acme.example.com/hooks/sb"</span>
 Headers:
@@ -179,12 +179,12 @@ Headers:
               </article>
 
               <article class="sb-card">
-                <header class="sb-card__head"><div class="sb-card__title">Delivery policy</div></header>
+                <header class="sb-card__head"><div class="sb-card__title">投递策略</div></header>
                 <div class="sb-card__body" style="font-size:var(--sb-text-sm);color:var(--sb-text-muted);display:grid;gap:8px">
-                  <div style="display:flex;justify-content:space-between"><span>Timeout</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">10 s</b></div>
-                  <div style="display:flex;justify-content:space-between"><span>Retry on 5xx / timeout</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">30 attempts · exponential</b></div>
-                  <div style="display:flex;justify-content:space-between"><span>Final retry</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">+ 30 days</b></div>
-                  <div style="display:flex;justify-content:space-between"><span>Signature</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">HMAC-SHA256</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>超时</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">10 秒</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>5xx / 超时重试</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">30 次 · 指数退避</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>最终重试</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">+ 30 天</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>签名</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">HMAC-SHA256</b></div>
                 </div>
               </article>
             </div>
@@ -192,8 +192,8 @@ Headers:
         </main>
 
         <footer class="sb-footer">
-          <span>SDK examples · <a href="docs.html" style="color:var(--sb-accent-300)">TypeScript / Python / Go / Rust</a></span>
-          <span>Need help verifying signatures? <a href="docs.html" style="color:var(--sb-accent-300)">Read the verify guide</a></span>
+          <span>SDK 示例 · <a href="docs.html" style="color:var(--sb-accent-300)">TypeScript / Python / Go / Rust</a></span>
+          <span>需要验证签名的帮助？<a href="docs.html" style="color:var(--sb-accent-300)">阅读校验指南</a></span>
         </footer>
       </div>
     </div>

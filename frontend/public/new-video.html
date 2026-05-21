@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>New video · ShadowBlade</title>
+    <title>新建视频 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="New video · ShadowBlade" />
-    <meta property="og:description" content="Pick a template, paste a brief, ship a cut in minutes." />
+    <meta property="og:title" content="新建视频 · ShadowBlade" />
+    <meta property="og:description" content="选个模板，粘贴一份简报，几分钟内交付成片。" />
     <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
@@ -169,97 +169,97 @@
         <div class="sb-brand__mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="#22D3B7"/></svg>
         </div>
-        <h1 id="wiz-title" class="title" style="margin:0">Create new video</h1>
-        <button class="close" aria-label="Close">
+        <h1 id="wiz-title" class="title" style="margin:0">新建视频</h1>
+        <button class="close" aria-label="关闭">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M6 18L18 6"/></svg>
         </button>
       </header>
 
-      <nav class="sb-steps" aria-label="Wizard steps">
-        <div class="sb-step sb-step--done"><span class="sb-step__index">01</span><b>Template</b></div>
-        <div class="sb-step sb-step--active"><span class="sb-step__index">02</span><b>Brief</b></div>
-        <div class="sb-step"><span class="sb-step__index">03</span><b>Brand</b></div>
-        <div class="sb-step"><span class="sb-step__index">04</span><b>Review</b></div>
+      <nav class="sb-steps" aria-label="向导步骤">
+        <div class="sb-step sb-step--done"><span class="sb-step__index">01</span><b>模板</b></div>
+        <div class="sb-step sb-step--active"><span class="sb-step__index">02</span><b>简报</b></div>
+        <div class="sb-step"><span class="sb-step__index">03</span><b>品牌</b></div>
+        <div class="sb-step"><span class="sb-step__index">04</span><b>审核</b></div>
       </nav>
 
       <div class="sb-wizard__body">
         <div class="sb-stack-form">
           <div class="sb-field">
-            <label id="sb-wiz-template-label">Picked template</label>
+            <label id="sb-wiz-template-label">已选模板</label>
             <div class="opt" role="group" aria-labelledby="sb-wiz-template-label" style="border-color:rgba(34,211,183,0.5);background:rgba(34,211,183,0.06);display:flex;align-items:center;gap:12px">
               <div style="width:60px;height:38px;border-radius:6px;background:linear-gradient(135deg,#1F3A72,#06101F);display:grid;place-items:center"><svg width="22" viewBox="0 0 24 24" fill="#22D3B7"><circle cx="12" cy="12" r="6"/></svg></div>
               <div style="display:grid;gap:2px">
-                <b>Launch hero · 30s</b>
-                <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">Marketing · 9:16 · 5 scenes</span>
+                <b>发布主视觉 · 30 秒</b>
+                <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">营销 · 9:16 · 5 个场景</span>
               </div>
-              <button class="sb-btn sb-btn--ghost sb-btn--sm" style="margin-left:auto">Change</button>
+              <button class="sb-btn sb-btn--ghost sb-btn--sm" style="margin-left:auto">更换</button>
             </div>
           </div>
 
           <div class="sb-field">
-            <label for="sb-wiz-brief">What's the cut about?</label>
-            <textarea id="sb-wiz-brief" placeholder="One paragraph. The clearer the brief, the better the first cut.">Spring launch of the Acme Wearable Hub. Hero benefit: 7-day battery, twelve discreet health metrics, one tap. Audience: fitness-curious knowledge workers, 28–42, US/EU. Tone: confident, plainspoken. CTA: pre-order — first 1,000 ship free.</textarea>
+            <label for="sb-wiz-brief">这条成片讲什么？</label>
+            <textarea id="sb-wiz-brief" placeholder="一段话。简报越清晰，首版成片越好。">春季发布 Acme 智能腕环。核心卖点：7 天续航、十二项隐藏式健康指标、一键完成。受众：对健身感兴趣的知识工作者，28–42 岁，美国/欧盟。语态：自信、直白。CTA：预订——前 1,000 名免运费。</textarea>
           </div>
 
           <div class="sb-field__row">
-            <div class="sb-field"><label for="sb-wiz-duration">Duration</label><select id="sb-wiz-duration"><option>15 s</option><option selected>30 s</option><option>60 s</option><option>90 s</option></select></div>
-            <div class="sb-field"><label for="sb-wiz-aspect">Aspect ratio</label><select id="sb-wiz-aspect"><option selected>9:16 vertical</option><option>16:9 wide</option><option>1:1 square</option></select></div>
+            <div class="sb-field"><label for="sb-wiz-duration">时长</label><select id="sb-wiz-duration"><option>15 秒</option><option selected>30 秒</option><option>60 秒</option><option>90 秒</option></select></div>
+            <div class="sb-field"><label for="sb-wiz-aspect">画幅比例</label><select id="sb-wiz-aspect"><option selected>9:16 竖屏</option><option>16:9 宽屏</option><option>1:1 方形</option></select></div>
           </div>
 
           <div class="sb-field">
-            <label for="sb-wiz-voice">Voice</label>
+            <label for="sb-wiz-voice">配音</label>
             <select id="sb-wiz-voice">
-              <option>Alloy · EN female · warm</option>
-              <option>Ember · EN male · grounded</option>
-              <option>Lumen · EN female · bright</option>
-              <option>Bring my own — upload .wav</option>
+              <option>Alloy · EN 女声 · 温暖</option>
+              <option>Ember · EN 男声 · 沉稳</option>
+              <option>Lumen · EN 女声 · 明亮</option>
+              <option>使用自己的配音 — 上传 .wav</option>
             </select>
           </div>
 
           <div class="sb-field">
-            <label for="sb-wiz-cta">Call to action</label>
-            <input id="sb-wiz-cta" value="Pre-order — first 1,000 ship free" />
+            <label for="sb-wiz-cta">行动指令</label>
+            <input id="sb-wiz-cta" value="预订——前 1,000 名免运费" />
           </div>
         </div>
 
         <div class="sb-stack-form">
           <div class="sb-eta-card">
-            <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted);letter-spacing:0.1em;text-transform:uppercase">Estimated first cut</div>
-            <b>4 min 32 s</b>
-            <small>Based on template length, current cluster load (3 of 4 workers busy), and your render priority.</small>
+            <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted);letter-spacing:0.1em;text-transform:uppercase">首版成片预计</div>
+            <b>4 分 32 秒</b>
+            <small>基于模板长度、当前集群负载（4 个 worker 中 3 个繁忙）和你的渲染优先级。</small>
             <div class="sb-divider"></div>
-            <div class="row"><span>Cluster</span><b>eu-central-1 · 3 of 4 busy</b></div>
-            <div class="row"><span>Render priority</span><b>Normal</b></div>
-            <div class="row"><span>Cost estimate</span><b>$1.40</b></div>
-            <div class="row"><span>Renders left this month</span><b>613 of 1,000</b></div>
+            <div class="row"><span>集群</span><b>eu-central-1 · 4 个中 3 个繁忙</b></div>
+            <div class="row"><span>渲染优先级</span><b>常规</b></div>
+            <div class="row"><span>预估费用</span><b>$1.40</b></div>
+            <div class="row"><span>本月剩余渲染</span><b>1,000 中余 613</b></div>
           </div>
 
           <article class="sb-card">
-            <header class="sb-card__head"><div class="sb-card__title">Smart suggestions</div></header>
+            <header class="sb-card__head"><div class="sb-card__title">智能建议</div></header>
             <div class="sb-card__body sb-stack">
               <div class="sb-stage">
                 <span class="sb-stage__index sb-stage__index--running" aria-hidden="true">★</span>
                 <div class="sb-stage__body">
-                  <div class="sb-stage__title">Add an outro card</div>
-                  <div class="sb-stage__log">Same template — converted 22% more on TikTok last quarter</div>
+                  <div class="sb-stage__title">添加片尾卡片</div>
+                  <div class="sb-stage__log">同模板——上季度在 TikTok 多带来 22% 转化</div>
                 </div>
-                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Add</button></div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">添加</button></div>
               </div>
               <div class="sb-stage">
                 <span class="sb-stage__index sb-stage__index--review" aria-hidden="true">✿</span>
                 <div class="sb-stage__body">
-                  <div class="sb-stage__title">B-roll from "Founder keynote"</div>
-                  <div class="sb-stage__log">2 clips matched · brand-approved · CC license</div>
+                  <div class="sb-stage__title">使用「创始人主题演讲」空镜素材</div>
+                  <div class="sb-stage__log">匹配到 2 段 · 品牌已批准 · CC 授权</div>
                 </div>
-                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Use</button></div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">使用</button></div>
               </div>
               <div class="sb-stage">
                 <span class="sb-stage__index sb-stage__index--succeeded" aria-hidden="true">↻</span>
                 <div class="sb-stage__body">
-                  <div class="sb-stage__title">Auto-translate to ES, DE, JA</div>
-                  <div class="sb-stage__log">Voice cloned at -14 LUFS · adds 2:00 to first cut</div>
+                  <div class="sb-stage__title">自动翻译为 ES、DE、JA</div>
+                  <div class="sb-stage__log">配音克隆，-14 LUFS · 首版成片增加 2:00</div>
                 </div>
-                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Plan</button></div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">规划</button></div>
               </div>
             </div>
           </article>
@@ -269,13 +269,13 @@
       <footer class="sb-wizard__foot">
         <button class="sb-btn sb-btn--ghost">
           <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-          Back
+          上一步
         </button>
         <span class="spacer"></span>
-        <span style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">Step 2 of 4</span>
-        <button class="sb-btn sb-btn--ghost">Save as draft</button>
+        <span style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">第 2/4 步</span>
+        <button class="sb-btn sb-btn--ghost">保存为草稿</button>
         <button class="sb-btn sb-btn--primary">
-          Next · pick brand kit
+          下一步 · 选择品牌套件
           <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
       </footer>
