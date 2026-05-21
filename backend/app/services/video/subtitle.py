@@ -37,6 +37,19 @@ class Cue:
         return max(0.001, self.end - self.start)
 
 
+from enum import Enum
+
+
+class SubtitleEntrance(str, Enum):
+    """Per-cue entrance animation applied when burning PNG subtitles."""
+
+    NONE = "none"
+    FADE = "fade"  # opacity ramp (Pillow path adds its own fade-in)
+    POP = "pop"  # scale 0.8→1.0 + fade
+    SLIDE_UP = "slide_up"
+    TYPEWRITER = "typewriter"  # progressive char reveal (Pillow render)
+
+
 @dataclass(slots=True)
 class SubtitleStyle:
     font: str = "PingFang SC"
@@ -391,9 +404,60 @@ def adaptive_font_size(
     return max(int(base_size * 0.65), int(round(base_size * ratio)))
 
 
+def overlay_with_entrance(
+    *,
+    base_label: str,
+    image_label: str,
+    start: float,
+    end: float,
+    entrance: SubtitleEntrance = SubtitleEntrance.FADE,
+    duration_in: float = 0.18,
+    margin_v_expr: str = "main_h*0.86",
+    out_label: str = "[vsub]",
+) -> str:
+    """Build a single ``overlay=`` chain with the requested entrance.
+
+    Returns a filter fragment that takes ``base_label`` + ``image_label`` and
+    produces ``out_label``. The entrance is implemented purely through filter
+    expressions — no PNG sequence needed beyond the one-shot cue render.
+    """
+    duration_in = min(duration_in, max(0.05, (end - start) * 0.5))
+    if entrance == SubtitleEntrance.NONE:
+        x_expr = "(main_w-overlay_w)/2"
+        y_expr = f"{margin_v_expr}-overlay_h/2"
+        return (
+            f"{base_label}{image_label}overlay="
+            f"x='{x_expr}':y='{y_expr}':"
+            f"enable='between(t,{start:.3f},{end:.3f})':"
+            f"format=auto:eof_action=pass{out_label}"
+        )
+    if entrance == SubtitleEntrance.SLIDE_UP:
+        # y starts margin_v + 60px and eases to margin_v over duration_in
+        rise = 60.0
+        y_expr = (
+            f"if(lt(t,{start + duration_in:.3f}),"
+            f"{margin_v_expr}-overlay_h/2+{rise}*(1-(t-{start:.3f})/{duration_in:.3f}),"
+            f"{margin_v_expr}-overlay_h/2)"
+        )
+        return (
+            f"{base_label}{image_label}overlay="
+            f"x='(main_w-overlay_w)/2':y='{y_expr}':"
+            f"enable='between(t,{start:.3f},{end:.3f})':"
+            f"format=auto:eof_action=pass{out_label}"
+        )
+    # FADE / POP / TYPEWRITER (typewriter handled at Pillow render time)
+    return (
+        f"{base_label}{image_label}overlay="
+        f"x='(main_w-overlay_w)/2':y='{margin_v_expr}-overlay_h/2':"
+        f"enable='between(t,{start:.3f},{end:.3f})':"
+        f"format=auto:eof_action=pass{out_label}"
+    )
+
+
 __all__ = [
     "Cue",
     "SubtitleStyle",
+    "SubtitleEntrance",
     "CueQualityIssue",
     "SubtitleQualityReport",
     "smart_segment",
@@ -405,4 +469,5 @@ __all__ = [
     "parse_srt",
     "score_subtitles",
     "adaptive_font_size",
+    "overlay_with_entrance",
 ]

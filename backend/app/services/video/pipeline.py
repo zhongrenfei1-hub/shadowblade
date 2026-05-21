@@ -35,6 +35,8 @@ from typing import Iterable
 
 from app.services.video.audio import AudioBus, build_voice_bgm_mix, build_voice_only
 from app.services.video.beat import BeatGrid, detect_beats
+from app.services.video.color import compose_color_chain
+from app.services.video.speed import SpeedSpec, atempo_chain, setpts_expr
 from app.services.video.brand import BrandKit, default_kit
 from app.services.video.covers import CoverSpec, generate_cover
 from app.services.video.encoder import (
@@ -83,10 +85,12 @@ class ClipSpec:
     motion: float = 0.5
     is_chapter_break: bool = False
     is_hero: bool = False
+    speed: float = 1.0  # >1 fast, <1 slow
 
     def trim_duration(self, info: MediaInfo) -> float:
         end = info.duration if self.end is None else min(self.end, info.duration)
-        return max(0.1, end - self.start)
+        raw = max(0.1, end - self.start)
+        return raw / max(0.1, self.speed)
 
 
 @dataclass(slots=True)
@@ -109,6 +113,9 @@ class MixRequest:
     storage_root: str = "./storage"
     extra_filters: str = ""  # appended right before output
     snap_to_beats: bool = False  # snap intra-clip cuts to BGM beats when BGM present
+    color_look: str | None = None  # "natural" / "warm" / ... / None
+    lut_path: str | None = None
+    auto_white_balance: bool = False
 
 
 @dataclass(slots=True)
@@ -270,17 +277,28 @@ class MixPipeline:
         norm_filter = normalize_clip_filter(
             width=preset.width, height=preset.height, fps=preset.fps
         )
+        color_chain = compose_color_chain(
+            preset=request.color_look,
+            lut_path=request.lut_path,
+            auto_wb=request.auto_white_balance,
+        )
         # If we have an external voice or BGM track, the clip audio is unused.
         # In that case skip building per-clip audio prep + the audio crossfade
         # to avoid dangling filter outputs.
         use_source_audio = voice_idx is None and bgm_idx is None
         graph_parts: list[str] = []
-        for i in range(clip_count):
-            graph_parts.append(f"[{i}:v]{norm_filter}[v{i}]")
+        for i, clip in enumerate(request.clips):
+            speed_v = setpts_expr(clip.speed)
+            v_filter = norm_filter + (f",{color_chain}" if color_chain else "")
+            if speed_v:
+                v_filter = f"{v_filter},{speed_v}"
+            graph_parts.append(f"[{i}:v]{v_filter}[v{i}]")
             if use_source_audio:
-                graph_parts.append(
-                    f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo[a{i}]"
-                )
+                a_speed = atempo_chain(clip.speed)
+                a_chain = "aresample=48000,aformat=channel_layouts=stereo"
+                if a_speed:
+                    a_chain = f"{a_chain},{a_speed}"
+                graph_parts.append(f"[{i}:a]{a_chain}[a{i}]")
 
         xfade_chain, final_v, final_a = build_xfade_chain(
             durations,

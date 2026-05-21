@@ -39,6 +39,7 @@ class ClipPayload(BaseModel):
     motion: float = Field(default=0.5, ge=0.0, le=1.0)
     is_chapter_break: bool = False
     is_hero: bool = False
+    speed: float = Field(default=1.0, ge=0.1, le=8.0)
 
 
 class CuePayload(BaseModel):
@@ -78,6 +79,9 @@ class MixVideoRequest(BaseModel):
     title: str | None = None
     cover_timestamp: float | None = None
     snap_to_beats: bool = False
+    color_look: str | None = None  # "warm" | "cool" | "cinematic" | "punchy" | "mono" | "vintage"
+    lut_path: str | None = None
+    auto_white_balance: bool = False
 
 
 class SubtitleIssuePayload(BaseModel):
@@ -145,6 +149,7 @@ def _build_mix_request(body: MixVideoRequest) -> MixRequest:
             motion=c.motion,
             is_chapter_break=c.is_chapter_break,
             is_hero=c.is_hero,
+            speed=c.speed,
         )
         for c in body.clips
     ]
@@ -166,6 +171,9 @@ def _build_mix_request(body: MixVideoRequest) -> MixRequest:
         cover_timestamp=body.cover_timestamp,
         storage_root=settings.storage_root,
         snap_to_beats=body.snap_to_beats,
+        color_look=body.color_look,
+        lut_path=body.lut_path,
+        auto_white_balance=body.auto_white_balance,
     )
 
 
@@ -254,6 +262,25 @@ async def list_presets_endpoint():
                 "video_bitrate": p.video_bitrate,
             }
             for name, p in PRESETS.items()
+        ]
+    }
+
+
+@router.get("/looks/list")
+async def list_color_looks():
+    from app.services.video.color import PRESETS
+
+    return {"items": [{"name": k, "available": v != "null"} for k, v in PRESETS.items()]}
+
+
+@router.get("/aspects/list")
+async def list_aspects():
+    from app.services.video.aspect import ASPECT_PRESETS
+
+    return {
+        "items": [
+            {"name": k, "width": v.width, "height": v.height}
+            for k, v in ASPECT_PRESETS.items()
         ]
     }
 
