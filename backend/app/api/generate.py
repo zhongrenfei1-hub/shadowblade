@@ -320,11 +320,24 @@ async def get_video_job(job_id: str):
 
 
 async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
+    import math
+
     job = _JOBS[job_id]
     job["status"] = "running"
     try:
-        # ---- 0. fetch stock footage if requested ----
+        # ---- 1. script (first, so we know how many clips we need) ----
+        job["steps"]["script"] = "running"
+        script = generate_script(body.topic, length=body.length)
+        job["steps"]["script"] = "succeeded"
+
+        # ---- 0. fetch stock footage (auto-scaling clip count) ----
         clip_paths = list(body.clip_paths)
+        # Each clip max ~8s; we want clips × 8 ≈ script_duration with a bit of
+        # safety. Floor at the user-requested count so manual >3 still wins.
+        max_per_clip = 8.0
+        needed = max(body.stock_count, math.ceil(script.estimated_seconds / max_per_clip))
+        needed = min(needed, 8)  # hard cap so a 600-char essay doesn't pull 20
+
         if body.stock_source in {"pexels", "search"}:
             job["steps"]["stock"] = "running"
             query = body.stock_query or body.topic
@@ -334,14 +347,14 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
 
                     results = await pexels_search(
                         query,
-                        per_page=body.stock_count + 4,
+                        per_page=needed + 4,
                         orientation=body.stock_orientation,
                     )
                     out_dir = Path(settings.storage_root) / "stock" / "pexels"
                     downloaded: list[str] = []
-                    for clip in results[: body.stock_count]:
+                    for clip in results[:needed]:
                         try:
-                            p = await pexels_download(clip, out_dir, max_seconds=6.0)
+                            p = await pexels_download(clip, out_dir, max_seconds=max_per_clip)
                             downloaded.append(str(p))
                         except RuntimeError as exc:
                             log.warning("skip clip %s: %s", clip.id, exc)
@@ -355,8 +368,8 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
                     found = await search_and_download(
                         query,
                         out_dir,
-                        count=body.stock_count,
-                        max_seconds=6.0,
+                        count=needed,
+                        max_seconds=max_per_clip,
                     )
                     clip_paths = [str(c.path) for c in found]
                 job["steps"]["stock"] = "succeeded"
@@ -369,11 +382,6 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
             raise RuntimeError(
                 "no clips provided (stock_source=manual but clip_paths is empty)"
             )
-
-        # ---- 1. script ----
-        job["steps"]["script"] = "running"
-        script = generate_script(body.topic, length=body.length)
-        job["steps"]["script"] = "succeeded"
 
         # ---- 2. tts ----
         job["steps"]["tts"] = "running"
@@ -480,13 +488,25 @@ def _build_clip_specs(paths: list[str], total_seconds: float) -> list[ClipSpec]:
     Each clip gets ``total_seconds / N`` of screen time (bounded to [1.5, 6]),
     with the first clip flagged as the hero and the last as a chapter break.
     """
+    import math
+
     valid = [p for p in paths if Path(p).exists()]
     if not valid:
         return []
-    n = len(valid)
-    per = max(1.5, min(6.0, total_seconds / n))
+    # If we don't have enough clips to cover the audio at <=8s per shot, loop
+    # the clip list — the mix engine treats each entry as a distinct shot, so
+    # reuse is fine (and feels natural, since transitions break it up).
+    max_shot = 8.0
+    needed_shots = max(len(valid), math.ceil(total_seconds / max_shot))
+    looped: list[str] = []
+    while len(looped) < needed_shots:
+        looped.extend(valid)
+    looped = looped[:needed_shots]
+
+    n = len(looped)
+    per = max(1.5, min(max_shot, total_seconds / n))
     clips: list[ClipSpec] = []
-    for i, p in enumerate(valid):
+    for i, p in enumerate(looped):
         clips.append(
             ClipSpec(
                 path=p,
