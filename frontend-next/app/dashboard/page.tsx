@@ -8,13 +8,17 @@ import { PipelineStage } from "@/components/workspace/pipeline-stage";
 import { ProjectCard } from "@/components/workspace/project-card";
 import { StatusBadge } from "@/components/workspace/status-badge";
 
+/**
+ * 标准 6 步流水线 · 与 components/workspace/create-wizard.tsx 的 PIPELINE 对齐：
+ * 脚本 → 语音 → 字幕 → 混剪 → 封面 → 品牌水印
+ */
 const STAGES = [
   { idx: 1, title: "脚本", log: "6 个场景 · 142 字 · 品牌语态评分 0.94", meta: "8.4 秒", state: "succeeded" as const },
-  { idx: 2, title: "分镜", log: "6/6 分镜已渲染 · 编辑风格", meta: "12.1 秒", state: "succeeded" as const },
-  { idx: 3, title: "配音", log: "alloy-en-female · 4 个版本 · -14 LUFS", meta: "18.6 秒", state: "succeeded" as const },
-  { idx: 4, title: "空镜素材匹配", log: "匹配 18 段素材 · 已开启 CC 协议过滤", meta: "41.0 秒", state: "succeeded" as const },
-  { idx: 5, title: "合成", log: "62% · 等待叠加层 #3 · 1280×2272", meta: "预计 0:64", state: "running" as const },
-  { idx: 6, title: "渲染为 MP4", log: "排在 2 个加急任务之后 · H.264 high · 60 fps", meta: "排队中" },
+  { idx: 2, title: "语音", log: "灵韵女声 · 4 个版本 · -14 LUFS · 已选 take_03", meta: "18.6 秒", state: "succeeded" as const },
+  { idx: 3, title: "字幕", log: "6 个场景 · 自动断句 · 已校对", meta: "12.1 秒", state: "succeeded" as const },
+  { idx: 4, title: "混剪", log: "62% · 6 个分镜 + 18 段空镜 · 等待叠加层 #3", meta: "预计 0:64", state: "running" as const },
+  { idx: 5, title: "封面", log: "等待混剪完成 · 将自动选 0:04 / 0:12 / 0:24 三帧候选", meta: "排队中" },
+  { idx: 6, title: "品牌水印", log: "套 Acme · 核心版 · 输出 1080×1920 · H.264 high · 60 fps", meta: "排队中" },
 ];
 
 const APPROVALS = [

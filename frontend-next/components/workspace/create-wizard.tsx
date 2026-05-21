@@ -6,9 +6,9 @@ import {
   Upload,
   Folder,
   Mic,
-  Video as VideoIcon,
   Captions,
-  Music2,
+  Film,
+  Droplet,
   Loader2,
   Check,
   ChevronRight,
@@ -38,13 +38,17 @@ const VOICES = [
   { id: "lumen-zh-f", name: "晨曦 · 女声", tone: "明亮、活泼" },
 ];
 
+/**
+ * 标准 6 步流水线 · 对齐 Hero 文案：
+ * 脚本 → 语音 → 字幕 → 混剪 → 封面 → 品牌水印
+ */
 const PIPELINE = [
-  { key: "script", label: "撰写脚本", icon: Sparkles },
-  { key: "storyboard", label: "生成分镜", icon: ImageIcon },
-  { key: "tts", label: "录制配音", icon: Mic },
-  { key: "broll", label: "匹配空镜素材", icon: VideoIcon },
-  { key: "captions", label: "生成字幕", icon: Captions },
-  { key: "compose", label: "合成 + 品牌水印", icon: Music2 },
+  { key: "script", label: "脚本", icon: Sparkles },
+  { key: "voice", label: "语音", icon: Mic },
+  { key: "captions", label: "字幕", icon: Captions },
+  { key: "mix", label: "混剪", icon: Film },
+  { key: "cover", label: "封面", icon: ImageIcon },
+  { key: "watermark", label: "品牌水印", icon: Droplet },
 ];
 
 export function CreateWizard() {
