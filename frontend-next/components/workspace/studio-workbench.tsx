@@ -30,13 +30,15 @@ import {
 } from "@/lib/api";
 
 // 后端在第一轮就生成了 storage/samples/* —— 提供默认值，用户首次进来就能一键跑通。
+// 相对路径：backend 启动目录通常是 shadowblade/ 仓库根，相对路径 `storage/samples/...` 在所有机器都成立。
+// 之前硬编码 /Users/qiu/工作流/... 是作者本机绝对路径，在 CI / 同事机器都会 404。
 const DEFAULT_SAMPLES = {
-  clipA: "/Users/qiu/工作流/shadowblade/storage/samples/clip_a.mp4",
-  clipB: "/Users/qiu/工作流/shadowblade/storage/samples/clip_b.mp4",
-  clipC: "/Users/qiu/工作流/shadowblade/storage/samples/clip_c.mp4",
-  voice: "/Users/qiu/工作流/shadowblade/storage/samples/voice.wav",
-  bgm: "/Users/qiu/工作流/shadowblade/storage/samples/bgm.wav",
-  logo: "/Users/qiu/工作流/shadowblade/storage/samples/logo.png",
+  clipA: "storage/samples/clip_a.mp4",
+  clipB: "storage/samples/clip_b.mp4",
+  clipC: "storage/samples/clip_c.mp4",
+  voice: "storage/samples/voice.wav",
+  bgm: "storage/samples/bgm.wav",
+  logo: "storage/samples/logo.png",
 };
 
 const LOOKS = [
@@ -165,7 +167,7 @@ export function StudioWorkbench() {
       <Card className="border-border/60">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Sparkles className="text-accent-300" size={18} />
+            <Sparkles className="text-accent-300" size={18} aria-hidden />
             混剪参数
           </CardTitle>
         </CardHeader>
@@ -185,19 +187,19 @@ export function StudioWorkbench() {
           <Tabs defaultValue="look" className="w-full">
             <TabsList className="w-full justify-start gap-1 overflow-x-auto">
               <TabsTrigger value="look">
-                <Palette size={14} /> 调色
+                <Palette size={14} aria-hidden /> 调色
               </TabsTrigger>
               <TabsTrigger value="aspect">
-                <Film size={14} /> 比例
+                <Film size={14} aria-hidden /> 比例
               </TabsTrigger>
               <TabsTrigger value="transitions">
-                <Sparkles size={14} /> 过渡
+                <Sparkles size={14} aria-hidden /> 过渡
               </TabsTrigger>
               <TabsTrigger value="audio">
-                <Music2 size={14} /> 音轨
+                <Music2 size={14} aria-hidden /> 音轨
               </TabsTrigger>
               <TabsTrigger value="captions">
-                <Captions size={14} /> 字幕
+                <Captions size={14} aria-hidden /> 字幕
               </TabsTrigger>
             </TabsList>
 
@@ -283,11 +285,11 @@ export function StudioWorkbench() {
             <Button size="lg" onClick={handleGenerate} disabled={running}>
               {running ? (
                 <>
-                  <Loader2 className="animate-spin" /> 生成中…
+                  <Loader2 className="preserve-motion animate-spin" aria-hidden /> 生成中…
                 </>
               ) : (
                 <>
-                  <Sparkles /> 立即渲染
+                  <Sparkles aria-hidden /> 立即渲染
                 </>
               )}
             </Button>
@@ -298,7 +300,7 @@ export function StudioWorkbench() {
 
           {error && (
             <div className="flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
-              <AlertTriangle size={14} className="mt-0.5 shrink-0" />
+              <AlertTriangle size={14} className="mt-0.5 shrink-0" aria-hidden />
               <span className="whitespace-pre-wrap break-all">{error}</span>
             </div>
           )}
@@ -308,7 +310,7 @@ export function StudioWorkbench() {
       <Card className="border-border/60">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Film size={18} className="text-accent-300" /> 渲染结果
+            <Film size={18} className="text-accent-300" aria-hidden /> 渲染结果
           </CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -326,8 +328,8 @@ export function StudioWorkbench() {
 function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
   if (!features) {
     return (
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Loader2 className="animate-spin" size={12} />
+      <div className="flex items-center gap-2 text-xs text-muted-foreground" aria-busy="true" aria-label="正在检测 ffmpeg 能力">
+        <Loader2 className="preserve-motion animate-spin" size={12} aria-hidden />
         检测 ffmpeg 能力…
       </div>
     );
@@ -341,7 +343,7 @@ function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
           features.has_videotoolbox ? "bg-accent-500/15 text-accent-200" : "bg-white/5 text-muted-foreground",
         )}
       >
-        <Cpu size={11} />
+        <Cpu size={11} aria-hidden />
         {features.has_videotoolbox ? "VideoToolbox GPU" : "软件编码"}
       </Badge>
       <Badge
@@ -351,7 +353,7 @@ function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
           features.can_burn_subtitles ? "bg-white/5 text-muted-foreground" : "bg-amber-500/15 text-amber-200",
         )}
       >
-        <Captions size={11} />
+        <Captions size={11} aria-hidden />
         {features.can_burn_subtitles ? "libass 字幕" : "Pillow PNG 字幕"}
       </Badge>
     </div>
@@ -361,7 +363,7 @@ function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
 function EmptyResult({ features }: { features: MixFeatures | null }) {
   return (
     <div className="flex aspect-[9/16] flex-col items-center justify-center gap-2 rounded-md border border-dashed border-white/10 bg-white/[0.02] p-6 text-center">
-      <Mic size={24} className="text-muted-foreground" />
+      <Mic size={24} className="text-muted-foreground" aria-hidden />
       <p className="text-sm text-muted-foreground">
         填好参数后点 <span className="font-semibold text-foreground">「立即渲染」</span>
       </p>
@@ -414,7 +416,7 @@ function ResultPanel({
           href={videoUrl}
           download
         >
-          <Download size={12} /> 下载 MP4
+          <Download size={12} aria-hidden /> 下载 MP4
         </a>
       )}
 
@@ -463,7 +465,7 @@ function IssueList({ issues }: { issues: MixSubtitleIssue[] }) {
                 : "border-white/10 bg-white/[0.02] text-muted-foreground",
           )}
         >
-          <AlertTriangle size={10} className="mt-0.5 shrink-0" />
+          <AlertTriangle size={10} className="mt-0.5 shrink-0" aria-hidden />
           <span>
             #{i.cue_index} · {i.message}
           </span>
@@ -487,12 +489,13 @@ function ChipGroup<T extends { key: string; label: string }>({
   return (
     <div className="grid gap-1.5">
       <Label className="text-xs text-muted-foreground">{label}</Label>
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-1.5" role="toolbar" aria-label={label}>
         {options.map((o) => (
           <button
             key={o.key}
             type="button"
             onClick={() => onChange(o.key)}
+            aria-pressed={value === o.key}
             className={cn(
               "rounded-full border px-3 py-1 text-xs transition-colors",
               value === o.key
