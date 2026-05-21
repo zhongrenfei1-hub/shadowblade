@@ -398,90 +398,31 @@ The link text says "auto-generated from /showcase" but the description claims ZI
 
 ### 18. **P3** · `localisation.html` — flag glyph SR cleanup
 
-```diff
--                  <div class="sb-lang__flag">ES</div>
-+                  <div class="sb-lang__flag" aria-hidden="true">ES</div>
-```
-→ `localisation.html:172, :186, :200, :214, :228` (5 instances). Lang name in `<b>` immediately follows — SR doesn't need the flag glyph.
+Add `aria-hidden="true"` on `.sb-lang__flag` (5 instances: `localisation.html:172, :186, :200, :214, :228`). The `<b>` lang name immediately follows — SR doesn't need the glyph.
 
 ### 19. **P3** · `localisation.html` — "Add a language" tile decision
 
-Option A (remove duplicate lure):
+Either (A) delete the duplicate tile at `:240-244` (the topbar `+ Add language` button at `:106` already covers it), or (B) wrap content in `<button>` and hoist a `.sb-lang--add` modifier.
 
-```diff
--              <article class="sb-lang" style="border-style:dashed;background:rgba(34,211,183,0.04);display:grid;place-items:center;text-align:center;padding:var(--sb-space-6)">
--                <svg width="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--sb-accent-300);margin:0 auto"><path d="M12 5v14M5 12h14"/></svg>
--                <b style="font-family:var(--sb-font-display);font-size:var(--sb-text-md);font-weight:600">Add a language</b>
--                <span style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">37 languages supported · cloned voice on Scale+</span>
--              </article>
-```
-→ delete `localisation.html:240-244`. The topbar `+ Add language` button (`:106`) already covers the action.
+### 20. **P3** · `audit-log.html` — header row inline-style hoist
 
-Option B: wrap in `<button>` and hoist a `.sb-lang--add` modifier in the inline `<style>`.
-
-### 20. **P3** · `audit-log.html` — header row inline styles hoist
-
-```diff
--              <div class="sb-audit-row" style="background:rgba(255,255,255,0.025);font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.08em;color:var(--sb-text-faint);font-weight:600;padding-top:10px;padding-bottom:10px">
-+              <div class="sb-audit-row sb-audit-row--head">
-```
-Add CSS:
-
-```css
-.sb-audit-row--head {
-  background: rgba(255,255,255,0.025);
-  font-size: var(--sb-text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--sb-text-faint);
-  font-weight: 600;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-```
-→ `audit-log.html:152` + style block
+Replace `<div class="sb-audit-row" style="9-prop block">` at `:152` with `<div class="sb-audit-row sb-audit-row--head">` and lift the 9 props into a single `.sb-audit-row--head` class in the page `<style>` block.
 
 ### 21. **P3** · `about.html` — 3 inline `<b style="color:var(--sb-text)">` hoist
 
-```diff
--      <p><b style="color:var(--sb-text)">Brand is a constraint, not a coat of paint.</b> Every cut renders against the kit. Drift is flagged before it ships.</p>
-+      <p><b class="sb-about-em">Brand is a constraint, not a coat of paint.</b> Every cut renders against the kit. Drift is flagged before it ships.</p>
-```
-→ `about.html:181-183` (3 instances).
+Replace inline `style="color:var(--sb-text)"` on three `<b>` at `:181-183` with `class="sb-about-em"`; add `.sb-about-body .sb-about-em { color: var(--sb-text); font-weight: 600; }` to the inline `<style>`.
 
-Add CSS:
+### 22. **P3** · `<time>` `datetime` attribute
 
-```css
-.sb-about-body .sb-about-em { color: var(--sb-text); font-weight: 600; }
-```
+Every `<time>14:13:24.802</time>` should carry an ISO-8601 `datetime="…"` for SR/parser clarity. Sites: `audit-log.html:156, 162, 168, 174, 180, 186, 192, 198, 204, 210` and `compare.html:165, 198`. Mechanical.
 
-### 22. **P3** · Audit-log + compare + localisation — `<time>` `datetime` attribute
+### 23. **P3** · Data-table semantics
 
-`audit-log.html:156, 162, 168, 174, 180, 186, 192, 198, 204, 210` and `compare.html:165, 198` — every `<time>14:13:24.802</time>` should carry an ISO-8601 `datetime="…"` attribute for parser/SR clarity. Mechanical fix.
-
-### 23. **P3** · `audit-log.html` + `workspace-switcher.html` — data-table semantics for the event log / workspace list
-
-Audit-log event log is a true data table (10 rows × 4 cols). Either:
-- Convert `<div class="sb-audit-row">` to `<table><tbody><tr>...` with `<caption>` and `<thead>`, OR
-- Add `role="table"` / `role="rowgroup"` / `role="row"` / `role="cell"` to retrofit semantics.
-
-Workspace-switcher list is already `role="listbox"` ✓ but each `[role="option"]` needs the keyboard wiring from item 2.
+`audit-log.html` event log is true tabular data (10 × 4) rendered as `<div>` grid — convert to `<table><thead><tbody>` or retrofit with `role="table" / "row" / "cell"`. Workspace-switcher list is already `role="listbox"` ✓ — keyboard wiring is in item 2.
 
 ### 24. **P3** · Shared `.sb-grad-avatar-navy` token
 
-Pass-001 P3 deferred this. The gradient `linear-gradient(135deg, #1c3868, #0a1428)` appears on:
-- `audit-log.html:49` (default avatar)
-- `audit-log.html:157` (AC row inline)
-- `about.html:89` (leader avatar)
-- `workspace-switcher.html:151` (AC inline)
-
-Add to `tokens.css`:
-
-```css
---sb-grad-avatar-navy: linear-gradient(135deg, #1c3868, #0a1428);
-```
-
-Then `background: var(--sb-grad-avatar-navy)` in all 4 sites.
+Gradient `linear-gradient(135deg, #1c3868, #0a1428)` repeats in `audit-log.html:49, :157`, `about.html:89`, `workspace-switcher.html:151`. Add `--sb-grad-avatar-navy` to `tokens.css` and route the 4 sites through it. (Pass-001 P3 deferral still live.)
 
 ---
 
