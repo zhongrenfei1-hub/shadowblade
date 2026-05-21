@@ -1,0 +1,28 @@
+# Python
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Local DB / state
+shadowblade.db
+*.sqlite3
+
+# Mix render outputs (regenerated on demand)
+storage/mix/
+storage/cache/
+
+# Sample assets (test fixtures)
+storage/samples/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (Next.js already has its own .gitignore inside frontend-next/)
+node_modules/
+
+# Editors
+.vscode/
+.idea/

@@ -78,7 +78,7 @@ def build_voice_bgm_mix(
         f"ratio={bus.duck_ratio}:"
         f"attack={bus.duck_attack_ms}:"
         f"release={bus.duck_release_ms}:"
-        f"makeup=0[bgm_ducked];"
+        f"makeup=1[bgm_ducked];"
     )
     mix = (
         f"[voice_main][bgm_ducked]amix=inputs=2:duration=first:dropout_transition=0:"

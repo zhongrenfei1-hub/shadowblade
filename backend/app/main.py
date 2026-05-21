@@ -11,6 +11,7 @@ from app.api import (
     brand_kits,
     health,
     jobs,
+    mix_video,
     projects,
     render_queue,
     templates,
@@ -54,5 +55,6 @@ for router in (
     render_queue.router,
     brand_kits.router,
     analytics.router,
+    mix_video.router,
 ):
     app.include_router(router, prefix="/api/v1")
