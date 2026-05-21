@@ -10,6 +10,11 @@ const nextConfig = {
           source: "/api/v1/:path*",
           destination: "http://localhost:8000/api/v1/:path*",
         },
+        {
+          // 后端 StaticFiles mount 的 storage 目录（混剪输出的 MP4 / 封面）
+          source: "/static/:path*",
+          destination: "http://localhost:8000/static/:path*",
+        },
       ];
     }
     return [];

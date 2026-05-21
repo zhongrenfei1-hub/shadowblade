@@ -185,6 +185,105 @@ export const api = {
     }),
   brandKits: () => get<{ items: BrandKit[] }>("/brand-kits", { items: BRAND_KIT_FALLBACK }),
   analytics: () => get<Analytics>("/analytics/overview", ANALYTICS_FALLBACK),
+  mixFeatures: () =>
+    get<MixFeatures>("/mix-video/features", {
+      has_drawtext: false,
+      has_subtitles_filter: false,
+      has_libass: false,
+      can_burn_subtitles: false,
+      has_videotoolbox: false,
+    }),
+  mixLooks: () => get<{ items: { name: string; available: boolean }[] }>("/mix-video/looks/list", { items: [] }),
+  mixAspects: () =>
+    get<{ items: { name: string; width: number; height: number }[] }>("/mix-video/aspects/list", { items: [] }),
+  mixPresets: () =>
+    get<{ items: { name: string; width: number; height: number; fps: number; video_bitrate: string }[] }>(
+      "/mix-video/presets/list",
+      { items: [] },
+    ),
+  mixPreview: async (body: MixVideoRequest): Promise<MixVideoResponse> => {
+    const res = await fetch(`${BASE}/mix-video/preview`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      const detail = await res.text();
+      throw new Error(`mix-video ${res.status}: ${detail.slice(0, 400)}`);
+    }
+    return res.json();
+  },
+};
+
+// ─── /mix-video 类型 ──────────────────────────────────────────────────
+
+export type MixFeatures = {
+  has_drawtext: boolean;
+  has_subtitles_filter: boolean;
+  has_libass: boolean;
+  can_burn_subtitles: boolean;
+  has_videotoolbox: boolean;
+};
+
+export type MixClip = {
+  path: string;
+  start?: number;
+  end?: number | null;
+  brightness?: number;
+  motion?: number;
+  is_chapter_break?: boolean;
+  is_hero?: boolean;
+  speed?: number;
+};
+
+export type MixCue = {
+  start: number;
+  end: number;
+  text: string;
+  subtext?: string;
+};
+
+export type MixVideoRequest = {
+  project_id: string | number;
+  clips: MixClip[];
+  voice_path?: string | null;
+  bgm_path?: string | null;
+  cues?: MixCue[];
+  watermark_path?: string | null;
+  watermark_position?: "tl" | "tr" | "bl" | "br" | "bc";
+  preset?: string;
+  transition_style?: "editorial" | "energetic" | "calm";
+  max_transition?: number;
+  title?: string | null;
+  snap_to_beats?: boolean;
+  color_look?: string | null;
+  auto_white_balance?: boolean;
+  adaptive_bgm_mix?: boolean;
+  srt_path?: string | null;
+};
+
+export type MixSubtitleIssue = {
+  cue_index: number;
+  severity: "info" | "warn" | "fail";
+  code: string;
+  message: string;
+  cps: number;
+};
+
+export type MixVideoResponse = {
+  project_id: string | number;
+  output_path: string;
+  cover_path: string | null;
+  duration: number;
+  preset: string;
+  used_hardware: boolean;
+  transitions: string[];
+  runtime_seconds: number;
+  warnings: string[];
+  subtitle_issues: MixSubtitleIssue[];
+  subtitle_max_cps: number | null;
+  beat_grid: { bpm: number; onsets: number[] } | null;
 };
 
 // ─── 离线回退数据（与后端 fixtures 一致）─────────────────────────────

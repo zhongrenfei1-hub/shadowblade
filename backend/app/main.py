@@ -1,8 +1,10 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api import (
     analytics,
@@ -58,3 +60,10 @@ for router in (
     mix_video.router,
 ):
     app.include_router(router, prefix="/api/v1")
+
+# Serve the rendered MP4 + cover output directory so the frontend's <video>
+# can stream the result by HTTP. Path is relative to the backend's CWD —
+# matches Settings.storage_root default of "./storage".
+_storage_root = Path(settings.storage_root).resolve()
+_storage_root.mkdir(parents=True, exist_ok=True)
+app.mount("/static/storage", StaticFiles(directory=str(_storage_root)), name="storage")

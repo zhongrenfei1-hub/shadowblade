@@ -16,6 +16,7 @@ import {
   LineChart,
   Plug,
   Bell,
+  Film,
   type LucideIcon,
 } from "lucide-react";
 
@@ -40,6 +41,7 @@ export const NAV: NavGroup[] = [
     items: [
       { href: "/dashboard", label: "工作台", icon: LayoutDashboard },
       { href: "/create", label: "新建视频", icon: Sparkles, cta: true },
+      { href: "/studio", label: "Studio · 真混剪", icon: Film },
       { href: "/projects", label: "项目库", icon: FolderOpen, badge: "38" },
       { href: "/templates", label: "模板", icon: LayoutTemplate },
       { href: "/analytics", label: "数据分析", icon: LineChart },
