@@ -214,6 +214,43 @@ export const api = {
     }
     return res.json();
   },
+
+  // ── /generate (end-to-end AI pipeline) ────────────────────────────────
+  scenarios: () =>
+    get<{ items: { slug: string; label: string; keywords: string[] }[] }>(
+      "/generate/scenarios",
+      { items: [] },
+    ),
+  voices: () =>
+    get<{ items: { alias: string; id: string; label: string; tone: string }[] }>(
+      "/generate/voices",
+      { items: [] },
+    ),
+  generateScript: async (body: ScriptRequest): Promise<ScriptResponse> => {
+    const res = await fetch(`${BASE}/generate/script`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`generate-script ${res.status}: ${await res.text()}`);
+    return res.json();
+  },
+  generateVideo: async (body: GenerateVideoRequest): Promise<GenerateVideoResponse> => {
+    const res = await fetch(`${BASE}/generate`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`generate ${res.status}: ${await res.text()}`);
+    return res.json();
+  },
+  generateVideoStatus: async (jobId: string): Promise<GenerateVideoResponse> => {
+    const res = await fetch(`${BASE}/generate/jobs/${jobId}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`generate-status ${res.status}`);
+    return res.json();
+  },
 };
 
 // ─── /mix-video 类型 ──────────────────────────────────────────────────
@@ -284,6 +321,70 @@ export type MixVideoResponse = {
   subtitle_issues: MixSubtitleIssue[];
   subtitle_max_cps: number | null;
   beat_grid: { bpm: number; onsets: number[] } | null;
+};
+
+// ─── /generate (AI 一键端到端) ────────────────────────────────────────
+
+export type ScriptRequest = {
+  topic: string;
+  language?: string;
+  length?: number;
+};
+
+export type ScriptCue = { start: number; end: number; text: string };
+
+export type ScriptResponse = {
+  content: string;
+  keywords: string;
+  scenario: string;
+  estimated_seconds: number;
+  cues: ScriptCue[];
+};
+
+export type GenerateVideoRequest = {
+  topic: string;
+  clip_paths: string[];
+  voice?: string;
+  rate?: string;
+  asr_model?: string;
+  skip_asr?: boolean;
+  bgm_path?: string | null;
+  watermark_path?: string | null;
+  title?: string | null;
+  preset?: string;
+  color_look?: string | null;
+  auto_white_balance?: boolean;
+  adaptive_bgm_mix?: boolean;
+  length?: number;
+};
+
+export type GenerateVideoSteps = {
+  script: string;
+  tts: string;
+  asr: string;
+  mix: string;
+  cover: string;
+};
+
+export type GenerateVideoOutput = {
+  video_file: string;
+  cover_file: string | null;
+  video_url: string;
+  cover_url: string | null;
+  duration: number;
+  scenario: string;
+  script: string;
+  keywords: string;
+  transitions: string[];
+  warnings: string[];
+};
+
+export type GenerateVideoResponse = {
+  job_id: string;
+  status: "queued" | "running" | "succeeded" | "failed";
+  steps: GenerateVideoSteps;
+  output: GenerateVideoOutput | null;
+  error: string | null;
 };
 
 // ─── 离线回退数据（与后端 fixtures 一致）─────────────────────────────
