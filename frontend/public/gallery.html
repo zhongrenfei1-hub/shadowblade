@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer reel · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/hero/hero-cover.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav .spacer { flex: 1; }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-gallery-head {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-12) var(--sb-space-8);
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--sb-space-8);
+        align-items: end;
+      }
+      .sb-gallery-head h1 {
+        margin: var(--sb-space-3) 0 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4.4vw, 56px);
+        letter-spacing: -0.025em;
+        font-weight: 600;
+        line-height: 1.05;
+      }
+      .sb-gallery-head p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 56ch; margin: var(--sb-space-4) 0 0; }
+      .sb-gallery-head .stats {
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-gallery-head .stats div {
+        display: flex; justify-content: space-between;
+        font-size: var(--sb-text-md);
+        color: var(--sb-text-muted);
+        padding: 12px 0;
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-gallery-head .stats b { color: var(--sb-text); font-family: var(--sb-font-display); }
+
+      .sb-gallery {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-16);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-reel {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        overflow: hidden;
+        background: rgba(11,18,32,0.6);
+        display: grid;
+        grid-template-rows: 230px 1fr;
+        cursor: pointer;
+        transition: transform var(--sb-dur) var(--sb-ease-out), border-color var(--sb-dur);
+      }
+      .sb-reel:hover { transform: translateY(-3px); border-color: rgba(34,211,183,0.4); }
+      .sb-reel__thumb {
+        background: linear-gradient(135deg, var(--sb-navy-700), var(--sb-navy-900));
+        position: relative;
+        overflow: hidden;
+      }
+      .sb-reel__thumb img, .sb-reel__thumb svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .sb-reel__thumb .play {
+        position: absolute; inset: 0; display: grid; place-items: center;
+        opacity: 0; transition: opacity var(--sb-dur);
+        background: linear-gradient(180deg, transparent, rgba(6,10,22,0.6));
+      }
+      .sb-reel:hover .sb-reel__thumb .play { opacity: 1; }
+      .sb-reel__thumb .play div {
+        width: 54px; height: 54px; border-radius: 50%;
+        background: var(--sb-accent-500);
+        display: grid; place-items: center;
+        color: var(--sb-navy-950);
+      }
+      .sb-reel__thumb .ribbon {
+        position: absolute; top: 12px; left: 12px;
+        display: flex; gap: 6px;
+      }
+      .sb-reel__thumb .runtime {
+        position: absolute; bottom: 12px; right: 12px;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        background: rgba(8,14,28,0.8);
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+      .sb-reel__body { padding: var(--sb-space-4); display: grid; gap: 8px; }
+      .sb-reel__name {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+      }
+      .sb-reel__meta {
+        display: flex; justify-content: space-between;
+        font-size: var(--sb-text-xs); color: var(--sb-text-faint);
+      }
+
+      .sb-gallery-cta {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-12);
+        text-align: center;
+      }
+      .sb-gallery-cta h3 {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        margin: 0 0 var(--sb-space-3);
+        letter-spacing: -0.02em;
+      }
+
+      @media (max-width: 1100px) { .sb-gallery { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 720px)  { .sb-gallery, .sb-gallery-head { grid-template-columns: 1fr; padding-left: var(--sb-space-6); padding-right: var(--sb-space-6); } }
+    </style>
+  </head>
+  <body>
+    <header class="sb-marketing__nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgg)"/><defs><linearGradient id="mgg" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="index.html">Product</a>
+      <a class="link" href="templates.html">Templates</a>
+      <a class="link" href="customer-story.html" style="color:var(--sb-text)">Customers</a>
+      <a class="link" href="pricing.html">Pricing</a>
+      <a class="link" href="#">Docs</a>
+      <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+      <a class="sb-btn sb-btn--primary" href="dashboard.html">Open workspace</a>
+    </header>
+
+    <section class="sb-gallery-head">
+      <div>
+        <div class="sb-eyebrow">Customer reel · last 30 days</div>
+        <h1>What enterprise teams are shipping on ShadowBlade.</h1>
+        <p>Every cut below was scripted, voiced, edited, captioned, and rendered by a real team using ShadowBlade — against their real brand kit, on their real schedule.</p>
+      </div>
+      <div class="stats">
+        <div><span>Cuts shipped this month</span><b>1,720</b></div>
+        <div><span>Average first cut</span><b>4.8 min</b></div>
+        <div><span>Approval on first review</span><b>92%</b></div>
+        <div><span>Saved vs agency baseline</span><b>$168k / qtr</b></div>
+      </div>
+    </section>
+
+    <section class="sb-gallery" id="gallery">
+      <!-- populated below; thumbnails come from the Showcase ring -->
+    </section>
+
+    <section class="sb-gallery-cta">
+      <h3>Want yours in the reel?</h3>
+      <p style="color:var(--sb-text-muted);margin:0 0 var(--sb-space-6)">Start with a brief. We'll have a cut for you to share before the kettle boils.</p>
+      <a class="sb-btn sb-btn--primary" href="dashboard.html">Open the workspace</a>
+      <a class="sb-btn sb-btn--ghost" href="pricing.html" style="margin-left:var(--sb-space-3)">See pricing</a>
+    </section>
+
+    <footer class="sb-footer">
+      <span>© 2026 ShadowBlade Labs · SOC 2 Type II · ISO 27001</span>
+      <span>Showcase reel refreshes daily · last sync just now</span>
+    </footer>
+
+    <template id="reel">
+      <article class="sb-reel">
+        <div class="sb-reel__thumb">
+          <img alt="" loading="lazy" />
+          <div class="ribbon"></div>
+          <span class="runtime"></span>
+          <div class="play"><div><svg width="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></div></div>
+        </div>
+        <div class="sb-reel__body">
+          <div class="sb-reel__name"></div>
+          <div class="sb-reel__meta"><span class="brand"></span><span class="cat"></span></div>
+        </div>
+      </article>
+    </template>
+
+    <script>
+      const REELS = [
+        { src: '/showcase/thumbnails/wearable-hub.svg', name: 'Spring launch — wearable hub', brand: 'Acme · Core', cat: '9:16 · 28s', tags: ['Marketing', 'Hero'] },
+        { src: '/showcase/thumbnails/bootcamp.svg', name: 'SE bootcamp · onboarding loop', brand: 'Acme · Internal', cat: '16:9 · 96s', tags: ['Training'] },
+        { src: '/showcase/thumbnails/copilot.svg', name: 'AI Copilot · 60s product demo', brand: 'Acme · Core', cat: '16:9 · 60s', tags: ['Demo'] },
+        { src: '/showcase/thumbnails/series-c.svg', name: 'Series C teaser · TikTok', brand: 'Acme · Field', cat: '9:16 · 15s', tags: ['Social'] },
+        { src: '/showcase/thumbnails/helios.svg', name: 'Helios Logistics · customer story', brand: 'Acme · Core', cat: '16:9 · 75s', tags: ['Case study'] },
+        { src: '/showcase/thumbnails/gdpr.svg', name: 'GDPR refresher · compliance', brand: 'Acme · Core', cat: '16:9 · 3:00', tags: ['Compliance'] },
+        // Same six are looped to show density at scale; production would paginate
+        { src: '/showcase/thumbnails/wearable-hub.svg', name: 'Spring launch · paid social cut', brand: 'Acme · Core', cat: '9:16 · 15s', tags: ['Paid'] },
+        { src: '/showcase/thumbnails/copilot.svg', name: 'AI Copilot · 15s pre-roll', brand: 'Acme · Core', cat: '16:9 · 15s', tags: ['Demo'] },
+        { src: '/showcase/thumbnails/series-c.svg', name: 'Series C · investor letter', brand: 'Acme · Field', cat: '16:9 · 45s', tags: ['Internal'] },
+      ];
+      const tpl = document.getElementById('reel');
+      const gallery = document.getElementById('gallery');
+      REELS.forEach((r) => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        const img = node.querySelector('img');
+        img.src = r.src;
+        img.alt = r.name;
+        img.onerror = () => {
+          img.remove();
+          const fallback = document.createElement('div');
+          fallback.style.cssText = 'display:grid;place-items:center;height:100%;font-family:var(--sb-font-display);font-weight:600;color:var(--sb-text-faint)';
+          fallback.textContent = r.name.split('·')[0].trim();
+          node.querySelector('.sb-reel__thumb').prepend(fallback);
+        };
+        node.querySelector('.sb-reel__name').textContent = r.name;
+        node.querySelector('.brand').textContent = r.brand;
+        node.querySelector('.cat').textContent = r.cat;
+        node.querySelector('.runtime').textContent = r.cat.split('·')[1].trim();
+        const ribbon = node.querySelector('.ribbon');
+        r.tags.forEach((t) => {
+          const pill = document.createElement('span');
+          pill.className = 'sb-pill';
+          pill.style.background = 'rgba(8,14,28,0.7)';
+          pill.style.color = 'var(--sb-text)';
+          pill.textContent = t;
+          ribbon.appendChild(pill);
+        });
+        gallery.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

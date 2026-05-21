@@ -105,7 +105,7 @@
       c.setAttribute('cx', x);
       c.setAttribute('cy', y);
       c.setAttribute('r', 3);
-      c.setAttribute('fill', '#22D3B7');
+      c.setAttribute('fill', ACCENT);
       svg.appendChild(c);
 
       const lbl = document.createElementNS(ns, 'text');
@@ -134,7 +134,7 @@
     const line = document.createElementNS(ns, 'path');
     line.setAttribute('d', pts.map(([x, y], i) => `${i ? 'L' : 'M'} ${x} ${y}`).join(' '));
     line.setAttribute('fill', 'none');
-    line.setAttribute('stroke', '#22D3B7');
+    line.setAttribute('stroke', ACCENT);
     line.setAttribute('stroke-width', '1.5');
     svg.appendChild(line);
     const dot = document.createElementNS(ns, 'circle');
@@ -142,7 +142,7 @@
     dot.setAttribute('cx', last[0]);
     dot.setAttribute('cy', last[1]);
     dot.setAttribute('r', '2');
-    dot.setAttribute('fill', '#22D3B7');
+    dot.setAttribute('fill', ACCENT);
     svg.appendChild(dot);
   }
 

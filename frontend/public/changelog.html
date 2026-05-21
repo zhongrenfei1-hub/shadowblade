@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Changelog · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav .spacer { flex: 1; }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-log-head {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-6) var(--sb-space-8);
+      }
+      .sb-log-head h1 {
+        margin: var(--sb-space-3) 0 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4vw, 52px);
+        letter-spacing: -0.025em;
+        font-weight: 600;
+      }
+      .sb-log-head p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 56ch; }
+
+      .sb-log {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 var(--sb-space-6) var(--sb-space-16);
+        position: relative;
+      }
+      .sb-log::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        left: 100px;
+        width: 1px;
+        background: linear-gradient(180deg, var(--sb-border-strong), transparent);
+      }
+      .sb-log-entry {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: var(--sb-space-6);
+        margin-bottom: var(--sb-space-12);
+        position: relative;
+      }
+      .sb-log-entry::before {
+        content: '';
+        position: absolute;
+        left: 96px; top: 6px;
+        width: 9px; height: 9px;
+        border-radius: 50%;
+        background: var(--sb-accent-500);
+        box-shadow: 0 0 0 4px rgba(34,211,183,0.15);
+      }
+      .sb-log-entry time {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-faint);
+        padding-top: 4px;
+        text-align: right;
+        padding-right: var(--sb-space-4);
+      }
+      .sb-log-entry .body {
+        background: rgba(11,18,32,0.6);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-5) var(--sb-space-6);
+      }
+      .sb-log-entry h2 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .sb-log-entry .pills {
+        display: flex; gap: 6px; flex-wrap: wrap; margin-top: var(--sb-space-2);
+      }
+      .sb-log-entry .pills .sb-pill { background: rgba(255,255,255,0.04); color: var(--sb-text-muted); }
+      .sb-log-entry .pills .sb-pill.feat { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
+      .sb-log-entry .pills .sb-pill.fix { color: #fbbf24; background: rgba(251,191,36,0.12); }
+      .sb-log-entry .pills .sb-pill.perf { color: #38BDF8; background: rgba(56,189,248,0.12); }
+      .sb-log-entry .pills .sb-pill.brand { color: #a78bfa; background: rgba(167,139,250,0.12); }
+      .sb-log-entry ul { margin: var(--sb-space-3) 0 0; padding-left: 20px; color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+      .sb-log-entry li { margin: 6px 0; }
+      .sb-log-entry li b { color: var(--sb-text); font-weight: 600; }
+
+      @media (max-width: 700px) {
+        .sb-log::before { left: 20px; }
+        .sb-log-entry { grid-template-columns: 1fr; gap: var(--sb-space-3); }
+        .sb-log-entry::before { left: 16px; top: 16px; }
+        .sb-log-entry time { text-align: left; padding-left: 40px; padding-right: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sb-marketing__nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgc)"/><defs><linearGradient id="mgc" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="index.html">Product</a>
+      <a class="link" href="templates.html">Templates</a>
+      <a class="link" href="customer-story.html">Customers</a>
+      <a class="link" href="pricing.html">Pricing</a>
+      <a class="link" href="#" style="color:var(--sb-text)">Changelog</a>
+      <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+      <a class="sb-btn sb-btn--primary" href="dashboard.html">Open workspace</a>
+    </header>
+
+    <section class="sb-log-head">
+      <div class="sb-eyebrow">Changelog</div>
+      <h1>What shipped, and why.</h1>
+      <p>Every visible change in ShadowBlade — features, fixes, performance, brand updates. New entries every Wednesday. <a href="#" style="color:var(--sb-accent-300)">Subscribe via RSS or email</a>.</p>
+    </section>
+
+    <section class="sb-log">
+      <article class="sb-log-entry">
+        <time>2026-05-21</time>
+        <div class="body">
+          <h2>Studio · multi-track timeline</h2>
+          <div class="pills"><span class="sb-pill feat">Feature</span><span class="sb-pill">Studio</span></div>
+          <ul>
+            <li><b>Track-based timeline</b> for video, voice, captions, and music. Snap, ripple, and zoom controls.</li>
+            <li>Playhead scrubbing now reflects compose progress in real time.</li>
+            <li>Captions auto-promote from voiceover with per-word timing — editable in place.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-05-14</time>
+        <div class="body">
+          <h2>Brand kits · drift detection</h2>
+          <div class="pills"><span class="sb-pill brand">Brand</span><span class="sb-pill">Analytics</span></div>
+          <ul>
+            <li>Every render is checked against the active kit on completion. Drift is surfaced in Analytics and the Inbox.</li>
+            <li>One-click auto-fix re-renders the affected cut with the corrected tokens.</li>
+            <li>Brand v3 schema adds <b>voice profile</b>, <b>tone do / avoid</b>, and <b>cap on adjectives</b> as enforced constraints.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-05-07</time>
+        <div class="body">
+          <h2>Render cluster · L40S rollout</h2>
+          <div class="pills"><span class="sb-pill perf">Performance</span><span class="sb-pill">Pipeline</span></div>
+          <ul>
+            <li>Default worker pool upgraded to NVIDIA L40S 48 GB. Median compose time down <b>31%</b>.</li>
+            <li>Region <b>ap-south-1</b> (Mumbai) opened — pin via Settings · Region.</li>
+            <li>Spot-instance reclaim now triggers a warm hand-off instead of cold restart.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-04-30</time>
+        <div class="body">
+          <h2>SSO · Microsoft Entra + Google Workspace</h2>
+          <div class="pills"><span class="sb-pill feat">Feature</span><span class="sb-pill">Security</span></div>
+          <ul>
+            <li>One-click connect for Entra and Google Workspace. Existing Okta tenants continue unchanged.</li>
+            <li>SCIM provisioning is now hourly by default; manual sync on demand.</li>
+            <li>IP allow-list moves out of preview — configurable per workspace.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-04-23</time>
+        <div class="body">
+          <h2>Templates · 12 net-new</h2>
+          <div class="pills"><span class="sb-pill feat">Feature</span><span class="sb-pill">Templates</span></div>
+          <ul>
+            <li>Twelve new templates including <b>Monthly recap · 90s</b>, <b>Press quote · 20s</b>, and <b>Onboarding loop · 45s</b>.</li>
+            <li>Templates now pre-tune to your brand kit before the first preview.</li>
+            <li>"Save current as template" lifts any project into a reusable surface in one click.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-04-16</time>
+        <div class="body">
+          <h2>API · webhooks for the full pipeline</h2>
+          <div class="pills"><span class="sb-pill feat">Feature</span><span class="sb-pill">API</span></div>
+          <ul>
+            <li>New events: <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">render.queued</code>, <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">render.started</code>, <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">render.completed</code>, <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">review.requested</code>, <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">review.approved</code>.</li>
+            <li>Signed payloads, 30-day delivery retries, replay from the dashboard.</li>
+            <li>Sample receivers in TypeScript, Python, and Go in the docs.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="sb-log-entry">
+        <time>2026-04-09</time>
+        <div class="body">
+          <h2>Reviewer experience · in-frame comments</h2>
+          <div class="pills"><span class="sb-pill fix">Fix</span><span class="sb-pill">Studio</span></div>
+          <ul>
+            <li>Comments now cite a precise word range or timeline position, not just the scene.</li>
+            <li>Mention-to-assign works from any comment.</li>
+            <li>Review state on the Dashboard updates without refresh.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <footer class="sb-footer">
+      <span>© 2026 ShadowBlade Labs · changelog retained from v0.1</span>
+      <span>Next release · 2026-05-28 · subscribe to know first</span>
+    </footer>
+  </body>
+</html>
