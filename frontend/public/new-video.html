@@ -185,8 +185,8 @@
       <div class="sb-wizard__body">
         <div class="sb-stack-form">
           <div class="sb-field">
-            <label>Picked template</label>
-            <div class="opt" style="border-color:rgba(34,211,183,0.5);background:rgba(34,211,183,0.06);display:flex;align-items:center;gap:12px">
+            <label id="sb-wiz-template-label">Picked template</label>
+            <div class="opt" role="group" aria-labelledby="sb-wiz-template-label" style="border-color:rgba(34,211,183,0.5);background:rgba(34,211,183,0.06);display:flex;align-items:center;gap:12px">
               <div style="width:60px;height:38px;border-radius:6px;background:linear-gradient(135deg,#1F3A72,#06101F);display:grid;place-items:center"><svg width="22" viewBox="0 0 24 24" fill="#22D3B7"><circle cx="12" cy="12" r="6"/></svg></div>
               <div style="display:grid;gap:2px">
                 <b>Launch hero · 30s</b>
@@ -197,18 +197,18 @@
           </div>
 
           <div class="sb-field">
-            <label>What's the cut about?</label>
-            <textarea placeholder="One paragraph. The clearer the brief, the better the first cut.">Spring launch of the Acme Wearable Hub. Hero benefit: 7-day battery, twelve discreet health metrics, one tap. Audience: fitness-curious knowledge workers, 28–42, US/EU. Tone: confident, plainspoken. CTA: pre-order — first 1,000 ship free.</textarea>
+            <label for="sb-wiz-brief">What's the cut about?</label>
+            <textarea id="sb-wiz-brief" placeholder="One paragraph. The clearer the brief, the better the first cut.">Spring launch of the Acme Wearable Hub. Hero benefit: 7-day battery, twelve discreet health metrics, one tap. Audience: fitness-curious knowledge workers, 28–42, US/EU. Tone: confident, plainspoken. CTA: pre-order — first 1,000 ship free.</textarea>
           </div>
 
           <div class="sb-field__row">
-            <div class="sb-field"><label>Duration</label><select><option>15 s</option><option selected>30 s</option><option>60 s</option><option>90 s</option></select></div>
-            <div class="sb-field"><label>Aspect ratio</label><select><option selected>9:16 vertical</option><option>16:9 wide</option><option>1:1 square</option></select></div>
+            <div class="sb-field"><label for="sb-wiz-duration">Duration</label><select id="sb-wiz-duration"><option>15 s</option><option selected>30 s</option><option>60 s</option><option>90 s</option></select></div>
+            <div class="sb-field"><label for="sb-wiz-aspect">Aspect ratio</label><select id="sb-wiz-aspect"><option selected>9:16 vertical</option><option>16:9 wide</option><option>1:1 square</option></select></div>
           </div>
 
           <div class="sb-field">
-            <label>Voice</label>
-            <select>
+            <label for="sb-wiz-voice">Voice</label>
+            <select id="sb-wiz-voice">
               <option>Alloy · EN female · warm</option>
               <option>Ember · EN male · grounded</option>
               <option>Lumen · EN female · bright</option>
@@ -217,8 +217,8 @@
           </div>
 
           <div class="sb-field">
-            <label>Call to action</label>
-            <input value="Pre-order — first 1,000 ship free" />
+            <label for="sb-wiz-cta">Call to action</label>
+            <input id="sb-wiz-cta" value="Pre-order — first 1,000 ship free" />
           </div>
         </div>
 
