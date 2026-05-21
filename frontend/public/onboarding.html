@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; place-items: center; min-height: 100vh; padding: var(--sb-space-6); }
+      .sb-ob {
+        width: min(1080px, 100%);
+        max-height: 92vh;
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border-strong);
+        background: linear-gradient(180deg, rgba(22,30,48,0.96), rgba(11,18,32,0.96));
+        box-shadow: var(--sb-shadow-lg);
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+      }
+      .sb-ob__head {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: var(--sb-space-5) var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-ob__head h1 {
+        margin: 0; font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl); font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .sb-ob__head .skip { margin-left: auto; font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-ob__progress {
+        height: 4px;
+        background: rgba(255,255,255,0.05);
+        position: relative;
+      }
+      .sb-ob__progress i {
+        position: absolute; inset: 0 75% 0 0;
+        background: linear-gradient(90deg, var(--sb-accent-500), #38BDF8);
+      }
+      .sb-ob__body {
+        padding: var(--sb-space-8) var(--sb-space-10);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-10);
+        align-items: center;
+        overflow: auto;
+      }
+      .sb-ob__copy .step {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-accent-300);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .sb-ob__copy h2 {
+        font-family: var(--sb-font-display);
+        font-size: clamp(28px, 3vw, 40px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        margin: var(--sb-space-3) 0 var(--sb-space-4);
+      }
+      .sb-ob__copy p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 44ch; }
+
+      .sb-ob__choices {
+        margin-top: var(--sb-space-6);
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .sb-ob__choice {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        cursor: pointer;
+        transition: border-color var(--sb-dur), background var(--sb-dur);
+      }
+      .sb-ob__choice:hover { border-color: rgba(34,211,183,0.4); background: rgba(34,211,183,0.04); }
+      .sb-ob__choice b { font-weight: 600; font-size: var(--sb-text-md); display:block }
+      .sb-ob__choice span { font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-ob__choice .glyph {
+        width: 38px; height: 38px; border-radius: 10px;
+        display: grid; place-items: center;
+        background: rgba(34,211,183,0.12);
+        color: var(--sb-accent-300);
+      }
+
+      .sb-ob__art {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        overflow: hidden;
+        background: linear-gradient(160deg, #102447, #050a18);
+        aspect-ratio: 4/3;
+        display: grid; place-items: center;
+        padding: var(--sb-space-5);
+        position: relative;
+      }
+      .sb-ob__art svg { width: 100%; height: 100%; }
+
+      .sb-ob__foot {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: var(--sb-space-4) var(--sb-space-6);
+        border-top: 1px solid var(--sb-border);
+        background: rgba(8,14,28,0.5);
+      }
+      .sb-ob__foot .spacer { flex: 1; }
+      .sb-ob__dots {
+        display: flex; gap: 6px;
+      }
+      .sb-ob__dots i {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+      }
+      .sb-ob__dots i.done { background: var(--sb-accent-500); }
+      .sb-ob__dots i.now  { background: var(--sb-text); box-shadow: 0 0 0 3px rgba(255,255,255,0.1); }
+
+      @media (max-width: 800px) {
+        .sb-ob__body { grid-template-columns: 1fr; padding: var(--sb-space-6); }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="sb-ob">
+      <header class="sb-ob__head">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="#22D3B7"/></svg></div>
+        <h1>Welcome to ShadowBlade</h1>
+        <a class="skip" href="dashboard.html">Skip for now →</a>
+      </header>
+      <div class="sb-ob__progress"><i></i></div>
+
+      <div class="sb-ob__body">
+        <div class="sb-ob__copy">
+          <span class="step">Step 2 of 4 · Choose your starting brand kit</span>
+          <h2>What does your brand look like today?</h2>
+          <p>Pick the closest match. We'll build a brand kit from it on the fly — you can refine in <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">Brand kits</code> after.</p>
+
+          <div class="sb-ob__choices">
+            <label class="sb-ob__choice">
+              <div class="glyph">
+                <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+              </div>
+              <div>
+                <b>I have a brand book PDF</b>
+                <span>Upload it. We'll extract palette, type, voice, intro / outro.</span>
+              </div>
+            </label>
+            <label class="sb-ob__choice">
+              <div class="glyph">
+                <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><text x="12" y="16" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="currentColor">F</text></svg>
+              </div>
+              <div>
+                <b>It lives in Figma</b>
+                <span>Connect Figma and we'll pull variables straight from your kit file.</span>
+              </div>
+            </label>
+            <label class="sb-ob__choice">
+              <div class="glyph">
+                <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+              </div>
+              <div>
+                <b>Paste a website URL</b>
+                <span>We'll scan your homepage for colour, type, voice, and logo.</span>
+              </div>
+            </label>
+            <label class="sb-ob__choice">
+              <div class="glyph">
+                <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+              </div>
+              <div>
+                <b>Start blank</b>
+                <span>I'll pick colours and type by hand.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="sb-ob__art" aria-hidden="true">
+          <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="obg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#102447"/>
+                <stop offset="100%" stop-color="#050a18"/>
+              </linearGradient>
+              <radialGradient id="obh" cx="0.75" cy="0.25" r="0.5">
+                <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
+                <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+              </radialGradient>
+            </defs>
+            <rect width="640" height="480" fill="url(#obg)"/>
+            <rect width="640" height="480" fill="url(#obh)"/>
+
+            <!-- floating tiles -->
+            <g transform="translate(60 60)">
+              <rect width="180" height="220" rx="12" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.08)"/>
+              <rect x="14" y="14" width="40" height="40" rx="8" fill="#22D3B7"/>
+              <rect x="62" y="14" width="40" height="40" rx="8" fill="#0F2A4A"/>
+              <rect x="110" y="14" width="40" height="40" rx="8" fill="#F7F9FC"/>
+              <rect x="14" y="62" width="152" height="14" rx="3" fill="rgba(255,255,255,0.12)"/>
+              <rect x="14" y="84" width="120" height="10" rx="3" fill="rgba(255,255,255,0.08)"/>
+              <rect x="14" y="102" width="120" height="10" rx="3" fill="rgba(255,255,255,0.08)"/>
+              <text x="14" y="156" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="2">BRAND KIT · ACME · CORE</text>
+              <text x="14" y="180" fill="#F7F9FC" font-family="Inter Display" font-size="16" font-weight="700">Your day,</text>
+              <text x="14" y="200" fill="#F7F9FC" font-family="Inter Display" font-size="16" font-weight="700">on time.</text>
+            </g>
+
+            <g transform="translate(280 90)">
+              <rect width="280" height="180" rx="12" fill="rgba(8,14,28,0.85)" stroke="rgba(34,211,183,0.35)"/>
+              <text x="20" y="32" fill="#22D3B7" font-family="Inter" font-size="10" letter-spacing="2">PIPELINE</text>
+              <g transform="translate(20 50)">
+                <circle r="6" fill="#22D3B7"/>
+                <line x1="0" y1="0" x2="240" y2="0" stroke="rgba(34,211,183,0.25)" stroke-width="2" stroke-dasharray="3 5" transform="translate(8 0)"/>
+              </g>
+              <g transform="translate(20 80)" font-family="Inter" font-size="11" fill="#F7F9FC">
+                <text>Script</text>
+                <text x="64">→ Storyboard</text>
+                <text x="158">→ Voice</text>
+                <text x="200">→ Render</text>
+              </g>
+              <rect x="20" y="108" width="240" height="50" rx="8" fill="rgba(34,211,183,0.12)" stroke="rgba(34,211,183,0.4)"/>
+              <circle cx="36" cy="133" r="4" fill="#22D3B7"/>
+              <text x="50" y="130" fill="#8590A8" font-family="Inter" font-size="9" letter-spacing="1.5">RENDERING</text>
+              <text x="50" y="146" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">ETA 64s</text>
+            </g>
+
+            <g transform="translate(120 320)">
+              <rect width="400" height="100" rx="12" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.08)"/>
+              <text x="20" y="34" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="2">SCENES · 6</text>
+              <g transform="translate(20 50)">
+                <rect width="50" height="36" rx="4" fill="rgba(34,211,183,0.18)" stroke="rgba(34,211,183,0.4)"/>
+                <rect x="58" width="50" height="36" rx="4" fill="rgba(34,211,183,0.18)" stroke="rgba(34,211,183,0.4)"/>
+                <rect x="116" width="50" height="36" rx="4" fill="rgba(34,211,183,0.18)" stroke="rgba(34,211,183,0.4)"/>
+                <rect x="174" width="50" height="36" rx="4" fill="rgba(56,189,248,0.25)" stroke="rgba(56,189,248,0.5)"/>
+                <rect x="232" width="50" height="36" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+                <rect x="290" width="50" height="36" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <footer class="sb-ob__foot">
+        <button class="sb-btn sb-btn--ghost">
+          <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back
+        </button>
+        <span class="spacer"></span>
+        <div class="sb-ob__dots" aria-hidden="true">
+          <i class="done"></i><i class="now"></i><i></i><i></i>
+        </div>
+        <span style="font-size:var(--sb-text-sm);color:var(--sb-text-faint)">2 of 4</span>
+        <button class="sb-btn sb-btn--primary">
+          Next · invite the team
+          <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </footer>
+    </article>
+  </body>
+</html>

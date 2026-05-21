@@ -24,6 +24,7 @@
       }
       .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
       .sb-marketing__nav a.link:hover { color: var(--sb-text); }
+      .sb-marketing__nav a.link.is-active { color: var(--sb-text); }
       .sb-marketing__nav .spacer { flex: 1; }
 
       .sb-pricing-head {
@@ -138,7 +139,7 @@
   <body>
     <main class="sb-marketing">
       <header class="sb-marketing__nav">
-        <a class="sb-brand" href="index.html">
+        <a class="sb-brand" href="index.html" aria-label="ShadowBlade home">
           <div class="sb-brand__mark">
             <svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mg)"/><defs><linearGradient id="mg" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
           </div>
@@ -148,7 +149,7 @@
         <a class="link" href="index.html">Product</a>
         <a class="link" href="templates.html">Templates</a>
         <a class="link" href="#">Customers</a>
-        <a class="link" href="pricing.html" style="color:var(--sb-text)">Pricing</a>
+        <a class="link is-active" href="pricing.html" aria-current="page">Pricing</a>
         <a class="link" href="#">Docs</a>
         <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
         <a class="sb-btn sb-btn--primary" href="dashboard.html">Open workspace</a>
@@ -158,9 +159,9 @@
         <div class="sb-eyebrow">Pricing</div>
         <h1>Pay for renders. Not for seats you've already paid for.</h1>
         <p>Annual contracts. Predictable per-render economics. Dedicated GPU pools available from Scale up.</p>
-        <div class="sb-pricing-toggle" role="tablist">
-          <button class="active" type="button">Annual · save 18%</button>
-          <button type="button">Monthly</button>
+        <div class="sb-pricing-toggle" role="tablist" aria-label="Billing cycle">
+          <button class="active" type="button" role="tab" aria-selected="true">Annual · save 18%</button>
+          <button type="button" role="tab" aria-selected="false">Monthly</button>
         </div>
       </section>
 
