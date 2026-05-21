@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Subscribe · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; place-items: center; min-height: 100vh; padding: var(--sb-space-6); }
+      .sb-sub {
+        width: min(560px, 100%);
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.96), rgba(11,18,32,0.96));
+        box-shadow: var(--sb-shadow-lg);
+        padding: var(--sb-space-10);
+        display: grid;
+        gap: var(--sb-space-5);
+      }
+      .sb-sub h1 {
+        margin: var(--sb-space-3) 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-3xl);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+      }
+      .sb-sub p { color: var(--sb-text-muted); font-size: var(--sb-text-md); margin: 0; }
+      .sb-sub__form { display: grid; gap: var(--sb-space-3); margin-top: var(--sb-space-3); }
+      .sb-sub__form label {
+        display: grid; gap: 6px;
+        font-size: var(--sb-text-xs); text-transform: uppercase; letter-spacing: 0.1em;
+        color: var(--sb-text-faint); font-weight: 600;
+      }
+      .sb-sub__form input {
+        padding: 12px 14px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        outline: none;
+      }
+      .sb-sub__form input:focus { border-color: var(--sb-accent-500); box-shadow: 0 0 0 3px rgba(34,211,183,0.18); }
+      .sb-sub__topics {
+        display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-2);
+      }
+      .sb-sub__topic {
+        display: flex; align-items: center; gap: var(--sb-space-2);
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.02);
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text);
+        cursor: pointer;
+      }
+      .sb-sub__topic input { width: 16px; height: 16px; accent-color: var(--sb-accent-500); }
+      .sb-sub__channels {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sb-space-2);
+        padding-top: var(--sb-space-3);
+        border-top: 1px solid var(--sb-border);
+      }
+      .sb-sub__channel {
+        padding: 10px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        text-align: center;
+        font-size: var(--sb-text-xs);
+        font-weight: 600;
+        font-family: var(--sb-font-mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .sb-sub__channel:hover { border-color: rgba(34,211,183,0.4); }
+    </style>
+  </head>
+  <body>
+    <article class="sb-sub">
+      <div class="sb-brand">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgsb)"/><defs><linearGradient id="mgsb" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Subscribe</span></div>
+      </div>
+
+      <div>
+        <div class="sb-eyebrow">Stay in the loop</div>
+        <h1>Two emails a month. No filler.</h1>
+        <p>Changelog highlights, incident learnings, and the one customer story worth the inbox real estate. Unsubscribe any time.</p>
+      </div>
+
+      <form class="sb-sub__form" onsubmit="event.preventDefault();alert('Subscribed')">
+        <label>Work email<input type="email" required placeholder="you@company.com" autocomplete="email" /></label>
+        <div>
+          <div class="sb-eyebrow" style="margin-bottom:6px">Topics</div>
+          <div class="sb-sub__topics">
+            <label class="sb-sub__topic"><input type="checkbox" checked /> Changelog</label>
+            <label class="sb-sub__topic"><input type="checkbox" checked /> Customer stories</label>
+            <label class="sb-sub__topic"><input type="checkbox" /> Engineering deep dives</label>
+            <label class="sb-sub__topic"><input type="checkbox" /> Security &amp; trust</label>
+          </div>
+        </div>
+        <button class="sb-btn sb-btn--primary" type="submit" style="margin-top:6px">
+          Subscribe
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div>
+        <div class="sb-eyebrow" style="margin-bottom:8px">Or pick a channel</div>
+        <div class="sb-sub__channels">
+          <a class="sb-sub__channel" href="#">RSS</a>
+          <a class="sb-sub__channel" href="#">JSON Feed</a>
+          <a class="sb-sub__channel" href="#">Slack app</a>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>
