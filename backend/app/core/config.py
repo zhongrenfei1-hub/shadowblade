@@ -1,6 +1,10 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Repo root is two levels above this file: backend/app/core/config.py → repo
+_REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
@@ -15,8 +19,12 @@ class Settings(BaseSettings):
     cors_origins: list[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
     ]
-    storage_root: str = "./storage"
+    # Default storage path — anchored to the repo root, not the CWD, so it
+    # behaves the same whether uvicorn is started from `./` or from `backend/`.
+    storage_root: str = str(_REPO_ROOT / "storage")
     render_concurrency: int = 4
 
 

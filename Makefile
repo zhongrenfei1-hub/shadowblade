@@ -14,7 +14,7 @@ install-next:
 	cd frontend-next && npm install
 
 backend:
-	cd backend && ../backend/.venv/bin/uvicorn app.main:app --reload --port $(PORT_BACKEND)
+	SHADOWBLADE_STORAGE_ROOT=./storage backend/.venv/bin/uvicorn app.main:app --reload --port $(PORT_BACKEND) --app-dir backend
 
 frontend:
 	cd frontend/public && $(PY) -m http.server $(PORT_FRONTEND)
