@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audit log · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-audit-filter {
+        display: flex; flex-wrap: wrap; gap: var(--sb-space-3);
+        padding: var(--sb-space-4) var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-audit-filter select, .sb-audit-filter input {
+        padding: 6px 10px;
+        font-size: var(--sb-text-sm);
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        outline: none;
+      }
+      .sb-audit-row {
+        display: grid;
+        grid-template-columns: 130px 140px 1fr 200px;
+        gap: var(--sb-space-4);
+        padding: var(--sb-space-3) var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+        align-items: center;
+        font-size: var(--sb-text-sm);
+      }
+      .sb-audit-row:last-child { border-bottom: none; }
+      .sb-audit-row time {
+        font-family: var(--sb-font-mono);
+        color: var(--sb-text-faint);
+        font-size: var(--sb-text-xs);
+      }
+      .sb-audit-row .actor {
+        display: flex; align-items: center; gap: 8px;
+      }
+      .sb-audit-row .actor .av {
+        width: 22px; height: 22px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-size: 9px; font-weight: 700;
+        background: linear-gradient(135deg, #1c3868, #0a1428);
+        color: var(--sb-accent-300);
+      }
+      .sb-audit-row .actor b { font-weight: 600; color: var(--sb-text); }
+      .sb-audit-row .action {
+        color: var(--sb-text-muted);
+      }
+      .sb-audit-row .action b { color: var(--sb-text); }
+      .sb-audit-row .action code {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-accent-300);
+        padding: 1px 6px;
+        background: rgba(34,211,183,0.08);
+        border-radius: 4px;
+      }
+      .sb-audit-row .meta {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-text-faint);
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .sb-audit-row .verb {
+        display: inline-flex;
+        align-items: center; gap: 4px;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .sb-audit-row .verb--create { color: var(--sb-accent-300); background: rgba(34,211,183,0.1); }
+      .sb-audit-row .verb--update { color: #38BDF8; background: rgba(56,189,248,0.1); }
+      .sb-audit-row .verb--delete { color: #f87171; background: rgba(248,113,113,0.1); }
+      .sb-audit-row .verb--auth   { color: #a78bfa; background: rgba(167,139,250,0.1); }
+      .sb-audit-row .verb--render { color: #fbbf24; background: rgba(251,191,36,0.1); }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Audit log</b>
+          </div>
+          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">LIVE</span>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export CSV
+            </button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4L19 7"/></svg>
+              Splunk · Datadog · S3
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Refresh
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Settings · Audit log</div>
+                <h1>Every event in the workspace.</h1>
+                <p class="sb-page-head__lead">
+                  Tamper-evident, retained 7 years, streamable to your SIEM. Filter by actor, resource, verb, or time window.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-kpi"><div class="sb-kpi__label">Events today</div><div class="sb-kpi__value">2,148</div><span class="sb-kpi__delta sb-kpi__delta--up">▲ 9% vs avg</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">Retention</div><div class="sb-kpi__value">7 yr</div><span class="sb-kpi__delta sb-kpi__delta--up">SOC 2 Type II</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">SIEM sink</div><div class="sb-kpi__value">Splunk</div><span class="sb-kpi__delta sb-kpi__delta--up">Streaming · last 0.4 s</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">Log integrity</div><div class="sb-kpi__value">100%</div><span class="sb-kpi__delta sb-kpi__delta--up">Hash chain verified</span></article>
+          </section>
+
+          <article class="sb-card">
+            <div class="sb-audit-filter">
+              <select aria-label="Actor"><option>Any actor</option><option>Ava Chen</option><option>Priya Rao</option><option>Marcus Lee</option><option>Diego Alvarez</option><option>system</option></select>
+              <select aria-label="Resource"><option>Any resource</option><option>project</option><option>render</option><option>brand-kit</option><option>workspace</option><option>seat</option></select>
+              <select aria-label="Verb"><option>Any verb</option><option>create</option><option>update</option><option>delete</option><option>auth</option><option>render</option></select>
+              <select aria-label="Window"><option>Last 1 hour</option><option selected>Last 24 hours</option><option>Last 7 days</option><option>Custom</option></select>
+              <span style="flex:1"></span>
+              <input type="search" aria-label="Search events" placeholder="Search event ID, IP, actor…" style="min-width:260px" />
+            </div>
+
+            <div class="sb-card__body sb-card__body--flush">
+              <div class="sb-audit-row" style="background:rgba(255,255,255,0.025);font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.08em;color:var(--sb-text-faint);font-weight:600;padding-top:10px;padding-bottom:10px">
+                <div>Time</div><div>Actor</div><div>Event</div><div style="text-align:right">Context</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>14:13:24.802</time>
+                <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
+                <div class="action"><span class="verb verb--render">render</span> started run <code>#901</code> on project <code>spring-launch</code> · priority rush</div>
+                <div class="meta">vpn-ofc-01 · evt_a3b8…f209</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>14:11:02.041</time>
+                <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3d2c5f,#1b1230);color:#a78bfa">PR</div><b>Priya Rao</b></div>
+                <div class="action"><span class="verb verb--update">update</span> project <code>spring-launch</code> · CTA copy changed (12 chars)</div>
+                <div class="meta">vpn-ofc-01 · evt_71c4…d822</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>14:08:02.118</time>
+                <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div><b>Diego Alvarez</b></div>
+                <div class="action"><span class="verb verb--update">update</span> rush priority requested on <code>spring-launch</code> · approved by Ava Chen</div>
+                <div class="meta">mobile · evt_4f12…b801</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>13:58:14.910</time>
+                <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
+                <div class="action"><span class="verb verb--render">render</span> run <code>#896</code> succeeded · MP4 8.4 MB · webhook delivered to acme.example.com (200)</div>
+                <div class="meta">gpu-cluster-1 · evt_38d9…0014</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>13:42:02.811</time>
+                <div class="actor"><div class="av">ML</div><b>Marcus Lee</b></div>
+                <div class="action"><span class="verb verb--auth">auth</span> signed in via Okta SAML · MFA · WebAuthn</div>
+                <div class="meta">88.214.xx.xx · evt_902f…1188</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>13:18:38.420</time>
+                <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
+                <div class="action"><span class="verb verb--update">update</span> brand-kit <code>acme-core</code> v3 published · 187 cuts marked for re-evaluation</div>
+                <div class="meta">vpn-ofc-01 · evt_61aa…77c3</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>12:09:55.001</time>
+                <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
+                <div class="action"><span class="verb verb--render">render</span> run <code>#894</code> failed at compose · ENOSPC on tmpfs · auto-retry queued</div>
+                <div class="meta">gpu-cluster-2 · evt_b011…ffe2</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>11:46:14.330</time>
+                <div class="actor"><div class="av" style="background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div><b>Diego Alvarez</b></div>
+                <div class="action"><span class="verb verb--update">update</span> approved cut for <code>series-c-teaser</code> · published to TikTok shelf</div>
+                <div class="meta">mobile · evt_77f0…0b14</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>10:18:22.110</time>
+                <div class="actor"><div class="av">AC</div><b>Ava Chen</b></div>
+                <div class="action"><span class="verb verb--create">create</span> project <code>helios-q3-story</code> · template case-study · brand kit acme-core</div>
+                <div class="meta">vpn-ofc-01 · evt_2c4e…aa01</div>
+              </div>
+              <div class="sb-audit-row">
+                <time>09:02:14.601</time>
+                <div class="actor"><div class="av" style="background:rgba(255,255,255,0.05);color:var(--sb-text-muted)">SYS</div><b style="color:var(--sb-text-muted)">system</b></div>
+                <div class="action"><span class="verb verb--auth">auth</span> SCIM sync · Okta · 24 members confirmed · 0 changes</div>
+                <div class="meta">eu-central-1 · evt_905a…4422</div>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Hash chain · last block 14:13:24 · integrity OK · 2,148 events today</span>
+          <span>Streaming to splunk-prod-eu · last delivery 0.4 s</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

@@ -13,7 +13,7 @@ under five minutes, against your brand kit.
 | Storage      | S3-compatible object store                     |
 | Auth         | SAML SSO + SCIM provisioning                   |
 
-## Surface map (32 pages shipped)
+## Surface map (30 pages shipped)
 
 ### Marketing (public, no auth)
 
