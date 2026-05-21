@@ -106,8 +106,25 @@
         margin: var(--sb-space-10) 0 var(--sb-space-4);
       }
       .sb-cs-body p { margin: 0 0 var(--sb-space-4); }
-      .sb-cs-quote {
+      .sb-cs-figure {
+        max-width: var(--sb-container);
+        margin: var(--sb-space-6) auto 0;
+        padding: 0 var(--sb-space-12);
+      }
+      .sb-cs-figure img { width: 100%; height: auto; display: block; border-radius: var(--sb-radius-xl); border: 1px solid var(--sb-border); }
+      .sb-cs-pullquote {
         margin: var(--sb-space-10) 0;
+        padding: 0;
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .sb-cs-pullquote > img {
+        width: 100%; height: auto; display: block;
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border);
+      }
+      .sb-cs-quote {
+        margin: 0;
         padding: var(--sb-space-8);
         border-radius: var(--sb-radius-xl);
         border-left: 4px solid var(--sb-accent-500);
@@ -208,10 +225,13 @@
         <p>Helios' content team spent 60% of every project on the brief — corralling product marketing, brand, legal, regional GTM, then back to brand because legal had moved the goalposts. By the time a cut was rendering, the campaign had drifted.</p>
         <p>ShadowBlade reverses the loop. Producers paste the brief into one field; the pipeline scripts, voices, captions, and renders against the brand kit before legal has finished their first read. By the time a reviewer opens the cut, the cut is already on-guideline.</p>
 
-        <div class="sb-cs-quote">
-          <div class="q">We ship video like product now. Same week. Same vibe.</div>
-          <div class="by">— Maya Okonkwo · VP Content, Helios Logistics</div>
-        </div>
+        <figure class="sb-cs-pullquote">
+          <img src="/showcase/case-study/helios-quote.svg" alt="" aria-hidden="true" />
+          <blockquote class="sb-cs-quote">
+            <div class="q">We ship video like product now. Same week. Same vibe.</div>
+            <div class="by">— Maya Okonkwo · VP Content, Helios Logistics</div>
+          </blockquote>
+        </figure>
 
         <h2>What changed</h2>
         <p><b style="color:var(--sb-text)">One brand kit, every region.</b> ShadowBlade renders every cut against the Helios Core kit — colour, type, voice, intro, outro, legal. Regional teams stopped re-rendering "to look like us."</p>

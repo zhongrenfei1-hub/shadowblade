@@ -116,7 +116,8 @@
       .sb-auth__right .art-fallback {
         position: absolute; inset: 0; pointer-events: none;
       }
-      .sb-auth__right .art-fallback svg { width: 100%; height: 100%; display:block; }
+      .sb-auth__right .art-fallback svg,
+      .sb-auth__right .art-fallback img { width: 100%; height: 100%; display:block; object-fit: cover; }
       .sb-auth__caption {
         position: relative; z-index: 2;
         color: var(--sb-text);
@@ -204,53 +205,7 @@
 
       <section class="sb-auth__right" aria-hidden="true">
         <div class="art-fallback">
-          <!-- Showcase v2 will provide /showcase/auth/login-art.svg — fallback below uses the same vocabulary. -->
-          <svg viewBox="0 0 540 720" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="lbg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#102447"/>
-                <stop offset="100%" stop-color="#050a18"/>
-              </linearGradient>
-              <radialGradient id="lglow" cx="0.8" cy="0.3" r="0.6">
-                <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
-                <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
-              </radialGradient>
-            </defs>
-            <rect width="540" height="720" fill="url(#lbg)"/>
-            <rect width="540" height="720" fill="url(#lglow)"/>
-
-            <g transform="translate(270 320)">
-              <circle r="200" fill="none" stroke="rgba(34,211,183,0.2)" stroke-width="1" stroke-dasharray="3 6"/>
-              <circle r="140" fill="none" stroke="rgba(34,211,183,0.35)" stroke-width="1"/>
-              <circle r="80"  fill="none" stroke="rgba(34,211,183,0.5)" stroke-width="1"/>
-              <circle r="36" fill="rgba(34,211,183,0.3)"/>
-              <circle r="16" fill="#22D3B7"/>
-            </g>
-
-            <!-- floating tiles -->
-            <g transform="translate(60 110)">
-              <rect width="200" height="50" rx="10" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.08)"/>
-              <text x="14" y="20" fill="#8590A8" font-family="Inter" font-size="9" letter-spacing="1.5">STAGE 01</text>
-              <text x="14" y="38" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">Script</text>
-              <text x="170" y="38" fill="#6EE2C5" font-family="JetBrains Mono" font-size="11" text-anchor="end">8.4s</text>
-            </g>
-            <g transform="translate(310 200)">
-              <rect width="180" height="50" rx="10" fill="rgba(8,14,28,0.85)" stroke="rgba(34,211,183,0.4)"/>
-              <circle cx="14" cy="25" r="4" fill="#22D3B7"/>
-              <text x="26" y="22" fill="#8590A8" font-family="Inter" font-size="9" letter-spacing="1.5">RENDERING</text>
-              <text x="26" y="38" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">ETA 64s</text>
-            </g>
-            <g transform="translate(80 540)">
-              <rect width="160" height="50" rx="10" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.08)"/>
-              <text x="14" y="20" fill="#8590A8" font-family="Inter" font-size="9" letter-spacing="1.5">REVIEW</text>
-              <text x="14" y="38" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">2 approvals</text>
-            </g>
-            <g transform="translate(320 610)">
-              <rect width="180" height="50" rx="10" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.08)"/>
-              <text x="14" y="20" fill="#8590A8" font-family="Inter" font-size="9" letter-spacing="1.5">PUBLISH</text>
-              <text x="14" y="38" fill="#F7F9FC" font-family="Inter" font-size="13" font-weight="600">Spring launch · v17</text>
-            </g>
-          </svg>
+          <img src="/showcase/auth/login-art.svg" alt="" />
         </div>
 
         <div class="sb-auth__caption">

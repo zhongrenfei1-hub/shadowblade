@@ -61,6 +61,15 @@
         margin-top: var(--sb-space-2);
         display: flex; gap: 6px;
       }
+      .sb-empty-state {
+        display: grid; place-items: center;
+        padding: var(--sb-space-12) var(--sb-space-6);
+        text-align: center;
+        gap: var(--sb-space-4);
+      }
+      .sb-empty-state img { width: min(420px, 100%); height: auto; display: block; border-radius: var(--sb-radius-lg); border: 1px solid var(--sb-border); }
+      .sb-empty-state h2 { margin: 0; font-family: var(--sb-font-display); font-size: var(--sb-text-xl); font-weight: 600; letter-spacing: -0.015em; }
+      .sb-empty-state p { margin: 0; color: var(--sb-text-muted); max-width: 44ch; font-size: var(--sb-text-md); }
       @media (max-width: 900px) { .sb-inbox { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -200,6 +209,12 @@
                   <time>Yesterday</time>
                 </div>
               </div>
+
+              <div class="sb-empty-state" role="status" aria-live="polite" hidden data-empty-state="inbox">
+                <img src="/showcase/empty/empty-inbox.svg" alt="" />
+                <h2>All caught up.</h2>
+                <p>No new pipeline events, approvals, or mentions. The pipeline is warm and the queue is clean.</p>
+              </div>
             </article>
           </section>
         </main>
@@ -212,5 +227,22 @@
     </div>
 
     <script src="scripts/shell.js"></script>
+    <script>
+      // Inbox tabs — surfaces the empty-state SVG when "Archived" is selected.
+      (function () {
+        const tabs = document.querySelectorAll('.sb-inbox-tab');
+        const list = document.querySelector('.sb-card__body--flush');
+        const empty = document.querySelector('[data-empty-state="inbox"]');
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            tabs.forEach((t) => t.classList.remove('active'));
+            tab.classList.add('active');
+            const isArchived = /archived/i.test(tab.textContent || '');
+            if (list) list.hidden = isArchived;
+            if (empty) empty.hidden = !isArchived;
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
