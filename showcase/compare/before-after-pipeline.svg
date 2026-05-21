@@ -177,7 +177,7 @@
           <rect width="36" height="36" rx="9" fill="rgba(34,211,183,0.18)"/>
           <text x="18" y="24" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#6EE2C5">✓</text>
         </g>
-        <text x="74" y="32" font-size="14" font-weight="700" fill="#F7F9FC">全链路一致 · 全部 6 步术语统一</text>
+        <text x="74" y="32" font-size="14" font-weight="700" fill="#F7F9FC">命名一致 · 全部 6 步术语统一</text>
         <text x="74" y="50" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">UI / 文档 / 邮件模板 / Webhook 事件名一并更新</text>
       </g>
     </g>

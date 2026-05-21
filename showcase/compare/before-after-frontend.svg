@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="ShadowBlade frontend before/after — static HTML to Next.js 14 + shadcn/ui">
+  <defs>
+    <linearGradient id="sb-cmp-fe-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-cmp-fe-before-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(225,229,236,0.96)"/>
+      <stop offset="100%" stop-color="rgba(204,210,222,0.94)"/>
+    </linearGradient>
+    <linearGradient id="sb-cmp-fe-after-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.95)"/>
+    </linearGradient>
+    <linearGradient id="sb-cmp-fe-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-cmp-fe-after-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(34,42,64,0.95)"/>
+      <stop offset="100%" stop-color="rgba(22,30,48,0.95)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#06101F"/>
+  <rect width="1600" height="900" fill="url(#sb-cmp-fe-bg)"/>
+
+  <!-- Top header -->
+  <g transform="translate(80 60)" font-family="Inter, system-ui, sans-serif">
+    <text font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">前端演进 · 静态 HTML → Next.js 14 + shadcn/ui</text>
+    <text y="40" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.7">从 44 页手写 HTML 到组件化 + 暗色主题 + 暗号交互</text>
+    <text y="68" font-size="13" fill="#B6BDCC">PR <tspan font-family="JetBrains Mono, monospace" fill="#6EE2C5">64266ee</tspan> · Next.js 14 + React + Tailwind + shadcn/ui 全新前端</text>
+  </g>
+
+  <!-- ── Before panel (left) · light, plain HTML ── -->
+  <g transform="translate(80 160)">
+    <rect width="700" height="640" rx="18" fill="url(#sb-cmp-fe-before-panel)" stroke="rgba(15,42,74,0.16)"/>
+
+    <!-- Before label -->
+    <g transform="translate(28 28)">
+      <rect width="86" height="28" rx="6" fill="rgba(15,42,74,0.12)" stroke="rgba(15,42,74,0.30)"/>
+      <text x="43" y="19" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" letter-spacing="2" font-weight="700" fill="#0F2A4A">BEFORE</text>
+    </g>
+    <text x="124" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#0F2A4A">静态 HTML · 44 页 · 手写</text>
+    <text x="672" y="46" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" fill="#5A6680">frontend/public/*.html</text>
+
+    <!-- Mock browser chrome -->
+    <g transform="translate(40 96)">
+      <rect width="620" height="32" rx="6" fill="rgba(15,42,74,0.06)" stroke="rgba(15,42,74,0.10)"/>
+      <g transform="translate(14 16)" fill="#5A6680">
+        <circle cx="0" cy="0" r="4"/>
+        <circle cx="14" cy="0" r="4"/>
+        <circle cx="28" cy="0" r="4"/>
+      </g>
+      <rect x="58" y="6" width="540" height="20" rx="4" fill="#FFFFFF" stroke="rgba(15,42,74,0.10)"/>
+      <text x="78" y="20" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A6680">shadowblade.local/dashboard.html</text>
+    </g>
+
+    <!-- Dashboard mock (plain) -->
+    <g transform="translate(40 144)">
+      <rect width="620" height="436" rx="8" fill="#FFFFFF" stroke="rgba(15,42,74,0.08)"/>
+
+      <!-- Topbar -->
+      <rect x="0" y="0" width="620" height="44" fill="#F1F4F9"/>
+      <text x="16" y="28" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0F2A4A">ShadowBlade</text>
+      <g font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A6680">
+        <text x="120" y="28">工作台</text>
+        <text x="170" y="28">项目</text>
+        <text x="210" y="28">渲染队列</text>
+        <text x="270" y="28">设置</text>
+      </g>
+      <g transform="translate(534 12)">
+        <rect width="72" height="20" rx="3" fill="#0F2A4A"/>
+        <text x="36" y="14" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">新建视频</text>
+      </g>
+
+      <!-- Page head -->
+      <text x="16" y="80" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#0F2A4A">欢迎回来，Ava。</text>
+      <text x="16" y="100" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A6680">本周已交付 6 条成片。</text>
+
+      <!-- KPI tiles · plain -->
+      <g transform="translate(16 124)">
+        <rect width="140" height="76" rx="4" fill="#F7F9FC" stroke="rgba(15,42,74,0.10)"/>
+        <text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A6680">本月渲染</text>
+        <text x="12" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#0F2A4A">387</text>
+        <text x="12" y="62" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A6680">/ 1,000</text>
+
+        <g transform="translate(148 0)"><rect width="140" height="76" rx="4" fill="#F7F9FC" stroke="rgba(15,42,74,0.10)"/><text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A6680">首版耗时</text><text x="12" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#0F2A4A">4.8 分</text></g>
+        <g transform="translate(296 0)"><rect width="140" height="76" rx="4" fill="#F7F9FC" stroke="rgba(15,42,74,0.10)"/><text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A6680">通过率</text><text x="12" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#0F2A4A">92%</text></g>
+        <g transform="translate(444 0)"><rect width="140" height="76" rx="4" fill="#F7F9FC" stroke="rgba(15,42,74,0.10)"/><text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A6680">节省</text><text x="12" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#0F2A4A">$168k</text></g>
+      </g>
+
+      <!-- Project list · plain -->
+      <g transform="translate(16 218)">
+        <rect width="588" height="200" rx="4" fill="#F7F9FC" stroke="rgba(15,42,74,0.10)"/>
+        <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0F2A4A">近期项目</text>
+        <g font-family="Inter, system-ui, sans-serif" font-size="11" fill="#0F2A4A">
+          <g transform="translate(14 42)"><text>春季产品发布 — Wearable Hub</text><text x="540" text-anchor="end" fill="#5A6680">渲染中</text></g>
+          <line x1="14" y1="52" x2="574" y2="52" stroke="rgba(15,42,74,0.08)"/>
+          <g transform="translate(14 70)"><text>售前训练营 · 新人入职</text><text x="540" text-anchor="end" fill="#5A6680">审核中</text></g>
+          <line x1="14" y1="80" x2="574" y2="80" stroke="rgba(15,42,74,0.08)"/>
+          <g transform="translate(14 98)"><text>AI Copilot · 60 秒演示</text><text x="540" text-anchor="end" fill="#5A6680">脚本</text></g>
+          <line x1="14" y1="108" x2="574" y2="108" stroke="rgba(15,42,74,0.08)"/>
+          <g transform="translate(14 126)"><text>媒体引述 · Series C 公告</text><text x="540" text-anchor="end" fill="#5A6680">排队中</text></g>
+          <line x1="14" y1="136" x2="574" y2="136" stroke="rgba(15,42,74,0.08)"/>
+          <g transform="translate(14 154)"><text>合规复训 — GDPR 基础要点</text><text x="540" text-anchor="end" fill="#5A6680">排队中</text></g>
+        </g>
+      </g>
+    </g>
+
+    <!-- Pain points -->
+    <g transform="translate(40 600)" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A6680">
+      <text>· 全局变量靠 CSS 变量 · 暗色模式需切表</text>
+      <text y="14">· 组件复制粘贴 · 44 个 HTML 文件难以保持一致</text>
+    </g>
+  </g>
+
+  <!-- ── Center divider ── -->
+  <line x1="800" y1="200" x2="800" y2="800" stroke="rgba(247,249,252,0.18)" stroke-width="1" stroke-dasharray="3 5"/>
+  <g transform="translate(800 480)">
+    <circle r="20" fill="url(#sb-cmp-fe-mark)"/>
+    <path d="M-6 0L0 -6L6 0L0 6Z" fill="#06101F"/>
+  </g>
+
+  <!-- ── After panel (right) · dark, Next.js + shadcn ── -->
+  <g transform="translate(820 160)">
+    <rect width="700" height="640" rx="18" fill="url(#sb-cmp-fe-after-panel)" stroke="rgba(34,211,183,0.30)"/>
+
+    <!-- After label -->
+    <g transform="translate(28 28)">
+      <rect width="86" height="28" rx="6" fill="url(#sb-cmp-fe-mark)"/>
+      <text x="43" y="19" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" letter-spacing="2" font-weight="700" fill="#0A1428">AFTER</text>
+    </g>
+    <text x="124" y="46" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">Next.js 14 · App Router · shadcn/ui</text>
+    <text x="672" y="46" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" fill="#6EE2C5">frontend-next/app</text>
+
+    <!-- Mock browser chrome -->
+    <g transform="translate(40 96)">
+      <rect width="620" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+      <g transform="translate(14 16)" fill="#5A667F">
+        <circle cx="0" cy="0" r="4"/>
+        <circle cx="14" cy="0" r="4"/>
+        <circle cx="28" cy="0" r="4"/>
+      </g>
+      <rect x="58" y="6" width="540" height="20" rx="4" fill="rgba(11,18,32,0.6)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="78" y="20" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">localhost:3000/dashboard</text>
+    </g>
+
+    <!-- Dashboard mock (dark, shadcn) -->
+    <g transform="translate(40 144)">
+      <rect width="620" height="436" rx="10" fill="rgba(11,18,32,0.7)" stroke="rgba(255,255,255,0.06)"/>
+
+      <!-- Topbar -->
+      <rect x="0" y="0" width="620" height="44" fill="rgba(15,22,38,0.85)"/>
+      <g transform="translate(14 14)"><rect width="20" height="20" rx="6" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/><g transform="translate(5 5) scale(0.45)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-cmp-fe-mark)"/></g></g>
+      <text x="42" y="28" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+      <g font-family="Inter, system-ui, sans-serif" font-size="11">
+        <text x="130" y="28" fill="#6EE2C5" font-weight="700">工作台</text>
+        <text x="170" y="28" fill="#8590A8">项目</text>
+        <text x="210" y="28" fill="#8590A8">渲染队列</text>
+      </g>
+      <g transform="translate(516 10)">
+        <rect width="92" height="24" rx="6" fill="url(#sb-cmp-fe-mark)"/>
+        <text x="46" y="16" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0A1428">+ 新建视频</text>
+      </g>
+
+      <!-- Page head -->
+      <text x="16" y="78" font-family="Inter, system-ui, sans-serif" font-size="9" letter-spacing="2" font-weight="700" fill="#6EE2C5">工作空间概览</text>
+      <text x="16" y="102" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">欢迎回来，Ava。</text>
+      <text x="16" y="120" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#B6BDCC">本周已交付 6 条 · 周二发布如期。</text>
+
+      <!-- KPI cards with sparklines -->
+      <g transform="translate(16 138)">
+        <g>
+          <rect width="140" height="78" rx="8" fill="url(#sb-cmp-fe-after-card)" stroke="rgba(34,211,183,0.18)"/>
+          <text x="12" y="20" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8590A8">渲染数</text>
+          <text x="12" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">387</text>
+          <polyline points="12,68 26,66 40,62 54,58 68,52 82,50 96,48 110,44 124,42" stroke="#22D3B7" stroke-width="1.4" fill="none"/>
+        </g>
+        <g transform="translate(148 0)">
+          <rect width="140" height="78" rx="8" fill="url(#sb-cmp-fe-after-card)" stroke="rgba(34,211,183,0.18)"/>
+          <text x="12" y="20" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8590A8">首版耗时</text>
+          <text x="12" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">4.8 <tspan font-size="11" fill="#5A667F">分</tspan></text>
+          <polyline points="12,52 26,56 40,58 54,60 68,62 82,64 96,66 110,68 124,70" stroke="#38BDF8" stroke-width="1.4" fill="none"/>
+        </g>
+        <g transform="translate(296 0)">
+          <rect width="140" height="78" rx="8" fill="url(#sb-cmp-fe-after-card)" stroke="rgba(34,211,183,0.18)"/>
+          <text x="12" y="20" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8590A8">通过率</text>
+          <text x="12" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">92 <tspan font-size="11" fill="#5A667F">%</tspan></text>
+          <polyline points="12,68 26,64 40,60 54,56 68,52 82,48 96,46 110,42 124,38" stroke="#22D3B7" stroke-width="1.4" fill="none"/>
+        </g>
+        <g transform="translate(444 0)">
+          <rect width="140" height="78" rx="8" fill="url(#sb-cmp-fe-after-card)" stroke="rgba(34,211,183,0.18)"/>
+          <text x="12" y="20" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8590A8">节省</text>
+          <text x="12" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">$168k</text>
+          <polyline points="12,64 26,58 40,52 54,48 68,42 82,38 96,34 110,30 124,26" stroke="#22D3B7" stroke-width="1.4" fill="none"/>
+        </g>
+      </g>
+
+      <!-- Pipeline list with progress -->
+      <g transform="translate(16 232)">
+        <rect width="588" height="190" rx="8" fill="url(#sb-cmp-fe-after-card)" stroke="rgba(255,255,255,0.06)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">进行中 · 流程运行</text>
+        <text x="574" y="22" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8590A8">实时</text>
+
+        <g font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F7F9FC">
+          <g transform="translate(14 38)">
+            <rect width="560" height="22" rx="4" fill="rgba(11,18,32,0.5)"/>
+            <g transform="translate(8 4)"><rect width="14" height="14" rx="3" fill="rgba(34,211,183,0.30)"/><text x="7" y="11" text-anchor="middle" font-size="9" fill="#6EE2C5">✓</text></g>
+            <text x="34" y="15">脚本 · 6 场景 · 142 词</text>
+            <text x="552" y="15" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#B6BDCC">8.4s</text>
+          </g>
+          <g transform="translate(14 64)">
+            <rect width="560" height="22" rx="4" fill="rgba(11,18,32,0.5)"/>
+            <g transform="translate(8 4)"><rect width="14" height="14" rx="3" fill="rgba(34,211,183,0.30)"/><text x="7" y="11" text-anchor="middle" font-size="9" fill="#6EE2C5">✓</text></g>
+            <text x="34" y="15">分镜 · 6/6 已渲染</text>
+            <text x="552" y="15" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#B6BDCC">12.1s</text>
+          </g>
+          <g transform="translate(14 90)">
+            <rect width="560" height="22" rx="4" fill="rgba(11,18,32,0.5)"/>
+            <g transform="translate(8 4)"><rect width="14" height="14" rx="3" fill="rgba(34,211,183,0.30)"/><text x="7" y="11" text-anchor="middle" font-size="9" fill="#6EE2C5">✓</text></g>
+            <text x="34" y="15">配音 · alloy-en-female</text>
+            <text x="552" y="15" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#B6BDCC">18.6s</text>
+          </g>
+          <g transform="translate(14 116)">
+            <rect width="560" height="22" rx="4" fill="rgba(11,18,32,0.5)" stroke="rgba(56,189,248,0.35)"/>
+            <g transform="translate(8 4)"><rect width="14" height="14" rx="3" fill="rgba(56,189,248,0.30)"/><circle cx="7" cy="7" r="2" fill="#38BDF8"/></g>
+            <text x="34" y="15">混剪 · 62% · 1080×1920</text>
+            <text x="552" y="15" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#38BDF8">预计 1:04</text>
+          </g>
+          <g transform="translate(14 142)">
+            <rect width="560" height="22" rx="4" fill="rgba(11,18,32,0.5)"/>
+            <g transform="translate(8 4)"><rect width="14" height="14" rx="3" fill="rgba(255,255,255,0.06)"/></g>
+            <text x="34" y="15">渲染 · H.264 · 60 fps</text>
+            <text x="552" y="15" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#8590A8">排队中</text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- Highlights -->
+    <g transform="translate(40 600)" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">
+      <text>· App Router · Server Components · RSC streaming</text>
+      <text y="14">· shadcn/ui token system · 暗色一等公民 · 微交互内建</text>
+    </g>
+  </g>
+
+  <!-- ── KPI badge ── -->
+  <g transform="translate(1340 760)">
+    <rect width="180" height="92" rx="14" fill="rgba(11,18,32,0.95)" stroke="rgba(34,211,183,0.45)"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="2.2" font-weight="700" fill="#6EE2C5">无障碍</text>
+    <text x="90" y="62" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">a11y AAA</text>
+    <text x="90" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">Lighthouse / axe-core</text>
+  </g>
+
+  <!-- footer caption -->
+  <g transform="translate(80 850)" font-family="JetBrains Mono, monospace" font-size="11" fill="#5A667F">
+    <text>showcase/compare/before-after-frontend.svg · 1600 × 900</text>
+    <text x="1440" text-anchor="end" fill="#6EE2C5">ShadowBlade · Next.js 重构</text>
+  </g>
+</svg>
