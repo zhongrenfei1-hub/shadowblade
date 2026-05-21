@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Switch workspace · ShadowBlade</title>
+    <title>切换工作空间 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -137,67 +137,67 @@
     <article class="sb-ws" role="dialog" aria-modal="true" aria-labelledby="ws-title">
       <header class="sb-ws__head">
         <div class="sb-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="#22D3B7"/></svg></div>
-        <h1 id="ws-title">Switch workspace</h1>
+        <h1 id="ws-title">切换工作空间</h1>
         <span style="margin-left:auto;font-family:var(--sb-font-mono);font-size:var(--sb-text-xs);color:var(--sb-text-faint);padding:3px 8px;border-radius:4px;background:rgba(255,255,255,0.04)">ava.chen@acme.com</span>
       </header>
 
       <div class="sb-ws__filter">
         <label>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-          <input aria-label="Filter workspaces" placeholder="Filter workspaces · type to search" autofocus />
+          <input aria-label="筛选工作空间" placeholder="筛选工作空间 · 输入搜索" autofocus />
           <kbd>↑↓</kbd><kbd>↵</kbd>
         </label>
       </div>
 
-      <div class="sb-ws__list" role="listbox" aria-label="Your workspaces">
+      <div class="sb-ws__list" role="listbox" aria-label="你的工作空间">
         <div class="sb-ws__row sb-ws__row--current" role="option" aria-selected="true">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#1c3868,#0a1428)">AC</div>
-          <div class="sb-ws__name"><b>Acme Marketing Cloud</b><span>24 seats · region eu-central-1 · 387 / 1,000 renders this cycle</span></div>
-          <span class="sb-ws__plan sb-ws__plan--scale">Scale</span>
-          <span class="sb-ws__shortcut">Current</span>
+          <div class="sb-ws__name"><b>Acme Marketing Cloud</b><span>24 席 · 区域 eu-central-1 · 本周期渲染 387 / 1,000</span></div>
+          <span class="sb-ws__plan sb-ws__plan--scale">规模版</span>
+          <span class="sb-ws__shortcut">当前</span>
         </div>
 
         <div class="sb-ws__row" role="option">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#101728,#5e2914);color:#FF7849">AF</div>
-          <div class="sb-ws__name"><b>Acme · Field Events</b><span>8 seats · region eu-central-1 · 12 / 250 renders</span></div>
-          <span class="sb-ws__plan sb-ws__plan--growth">Growth</span>
+          <div class="sb-ws__name"><b>Acme · 线下活动</b><span>8 席 · 区域 eu-central-1 · 渲染 12 / 250</span></div>
+          <span class="sb-ws__plan sb-ws__plan--growth">成长版</span>
           <span class="sb-ws__shortcut">⌘ 2</span>
         </div>
 
         <div class="sb-ws__row" role="option">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#1a223a,#0a0f1c);color:#a78bfa">AL</div>
-          <div class="sb-ws__name"><b>Acme · Internal L&amp;D</b><span>14 seats · region eu-central-1 · 84 / 250 renders</span></div>
-          <span class="sb-ws__plan sb-ws__plan--growth">Growth</span>
+          <div class="sb-ws__name"><b>Acme · 内部学习发展</b><span>14 席 · 区域 eu-central-1 · 渲染 84 / 250</span></div>
+          <span class="sb-ws__plan sb-ws__plan--growth">成长版</span>
           <span class="sb-ws__shortcut">⌘ 3</span>
         </div>
 
         <div class="sb-ws__row" role="option">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#0a3d4a,#06181a);color:#22D3B7">HL</div>
-          <div class="sb-ws__name"><b>Helios Logistics</b><span>34 seats · region us-east-1 · 1,720 / unlimited renders</span></div>
-          <span class="sb-ws__plan sb-ws__plan--enterprise">Enterprise</span>
+          <div class="sb-ws__name"><b>Helios Logistics</b><span>34 席 · 区域 us-east-1 · 渲染 1,720 / 不限</span></div>
+          <span class="sb-ws__plan sb-ws__plan--enterprise">企业版</span>
           <span class="sb-ws__shortcut">⌘ 4</span>
         </div>
 
         <div class="sb-ws__row" role="option">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#3d1a2e,#1a0610);color:#f87171">NW</div>
-          <div class="sb-ws__name"><b>Northwind · Agency client</b><span>6 seats · region us-east-1 · 220 / 250 renders · 14 days renewal</span></div>
-          <span class="sb-ws__plan sb-ws__plan--growth">Growth</span>
+          <div class="sb-ws__name"><b>Northwind · 代理客户</b><span>6 席 · 区域 us-east-1 · 渲染 220 / 250 · 14 天后续费</span></div>
+          <span class="sb-ws__plan sb-ws__plan--growth">成长版</span>
           <span class="sb-ws__shortcut">⌘ 5</span>
         </div>
 
         <div class="sb-ws__row sb-ws__row--inactive" role="option">
           <div class="sb-ws__avatar" style="background:linear-gradient(135deg,#2a2a2a,#0f0f0f);color:#94a3b8">UM</div>
-          <div class="sb-ws__name"><b>Umbra Co · Trial</b><span>1 seat · region eu-central-1 · 25 / 25 renders · expires 2026-05-28</span></div>
-          <span class="sb-ws__plan">Studio</span>
+          <div class="sb-ws__name"><b>Umbra Co · 试用</b><span>1 席 · 区域 eu-central-1 · 渲染 25 / 25 · 2026-05-28 到期</span></div>
+          <span class="sb-ws__plan">体验版</span>
           <span class="sb-ws__shortcut">⌘ 6</span>
         </div>
       </div>
 
       <footer class="sb-ws__foot">
-        <a class="helper" href="signup.html">+ New workspace</a>
+        <a class="helper" href="signup.html">+ 新建工作空间</a>
         <span class="spacer"></span>
-        <a class="helper" href="settings.html">Workspace settings</a>
-        <button class="sb-btn sb-btn--ghost sb-btn--sm" aria-label="Close">
+        <a class="helper" href="settings.html">工作空间设置</a>
+        <button class="sb-btn sb-btn--ghost sb-btn--sm" aria-label="关闭">
           <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M6 18L18 6"/></svg>
         </button>
       </footer>
