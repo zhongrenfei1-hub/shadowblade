@@ -1,5 +1,7 @@
-"use client";
-
+// 注意：这是 server-friendly 组件（不带 "use client"）。
+// 接受 Lucide icon (function) 作为 prop —— 一旦标记 "use client"，
+// server 父组件传 icon 会触发 Next 「Functions cannot be passed to Client Components」错误。
+// useId 在 server / client 两端都可用，无需 "use client"。
 import { useId } from "react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";

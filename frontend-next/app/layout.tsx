@@ -17,6 +17,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://frontend-next-two-lac.vercel.app",
+  ),
   title: "ShadowBlade · 企业级 AI 视频云",
   description:
     "ShadowBlade 把一份简报变成可以直接上线的营销 / 培训 / 产品视频，4 分钟出片，对照你的品牌套件渲染。",
