@@ -36,27 +36,27 @@
     <rect width="44" height="44" rx="12" fill="#0F1D3A" stroke="rgba(34,211,183,0.45)"/>
     <g transform="translate(10 10) scale(1.05)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#og-mark)"/></g>
     <text x="62" y="22" font-family="Inter Display, Inter, sans-serif" font-weight="700" font-size="20" fill="#F7F9FC">ShadowBlade</text>
-    <text x="62" y="40" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" fill="#8590A8" font-weight="600">VIDEO CLOUD · ENTERPRISE</text>
+    <text x="62" y="40" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" fill="#8590A8" font-weight="600">视频云 · 企业版</text>
   </g>
 
   <!-- Chip -->
   <g transform="translate(70 178)">
     <rect width="252" height="34" rx="17" fill="rgba(34,211,183,0.10)" stroke="rgba(34,211,183,0.35)"/>
     <circle cx="20" cy="17" r="4.5" fill="#22D3B7"/>
-    <text x="36" y="22" font-family="Inter, sans-serif" font-size="12" letter-spacing="2.4" font-weight="700" fill="#22D3B7">ENTERPRISE AI VIDEO CLOUD</text>
+    <text x="36" y="22" font-family="Inter, sans-serif" font-size="12" letter-spacing="2.4" font-weight="700" fill="#22D3B7">企业级 AI 视频云</text>
   </g>
 
   <!-- Headline -->
   <g transform="translate(70 240)" font-family="Inter Display, Inter, sans-serif" fill="#F7F9FC">
     <text font-size="64" font-weight="700" letter-spacing="-1.8">
-      <tspan x="0" y="0">From brief to broadcast-</tspan>
-      <tspan x="0" y="76">ready video in </tspan>
-      <tspan font-weight="800" fill="url(#og-text)">4 minutes</tspan><tspan>.</tspan>
+      <tspan x="0" y="0">从简报到播出级视频</tspan>
+      <tspan x="0" y="76">只需 </tspan>
+      <tspan font-weight="800" fill="url(#og-text)">4 分钟</tspan><tspan>。</tspan>
     </text>
   </g>
 
   <!-- Sub copy -->
-  <text x="70" y="476" font-family="Inter, sans-serif" font-size="18" fill="#B6BDCC">The enterprise pipeline marketing, training, and product teams ship on.</text>
+  <text x="70" y="476" font-family="Inter, sans-serif" font-size="18" fill="#B6BDCC">市场、培训、产品团队共用的企业级视频流水线。</text>
 
   <!-- Right side: rendering chip + ring -->
   <g transform="translate(960 315)">
@@ -72,13 +72,13 @@
     <rect width="170" height="56" rx="12" fill="rgba(8,14,28,0.92)" stroke="rgba(34,211,183,0.6)"/>
     <circle cx="22" cy="28" r="5" fill="#22D3B7"/>
     <circle cx="22" cy="28" r="9" fill="none" stroke="#22D3B7" stroke-opacity="0.35" stroke-width="1.4"/>
-    <text x="40" y="24" font-family="Inter, sans-serif" font-size="10" fill="#8590A8" font-weight="600" letter-spacing="2">RENDERING</text>
-    <text x="40" y="44" font-family="Inter Display, Inter, sans-serif" font-size="18" fill="#F7F9FC" font-weight="700">ETA 64s</text>
+    <text x="40" y="24" font-family="Inter, sans-serif" font-size="10" fill="#8590A8" font-weight="600" letter-spacing="2">渲染中</text>
+    <text x="40" y="44" font-family="Inter Display, Inter, sans-serif" font-size="18" fill="#F7F9FC" font-weight="700">预计 64 秒</text>
   </g>
 
   <!-- Footer strip: trust -->
   <g transform="translate(70 552)" font-family="Inter, sans-serif">
-    <text font-size="11" letter-spacing="3" font-weight="600" fill="#5A667F">SOC 2 · SSO · REGIONAL RENDER · ENTERPRISE READY</text>
+    <text font-size="11" letter-spacing="3" font-weight="600" fill="#5A667F">SOC 2 · SSO · 区域化渲染 · 企业级</text>
     <text x="0" y="36" font-size="14" font-weight="600" fill="#22D3B7">shadowblade.video</text>
   </g>
 

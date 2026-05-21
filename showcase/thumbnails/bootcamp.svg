@@ -16,25 +16,25 @@
   <g transform="translate(64 240)">
     <g>
       <rect width="280" height="240" rx="18" fill="rgba(34,211,183,0.16)" stroke="rgba(34,211,183,0.42)"/>
-      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="700" letter-spacing="2.4">MODULE 01</text>
-      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">Discovery</text>
-      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">28 min · 4 scenes</text>
+      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="700" letter-spacing="2.4">模块 01</text>
+      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">需求挖掘</text>
+      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">28 分钟 · 4 场景</text>
       <rect x="22" y="200" width="100" height="6" rx="3" fill="rgba(255,255,255,0.10)"/>
       <rect x="22" y="200" width="100" height="6" rx="3" fill="#22D3B7"/>
     </g>
     <g transform="translate(300 0)">
       <rect width="280" height="240" rx="18" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.42)"/>
-      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.4">MODULE 02</text>
-      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">Demo craft</text>
-      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">36 min · 6 scenes</text>
+      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.4">模块 02</text>
+      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">演示功力</text>
+      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">36 分钟 · 6 场景</text>
       <rect x="22" y="200" width="180" height="6" rx="3" fill="rgba(255,255,255,0.10)"/>
       <rect x="22" y="200" width="120" height="6" rx="3" fill="#38BDF8"/>
     </g>
     <g transform="translate(600 0)">
       <rect width="280" height="240" rx="18" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.42)"/>
-      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">MODULE 03</text>
-      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">Negotiation</text>
-      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">32 min · 5 scenes</text>
+      <text x="22" y="32" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">模块 03</text>
+      <text x="22" y="80" font-family="Inter Display, Inter, sans-serif" font-size="28" font-weight="700" fill="#F7F9FC">商务谈判</text>
+      <text x="22" y="106" font-family="Inter, sans-serif" font-size="13" fill="#B6BDCC">32 分钟 · 5 场景</text>
       <rect x="22" y="200" width="180" height="6" rx="3" fill="rgba(255,255,255,0.10)"/>
       <rect x="22" y="200" width="60" height="6" rx="3" fill="#A78BFA"/>
     </g>
@@ -44,7 +44,7 @@
   <g transform="translate(64 60)">
     <rect width="186" height="30" rx="15" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.45)"/>
     <circle cx="18" cy="15" r="4" fill="#A78BFA"/>
-    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="600" letter-spacing="2.4">INTERNAL · L&amp;D</text>
+    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="600" letter-spacing="2.4">内部 · 学习发展</text>
   </g>
   <g transform="translate(64 130)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
     <text font-size="58" font-weight="700" letter-spacing="-1.6">SE Bootcamp</text>

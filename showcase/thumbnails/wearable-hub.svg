@@ -36,20 +36,20 @@
   <g transform="translate(64 60)">
     <rect width="170" height="30" rx="15" fill="rgba(34,211,183,0.12)" stroke="rgba(34,211,183,0.45)"/>
     <circle cx="18" cy="15" r="4" fill="#22D3B7"/>
-    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="600" letter-spacing="2.4">SPRING LAUNCH</text>
+    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="600" letter-spacing="2.4">春季发布</text>
   </g>
 
   <!-- Title -->
   <g transform="translate(64 158)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
     <text font-size="64" font-weight="700" letter-spacing="-1.8">
       <tspan x="0" y="0">Wearable Hub</tspan>
-      <tspan x="0" y="76" font-weight="500" fill="#B6BDCC">Hero teaser · 28s</tspan>
+      <tspan x="0" y="76" font-weight="500" fill="#B6BDCC">主视觉预告 · 28 秒</tspan>
     </text>
   </g>
 
   <!-- Metadata strip -->
   <g transform="translate(64 484)" font-family="Inter, sans-serif">
-    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">PAID SOCIAL · 9:16 · AVA CHEN</text>
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">付费社媒 · 9:16 · AVA CHEN</text>
   </g>
 
   <!-- Bottom dock: meter -->
@@ -63,6 +63,6 @@
   <g transform="translate(870 60)">
     <rect width="142" height="30" rx="15" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.45)"/>
     <circle cx="16" cy="15" r="4" fill="#38BDF8"/>
-    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2">RENDERING</text>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2">渲染中</text>
   </g>
 </svg>
