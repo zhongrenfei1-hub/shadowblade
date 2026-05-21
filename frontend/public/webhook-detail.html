@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delivery wh_a3b8…f209 · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-wh-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--sb-space-4);
+        align-items: center;
+      }
+      .sb-wh-id {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-accent-300);
+        background: rgba(34,211,183,0.08);
+        padding: 3px 8px;
+        border-radius: 4px;
+        letter-spacing: 0.04em;
+      }
+      .sb-wh-layout {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--sb-space-6);
+        align-items: start;
+      }
+      .sb-payload-box {
+        font-family: var(--sb-font-mono);
+        font-size: 12px;
+        line-height: 1.65;
+        background: rgba(6,10,22,0.8);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius);
+        padding: var(--sb-space-4);
+        overflow: auto;
+        max-height: 460px;
+      }
+      .sb-payload-box .k { color: var(--sb-status-queued); }
+      .sb-payload-box .s { color: var(--sb-accent-300); }
+      .sb-payload-box .n { color: var(--sb-status-running); }
+      .sb-payload-box .c { color: var(--sb-text-faint); }
+
+      .sb-attempt-row {
+        display: grid;
+        grid-template-columns: 32px 80px 1fr auto;
+        gap: var(--sb-space-3);
+        align-items: center;
+        padding: var(--sb-space-3) var(--sb-space-4);
+        border-bottom: 1px solid var(--sb-border);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-attempt-row:last-child { border-bottom: none; }
+      .sb-attempt-row .num {
+        font-family: var(--sb-font-mono);
+        font-weight: 700;
+        color: var(--sb-text-faint);
+        text-align: center;
+      }
+      .sb-attempt-row .code {
+        font-family: var(--sb-font-mono);
+        font-weight: 700;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .sb-attempt-row .code.s2xx { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
+      .sb-attempt-row .code.s4xx { color: var(--sb-status-queued); background: rgba(251,191,36,0.12); }
+      .sb-attempt-row .code.s5xx { color: var(--sb-status-failed); background: rgba(248,113,113,0.12); }
+      .sb-attempt-row .meta { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-text-faint); }
+      .sb-attempt-row time { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-text-muted); text-align: right; }
+
+      @media (max-width: 1100px) { .sb-wh-layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="dev-console.html" style="color:var(--sb-text-muted)">Developer console</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Delivery</b>
+            <span class="sb-wh-id" style="margin-left:8px">wh_a3b8…f209</span>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">Copy as cURL</button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Replay
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Mark resolved
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-wh-head">
+              <div>
+                <div class="sb-eyebrow">Webhook delivery · render.completed · run #901</div>
+                <h1>200 · 412 ms · 1 attempt</h1>
+                <p class="sb-page-head__lead">
+                  Delivered cleanly to acme.example.com/hooks/sb on the first attempt. HMAC signature valid. Payload 4 KB.
+                </p>
+              </div>
+              <div>
+                <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">Delivered</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Status</div>
+              <div class="sb-kpi__value">200 OK</div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">First attempt</span>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Latency</div>
+              <div class="sb-kpi__value">412 <small>ms</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▼ 5% vs p50</span>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Payload</div>
+              <div class="sb-kpi__value">4.1 <small>KB</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">JSON + signed</span>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Endpoint</div>
+              <div class="sb-kpi__value" style="font-family:var(--sb-font-mono);font-size:var(--sb-text-md)">acme.example.com</div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">Verified · TLS 1.3</span>
+            </article>
+          </section>
+
+          <section class="sb-wh-layout">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Request payload</div>
+                <div class="sb-card__head-actions">
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Copy</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Resign</button>
+                </div>
+              </header>
+              <div class="sb-card__body">
+                <pre class="sb-payload-box"><span class="c">POST /hooks/sb HTTP/1.1
+Host: acme.example.com
+Content-Type: application/json
+X-ShadowBlade-Signature: t=1747837000,v1=8a44d…ab21
+X-ShadowBlade-Webhook-Id: wh_a3b8…f209
+X-ShadowBlade-Attempt: 1
+User-Agent: ShadowBlade-Webhook/1.4
+
+</span>{
+  <span class="k">"event"</span>:        <span class="s">"render.completed"</span>,
+  <span class="k">"workspace"</span>:    <span class="s">"acme"</span>,
+  <span class="k">"project_id"</span>:   <span class="n">101</span>,
+  <span class="k">"run_id"</span>:       <span class="n">901</span>,
+  <span class="k">"output"</span>: {
+    <span class="k">"url"</span>:           <span class="s">"https://cdn.shadowblade.io/r/901/cut.mp4"</span>,
+    <span class="k">"width"</span>:         <span class="n">1080</span>,
+    <span class="k">"height"</span>:        <span class="n">1920</span>,
+    <span class="k">"duration_ms"</span>:   <span class="n">28000</span>,
+    <span class="k">"size_bytes"</span>:    <span class="n">8425184</span>,
+    <span class="k">"loudness_lufs"</span>: <span class="n">-14.1</span>,
+    <span class="k">"checksum"</span>:      <span class="s">"sha256:a9c8…f0b1"</span>
+  },
+  <span class="k">"brand_kit"</span>:    <span class="s">"acme-core"</span>,
+  <span class="k">"drift_score"</span>:  <span class="n">0.02</span>,
+  <span class="k">"started_at"</span>:   <span class="s">"2026-05-21T14:08:02Z"</span>,
+  <span class="k">"finished_at"</span>:  <span class="s">"2026-05-21T14:13:40Z"</span>,
+  <span class="k">"webhook_id"</span>:   <span class="s">"wh_a3b8…f209"</span>
+}</pre>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Response</div>
+                <div class="sb-card__head-actions">
+                  <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">200 OK</span>
+                </div>
+              </header>
+              <div class="sb-card__body">
+                <pre class="sb-payload-box"><span class="c">HTTP/1.1 200 OK
+Date: Thu, 21 May 2026 14:13:41 GMT
+Content-Type: application/json
+Content-Length: 31
+Server: nginx
+X-Acme-Trace: 7c4f…b182
+
+</span>{<span class="k">"received"</span>:<span class="n">true</span>,<span class="k">"id"</span>:<span class="s">"wh_…f209"</span>}</pre>
+
+                <div style="margin-top:var(--sb-space-3);font-size:var(--sb-text-sm);color:var(--sb-text-muted);display:grid;gap:6px">
+                  <div style="display:flex;justify-content:space-between"><span>Connect</span><span style="font-family:var(--sb-font-mono);color:var(--sb-text)">128 ms</span></div>
+                  <div style="display:flex;justify-content:space-between"><span>TLS handshake</span><span style="font-family:var(--sb-font-mono);color:var(--sb-text)">84 ms</span></div>
+                  <div style="display:flex;justify-content:space-between"><span>Send</span><span style="font-family:var(--sb-font-mono);color:var(--sb-text)">8 ms</span></div>
+                  <div style="display:flex;justify-content:space-between"><span>Wait + recv</span><span style="font-family:var(--sb-font-mono);color:var(--sb-text)">192 ms</span></div>
+                  <div style="display:flex;justify-content:space-between"><span><b style="color:var(--sb-text)">Total</b></span><span style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)"><b>412 ms</b></span></div>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Attempt history</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill" style="color:var(--sb-text-muted)">1 of max 30</span>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush">
+              <div class="sb-attempt-row">
+                <div class="num">1</div>
+                <div class="code s2xx">200</div>
+                <div>412 ms · 4 KB payload · TLS 1.3</div>
+                <time>2026-05-21 14:13:41 UTC</time>
+              </div>
+              <div class="sb-attempt-row" style="opacity:0.5">
+                <div class="num">2+</div>
+                <div class="code s2xx">—</div>
+                <div>Not attempted — first delivery succeeded</div>
+                <time>—</time>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Delivery wh_a3b8…f209 · part of run #901 · audit chain verified</span>
+          <span><a href="audit-log.html" style="color:var(--sb-accent-300)">Audit log</a> · 3 events</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
