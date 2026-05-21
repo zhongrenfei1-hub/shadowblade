@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Press kit · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav .spacer { flex: 1; }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-pk-hero {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-12) var(--sb-space-8);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--sb-space-8);
+        align-items: end;
+      }
+      .sb-pk-hero h1 {
+        margin: var(--sb-space-3) 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4vw, 50px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      .sb-pk-hero p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 56ch; }
+
+      .sb-pk-section {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-10);
+      }
+      .sb-pk-section h2 {
+        margin: var(--sb-space-6) 0 var(--sb-space-4);
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+        letter-spacing: -0.015em;
+      }
+
+      .sb-pk-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-pk-tile {
+        display: grid;
+        grid-template-rows: 160px auto;
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        overflow: hidden;
+      }
+      .sb-pk-tile__art {
+        display: grid; place-items: center;
+        background: linear-gradient(135deg, #0F2A4A, #050a18);
+      }
+      .sb-pk-tile__art.light { background: #F7F9FC; }
+      .sb-pk-tile__art.accent { background: linear-gradient(135deg, #22D3B7, #38BDF8); }
+      .sb-pk-tile__art.dark { background: linear-gradient(135deg, #11161F, #050a18); }
+      .sb-pk-tile__art svg { max-width: 70%; max-height: 70%; }
+      .sb-pk-tile__body { padding: var(--sb-space-3) var(--sb-space-4); display: grid; gap: 2px; }
+      .sb-pk-tile__body b { font-family: var(--sb-font-display); font-weight: 600; font-size: var(--sb-text-sm); }
+      .sb-pk-tile__body span { font-family: var(--sb-font-mono); font-size: 10px; color: var(--sb-text-faint); }
+      .sb-pk-tile__foot {
+        padding: 8px var(--sb-space-4);
+        display: flex; gap: 6px;
+        border-top: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.02);
+      }
+      .sb-pk-tile__foot a {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-accent-300);
+        font-family: var(--sb-font-mono);
+      }
+      .sb-pk-tile__foot span {
+        margin-left: auto;
+        font-size: 10px;
+        color: var(--sb-text-faint);
+        font-family: var(--sb-font-mono);
+      }
+
+      .sb-pk-palette {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--sb-space-3);
+      }
+      .sb-pk-swatch {
+        border-radius: var(--sb-radius);
+        height: 110px;
+        padding: var(--sb-space-3);
+        display: grid;
+        align-content: end;
+        gap: 2px;
+      }
+      .sb-pk-swatch b { font-family: var(--sb-font-display); font-size: var(--sb-text-sm); font-weight: 600; }
+      .sb-pk-swatch span { font-family: var(--sb-font-mono); font-size: 10px; }
+      .sb-pk-swatch.light { color: var(--sb-navy-900); }
+      .sb-pk-swatch.dark { color: var(--sb-text); }
+
+      .sb-pk-facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-pk-fact {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: grid;
+        gap: 6px;
+      }
+      .sb-pk-fact dt {
+        font-size: var(--sb-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sb-text-faint);
+        font-weight: 600;
+      }
+      .sb-pk-fact dd {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+        color: var(--sb-text);
+      }
+
+      @media (max-width: 1100px) {
+        .sb-pk-grid { grid-template-columns: repeat(2, 1fr); }
+        .sb-pk-palette { grid-template-columns: repeat(3, 1fr); }
+        .sb-pk-facts { grid-template-columns: 1fr; }
+        .sb-pk-hero { grid-template-columns: 1fr; padding: var(--sb-space-8); }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sb-marketing__nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgpk)"/><defs><linearGradient id="mgpk" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Press kit</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="about.html">About</a>
+      <a class="link" href="changelog.html">Changelog</a>
+      <a class="link" href="customer-story.html">Customers</a>
+      <a class="link" href="#" style="color:var(--sb-text)">Press</a>
+      <a class="sb-btn sb-btn--ghost" href="mailto:press@shadowblade.io">press@shadowblade.io</a>
+    </header>
+
+    <section class="sb-pk-hero">
+      <div>
+        <div class="sb-eyebrow">Press kit · v2026.5</div>
+        <h1>Logos, screenshots, swatches, facts.</h1>
+        <p>Everything you need to write about ShadowBlade — without emailing us first. Re-use it freely under the brand guideline at the bottom.</p>
+      </div>
+      <div style="display:flex;gap:var(--sb-space-3);flex-wrap:wrap">
+        <a class="sb-btn sb-btn--primary" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Press kit ZIP · 28 MB
+        </a>
+        <a class="sb-btn sb-btn--ghost" href="mailto:press@shadowblade.io">Email comms</a>
+      </div>
+    </section>
+
+    <section class="sb-pk-section">
+      <h2>Logos</h2>
+      <div class="sb-pk-grid">
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art">
+            <svg viewBox="0 0 200 60" width="160"><path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="url(#pkl1)"/><text x="58" y="38" fill="#F7F9FC" font-family="Inter Display" font-size="22" font-weight="700">ShadowBlade</text><defs><linearGradient id="pkl1" x1="14" y1="14" x2="46" y2="46"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
+          </div>
+          <div class="sb-pk-tile__body"><b>Primary · gradient on dark</b><span>logo-primary-dark.svg</span></div>
+          <div class="sb-pk-tile__foot"><a href="#">SVG</a><a href="#">PNG 1024</a><a href="#">PDF</a><span>3.2 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art light">
+            <svg viewBox="0 0 200 60" width="160"><path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#0F2A4A"/><text x="58" y="38" fill="#0F2A4A" font-family="Inter Display" font-size="22" font-weight="700">ShadowBlade</text></svg>
+          </div>
+          <div class="sb-pk-tile__body"><b>Mono · on light</b><span>logo-mono-light.svg</span></div>
+          <div class="sb-pk-tile__foot"><a href="#">SVG</a><a href="#">PNG 1024</a><a href="#">PDF</a><span>2.1 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art accent">
+            <svg viewBox="0 0 200 60" width="160"><path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#06101F"/><text x="58" y="38" fill="#06101F" font-family="Inter Display" font-size="22" font-weight="700">ShadowBlade</text></svg>
+          </div>
+          <div class="sb-pk-tile__body"><b>Inverse · on accent</b><span>logo-mono-inverse.svg</span></div>
+          <div class="sb-pk-tile__foot"><a href="#">SVG</a><a href="#">PNG 1024</a><a href="#">PDF</a><span>2.1 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art dark">
+            <svg viewBox="0 0 60 60" width="60"><path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="url(#pkl4)"/><defs><linearGradient id="pkl4" x1="14" y1="14" x2="46" y2="46"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
+          </div>
+          <div class="sb-pk-tile__body"><b>Mark only · 1:1</b><span>mark-square.svg</span></div>
+          <div class="sb-pk-tile__foot"><a href="#">SVG</a><a href="#">PNG 512</a><a href="#">ICO</a><span>0.8 KB</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sb-pk-section">
+      <h2>Colours</h2>
+      <div class="sb-pk-palette">
+        <div class="sb-pk-swatch dark" style="background:#0F2A4A"><b>Primary</b><span>#0F2A4A · RGB 15 42 74</span></div>
+        <div class="sb-pk-swatch light" style="background:#22D3B7"><b>Accent</b><span>#22D3B7 · RGB 34 211 183</span></div>
+        <div class="sb-pk-swatch dark" style="background:#11161F"><b>Graphite</b><span>#11161F · RGB 17 22 31</span></div>
+        <div class="sb-pk-swatch light" style="background:#F7F9FC"><b>Mist</b><span>#F7F9FC · RGB 247 249 252</span></div>
+        <div class="sb-pk-swatch light" style="background:#38BDF8"><b>Info</b><span>#38BDF8 · RGB 56 189 248</span></div>
+        <div class="sb-pk-swatch light" style="background:#FBBF24"><b>Caution</b><span>#FBBF24 · RGB 251 191 36</span></div>
+      </div>
+    </section>
+
+    <section class="sb-pk-section">
+      <h2>Screenshots</h2>
+      <div class="sb-pk-grid">
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art" style="background:#000;padding:8px">
+            <img src="/showcase/screens/screen-dashboard.svg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:6px" loading="lazy" />
+          </div>
+          <div class="sb-pk-tile__body"><b>Dashboard</b><span>screen-dashboard.svg · 1600×1000</span></div>
+          <div class="sb-pk-tile__foot"><a href="/showcase/screens/screen-dashboard.svg">SVG</a><a href="#">PNG 1920</a><span>26.7 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art" style="background:#000;padding:8px">
+            <img src="/showcase/screens/screen-studio.svg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:6px" loading="lazy" />
+          </div>
+          <div class="sb-pk-tile__body"><b>Studio</b><span>screen-studio.svg · 1600×1000</span></div>
+          <div class="sb-pk-tile__foot"><a href="/showcase/screens/screen-studio.svg">SVG</a><a href="#">PNG 1920</a><span>23.2 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art" style="background:#000;padding:8px">
+            <img src="/showcase/screens/screen-queue.svg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:6px" loading="lazy" />
+          </div>
+          <div class="sb-pk-tile__body"><b>Render queue</b><span>screen-queue.svg · 1600×1000</span></div>
+          <div class="sb-pk-tile__foot"><a href="/showcase/screens/screen-queue.svg">SVG</a><a href="#">PNG 1920</a><span>19.6 KB</span></div>
+        </article>
+        <article class="sb-pk-tile">
+          <div class="sb-pk-tile__art" style="background:#000;padding:8px">
+            <img src="/showcase/hero/hero-cover.svg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:6px" loading="lazy" />
+          </div>
+          <div class="sb-pk-tile__body"><b>Hero · OG / social</b><span>hero-cover.svg · 1600×900</span></div>
+          <div class="sb-pk-tile__foot"><a href="/showcase/hero/hero-cover.svg">SVG</a><a href="#">PNG 1920</a><span>10.7 KB</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sb-pk-section">
+      <h2>Boilerplate facts</h2>
+      <dl class="sb-pk-facts">
+        <div class="sb-pk-fact"><dt>Founded</dt><dd>2024 · Berlin &amp; NYC</dd></div>
+        <div class="sb-pk-fact"><dt>Funding</dt><dd>Series B · 2026-02</dd></div>
+        <div class="sb-pk-fact"><dt>Team</dt><dd>1,720 cuts shipped this month</dd></div>
+        <div class="sb-pk-fact"><dt>Customers</dt><dd>Helios · Northwind · Umbra · Quanta · Fabrik · Polaris</dd></div>
+        <div class="sb-pk-fact"><dt>Compliance</dt><dd>SOC 2 Type II · ISO 27001 · GDPR · HIPAA</dd></div>
+        <div class="sb-pk-fact"><dt>Press contact</dt><dd>press@shadowblade.io</dd></div>
+      </dl>
+    </section>
+
+    <section class="sb-pk-section">
+      <h2>Brand guideline</h2>
+      <article style="padding:var(--sb-space-6);border-radius:var(--sb-radius-lg);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text-muted);font-size:var(--sb-text-md);line-height:1.7;max-width:760px">
+        <p style="margin:0 0 var(--sb-space-3)"><b style="color:var(--sb-text)">One word.</b> "ShadowBlade." Capital S, capital B, no space, no hyphen.</p>
+        <p style="margin:0 0 var(--sb-space-3)"><b style="color:var(--sb-text)">Logo.</b> Don't stretch, recolour, rotate, or add effects. Don't reproduce smaller than 16 px tall. Always allow padding equal to the height of the "S" on every side.</p>
+        <p style="margin:0 0 var(--sb-space-3)"><b style="color:var(--sb-text)">Colour.</b> Accent <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">#22D3B7</code> is reserved for ShadowBlade. Don't pair it with a non-brand teal.</p>
+        <p style="margin:0"><b style="color:var(--sb-text)">Description.</b> Use this one-liner: "ShadowBlade is the enterprise AI video cloud that turns a brief into a broadcast-ready cut in under five minutes."</p>
+      </article>
+    </section>
+
+    <footer class="sb-footer">
+      <span>© 2026 ShadowBlade Labs · Press kit auto-rebuilt on every release</span>
+      <span>For licensing or partnerships · <a href="mailto:partners@shadowblade.io" style="color:var(--sb-accent-300)">partners@shadowblade.io</a></span>
+    </footer>
+  </body>
+</html>

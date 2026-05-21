@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" role="img" aria-label="Help centre hero — search magnifier with concentric pipeline rings">
+  <defs>
+    <linearGradient id="sb-help-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A"/>
+      <stop offset="55%" stop-color="#0A1428"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sb-help-glow" cx="0.62" cy="0.45" r="0.55">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sb-help-headline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F7F9FC"/>
+      <stop offset="100%" stop-color="#2EE2C4"/>
+    </linearGradient>
+    <linearGradient id="sb-help-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#22D3B7"/>
+    </linearGradient>
+    <radialGradient id="sb-help-lens" cx="0.35" cy="0.30" r="0.75">
+      <stop offset="0%" stop-color="rgba(56,189,248,0.30)"/>
+      <stop offset="55%" stop-color="rgba(11,20,40,0.85)"/>
+      <stop offset="100%" stop-color="rgba(6,16,31,0.95)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="500" fill="url(#sb-help-bg)"/>
+  <rect width="1200" height="500" fill="url(#sb-help-glow)"/>
+
+  <!-- Background grid wash -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <path d="M0 100H1200M0 200H1200M0 300H1200M0 400H1200"/>
+    <path d="M150 0V500M300 0V500M450 0V500M750 0V500M900 0V500M1050 0V500"/>
+  </g>
+
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- LEFT: copy block                                            -->
+  <g transform="translate(80 130)">
+    <rect width="56" height="3" rx="1.5" fill="url(#sb-help-rule)"/>
+    <text y="32" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#22D3B7" letter-spacing="2.6">HELP CENTRE</text>
+    <text y="92" font-family="Inter Display, Inter, sans-serif" font-size="48" font-weight="700"
+          fill="url(#sb-help-headline)" letter-spacing="-1.4">Find the answer in</text>
+    <text y="142" font-family="Inter Display, Inter, sans-serif" font-size="48" font-weight="700"
+          fill="url(#sb-help-headline)" letter-spacing="-1.4">one step.</text>
+    <text y="180" font-family="Inter, sans-serif" font-size="15" font-weight="400" fill="#8590A8">
+      Search 240+ guides across pipeline, render, and approvals.
+    </text>
+
+    <!-- Search field -->
+    <g transform="translate(0 210)">
+      <rect width="480" height="56" rx="12" fill="rgba(247,249,252,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <circle cx="28" cy="28" r="9" fill="none" stroke="#22D3B7" stroke-width="1.8"/>
+      <line x1="35" y1="35" x2="42" y2="42" stroke="#22D3B7" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="62" y="34" font-family="Inter, sans-serif" font-size="15" fill="rgba(247,249,252,0.55)">How do I rerun a failed render?</text>
+      <g transform="translate(420 14)">
+        <rect width="46" height="28" rx="6" fill="rgba(34,211,183,0.16)" stroke="rgba(34,211,183,0.45)"/>
+        <text x="23" y="19" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#22D3B7" text-anchor="middle">/</text>
+      </g>
+    </g>
+
+    <!-- Quick-link chips -->
+    <g transform="translate(0 288)" font-family="Inter, sans-serif" font-size="11" font-weight="600">
+      <g><rect width="86"  height="26" rx="13" fill="rgba(56,189,248,0.10)" stroke="rgba(56,189,248,0.35)"/>
+         <text x="43" y="17" fill="#38BDF8" text-anchor="middle">Pipeline</text></g>
+      <g transform="translate(96 0)"><rect width="78"  height="26" rx="13" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.35)"/>
+         <text x="39" y="17" fill="#A78BFA" text-anchor="middle">Review</text></g>
+      <g transform="translate(184 0)"><rect width="78"  height="26" rx="13" fill="rgba(251,191,36,0.10)" stroke="rgba(251,191,36,0.35)"/>
+         <text x="39" y="17" fill="#FBBF24" text-anchor="middle">Billing</text></g>
+      <g transform="translate(272 0)"><rect width="98"  height="26" rx="13" fill="rgba(34,211,183,0.10)" stroke="rgba(34,211,183,0.35)"/>
+         <text x="49" y="17" fill="#22D3B7" text-anchor="middle">API & SDK</text></g>
+    </g>
+  </g>
+
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- RIGHT: search magnifier with concentric pipeline rings      -->
+  <g transform="translate(880 250)">
+    <!-- Outer pipeline rings, colour-coded by stage -->
+    <circle r="180" fill="none" stroke="rgba(56,189,248,0.16)" stroke-width="1" stroke-dasharray="3 6"/>
+    <circle r="150" fill="none" stroke="rgba(167,139,250,0.20)" stroke-width="1" stroke-dasharray="3 6"/>
+    <circle r="118" fill="none" stroke="rgba(251,191,36,0.22)" stroke-width="1" stroke-dasharray="3 6"/>
+    <circle r="86"  fill="none" stroke="rgba(34,211,183,0.30)" stroke-width="1.2"/>
+
+    <!-- Orbit nodes on each ring -->
+    <g>
+      <circle cx="180" cy="0"     r="4" fill="#38BDF8"/>
+      <circle cx="-106" cy="-106" r="4" fill="#A78BFA"/>
+      <circle cx="0"    cy="-118" r="4" fill="#FBBF24"/>
+      <circle cx="86"   cy="0"    r="4" fill="#22D3B7"/>
+      <circle cx="-60"  cy="86"   r="4" fill="#22D3B7"/>
+    </g>
+
+    <!-- Magnifier lens (slightly offset top-left) -->
+    <g transform="translate(-10 -14)">
+      <circle r="64" fill="url(#sb-help-lens)" stroke="#2EE2C4" stroke-width="2.2"/>
+      <!-- Lens highlight -->
+      <path d="M-44 -28 Q -44 -52, -18 -58" stroke="rgba(247,249,252,0.45)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <!-- Inside the lens: a tiny stage indicator -->
+      <g transform="translate(0 4)">
+        <circle r="22" fill="none" stroke="rgba(34,211,183,0.45)" stroke-width="1"/>
+        <circle r="12" fill="none" stroke="rgba(34,211,183,0.65)" stroke-width="1"/>
+        <circle r="3"  fill="#22D3B7"/>
+        <text y="-32" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700"
+              fill="#22D3B7" text-anchor="middle" letter-spacing="1.2">FOUND</text>
+      </g>
+    </g>
+
+    <!-- Magnifier handle -->
+    <line x1="40" y1="36" x2="92" y2="88" stroke="#2EE2C4" stroke-width="6" stroke-linecap="round"/>
+    <line x1="42" y1="38" x2="90" y2="86" stroke="rgba(247,249,252,0.30)" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Floating stat chip top-right -->
+  <g transform="translate(1020 60)">
+    <rect width="120" height="34" rx="17" fill="rgba(34,211,183,0.10)" stroke="rgba(34,211,183,0.35)"/>
+    <circle cx="16" cy="17" r="4" fill="#22D3B7"/>
+    <text x="28" y="22" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#22D3B7">240 GUIDES</text>
+  </g>
+</svg>
