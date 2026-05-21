@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ShadowBlade Press Kit screen mockup">
+  <defs>
+    <linearGradient id="sb-press-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-press-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-press-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-press-logo-art" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A"/>
+      <stop offset="100%" stop-color="#050A18"/>
+    </linearGradient>
+    <linearGradient id="sb-press-accent-art" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-press-thumb-a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sb-press-glow" cx="0.85" cy="0.05" r="0.6">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#06101F"/>
+  <rect width="1600" height="1000" fill="url(#sb-press-bg)"/>
+  <rect width="1600" height="1000" fill="url(#sb-press-glow)"/>
+
+  <!-- ── Marketing nav ── -->
+  <g transform="translate(0 0)">
+    <rect width="1600" height="76" fill="rgba(8,14,28,0.6)" stroke="rgba(255,255,255,0.06)"/>
+    <g transform="translate(160 22)">
+      <rect width="32" height="32" rx="10" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/>
+      <g transform="translate(7 7) scale(0.75)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-press-mark)"/></g>
+      <text x="46" y="16" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+      <text x="46" y="30" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.2" fill="#5A667F">媒体资源</text>
+    </g>
+    <g font-family="Inter, system-ui, sans-serif" font-size="13" fill="#B6BDCC">
+      <text x="876" y="46">关于我们</text>
+      <text x="958" y="46">更新日志</text>
+      <text x="1040" y="46">客户案例</text>
+      <text x="1130" y="46" fill="#F7F9FC" font-weight="700">媒体</text>
+    </g>
+    <g transform="translate(1200 22)">
+      <rect width="240" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="120" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#F7F9FC">press@shadowblade.io</text>
+    </g>
+  </g>
+
+  <!-- ── Hero ── -->
+  <g transform="translate(160 110)">
+    <text font-family="Inter, system-ui, sans-serif" font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">媒体资源 · v2026.5</text>
+    <text y="48" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="48" font-weight="700" fill="#F7F9FC" letter-spacing="-0.9">Logo、截图、色板、事实。</text>
+    <text y="84" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#B6BDCC">写关于 ShadowBlade 的内容你需要的一切 — 无需先发邮件给我们。</text>
+
+    <g transform="translate(820 24)">
+      <rect width="240" height="46" rx="8" fill="url(#sb-press-mark)"/>
+      <g transform="translate(18 14)" fill="none" stroke="#0A1428" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></g>
+      <text x="120" y="30" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0A1428">媒体资源 ZIP · 28 MB</text>
+      <g transform="translate(252 0)">
+        <rect width="180" height="46" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.16)"/>
+        <text x="90" y="29" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F7F9FC">联系传播团队</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Section · Logo ── -->
+  <g transform="translate(160 240)">
+    <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">Logo</text>
+
+    <g transform="translate(0 28)">
+      <!-- Tile 1 · primary on dark -->
+      <g>
+        <rect width="304" height="232" rx="12" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="304" height="160" rx="12" fill="url(#sb-press-logo-art)"/>
+        <g transform="translate(60 64)">
+          <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="url(#sb-press-mark)"/>
+          <text x="58" y="38" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+        </g>
+        <g transform="translate(16 176)">
+          <text font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">主版 · 渐变 · 深色</text>
+          <text y="16" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">logo-primary-dark.svg</text>
+        </g>
+        <g transform="translate(0 212)" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">
+          <rect width="304" height="20" fill="rgba(255,255,255,0.02)"/>
+          <text x="16" y="14">SVG</text>
+          <text x="56" y="14">PNG 1024</text>
+          <text x="120" y="14">PDF</text>
+          <text x="288" y="14" text-anchor="end" fill="#5A667F">3.2 KB</text>
+        </g>
+      </g>
+      <!-- Tile 2 · mono on light -->
+      <g transform="translate(316 0)">
+        <rect width="304" height="232" rx="12" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="304" height="160" rx="12" fill="#F7F9FC"/>
+        <g transform="translate(60 64)">
+          <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#0F2A4A"/>
+          <text x="58" y="38" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#0F2A4A">ShadowBlade</text>
+        </g>
+        <g transform="translate(16 176)">
+          <text font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">单色 · 浅色背景</text>
+          <text y="16" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">logo-mono-light.svg</text>
+        </g>
+        <g transform="translate(0 212)" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">
+          <rect width="304" height="20" fill="rgba(255,255,255,0.02)"/>
+          <text x="16" y="14">SVG</text>
+          <text x="56" y="14">PNG 1024</text>
+          <text x="120" y="14">PDF</text>
+          <text x="288" y="14" text-anchor="end" fill="#5A667F">2.1 KB</text>
+        </g>
+      </g>
+      <!-- Tile 3 · inverse on accent -->
+      <g transform="translate(632 0)">
+        <rect width="304" height="232" rx="12" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="304" height="160" rx="12" fill="url(#sb-press-accent-art)"/>
+        <g transform="translate(60 64)">
+          <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#06101F"/>
+          <text x="58" y="38" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#06101F">ShadowBlade</text>
+        </g>
+        <g transform="translate(16 176)">
+          <text font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">反色 · 强调色背景</text>
+          <text y="16" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">logo-mono-inverse.svg</text>
+        </g>
+        <g transform="translate(0 212)" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">
+          <rect width="304" height="20" fill="rgba(255,255,255,0.02)"/>
+          <text x="16" y="14">SVG</text>
+          <text x="56" y="14">PNG 1024</text>
+          <text x="120" y="14">PDF</text>
+          <text x="288" y="14" text-anchor="end" fill="#5A667F">2.1 KB</text>
+        </g>
+      </g>
+      <!-- Tile 4 · square mark -->
+      <g transform="translate(948 0)">
+        <rect width="304" height="232" rx="12" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="304" height="160" rx="12" fill="#11161F"/>
+        <g transform="translate(112 50)">
+          <path d="M16 16L72 48L16 80V58L48 48L16 38V16Z" fill="url(#sb-press-mark)"/>
+        </g>
+        <g transform="translate(16 176)">
+          <text font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">仅标识 · 1:1</text>
+          <text y="16" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">mark-square.svg</text>
+        </g>
+        <g transform="translate(0 212)" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">
+          <rect width="304" height="20" fill="rgba(255,255,255,0.02)"/>
+          <text x="16" y="14">SVG</text>
+          <text x="56" y="14">PNG 512</text>
+          <text x="112" y="14">ICO</text>
+          <text x="288" y="14" text-anchor="end" fill="#5A667F">0.8 KB</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Section · Color palette ── -->
+  <g transform="translate(160 528)">
+    <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">色彩</text>
+    <g transform="translate(0 28)" font-family="JetBrains Mono, monospace" font-size="10">
+      <!-- Swatch 1 · navy -->
+      <g>
+        <rect width="200" height="140" rx="10" fill="#0F2A4A"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">深海军</text>
+        <text x="14" y="124" fill="#F7F9FC">#0F2A4A</text>
+      </g>
+      <g transform="translate(212 0)">
+        <rect width="200" height="140" rx="10" fill="#22D3B7"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0A1428">强调色</text>
+        <text x="14" y="124" fill="#0A1428">#22D3B7</text>
+      </g>
+      <g transform="translate(424 0)">
+        <rect width="200" height="140" rx="10" fill="#11161F"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">石墨灰</text>
+        <text x="14" y="124" fill="#F7F9FC">#11161F</text>
+      </g>
+      <g transform="translate(636 0)">
+        <rect width="200" height="140" rx="10" fill="#F7F9FC"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0A1428">雾白</text>
+        <text x="14" y="124" fill="#0A1428">#F7F9FC</text>
+      </g>
+      <g transform="translate(848 0)">
+        <rect width="200" height="140" rx="10" fill="#38BDF8"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0A1428">信息</text>
+        <text x="14" y="124" fill="#0A1428">#38BDF8</text>
+      </g>
+      <g transform="translate(1060 0)">
+        <rect width="200" height="140" rx="10" fill="#FBBF24"/>
+        <text x="14" y="106" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0A1428">提示</text>
+        <text x="14" y="124" fill="#0A1428">#FBBF24</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Section · Screenshots + Facts ── -->
+  <g transform="translate(160 738)">
+    <!-- Left: Screenshots mini grid -->
+    <g>
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">截图</text>
+      <g transform="translate(0 28)">
+        <!-- mini dashboard -->
+        <g>
+          <rect width="180" height="112" rx="10" fill="url(#sb-press-thumb-a)" stroke="rgba(255,255,255,0.06)"/>
+          <rect x="10" y="10" width="32" height="92" rx="4" fill="rgba(255,255,255,0.06)"/>
+          <rect x="52" y="14" width="118" height="10" rx="3" fill="rgba(255,255,255,0.12)"/>
+          <rect x="52" y="32" width="56" height="20" rx="4" fill="rgba(34,211,183,0.30)"/>
+          <rect x="114" y="32" width="56" height="20" rx="4" fill="rgba(56,189,248,0.30)"/>
+          <rect x="52" y="60" width="118" height="42" rx="4" fill="rgba(34,211,183,0.10)"/>
+          <text x="10" y="130" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">screen-dashboard.svg</text>
+        </g>
+        <g transform="translate(196 0)">
+          <rect width="180" height="112" rx="10" fill="#11161F" stroke="rgba(255,255,255,0.06)"/>
+          <rect x="10" y="10" width="80" height="92" rx="4" fill="rgba(34,211,183,0.10)"/>
+          <rect x="100" y="10" width="70" height="38" rx="4" fill="rgba(255,255,255,0.06)"/>
+          <rect x="100" y="56" width="70" height="46" rx="4" fill="rgba(167,139,250,0.18)"/>
+          <text x="10" y="130" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">screen-studio.svg</text>
+        </g>
+        <g transform="translate(392 0)">
+          <rect width="180" height="112" rx="10" fill="#0B1326" stroke="rgba(255,255,255,0.06)"/>
+          <g transform="translate(10 14)" font-family="JetBrains Mono, monospace" font-size="8" fill="#6EE2C5">
+            <rect width="160" height="18" rx="3" fill="rgba(34,211,183,0.12)"/>
+            <rect y="22" width="160" height="18" rx="3" fill="rgba(56,189,248,0.12)"/>
+            <rect y="44" width="160" height="18" rx="3" fill="rgba(251,191,36,0.12)"/>
+            <rect y="66" width="160" height="18" rx="3" fill="rgba(255,255,255,0.04)"/>
+          </g>
+          <text x="10" y="130" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">screen-queue.svg</text>
+        </g>
+        <g transform="translate(588 0)">
+          <rect width="180" height="112" rx="10" fill="url(#sb-press-accent-art)"/>
+          <text x="90" y="60" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#06101F">主视觉 · OG</text>
+          <text x="90" y="78" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="rgba(6,16,31,0.7)">1600 × 900</text>
+          <text x="10" y="130" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">hero-cover.svg</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Right: Facts -->
+    <g transform="translate(820 0)">
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#F7F9FC">基础事实</text>
+      <g transform="translate(0 28)" font-family="Inter, system-ui, sans-serif">
+        <g>
+          <rect width="450" height="56" rx="10" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+          <text x="20" y="22" font-size="10" letter-spacing="1.6" font-weight="700" fill="#5A667F">成立</text>
+          <text x="20" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">2024 · 柏林 &amp; 纽约</text>
+          <text x="240" y="22" font-size="10" letter-spacing="1.6" font-weight="700" fill="#5A667F">融资</text>
+          <text x="240" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">B 轮 · 2026-02</text>
+        </g>
+        <g transform="translate(0 66)">
+          <rect width="450" height="56" rx="10" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+          <text x="20" y="22" font-size="10" letter-spacing="1.6" font-weight="700" fill="#5A667F">规模</text>
+          <text x="20" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">本月交付 1,720 条成片</text>
+          <text x="240" y="22" font-size="10" letter-spacing="1.6" font-weight="700" fill="#5A667F">合规</text>
+          <text x="240" y="44" font-family="JetBrains Mono, monospace" font-size="11" fill="#6EE2C5">SOC 2 · ISO 27001 · GDPR</text>
+        </g>
+        <g transform="translate(0 132)">
+          <rect width="450" height="56" rx="10" fill="url(#sb-press-card)" stroke="rgba(255,255,255,0.06)"/>
+          <text x="20" y="22" font-size="10" letter-spacing="1.6" font-weight="700" fill="#5A667F">主要客户</text>
+          <text x="20" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">Helios · Northwind · Umbra · Quanta · Fabrik</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Footer ── -->
+  <g transform="translate(160 974)" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F" letter-spacing="0.8">
+    <text>© 2026 ShadowBlade Labs · 媒体资源每次发布自动重建</text>
+    <text x="1280" text-anchor="end">授权或合作 · partners@shadowblade.io</text>
+  </g>
+</svg>

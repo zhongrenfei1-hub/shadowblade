@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ShadowBlade About screen mockup">
+  <defs>
+    <linearGradient id="sb-about-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-about-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-about-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-about-text-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <radialGradient id="sb-about-glow" cx="0.5" cy="0.0" r="0.6">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sb-about-av" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C3868"/>
+      <stop offset="100%" stop-color="#0A1428"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#06101F"/>
+  <rect width="1600" height="1000" fill="url(#sb-about-bg)"/>
+  <rect width="1600" height="1000" fill="url(#sb-about-glow)"/>
+
+  <!-- ── Marketing nav ── -->
+  <g>
+    <rect width="1600" height="76" fill="rgba(8,14,28,0.6)" stroke="rgba(255,255,255,0.06)"/>
+    <g transform="translate(160 22)">
+      <rect width="32" height="32" rx="10" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/>
+      <g transform="translate(7 7) scale(0.75)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-about-mark)"/></g>
+      <text x="46" y="16" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+      <text x="46" y="30" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.2" fill="#5A667F">视频云</text>
+    </g>
+    <g font-family="Inter, system-ui, sans-serif" font-size="13" fill="#B6BDCC">
+      <text x="820" y="46">产品</text>
+      <text x="876" y="46">价格</text>
+      <text x="932" y="46">客户案例</text>
+      <text x="1020" y="46" fill="#F7F9FC" font-weight="700">关于我们</text>
+      <text x="1110" y="46">文档</text>
+    </g>
+    <g transform="translate(1180 22)">
+      <rect width="80" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.16)"/>
+      <text x="40" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F7F9FC">登录</text>
+      <g transform="translate(92 0)">
+        <rect width="100" height="32" rx="6" fill="url(#sb-about-mark)"/>
+        <text x="50" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0A1428">立即开始</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Hero · centered ── -->
+  <g transform="translate(420 116)" text-anchor="middle">
+    <text x="380" font-family="Inter, system-ui, sans-serif" font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">关于 SHADOWBLADE</text>
+    <g transform="translate(380 36)">
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="44" font-weight="700" fill="#F7F9FC" letter-spacing="-0.8" y="42">我们正在为</text>
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="44" font-weight="700" fill="url(#sb-about-text-grad)" letter-spacing="-0.8" y="92">每周都要交付的团队</text>
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="44" font-weight="700" fill="#F7F9FC" letter-spacing="-0.8" y="142">重建视频工厂。</text>
+    </g>
+    <text x="380" y="216" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#B6BDCC">2024 年柏林起步，今天服务于 14 个国家、1,200 个品牌套件。</text>
+  </g>
+
+  <!-- ── Beliefs strip (3 cards) ── -->
+  <g transform="translate(160 396)">
+    <g>
+      <rect width="416" height="160" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(24 24)">
+        <rect width="36" height="36" rx="9" fill="rgba(34,211,183,0.14)"/>
+        <text x="18" y="24" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#6EE2C5">01</text>
+      </g>
+      <text x="24" y="98" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">品牌是约束</text>
+      <text x="24" y="124" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">每条成片对照品牌套件渲染，</text>
+      <text x="24" y="142" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">偏移在发布前被标记。</text>
+    </g>
+    <g transform="translate(432 0)">
+      <rect width="416" height="160" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(24 24)">
+        <rect width="36" height="36" rx="9" fill="rgba(56,189,248,0.14)"/>
+        <text x="18" y="24" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#38BDF8">02</text>
+      </g>
+      <text x="24" y="98" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">吞吐胜过奇观</text>
+      <text x="24" y="124" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">周二交十条片的团队，</text>
+      <text x="24" y="142" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">比一季度一支大片学得更快。</text>
+    </g>
+    <g transform="translate(864 0)">
+      <rect width="416" height="160" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(24 24)">
+        <rect width="36" height="36" rx="9" fill="rgba(167,139,250,0.14)"/>
+        <text x="18" y="24" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#A78BFA">03</text>
+      </g>
+      <text x="24" y="98" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">可审计是一项功能</text>
+      <text x="24" y="124" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">采购、法务、安全不是阻拦者，</text>
+      <text x="24" y="142" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">他们是用户。</text>
+    </g>
+  </g>
+
+  <!-- ── Leaders row (4) ── -->
+  <g transform="translate(160 588)">
+    <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#F7F9FC">我们是谁</text>
+
+    <g transform="translate(0 30)">
+      <!-- AS -->
+      <g>
+        <rect width="308" height="180" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <g transform="translate(154 50)">
+          <circle r="36" fill="url(#sb-about-av)" stroke="rgba(34,211,183,0.30)"/>
+          <text y="8" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#6EE2C5">AS</text>
+        </g>
+        <text x="154" y="114" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">Anya Sokolova</text>
+        <text x="154" y="134" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">联合创始人 &amp; CEO</text>
+        <text x="154" y="156" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F">曾任 Northwind 品牌负责人</text>
+      </g>
+      <!-- LM -->
+      <g transform="translate(320 0)">
+        <rect width="308" height="180" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <g transform="translate(154 50)">
+          <circle r="36" fill="url(#sb-about-av)" stroke="rgba(34,211,183,0.30)"/>
+          <text y="8" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#6EE2C5">LM</text>
+        </g>
+        <text x="154" y="114" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">Luca Marchetti</text>
+        <text x="154" y="134" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">联合创始人 &amp; CTO</text>
+        <text x="154" y="156" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F">曾搭建 Quanta 渲染农场</text>
+      </g>
+      <!-- JR -->
+      <g transform="translate(640 0)">
+        <rect width="308" height="180" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <g transform="translate(154 50)">
+          <circle r="36" fill="url(#sb-about-av)" stroke="rgba(34,211,183,0.30)"/>
+          <text y="8" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#6EE2C5">JR</text>
+        </g>
+        <text x="154" y="114" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">Jordan Reed</text>
+        <text x="154" y="134" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">产品负责人</text>
+        <text x="154" y="156" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F">曾任 Figma 产品经理</text>
+      </g>
+      <!-- DM -->
+      <g transform="translate(960 0)">
+        <rect width="308" height="180" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <g transform="translate(154 50)">
+          <circle r="36" fill="url(#sb-about-av)" stroke="rgba(34,211,183,0.30)"/>
+          <text y="8" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#6EE2C5">DM</text>
+        </g>
+        <text x="154" y="114" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">Dr. Demi Moroka</text>
+        <text x="154" y="134" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#B6BDCC">研究负责人</text>
+        <text x="154" y="156" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F">CMU 语音合成博士</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Press quotes (3) ── -->
+  <g transform="translate(160 814)">
+    <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">媒体怎么说</text>
+
+    <g transform="translate(0 24)">
+      <g>
+        <rect width="416" height="116" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <text x="22" y="30" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6EE2C5">TECHCRUNCH</text>
+        <text x="22" y="58" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">「这就是我们一直等的视频工具 — 为每周</text>
+        <text x="22" y="78" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">交付的团队而生。」</text>
+        <text x="22" y="102" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">2026-03-14</text>
+      </g>
+      <g transform="translate(432 0)">
+        <rect width="416" height="116" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <text x="22" y="30" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6EE2C5">THE INFORMATION</text>
+        <text x="22" y="58" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">「品牌套件就是下一个操作系统 —</text>
+        <text x="22" y="78" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">每条成片对照它渲染，它会沉淀。」</text>
+        <text x="22" y="102" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">2026-02-28</text>
+      </g>
+      <g transform="translate(864 0)">
+        <rect width="416" height="116" rx="14" fill="url(#sb-about-card)" stroke="rgba(255,255,255,0.06)"/>
+        <text x="22" y="30" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6EE2C5">MARTECH WEEKLY</text>
+        <text x="22" y="58" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">「过去一年，这是唯一带 SOC 2 报告</text>
+        <text x="22" y="78" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#F7F9FC">走进采购评审的 AI 视频工具。」</text>
+        <text x="22" y="102" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">2026-01-22</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Footer ── -->
+  <g transform="translate(160 974)" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F" letter-spacing="0.8">
+    <text>© 2026 ShadowBlade Labs · B 轮 · 柏林 · 纽约 · 东京</text>
+    <text x="1280" text-anchor="end">更新日志 · 服务状态 · 安全合规</text>
+  </g>
+</svg>

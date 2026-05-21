@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ShadowBlade Developer Console screen mockup">
+  <defs>
+    <linearGradient id="sb-dev-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-dev-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(11,20,40,0.95)"/>
+      <stop offset="100%" stop-color="rgba(8,14,28,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-dev-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-dev-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-dev-payload" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(6,10,22,0.85)"/>
+      <stop offset="100%" stop-color="rgba(8,14,28,0.95)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#06101F"/>
+  <rect width="1600" height="1000" fill="url(#sb-dev-bg)"/>
+
+  <!-- ── Sidebar ── -->
+  <rect width="248" height="1000" fill="url(#sb-dev-side)" stroke="rgba(255,255,255,0.06)"/>
+  <g transform="translate(20 22)">
+    <rect width="32" height="32" rx="10" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/>
+    <g transform="translate(7 7) scale(0.75)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-dev-mark)"/></g>
+    <text x="46" y="16" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+    <text x="46" y="30" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.2" fill="#5A667F">视频云</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" fill="#B6BDCC" font-size="13">
+    <text x="22" y="100" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">制作</text>
+    <text x="38" y="135">工作台</text>
+    <text x="38" y="170">编辑器</text>
+    <text x="38" y="205">项目</text>
+    <text x="22" y="260" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">流水线</text>
+    <text x="38" y="295">渲染队列</text>
+    <text x="38" y="330">数据分析</text>
+    <text x="22" y="386" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">工作空间</text>
+    <text x="38" y="421">团队与权限</text>
+    <text x="38" y="456">设置</text>
+    <!-- dev console active -->
+    <g transform="translate(14 470)">
+      <rect width="220" height="32" rx="6" fill="rgba(34,211,183,0.10)"/>
+      <rect x="-2" y="6" width="2" height="20" rx="1" fill="#22D3B7"/>
+      <text x="24" y="21" fill="#F7F9FC" font-weight="700">开发者控制台</text>
+    </g>
+  </g>
+
+  <!-- ── Topbar ── -->
+  <g transform="translate(248 0)">
+    <rect width="1352" height="60" fill="rgba(8,14,28,0.6)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="40" y="36" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#8590A8">Acme  ›  设置  ›  <tspan fill="#F7F9FC" font-weight="700">开发者控制台</tspan></text>
+
+    <g transform="translate(840 14)">
+      <rect width="160" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="80" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#F7F9FC">重发上次失败</text>
+    </g>
+    <g transform="translate(1012 14)">
+      <rect width="140" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="70" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#F7F9FC">+ 新建 Webhook</text>
+    </g>
+    <g transform="translate(1164 14)">
+      <rect width="168" height="32" rx="6" fill="url(#sb-dev-mark)"/>
+      <text x="84" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0A1428">+ 新建 API 密钥</text>
+    </g>
+  </g>
+
+  <!-- ── Page head ── -->
+  <g transform="translate(296 88)">
+    <text font-family="Inter, system-ui, sans-serif" font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">设置 · 开发者控制台</text>
+    <text y="38" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">API 密钥、Webhook、重发。</text>
+    <text y="68" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#B6BDCC">签名载荷 · 30 天投递重试 · 可从日志任意位置重新发送。</text>
+  </g>
+
+  <!-- ── KPI strip ── -->
+  <g transform="translate(296 188)">
+    <g>
+      <rect width="295" height="92" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="28" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.4" font-weight="700" fill="#5A667F">今日 WEBHOOK</text>
+      <text x="20" y="68" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="30" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">2,402</text>
+    </g>
+    <g transform="translate(305 0)">
+      <rect width="295" height="92" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="28" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.4" font-weight="700" fill="#5A667F">投递成功率</text>
+      <text x="20" y="68" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="30" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">99.94 <tspan font-size="13" fill="#6EE2C5">%</tspan></text>
+    </g>
+    <g transform="translate(610 0)">
+      <rect width="295" height="92" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="28" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.4" font-weight="700" fill="#5A667F">投递耗时中位数</text>
+      <text x="20" y="68" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="30" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">412 <tspan font-size="13" fill="#8590A8">毫秒</tspan></text>
+    </g>
+    <g transform="translate(915 0)">
+      <rect width="295" height="92" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="28" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.4" font-weight="700" fill="#5A667F">活跃 API 密钥</text>
+      <text x="20" y="68" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="30" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">7 <tspan font-size="13" fill="#8590A8">/ 上限 25</tspan></text>
+    </g>
+  </g>
+
+  <!-- ── Tabs ── -->
+  <g transform="translate(296 304)" font-family="Inter, system-ui, sans-serif">
+    <rect width="380" height="36" rx="8" fill="rgba(255,255,255,0.04)"/>
+    <g><rect x="4" y="4" width="118" height="28" rx="6" fill="rgba(34,211,183,0.18)"/><text x="63" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#F7F9FC">Webhook 投递</text></g>
+    <text x="156" y="22" font-size="12" fill="#8590A8">API 密钥</text>
+    <text x="234" y="22" font-size="12" fill="#8590A8">重发队列</text>
+    <text x="320" y="22" font-size="12" fill="#8590A8">限流</text>
+  </g>
+
+  <!-- ── Two-col layout: deliveries + payload ── -->
+  <g transform="translate(296 358)">
+    <!-- LEFT · Deliveries -->
+    <g>
+      <rect width="600" height="450" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+
+      <g transform="translate(22 22)">
+        <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">最近投递</text>
+        <g transform="translate(372 -4)">
+          <rect width="64" height="22" rx="4" fill="rgba(34,211,183,0.12)"/>
+          <text x="32" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#6EE2C5">2,398 成功</text>
+          <g transform="translate(72 0)"><rect width="62" height="22" rx="4" fill="rgba(251,191,36,0.12)"/><text x="31" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#FBBF24">3 重试中</text></g>
+          <g transform="translate(142 0)"><rect width="56" height="22" rx="4" fill="rgba(248,113,113,0.12)"/><text x="28" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#F87171">1 失败</text></g>
+        </g>
+      </g>
+      <line x1="0" y1="60" x2="600" y2="60" stroke="rgba(255,255,255,0.06)"/>
+
+      <!-- rows -->
+      <g font-family="Inter, system-ui, sans-serif">
+        <g transform="translate(0 60)">
+          <rect width="600" height="64" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(34,211,183,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#6EE2C5">200</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">render.completed · run #901 · spring-launch</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">acme.example.com/hooks/sb · 412 毫秒 · 4 KB</text>
+          <text x="572" y="34" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">0.3 秒前</text>
+        </g>
+        <g transform="translate(0 124)">
+          <rect width="600" height="64" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(34,211,183,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#6EE2C5">200</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">review.requested · run #896 · SE bootcamp</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">acme.example.com/hooks/sb · 388 毫秒 · 3 KB</text>
+          <text x="572" y="34" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">14 秒前</text>
+        </g>
+        <g transform="translate(0 188)">
+          <rect width="600" height="64" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(34,211,183,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#6EE2C5">200</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">render.started · run #902 · AI Copilot 演示</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">slack.com/hook/T01… · 244 毫秒</text>
+          <text x="572" y="34" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">1 分钟前</text>
+        </g>
+        <g transform="translate(0 252)">
+          <rect width="600" height="64" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(251,191,36,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#FBBF24">429</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">render.queued · run #903</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">被限流 · 18 秒后重试</text>
+          <text x="572" y="34" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#FBBF24">2 分钟前</text>
+        </g>
+        <g transform="translate(0 316)">
+          <rect width="600" height="64" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(248,113,113,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#F87171">502</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">render.failed · run #894 · helios 故事</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">网关错误 · 重试已用尽</text>
+          <g transform="translate(488 16)"><rect width="86" height="28" rx="6" fill="url(#sb-dev-mark)"/><text x="43" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="#0A1428">重新发送</text></g>
+        </g>
+        <g transform="translate(0 380)">
+          <rect width="600" height="64" fill="transparent"/>
+          <g transform="translate(22 20)"><rect width="42" height="22" rx="4" fill="rgba(34,211,183,0.12)"/><text x="21" y="15" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#6EE2C5">200</text></g>
+          <text x="76" y="30" font-size="12" font-weight="700" fill="#F7F9FC">review.approved · run #888 · C 轮预告</text>
+          <text x="76" y="48" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">tiktok.com/api/upload · 1,802 毫秒 · 8.4 MB</text>
+          <text x="572" y="34" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8590A8">1 小时前</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- RIGHT · Payload viewer -->
+    <g transform="translate(616 0)">
+      <rect width="594" height="450" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(22 22)">
+        <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">载荷 · render.completed</text>
+        <g transform="translate(440 -4)"><rect width="64" height="22" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="32" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#F7F9FC">复制</text></g>
+        <g transform="translate(508 -4)"><rect width="62" height="22" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="31" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#F7F9FC">重新签名</text></g>
+      </g>
+      <line x1="0" y1="60" x2="594" y2="60" stroke="rgba(255,255,255,0.06)"/>
+
+      <!-- payload box -->
+      <g transform="translate(22 76)">
+        <rect width="550" height="296" rx="8" fill="url(#sb-dev-payload)" stroke="rgba(255,255,255,0.06)"/>
+        <g font-family="JetBrains Mono, monospace" font-size="11.5">
+          <text x="16" y="24" fill="#5A667F">// 通过 HMAC-SHA256 签名 · X-ShadowBlade-Signature</text>
+          <text x="16" y="46" fill="#F7F9FC">{</text>
+          <text x="32" y="64"><tspan fill="#FBBF24">"event"</tspan><tspan fill="#5A667F">:        </tspan><tspan fill="#6EE2C5">"render.completed"</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="32" y="82"><tspan fill="#FBBF24">"workspace"</tspan><tspan fill="#5A667F">:    </tspan><tspan fill="#6EE2C5">"acme"</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="32" y="100"><tspan fill="#FBBF24">"project_id"</tspan><tspan fill="#5A667F">:   </tspan><tspan fill="#38BDF8">101</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="32" y="118"><tspan fill="#FBBF24">"run_id"</tspan><tspan fill="#5A667F">:       </tspan><tspan fill="#38BDF8">901</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="32" y="136"><tspan fill="#FBBF24">"output"</tspan><tspan fill="#5A667F">: {</tspan></text>
+          <text x="48" y="154"><tspan fill="#FBBF24">"url"</tspan><tspan fill="#5A667F">:          </tspan><tspan fill="#6EE2C5">"https://cdn.shadowblade.io/r/901/cut.mp4"</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="48" y="172"><tspan fill="#FBBF24">"width"</tspan><tspan fill="#5A667F">:        </tspan><tspan fill="#38BDF8">1080</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="48" y="190"><tspan fill="#FBBF24">"height"</tspan><tspan fill="#5A667F">:       </tspan><tspan fill="#38BDF8">1920</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="48" y="208"><tspan fill="#FBBF24">"duration_ms"</tspan><tspan fill="#5A667F">:  </tspan><tspan fill="#38BDF8">28000</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="48" y="226"><tspan fill="#FBBF24">"loudness_lufs"</tspan><tspan fill="#5A667F">: </tspan><tspan fill="#38BDF8">-14.1</tspan><tspan fill="#5A667F">,</tspan></text>
+          <text x="48" y="244"><tspan fill="#FBBF24">"checksum"</tspan><tspan fill="#5A667F">:     </tspan><tspan fill="#6EE2C5">"sha256:a9c8…f0b1"</tspan></text>
+          <text x="32" y="262" fill="#5A667F">},</text>
+          <text x="32" y="280"><tspan fill="#FBBF24">"brand_kit"</tspan><tspan fill="#5A667F">:    </tspan><tspan fill="#6EE2C5">"acme-core"</tspan></text>
+        </g>
+      </g>
+
+      <!-- Headers footer -->
+      <g transform="translate(22 384)" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">
+        <text>X-ShadowBlade-Signature: t=1747837000,v1=8a44d…ab21</text>
+        <text y="14">X-ShadowBlade-Webhook-Id: wh_a3b8…f209</text>
+        <text y="28">X-ShadowBlade-Attempt: 1</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── API keys card ── -->
+  <g transform="translate(296 826)">
+    <rect width="1210" height="130" rx="14" fill="url(#sb-dev-card)" stroke="rgba(255,255,255,0.06)"/>
+    <g transform="translate(22 22)">
+      <text font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">API 密钥 · 7 个活跃</text>
+      <text x="1166" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#8590A8">全部重置</text>
+    </g>
+    <line x1="0" y1="50" x2="1210" y2="50" stroke="rgba(255,255,255,0.06)"/>
+
+    <g font-family="Inter, system-ui, sans-serif">
+      <g transform="translate(0 50)">
+        <rect width="1210" height="40" fill="transparent" stroke="rgba(255,255,255,0.04)"/>
+        <text x="22" y="18" font-size="12" font-weight="700" fill="#F7F9FC">CI · 推送即渲染</text>
+        <text x="22" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">sk_live_•••••••••••••••••6f12</text>
+        <g transform="translate(900 10)"><rect width="58" height="20" rx="4" fill="rgba(251,191,36,0.12)"/><text x="29" y="14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="700" fill="#FBBF24">写入</text></g>
+        <g transform="translate(1130 10)"><rect width="56" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="28" y="14" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F7F9FC">重置</text></g>
+      </g>
+      <g transform="translate(0 90)">
+        <rect width="1210" height="40" fill="transparent"/>
+        <text x="22" y="18" font-size="12" font-weight="700" fill="#F7F9FC">采购（Helios）· BYOC</text>
+        <text x="22" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#6EE2C5">sk_live_•••••••••••••••••ff21</text>
+        <g transform="translate(900 10)"><rect width="68" height="20" rx="4" fill="rgba(248,113,113,0.12)"/><text x="34" y="14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="700" fill="#F87171">管理员</text></g>
+        <g transform="translate(1130 10)"><rect width="56" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="28" y="14" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F7F9FC">重置</text></g>
+      </g>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <g transform="translate(296 974)" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A667F" letter-spacing="0.8">
+    <text>Webhook 投递保留 30 天 · 密钥静态散列存储</text>
+    <text x="1210" text-anchor="end">SDK · TypeScript · Python · Go · Rust</text>
+  </g>
+</svg>

@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ShadowBlade Localisation screen mockup">
+  <defs>
+    <linearGradient id="sb-loc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-loc-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(11,20,40,0.95)"/>
+      <stop offset="100%" stop-color="rgba(8,14,28,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-loc-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-loc-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-loc-stage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#15376A"/>
+      <stop offset="100%" stop-color="#050A18"/>
+    </linearGradient>
+    <radialGradient id="sb-loc-glow" cx="0.7" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="rgba(34,211,183,0.34)"/>
+      <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#06101F"/>
+  <rect width="1600" height="1000" fill="url(#sb-loc-bg)"/>
+
+  <!-- ── Sidebar ── -->
+  <rect width="248" height="1000" fill="url(#sb-loc-side)" stroke="rgba(255,255,255,0.06)"/>
+  <g transform="translate(20 22)">
+    <rect width="32" height="32" rx="10" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/>
+    <g transform="translate(7 7) scale(0.75)"><path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-loc-mark)"/></g>
+    <text x="46" y="16" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+    <text x="46" y="30" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.2" fill="#5A667F">视频云</text>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" fill="#B6BDCC" font-size="13">
+    <text x="22" y="100" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">制作</text>
+    <text x="38" y="135">工作台</text>
+    <text x="38" y="170">编辑器</text>
+    <!-- projects active group -->
+    <g transform="translate(14 184)">
+      <rect width="220" height="32" rx="6" fill="rgba(34,211,183,0.10)"/>
+      <rect x="-2" y="6" width="2" height="20" rx="1" fill="#22D3B7"/>
+      <text x="24" y="21" fill="#F7F9FC" font-weight="700">项目 · 本地化</text>
+    </g>
+    <text x="38" y="240">模板</text>
+    <text x="22" y="296" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">素材</text>
+    <text x="38" y="331">素材库</text>
+    <text x="38" y="365">品牌套件</text>
+  </g>
+
+  <!-- ── Topbar ── -->
+  <g transform="translate(248 0)">
+    <rect width="1352" height="60" fill="rgba(8,14,28,0.6)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="40" y="36" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#8590A8">Acme  ›  项目  ›  春季产品发布  ›  <tspan fill="#F7F9FC" font-weight="700">本地化</tspan></text>
+
+    <g transform="translate(996 14)">
+      <rect width="124" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="62" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#F7F9FC">+ 新增语言</text>
+    </g>
+    <g transform="translate(1132 14)">
+      <rect width="200" height="32" rx="6" fill="url(#sb-loc-mark)"/>
+      <text x="100" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0A1428">▶ 渲染 5 个版本</text>
+    </g>
+  </g>
+
+  <!-- ── Page head ── -->
+  <g transform="translate(296 88)">
+    <text font-family="Inter, system-ui, sans-serif" font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">项目 · 本地化 · 5 个版本</text>
+    <text y="40" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#F7F9FC" letter-spacing="-0.7">一条成片，五种语言，同一种声音。</text>
+    <text y="70" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#B6BDCC">源版本 v17 是主版本。把 Alloy 配音克隆到每个目标语言，重新计时字幕，遵守本地阅读速度。</text>
+  </g>
+
+  <!-- ── Source card (left) ── -->
+  <g transform="translate(296 200)">
+    <rect width="320" height="740" rx="14" fill="url(#sb-loc-card)" stroke="rgba(255,255,255,0.06)"/>
+
+    <g transform="translate(22 22)">
+      <text font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="2.2" font-weight="700" fill="#6EE2C5">源版本 · V17</text>
+    </g>
+
+    <!-- 9:16 phone preview -->
+    <g transform="translate(56 56)">
+      <rect width="208" height="370" rx="14" fill="url(#sb-loc-stage)" stroke="rgba(255,255,255,0.10)"/>
+      <rect width="208" height="370" rx="14" fill="url(#sb-loc-glow)"/>
+
+      <g transform="translate(104 178)">
+        <circle r="98" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="3 5"/>
+        <circle r="54" fill="rgba(34,211,183,0.35)"/>
+        <circle r="22" fill="#22D3B7"/>
+        <text y="6" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#06101F">HUB</text>
+      </g>
+
+      <g transform="translate(14 286)">
+        <rect width="180" height="74" rx="10" fill="rgba(8,14,28,0.85)" stroke="rgba(34,211,183,0.30)"/>
+        <text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="9" letter-spacing="1.4" fill="#22D3B7">ACME · WEARABLE HUB</text>
+        <text x="12" y="44" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">Your day, on time.</text>
+        <text x="12" y="62" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#B6BDCC">Without breaking stride.</text>
+      </g>
+
+      <!-- duration -->
+      <g transform="translate(10 12)"><rect width="48" height="16" rx="4" fill="rgba(8,14,28,0.85)"/><text x="24" y="11" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6EE2C5">0:28</text></g>
+    </g>
+
+    <!-- meta dl -->
+    <g transform="translate(22 450)" font-family="Inter, system-ui, sans-serif" font-size="12">
+      <g><text fill="#8590A8">语言</text><text x="276" text-anchor="end" fill="#F7F9FC" font-weight="600">英语（美国）</text></g>
+      <g transform="translate(0 26)"><text fill="#8590A8">配音</text><text x="276" text-anchor="end" fill="#F7F9FC" font-weight="600">Alloy · EN 女声</text></g>
+      <g transform="translate(0 52)"><text fill="#8590A8">时长</text><text x="276" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#F7F9FC" font-weight="600">28.0 秒</text></g>
+      <g transform="translate(0 78)"><text fill="#8590A8">字幕</text><text x="276" text-anchor="end" fill="#F7F9FC" font-weight="600">逐词 · 上限 14 wpm</text></g>
+      <g transform="translate(0 104)"><text fill="#8590A8">阅读速度</text><text x="276" text-anchor="end" font-family="JetBrains Mono, monospace" fill="#F7F9FC" font-weight="600">198 wpm · 正常</text></g>
+    </g>
+
+    <line x1="22" y1="612" x2="298" y2="612" stroke="rgba(255,255,255,0.06)"/>
+    <g transform="translate(22 632)">
+      <text font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="1.4" font-weight="700" fill="#5A667F">脚本变化时</text>
+      <text y="20" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#B6BDCC">所有版本自动标记重新渲染。</text>
+
+      <g transform="translate(0 50)">
+        <rect width="276" height="40" rx="8" fill="rgba(34,211,183,0.08)" stroke="rgba(34,211,183,0.30)"/>
+        <g transform="translate(12 16)"><circle r="6" fill="#22D3B7"/><text x="6" y="3" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#06101F">✓</text></g>
+        <text x="28" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#F7F9FC">5 个目标语言 · 总时长 2:21</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── 5 language tiles + add tile ── -->
+  <g transform="translate(636 200)">
+    <!-- Row 1 -->
+    <!-- Tile 1 · es-419 · done -->
+    <g>
+      <rect width="430" height="178" rx="14" fill="url(#sb-loc-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(22 22)">
+        <rect width="44" height="32" rx="4" fill="#1F3A72"/>
+        <g transform="translate(2 4)"><rect width="40" height="24" fill="#C8102E"/><rect y="8" width="40" height="8" fill="#FFFFFF"/><circle cx="20" cy="12" r="3" fill="#006847"/></g>
+        <text x="58" y="14" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">西班牙语（拉美）</text>
+        <text x="58" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">es-419 · Alloy · 克隆相似度 92%</text>
+        <g transform="translate(298 4)">
+          <rect width="86" height="22" rx="4" fill="rgba(34,211,183,0.12)" stroke="rgba(34,211,183,0.32)"/>
+          <text x="43" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#6EE2C5">就绪</text>
+        </g>
+      </g>
+      <g transform="translate(22 78)">
+        <rect width="386" height="34" rx="6" fill="rgba(255,255,255,0.025)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-style="italic" font-size="13" fill="#B6BDCC">「Tu día, a tiempo — sin perder el ritmo.」</text>
+      </g>
+      <g transform="translate(22 122)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <g><text fill="#8590A8">时长</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">27.8 秒</text><text x="200" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−0.2 秒</text></g>
+        <g transform="translate(0 18)"><text fill="#8590A8">阅读速度</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">176 wpm</text><text x="200" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−22 wpm</text></g>
+        <g transform="translate(0 36)"><text fill="#8590A8">审核人</text><text x="120" font-family="Inter, system-ui, sans-serif" font-weight="600" fill="#F7F9FC">Sofia Vargas · 墨西哥城</text></g>
+      </g>
+    </g>
+
+    <!-- Tile 2 · de-DE · done -->
+    <g transform="translate(440 0)">
+      <rect width="430" height="178" rx="14" fill="url(#sb-loc-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(22 22)">
+        <g transform="translate(0 4)"><rect width="44" height="24" fill="#000000"/><rect y="8" width="44" height="8" fill="#DD0000"/><rect y="16" width="44" height="8" fill="#FFCE00"/></g>
+        <text x="58" y="14" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">德语</text>
+        <text x="58" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">de-DE · Alloy · 克隆相似度 94%</text>
+        <g transform="translate(298 4)">
+          <rect width="86" height="22" rx="4" fill="rgba(34,211,183,0.12)" stroke="rgba(34,211,183,0.32)"/>
+          <text x="43" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#6EE2C5">就绪</text>
+        </g>
+      </g>
+      <g transform="translate(22 78)">
+        <rect width="386" height="34" rx="6" fill="rgba(255,255,255,0.025)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-style="italic" font-size="13" fill="#B6BDCC">「Dein Tag, pünktlich — ohne den Takt zu verlieren.」</text>
+      </g>
+      <g transform="translate(22 122)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <g><text fill="#8590A8">时长</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">29.4 秒</text><text x="200" font-family="JetBrains Mono, monospace" fill="#FBBF24">+1.4 秒</text></g>
+        <g transform="translate(0 18)"><text fill="#8590A8">阅读速度</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">168 wpm</text><text x="200" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−30 wpm</text></g>
+        <g transform="translate(0 36)"><text fill="#8590A8">审核人</text><text x="120" font-family="Inter, system-ui, sans-serif" font-weight="600" fill="#F7F9FC">Anika Holzer · 慕尼黑</text></g>
+      </g>
+    </g>
+
+    <!-- Row 2 -->
+    <!-- Tile 3 · ja-JP · running -->
+    <g transform="translate(0 188)">
+      <rect width="430" height="178" rx="14" fill="url(#sb-loc-card)" stroke="rgba(56,189,248,0.34)"/>
+      <g transform="translate(22 22)">
+        <g transform="translate(0 4)"><rect width="44" height="24" fill="#FFFFFF" stroke="rgba(255,255,255,0.18)"/><circle cx="22" cy="12" r="7" fill="#BC002D"/></g>
+        <text x="58" y="14" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">日语</text>
+        <text x="58" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">ja-JP · Alloy · 克隆相似度 88%</text>
+        <g transform="translate(266 4)">
+          <rect width="118" height="22" rx="4" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.40)"/>
+          <circle cx="14" cy="11" r="3" fill="#38BDF8"/>
+          <text x="24" y="15" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#38BDF8">渲染中 · 42%</text>
+        </g>
+      </g>
+      <g transform="translate(22 78)">
+        <rect width="386" height="34" rx="6" fill="rgba(255,255,255,0.025)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="13" fill="#B6BDCC">「あなたの一日を、時間通りに ― 歩みを止めずに。」</text>
+      </g>
+      <g transform="translate(22 122)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <g><text fill="#8590A8">时长</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 26.9 秒</text><text x="220" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−1.1 秒</text></g>
+        <g transform="translate(0 18)"><text fill="#8590A8">阅读速度</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 22 cps</text><text x="220" font-family="JetBrains Mono, monospace" fill="#6EE2C5">正常</text></g>
+        <g transform="translate(0 36)"><text fill="#8590A8">审核人</text><text x="120" font-family="Inter, system-ui, sans-serif" font-weight="600" fill="#F7F9FC">Yuki Tanabe · 东京</text></g>
+      </g>
+    </g>
+
+    <!-- Tile 4 · fr-FR · queued -->
+    <g transform="translate(440 188)">
+      <rect width="430" height="178" rx="14" fill="url(#sb-loc-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(22 22)">
+        <g transform="translate(0 4)"><rect width="14" height="24" fill="#0055A4"/><rect x="14" width="16" height="24" fill="#FFFFFF"/><rect x="30" width="14" height="24" fill="#EF4135"/></g>
+        <text x="58" y="14" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">法语</text>
+        <text x="58" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">fr-FR · Alloy · 克隆相似度 93%</text>
+        <g transform="translate(298 4)">
+          <rect width="86" height="22" rx="4" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.32)"/>
+          <text x="43" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#FBBF24">排队中</text>
+        </g>
+      </g>
+      <g transform="translate(22 78)">
+        <rect width="386" height="34" rx="6" fill="rgba(255,255,255,0.025)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-style="italic" font-size="13" fill="#B6BDCC">「Votre journée, à l'heure — sans rompre le rythme.」</text>
+      </g>
+      <g transform="translate(22 122)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <g><text fill="#8590A8">时长</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 28.6 秒</text><text x="220" font-family="JetBrains Mono, monospace" fill="#FBBF24">+0.6 秒</text></g>
+        <g transform="translate(0 18)"><text fill="#8590A8">阅读速度</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 172 wpm</text><text x="220" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−26 wpm</text></g>
+        <g transform="translate(0 36)"><text fill="#8590A8">审核人</text><text x="120" font-family="Inter, system-ui, sans-serif" font-weight="600" fill="#F7F9FC">Camille Roy · 巴黎</text></g>
+      </g>
+    </g>
+
+    <!-- Row 3 -->
+    <!-- Tile 5 · pt-BR · queued -->
+    <g transform="translate(0 376)">
+      <rect width="430" height="178" rx="14" fill="url(#sb-loc-card)" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(22 22)">
+        <g transform="translate(0 4)"><rect width="44" height="24" fill="#009C3B"/><polygon points="22,2 42,12 22,22 2,12" fill="#FFDF00"/><circle cx="22" cy="12" r="5" fill="#002776"/></g>
+        <text x="58" y="14" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">葡萄牙语（巴西）</text>
+        <text x="58" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">pt-BR · Alloy · 克隆相似度 90%</text>
+        <g transform="translate(298 4)">
+          <rect width="86" height="22" rx="4" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.32)"/>
+          <text x="43" y="15" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#FBBF24">排队中</text>
+        </g>
+      </g>
+      <g transform="translate(22 78)">
+        <rect width="386" height="34" rx="6" fill="rgba(255,255,255,0.025)"/>
+        <text x="14" y="22" font-family="Inter Display, Inter, system-ui, sans-serif" font-style="italic" font-size="13" fill="#B6BDCC">「Seu dia, no tempo certo — sem perder o ritmo.」</text>
+      </g>
+      <g transform="translate(22 122)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <g><text fill="#8590A8">时长</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 28.2 秒</text><text x="220" font-family="JetBrains Mono, monospace" fill="#FBBF24">+0.2 秒</text></g>
+        <g transform="translate(0 18)"><text fill="#8590A8">阅读速度</text><text x="120" font-family="JetBrains Mono, monospace" font-weight="700" fill="#F7F9FC">预计 174 wpm</text><text x="220" font-family="JetBrains Mono, monospace" fill="#6EE2C5">−24 wpm</text></g>
+        <g transform="translate(0 36)"><text fill="#8590A8">审核人</text><text x="120" font-family="Inter, system-ui, sans-serif" font-weight="600" fill="#F7F9FC">Lucas Pinto · 圣保罗</text></g>
+      </g>
+    </g>
+
+    <!-- Add tile -->
+    <g transform="translate(440 376)">
+      <rect width="430" height="178" rx="14" fill="rgba(34,211,183,0.04)" stroke="rgba(34,211,183,0.30)" stroke-dasharray="6 6"/>
+      <g transform="translate(215 60)">
+        <circle r="22" fill="rgba(34,211,183,0.16)"/>
+        <path d="M-8 0H8M0 -8V8" stroke="#22D3B7" stroke-width="2"/>
+      </g>
+      <text x="215" y="120" text-anchor="middle" font-family="Inter Display, Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">新增语言</text>
+      <text x="215" y="138" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#8590A8">支持 37 种语言</text>
+      <text x="215" y="154" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#5A667F">规模版及以上提供克隆配音</text>
+    </g>
+  </g>
+
+  <!-- ── Footer ── -->
+  <g transform="translate(296 974)" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#5A667F" letter-spacing="0.8">
+    <text>克隆配音从不离开你的租户 · 37 种语言 · 6 套字幕字母表</text>
+    <text x="1210" text-anchor="end">流水线已运行 · 2 分 14 秒 · 末位预计 1 分 02 秒</text>
+  </g>
+</svg>
