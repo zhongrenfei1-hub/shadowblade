@@ -13,20 +13,31 @@ under five minutes, against your brand kit.
 | Storage      | S3-compatible object store                     |
 | Auth         | SAML SSO + SCIM provisioning                   |
 
-## Surface map (24 pages shipped)
+## Surface map (32 pages shipped)
 
 ### Marketing (public, no auth)
 
 | Route                | Page                                                     |
 | -------------------- | -------------------------------------------------------- |
 | `index.html`         | Landing — hero pipeline visual, logos, features          |
+| `features.html`      | Pipeline walkthrough — Script / Storyboard / Voice / Render |
 | `pricing.html`       | 4-tier plans, annual/monthly toggle, feature matrix      |
 | `customer-story.html`| Helios case study — hero, KPIs, body, pull-quote, CTA    |
 | `gallery.html`       | Customer reel grid from Showcase thumbnails              |
 | `changelog.html`     | Date-axis timeline with category pills                   |
 | `docs.html`          | Knowledge grid + curl example + Cmd-K search             |
+| `security.html`      | Trust badges + 6 pillars + compliance doc table          |
 | `status.html`        | Statuspage — 6 services, 60-min tick bars, incidents     |
+| `404.html`           | Lost cut — minimal glyph + path echo + workspace nav     |
+
+### Auth + Onboarding
+
+| Route                | Page                                                     |
+| -------------------- | -------------------------------------------------------- |
 | `login.html`         | SSO-first (Okta · Entra · Google) + email + branded rail |
+| `signup.html`        | Split-screen marketing rail + 60-second workspace form   |
+| `onboarding.html`    | First-launch wizard — brand kit source picker            |
+| `review.html`        | External reviewer signed-share preview surface           |
 
 ### Workspace (app shell + sidebar nav)
 
