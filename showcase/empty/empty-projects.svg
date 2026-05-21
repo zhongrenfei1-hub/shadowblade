@@ -52,13 +52,13 @@
 
   <!-- Copy -->
   <g transform="translate(320 264)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
-    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">No projects yet</text>
-    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">Drop a brief here to start your first cut.</text>
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">还没有项目</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">把一份简报拖到这里，开始你的第一条成片。</text>
   </g>
 
   <!-- CTA chip -->
   <g transform="translate(254 312)">
     <rect width="132" height="32" rx="8" fill="rgba(34,211,183,0.14)" stroke="rgba(34,211,183,0.45)"/>
-    <text x="66" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#22D3B7" text-anchor="middle" letter-spacing="0.4">+ New project</text>
+    <text x="66" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#22D3B7" text-anchor="middle" letter-spacing="0.4">+ 新建项目</text>
   </g>
 </svg>

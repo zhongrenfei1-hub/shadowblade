@@ -60,7 +60,7 @@
     </g>
     <g transform="translate(0 72)">
       <circle cx="12" cy="-4" r="9" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-      <text x="32" y="0" fill="#8590A8">Incident response · 72-hour clock</text>
+      <text x="32" y="0" fill="#8590A8">事件响应 · 72 小时窗口</text>
     </g>
   </g>
 
@@ -68,11 +68,11 @@
   <g transform="translate(890 60)">
     <rect width="120" height="30" rx="15" fill="rgba(148,163,184,0.16)" stroke="rgba(148,163,184,0.40)"/>
     <circle cx="16" cy="15" r="4" fill="#94A3B8"/>
-    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#94A3B8" font-weight="700" letter-spacing="2.4">DRAFT</text>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#94A3B8" font-weight="700" letter-spacing="2.4">草稿</text>
   </g>
 
   <!-- Metadata bottom -->
   <g transform="translate(64 540)" font-family="Inter, sans-serif">
-    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">TRAINING · 16:9 · 180s · MARCUS LEE</text>
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">培训 · 16:9 · 180 秒 · MARCUS LEE</text>
   </g>
 </svg>

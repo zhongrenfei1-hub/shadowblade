@@ -117,3 +117,37 @@ Eleven new files for the latest Design wave: 5 language-flag pills, 4 abstract l
 | Help centre hero | `help/help-hero.svg` | `help.html` hero banner (1200×500), help search modal background, support email header | Drop straight into the search field | Left rail: gradient headline "Find the answer in one step", search field with `/` shortcut chip, four colour-coded category pills (Pipeline / Review / Billing / API & SDK). Right rail: magnifier with concentric pipeline rings — outer rings colour-coded by stage (running / review / queued / done), tiny "FOUND" indicator inside the lens, "240 GUIDES" floating chip |
 
 > Handoff for Test/Refine: (1) flag pills are 36×26 by design — if Refine wants a larger surface for hover/expanded states, the gradient stops scale cleanly but the locale-code font-size needs a pass. (2) Leader portraits all share the same head+shoulders glyph and vary only by gradient direction + accent ring placement — Refine can clone the pattern for new leaders by changing the four file-scoped gradient stops and the accent position. (3) `compare/diff-art.svg` is decoration only — the actual diff table lives in the page, not in this SVG. (4) `help/help-hero.svg` has a `/` keyboard-shortcut chip in the search field; if Test wants to swap to `⌘K` semantics, only one tspan needs updating. (5) No flag uses a literal national flag for political safety — Refine should keep this constraint for any future locales.
+
+## 本地化记录
+
+2026-05-21 — 完成 showcase SVG 中文化（34 个文件全部覆盖）。翻译遵循 `docs/i18n-glossary.md`。
+
+**已翻译的 SVG（27 个，含中文文字）：**
+- `brand/` — `logo.svg`, `logo-mono.svg`, `og-image.svg`（副标、headline、ETA chip、信任条全部中文化；`favicon.svg` 无文字，未改）
+- `hero/hero-cover.svg` — headline、CTA、流水线四步卡、ETA 与场景片
+- `thumbnails/` — `wearable-hub.svg`, `bootcamp.svg`, `copilot.svg`, `series-c.svg`, `helios.svg`, `gdpr.svg`
+- `screens/` — `screen-dashboard.svg`, `screen-studio.svg`, `screen-queue.svg`（侧边栏、KPI、流水线步骤、审批卡、表格列名等全部中文化，与对应 HTML 工作台 / 编辑器 / 渲染队列页保持一致）
+- `case-study/` — `helios-hero.svg`, `helios-quote.svg`, `helios-metrics.svg`
+- `auth/login-art.svg` — heading "登录你的视频工厂"
+- `empty/` — 全部 5 个 empty state（"还没有项目" / "素材库是空的" / "队列已清空" / "已全部处理" / "没有匹配结果"）
+- `compare/diff-art.svg` — 改前 / 改后 / 差异
+- `help/help-hero.svg` — "一步找到答案" + 占位查询 + 分类标签
+
+**按规则保留英文不译（7 个）：**
+- `brand/favicon.svg` — 纯图形，无文字
+- `leaders/as.svg`, `leaders/lm.svg`, `leaders/jr.svg`, `leaders/dm.svg` — monogram 缩写（AS / LM / JR / DM）按头像规范保留拉丁字母
+- `flags/es-419.svg`, `flags/de-de.svg`, `flags/ja-jp.svg`, `flags/pt-br.svg`, `flags/fr-fr.svg` — locale code（ES / DE / JA / PT / FR）按国际化规范保留拉丁字母
+
+**保留英文的局部文本（在中文化的文件里）：**
+- 品牌名 ShadowBlade、客户名 Acme / Helios Logistics / Northwind / Wearable Hub
+- 人名 Maya Okonkwo / Ava Chen / Marcus Lee / Priya Rao / Diego Alvarez / Naomi Soto
+- 技术词 H.264 / ProRes / LUFS / A100 / GPU / VO / worker / cluster / region / TIKTOK / SOC 2 / SSO
+- ALL CAPS 客户 logo 条（HELIOS / NORTHWIND / UMBRA·CO / FABRIK / QUANTA）— 模拟客户 logo wordmark，保留更真实
+- 月份缩写 "06 May" — Dashboard 同步时间戳保留英文
+- 头像缩写（SE / CP / SR / MO / AC）— 与 monogram 同性质
+
+**视觉风险点：**
+- screen-dashboard / screen-studio / screen-queue 侧边栏中文比英文短，留白略多但可接受。
+- 部分 chip / pill 的 letter-spacing 较大（2.4），中文显示时字距偏宽，可后续把 letter-spacing 降到 0 让中文紧凑一些。
+- `compare/diff-art.svg` 的 "改前 / 改后" 比 "BEFORE / AFTER" 短很多，未调整字号；如需更醒目可调大到 14px。
+- 所有 SVG 沿用 `Inter Display` / `Inter` font-family，依赖浏览器 / OS 中文字体回退（PingFang SC / Microsoft YaHei）。未批量添加中文 fallback，避免改动属性引入回归。

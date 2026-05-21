@@ -49,13 +49,13 @@
 
   <!-- Copy -->
   <g transform="translate(320 264)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
-    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">Library is empty</text>
-    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">Upload a logo, font, or brand kit to begin.</text>
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">素材库是空的</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">上传一个 logo、字体或品牌套件开始使用。</text>
   </g>
 
   <!-- CTA chip -->
   <g transform="translate(254 312)">
     <rect width="132" height="32" rx="8" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.45)"/>
-    <text x="66" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#38BDF8" text-anchor="middle" letter-spacing="0.4">Upload assets</text>
+    <text x="66" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#38BDF8" text-anchor="middle" letter-spacing="0.4">上传素材</text>
   </g>
 </svg>

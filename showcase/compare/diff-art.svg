@@ -54,15 +54,15 @@
 
   <!-- Side labels -->
   <g font-family="Inter, sans-serif" font-weight="700" font-size="11" letter-spacing="2.4">
-    <text x="40" y="60" fill="#38BDF8">BEFORE</text>
-    <text x="760" y="60" fill="#22D3B7" text-anchor="end">AFTER</text>
+    <text x="40" y="60" fill="#38BDF8">改前</text>
+    <text x="760" y="60" fill="#22D3B7" text-anchor="end">改后</text>
   </g>
 
   <!-- Energy ticks bottom -->
   <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(247,249,252,0.55)">
     <text x="40"  y="372">v0</text>
     <text x="200" y="372">v1</text>
-    <text x="400" y="372" text-anchor="middle" fill="#F7F9FC">DIFF</text>
+    <text x="400" y="372" text-anchor="middle" fill="#F7F9FC">差异</text>
     <text x="600" y="372" text-anchor="middle">v2</text>
     <text x="760" y="372" text-anchor="end" fill="#22D3B7">v3</text>
   </g>

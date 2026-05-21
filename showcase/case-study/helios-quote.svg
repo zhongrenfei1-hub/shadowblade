@@ -36,14 +36,14 @@
 
   <!-- Eyebrow -->
   <g transform="translate(84 116)">
-    <text font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.6">PULL QUOTE · HELIOS LOGISTICS</text>
+    <text font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.6">客户引述 · HELIOS LOGISTICS</text>
   </g>
 
   <!-- Quote (Inter Display 600) -->
   <g transform="translate(84 198)" font-family="Inter Display, Inter, sans-serif" font-weight="600" fill="#F7F9FC">
     <text font-size="56" letter-spacing="-1.6">
-      <tspan x="0" y="0">"We ship video like product</tspan>
-      <tspan x="0" y="72">now. Same week. Same vibe."</tspan>
+      <tspan x="0" y="0">「我们现在像做产品一样发片。</tspan>
+      <tspan x="0" y="72">同周交付，调性一致。」</tspan>
     </text>
   </g>
 
@@ -56,7 +56,7 @@
     <!-- Name + role (Inter 500, small caps) -->
     <g transform="translate(84 18)" font-family="Inter, sans-serif">
       <text font-size="14" font-weight="700" fill="#F7F9FC" letter-spacing="2.4">MAYA OKONKWO</text>
-      <text y="22" font-size="12" font-weight="500" fill="#8590A8" letter-spacing="1.8">VP CONTENT &#183; HELIOS LOGISTICS</text>
+      <text y="22" font-size="12" font-weight="500" fill="#8590A8" letter-spacing="1.8">内容副总裁 &#183; HELIOS LOGISTICS</text>
     </g>
   </g>
 
@@ -81,6 +81,6 @@
 
   <!-- Footer mark -->
   <g transform="translate(1116 568)" font-family="Inter, sans-serif" fill="#5A667F">
-    <text font-size="10" letter-spacing="2.2" font-weight="600" text-anchor="end">SHADOWBLADE &#183; CUSTOMER STORIES</text>
+    <text font-size="10" letter-spacing="2.2" font-weight="600" text-anchor="end">SHADOWBLADE &#183; 客户案例</text>
   </g>
 </svg>

@@ -62,24 +62,24 @@
   <g transform="translate(96 96)">
     <rect width="240" height="32" rx="16" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.45)"/>
     <circle cx="18" cy="16" r="4" fill="#38BDF8"/>
-    <text x="32" y="21" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.4">CUSTOMER STORY · HELIOS</text>
+    <text x="32" y="21" font-family="Inter, sans-serif" font-size="11" fill="#38BDF8" font-weight="700" letter-spacing="2.4">客户案例 · HELIOS</text>
   </g>
 
   <!-- Logo lockup -->
   <g transform="translate(96 156)">
-    <text font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="600" letter-spacing="3">HELIOS LOGISTICS · BRAND + MARKETING</text>
+    <text font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="600" letter-spacing="3">HELIOS LOGISTICS · 品牌与市场</text>
   </g>
 
   <!-- Headline -->
   <g transform="translate(96 220)" font-family="Inter Display, Inter, sans-serif" fill="#F7F9FC">
     <text font-size="74" font-weight="600" letter-spacing="-2.0">
-      <tspan x="0" y="0">From a 6-week edit </tspan>
-      <tspan x="0" y="84">cycle to a </tspan>
-      <tspan font-weight="700" fill="url(#sb-helios-hero-text)">same-week cut</tspan><tspan>.</tspan>
+      <tspan x="0" y="0">从 6 周剪辑周期</tspan>
+      <tspan x="0" y="84">到</tspan>
+      <tspan font-weight="700" fill="url(#sb-helios-hero-text)">当周成片</tspan><tspan>。</tspan>
     </text>
     <text x="0" y="200" font-family="Inter, sans-serif" font-size="22" font-weight="400" fill="#B6BDCC" letter-spacing="-0.2">
-      <tspan x="0" dy="0">How a 14-region logistics brand cut review rounds, shipped 128 more cuts</tspan>
-      <tspan x="0" dy="30">per month, and put $184k back on the marketing line each quarter.</tspan>
+      <tspan x="0" dy="0">14 个区域的物流品牌如何缩减审核轮次、每月多出 128 条成片，</tspan>
+      <tspan x="0" dy="30">每季度把 $184k 重新投回市场预算。</tspan>
     </text>
   </g>
 
@@ -87,13 +87,13 @@
   <g transform="translate(96 620)" font-family="Inter Display, Inter, sans-serif">
     <g>
       <rect width="280" height="92" rx="14" fill="rgba(34,211,183,0.10)" stroke="rgba(34,211,183,0.40)"/>
-      <text x="20" y="28" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" font-weight="700" fill="#22D3B7">TIME-TO-FIRST-CUT</text>
-      <text x="20" y="68" font-size="34" font-weight="700" fill="#F7F9FC">68% faster</text>
+      <text x="20" y="28" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" font-weight="700" fill="#22D3B7">首版成片耗时</text>
+      <text x="20" y="68" font-size="34" font-weight="700" fill="#F7F9FC">提速 68%</text>
     </g>
     <g transform="translate(304 0)">
       <rect width="280" height="92" rx="14" fill="rgba(56,189,248,0.10)" stroke="rgba(56,189,248,0.40)"/>
-      <text x="20" y="28" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" font-weight="700" fill="#38BDF8">QUARTERLY SAVINGS</text>
-      <text x="20" y="68" font-size="34" font-weight="700" fill="#F7F9FC">$184k saved</text>
+      <text x="20" y="28" font-family="Inter, sans-serif" font-size="11" letter-spacing="2.4" font-weight="700" fill="#38BDF8">季度节省</text>
+      <text x="20" y="68" font-size="34" font-weight="700" fill="#F7F9FC">$184k</text>
     </g>
   </g>
 
@@ -101,45 +101,45 @@
   <g transform="translate(96 752)" font-family="Inter, sans-serif">
     <g>
       <rect width="220" height="50" rx="8" fill="url(#sb-helios-hero-text)"/>
-      <text x="110" y="32" font-size="15" font-weight="700" fill="#0A1428" text-anchor="middle">Read the full story →</text>
+      <text x="110" y="32" font-size="15" font-weight="700" fill="#0A1428" text-anchor="middle">阅读完整案例 →</text>
     </g>
     <g transform="translate(240 0)">
       <rect width="200" height="50" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)"/>
-      <text x="100" y="32" font-size="15" font-weight="600" fill="#F7F9FC" text-anchor="middle">Watch the 90s cut</text>
+      <text x="100" y="32" font-size="15" font-weight="600" fill="#F7F9FC" text-anchor="middle">观看 90 秒成片</text>
     </g>
   </g>
 
   <!-- Right rail: stat dashboard mini -->
   <g transform="translate(1080 560)">
     <rect width="440" height="240" rx="16" fill="url(#sb-helios-hero-card)" stroke="rgba(255,255,255,0.10)"/>
-    <text x="24" y="34" font-family="Inter, sans-serif" font-size="10" fill="#8590A8" font-weight="700" letter-spacing="2.4">Q1 BASELINE → Q3 WITH SHADOWBLADE</text>
+    <text x="24" y="34" font-family="Inter, sans-serif" font-size="10" fill="#8590A8" font-weight="700" letter-spacing="2.4">Q1 基线 → Q3 启用 SHADOWBLADE</text>
 
     <!-- Row 1 -->
     <g transform="translate(24 60)">
-      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">First-cut latency</text>
-      <text x="392" font-family="Inter Display, Inter, sans-serif" font-size="13" font-weight="700" fill="#22D3B7" text-anchor="end">4.8 min</text>
+      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">首版成片耗时</text>
+      <text x="392" font-family="Inter Display, Inter, sans-serif" font-size="13" font-weight="700" fill="#22D3B7" text-anchor="end">4.8 分钟</text>
       <rect y="16" width="392" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
       <rect y="16" width="312" height="6" rx="3" fill="url(#sb-helios-hero-meter)"/>
     </g>
     <!-- Row 2 -->
     <g transform="translate(24 110)">
-      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">Cuts shipped / mo</text>
+      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">每月交付成片</text>
       <text x="392" font-family="Inter Display, Inter, sans-serif" font-size="13" font-weight="700" fill="#38BDF8" text-anchor="end">+128</text>
       <rect y="16" width="392" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
       <rect y="16" width="280" height="6" rx="3" fill="#38BDF8"/>
     </g>
     <!-- Row 3 -->
     <g transform="translate(24 160)">
-      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">Reviewer approval</text>
+      <text font-family="Inter, sans-serif" font-size="12" fill="#B6BDCC">一次审核通过</text>
       <text x="392" font-family="Inter Display, Inter, sans-serif" font-size="13" font-weight="700" fill="#A78BFA" text-anchor="end">92%</text>
       <rect y="16" width="392" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
       <rect y="16" width="360" height="6" rx="3" fill="#A78BFA"/>
     </g>
-    <text x="24" y="220" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">last sync · 06 May · 14 regions</text>
+    <text x="24" y="220" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">最近同步 · 06 May · 14 个区域</text>
   </g>
 
   <!-- Trust chip bottom right -->
   <g transform="translate(1440 836)" font-family="Inter, sans-serif" fill="#5A667F">
-    <text font-size="10" letter-spacing="2.2" font-weight="600" text-anchor="end">CASE STUDY · 16:9 · 90S · AVA CHEN</text>
+    <text font-size="10" letter-spacing="2.2" font-weight="600" text-anchor="end">客户案例 · 16:9 · 90 秒 · AVA CHEN</text>
   </g>
 </svg>

@@ -44,16 +44,16 @@
       <rect x="0" y="0" width="72" height="32" rx="6" fill="rgba(34,211,183,0.10)" stroke="#22D3B7" stroke-width="1.2"/>
       <circle cx="14" cy="16" r="4" fill="#22D3B7"/>
       <circle cx="14" cy="16" r="8" fill="none" stroke="#22D3B7" stroke-opacity="0.35"/>
-      <text x="26" y="20" font-family="JetBrains Mono, monospace" font-size="10" fill="#22D3B7" font-weight="700">IDLE</text>
+      <text x="26" y="20" font-family="JetBrains Mono, monospace" font-size="10" fill="#22D3B7" font-weight="700">空闲</text>
     </g>
 
     <!-- Worker label -->
-    <text y="-60" font-family="Inter, sans-serif" font-size="10" fill="#5A667F" font-weight="700" letter-spacing="2.4" text-anchor="middle">RENDER FARM &#183; 12 WORKERS</text>
+    <text y="-60" font-family="Inter, sans-serif" font-size="10" fill="#5A667F" font-weight="700" letter-spacing="2.4" text-anchor="middle">渲染农场 &#183; 12 个 WORKER</text>
   </g>
 
   <!-- Copy -->
   <g transform="translate(320 280)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
-    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">Queue is clear</text>
-    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">No jobs running. Farm is warm and waiting.</text>
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">队列已清空</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">没有任务在跑。农场已就绪，随时待命。</text>
   </g>
 </svg>

@@ -40,28 +40,28 @@
   <g transform="translate(48 44)">
     <rect width="220" height="28" rx="14" fill="rgba(34,211,183,0.10)" stroke="rgba(34,211,183,0.40)"/>
     <circle cx="16" cy="14" r="4" fill="#22D3B7"/>
-    <text x="28" y="19" font-family="Inter, sans-serif" font-size="10" fill="#22D3B7" font-weight="700" letter-spacing="2.4">90-DAY POST-DEPLOY</text>
-    <text x="232" y="20" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="600" letter-spacing="2.2">HELIOS LOGISTICS &#183; Q3 / 14 REGIONS</text>
+    <text x="28" y="19" font-family="Inter, sans-serif" font-size="10" fill="#22D3B7" font-weight="700" letter-spacing="2.4">部署后 90 天</text>
+    <text x="232" y="20" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="600" letter-spacing="2.2">HELIOS LOGISTICS &#183; Q3 / 14 个区域</text>
   </g>
 
   <!-- KPI Card 1: 4.8 min -->
   <g transform="translate(48 108)">
     <rect width="352" height="248" rx="16" fill="url(#sb-helios-metrics-card)" stroke="rgba(255,255,255,0.10)"/>
     <rect x="20" y="20" width="56" height="3" rx="1.5" fill="url(#sb-helios-metrics-rule1)"/>
-    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">AVG FIRST CUT</text>
+    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">平均首版成片</text>
 
     <!-- Big number (Inter Display 600) -->
     <text x="20" y="148" font-family="Inter Display, Inter, sans-serif" font-size="92" font-weight="600" fill="#F7F9FC" letter-spacing="-2.4">4.8</text>
-    <text x="170" y="148" font-family="Inter Display, Inter, sans-serif" font-size="32" font-weight="600" fill="#22D3B7" letter-spacing="-0.4">min</text>
+    <text x="170" y="148" font-family="Inter Display, Inter, sans-serif" font-size="32" font-weight="600" fill="#22D3B7" letter-spacing="-0.4">分钟</text>
 
     <!-- Label (Inter 400) -->
-    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">brief to first reviewable cut</text>
+    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">从简报到首版可审稿</text>
 
     <!-- Mini bar / delta -->
     <g transform="translate(20 214)">
       <rect width="312" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
       <rect width="240" height="6" rx="3" fill="#22D3B7" opacity="0.85"/>
-      <text x="312" y="-2" font-family="JetBrains Mono, monospace" font-size="10" fill="#22D3B7" text-anchor="end">&#9660; 68% vs Q1</text>
+      <text x="312" y="-2" font-family="JetBrains Mono, monospace" font-size="10" fill="#22D3B7" text-anchor="end">&#9660; 较 Q1 -68%</text>
     </g>
   </g>
 
@@ -69,17 +69,17 @@
   <g transform="translate(424 108)">
     <rect width="352" height="248" rx="16" fill="url(#sb-helios-metrics-card)" stroke="rgba(255,255,255,0.10)"/>
     <rect x="20" y="20" width="56" height="3" rx="1.5" fill="url(#sb-helios-metrics-rule2)"/>
-    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">PER MONTH VS Q1</text>
+    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">每月较 Q1</text>
 
     <text x="20" y="148" font-family="Inter Display, Inter, sans-serif" font-size="92" font-weight="600" fill="#F7F9FC" letter-spacing="-2.4">+128</text>
-    <text x="216" y="148" font-family="Inter Display, Inter, sans-serif" font-size="32" font-weight="600" fill="#38BDF8" letter-spacing="-0.4">cuts</text>
+    <text x="216" y="148" font-family="Inter Display, Inter, sans-serif" font-size="32" font-weight="600" fill="#38BDF8" letter-spacing="-0.4">条</text>
 
-    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">net new monthly throughput</text>
+    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">每月净新增产能</text>
 
     <!-- Mini sparkline -->
     <g transform="translate(20 208)">
       <polyline points="0,18 30,14 60,16 90,10 120,8 150,4 180,5 210,2 240,0" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-      <text x="312" y="6" font-family="JetBrains Mono, monospace" font-size="10" fill="#38BDF8" text-anchor="end">9-mo trend</text>
+      <text x="312" y="6" font-family="JetBrains Mono, monospace" font-size="10" fill="#38BDF8" text-anchor="end">9 个月趋势</text>
     </g>
   </g>
 
@@ -87,12 +87,12 @@
   <g transform="translate(800 108)">
     <rect width="352" height="248" rx="16" fill="url(#sb-helios-metrics-card)" stroke="rgba(255,255,255,0.10)"/>
     <rect x="20" y="20" width="56" height="3" rx="1.5" fill="url(#sb-helios-metrics-rule3)"/>
-    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">REVIEWER APPROVAL</text>
+    <text x="20" y="50" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" font-weight="700" letter-spacing="2.4">一次审核通过率</text>
 
     <text x="20" y="148" font-family="Inter Display, Inter, sans-serif" font-size="92" font-weight="600" fill="#F7F9FC" letter-spacing="-2.4">92</text>
     <text x="148" y="148" font-family="Inter Display, Inter, sans-serif" font-size="56" font-weight="600" fill="#A78BFA" letter-spacing="-1">%</text>
 
-    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">cleared in round one</text>
+    <text x="20" y="194" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="#B6BDCC">第一轮即通过</text>
 
     <!-- Round ring -->
     <g transform="translate(280 200)">
