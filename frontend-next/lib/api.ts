@@ -383,7 +383,7 @@ export type GenerateVideoRequest = {
   auto_white_balance?: boolean;
   adaptive_bgm_mix?: boolean;
   length?: number;
-  stock_source?: "manual" | "pexels";
+  stock_source?: "manual" | "pexels" | "search";
   stock_query?: string | null;
   stock_count?: number;
   stock_orientation?: "portrait" | "landscape" | "square";

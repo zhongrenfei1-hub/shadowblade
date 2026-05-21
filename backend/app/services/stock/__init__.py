@@ -16,6 +16,12 @@ paths the mix pipeline can ingest unchanged.
 """
 
 from app.services.stock.pexels import PexelsClip, pexels_download, pexels_search
+from app.services.stock.searcher import (
+    FoundClip,
+    archive_search_download,
+    search_and_download,
+    ytsearch_download,
+)
 from app.services.stock.youtube import YtClip, has_ytdlp, ytdlp_download
 
 __all__ = [
@@ -25,4 +31,8 @@ __all__ = [
     "YtClip",
     "has_ytdlp",
     "ytdlp_download",
+    "FoundClip",
+    "search_and_download",
+    "ytsearch_download",
+    "archive_search_download",
 ]

@@ -266,11 +266,11 @@ class GenerateVideoRequest(BaseModel):
     length: int = 220
     stock_source: str = Field(
         default="manual",
-        description="manual: 用 clip_paths；pexels: 按 topic/keyword 自动从 Pexels 拉",
+        description="manual: 用 clip_paths；search: yt-dlp+archive.org 关键词爬（无 key）；pexels: 需 API key",
     )
     stock_query: str | None = Field(
         default=None,
-        description="覆盖 topic 用作 Pexels 搜索关键词（中文/英文皆可）",
+        description="覆盖 topic 用作搜索关键词（中文/英文皆可）",
     )
     stock_count: int = Field(default=3, ge=1, le=8)
     stock_orientation: str = "portrait"
@@ -325,30 +325,40 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
     try:
         # ---- 0. fetch stock footage if requested ----
         clip_paths = list(body.clip_paths)
-        if body.stock_source == "pexels":
-            from app.services.stock.pexels import pexels_download, pexels_search
-
+        if body.stock_source in {"pexels", "search"}:
             job["steps"]["stock"] = "running"
             query = body.stock_query or body.topic
             try:
-                results = await pexels_search(
-                    query,
-                    per_page=body.stock_count + 4,
-                    orientation=body.stock_orientation,
-                )
-                out_dir = Path(settings.storage_root) / "stock" / "pexels"
-                downloaded: list[str] = []
-                for clip in results[: body.stock_count]:
-                    try:
-                        p = await pexels_download(clip, out_dir, max_seconds=6.0)
-                        downloaded.append(str(p))
-                    except RuntimeError as exc:
-                        log.warning("skip clip %s: %s", clip.id, exc)
-                if not downloaded:
-                    raise RuntimeError(
-                        f"no Pexels clips downloaded for query: {query!r}"
+                if body.stock_source == "pexels":
+                    from app.services.stock.pexels import pexels_download, pexels_search
+
+                    results = await pexels_search(
+                        query,
+                        per_page=body.stock_count + 4,
+                        orientation=body.stock_orientation,
                     )
-                clip_paths = downloaded
+                    out_dir = Path(settings.storage_root) / "stock" / "pexels"
+                    downloaded: list[str] = []
+                    for clip in results[: body.stock_count]:
+                        try:
+                            p = await pexels_download(clip, out_dir, max_seconds=6.0)
+                            downloaded.append(str(p))
+                        except RuntimeError as exc:
+                            log.warning("skip clip %s: %s", clip.id, exc)
+                    if not downloaded:
+                        raise RuntimeError(f"no Pexels clips downloaded for: {query!r}")
+                    clip_paths = downloaded
+                else:  # "search" — keyword crawl, no API key
+                    from app.services.stock.searcher import search_and_download
+
+                    out_dir = Path(settings.storage_root) / "stock" / "search"
+                    found = await search_and_download(
+                        query,
+                        out_dir,
+                        count=body.stock_count,
+                        max_seconds=6.0,
+                    )
+                    clip_paths = [str(c.path) for c in found]
                 job["steps"]["stock"] = "succeeded"
             except Exception as exc:  # noqa: BLE001
                 job["steps"]["stock"] = f"failed: {exc}"

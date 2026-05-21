@@ -83,7 +83,7 @@ const EXAMPLE_TOPICS = [
   "新店开业 — 全场 7 折前三天",
 ];
 
-type StockMode = "sample" | "pexels" | "url";
+type StockMode = "sample" | "search" | "url" | "pexels";
 
 export function StudioGenerate() {
   const [topic, setTopic] = useState(EXAMPLE_TOPICS[0]);
@@ -166,9 +166,10 @@ export function StudioGenerate() {
     setJob(null);
     setError(null);
     try {
+      const isAuto = stockMode === "search" || stockMode === "pexels";
       const initial = await api.generateVideo({
         topic,
-        clip_paths: stockMode === "pexels" ? [] : clipPaths.filter(Boolean),
+        clip_paths: isAuto ? [] : clipPaths.filter(Boolean),
         voice,
         bgm_path: bgmPath || undefined,
         watermark_path: logoPath || undefined,
@@ -179,11 +180,11 @@ export function StudioGenerate() {
         adaptive_bgm_mix: adaptiveMix,
         auto_white_balance: autoWB,
         length,
-        stock_source: stockMode === "pexels" ? "pexels" : "manual",
-        stock_query: stockMode === "pexels" ? (pexelsQuery || topic) : undefined,
+        stock_source: stockMode === "search" ? "search" : stockMode === "pexels" ? "pexels" : "manual",
+        stock_query: isAuto ? (pexelsQuery || topic) : undefined,
         stock_count: pexelsCount,
         stock_orientation: preset.endsWith("16x9") ? "landscape" : "portrait",
-      });
+      } as any);
       setJob(initial);
       if (pollHandle.current) clearInterval(pollHandle.current);
       pollHandle.current = window.setInterval(async () => {
@@ -249,35 +250,41 @@ export function StudioGenerate() {
 
           <div className="grid gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3">
             <Label className="text-xs text-muted-foreground">视频素材来源</Label>
-            <div className="grid grid-cols-3 gap-1.5">
+            <div className="grid grid-cols-2 gap-1.5 md:grid-cols-4">
+              <SourceChip
+                active={stockMode === "search"}
+                onClick={() => setStockMode("search")}
+                label="🔍 关键词爬取"
+                hint="无需 key · 推荐"
+              />
+              <SourceChip
+                active={stockMode === "url"}
+                onClick={() => setStockMode("url")}
+                label="🔗 自定义 URL"
+                hint="yt-dlp"
+                warn={!stockStatus?.ytdlp.configured}
+              />
               <SourceChip
                 active={stockMode === "sample"}
                 onClick={() => setStockMode("sample")}
-                label="内置示例"
+                label="📦 内置示例"
                 hint="3 个测试素材"
               />
               <SourceChip
                 active={stockMode === "pexels"}
                 onClick={() => setStockMode("pexels")}
-                label="Pexels"
-                hint={stockStatus?.pexels.configured ? "已配置 key" : "需要 API key"}
+                label="🌐 Pexels"
+                hint={stockStatus?.pexels.configured ? "已配置 key" : "需 API key"}
                 warn={!stockStatus?.pexels.configured}
-              />
-              <SourceChip
-                active={stockMode === "url"}
-                onClick={() => setStockMode("url")}
-                label="自定义 URL"
-                hint="yt-dlp"
-                warn={!stockStatus?.ytdlp.configured}
               />
             </div>
 
-            {stockMode === "pexels" && (
+            {(stockMode === "search" || stockMode === "pexels") && (
               <div className="grid gap-2 pt-2">
                 <Input
                   value={pexelsQuery}
                   onChange={(e) => setPexelsQuery(e.target.value)}
-                  placeholder={`关键词（留空则用主题）— 例: skincare, nail salon`}
+                  placeholder={`关键词（留空则用主题）— 例: skincare, nail salon, coffee shop`}
                 />
                 <div className="flex items-center gap-2">
                   <Label className="text-xs text-muted-foreground">数量</Label>
@@ -291,7 +298,12 @@ export function StudioGenerate() {
                   />
                   <span className="text-xs text-muted-foreground w-6 text-right">{pexelsCount}</span>
                 </div>
-                {!stockStatus?.pexels.configured && (
+                {stockMode === "search" && (
+                  <p className="text-[11px] text-muted-foreground">
+                    用 yt-dlp 搜索 + archive.org 兜底，无需 API key · 约 30s–2min · 英文关键词命中率更高
+                  </p>
+                )}
+                {stockMode === "pexels" && !stockStatus?.pexels.configured && (
                   <p className="text-[11px] text-amber-200/90">
                     需要先在终端 <code className="rounded bg-white/10 px-1">export PEXELS_API_KEY=xxx</code>{" "}
                     再重启后端 · 注册 <a href="https://www.pexels.com/api/" target="_blank" rel="noreferrer" className="underline">pexels.com/api</a>

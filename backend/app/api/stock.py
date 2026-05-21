@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 from app.core.config import settings
 from app.services.stock.pexels import pexels_download, pexels_search
+from app.services.stock.searcher import search_and_download
 from app.services.stock.youtube import ytdlp_download
 
 log = logging.getLogger("shadowblade.api.stock")
@@ -181,6 +182,52 @@ async def stock_from_url(body: FromUrlRequest):
         duration=clip.duration,
         width=clip.width,
         height=clip.height,
+    )
+
+
+# ── /stock/search (keyword crawl — no API key) ─────────────────────────
+
+
+class SearchRequest(BaseModel):
+    keyword: str
+    count: int = Field(default=3, ge=1, le=8)
+    max_seconds: float = Field(default=6.0, ge=2, le=15)
+    sources: list[str] = Field(
+        default_factory=lambda: ["youtube", "archive"],
+        description="Try in order; falls back when a source returns no results",
+    )
+
+
+class SearchResponse(BaseModel):
+    keyword: str
+    paths: list[str]
+    relative_urls: list[str]
+    titles: list[str]
+    sources: list[str]
+
+
+@router.post("/search", response_model=SearchResponse)
+async def stock_search(body: SearchRequest):
+    """Keyword → real clips. No API key. Uses yt-dlp search + archive.org."""
+    out_dir = _stock_dir("search")
+    try:
+        clips = await search_and_download(
+            body.keyword,
+            out_dir,
+            count=body.count,
+            max_seconds=body.max_seconds,
+            sources=tuple(body.sources),
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return SearchResponse(
+        keyword=body.keyword,
+        paths=[str(c.path) for c in clips],
+        relative_urls=[
+            f"/static/storage/{c.path.relative_to(Path(settings.storage_root))}" for c in clips
+        ],
+        titles=[c.title for c in clips],
+        sources=[c.source for c in clips],
     )
 
 
