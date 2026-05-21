@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShadowBlade · Status</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-status-nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-status-nav .spacer { flex: 1; }
+      .sb-status-nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-status-banner {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        width: 100%;
+        padding: var(--sb-space-8) var(--sb-space-12) 0;
+      }
+      .sb-status-banner .card {
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid rgba(34,211,183,0.4);
+        background: linear-gradient(180deg, rgba(34,211,183,0.10), rgba(11,18,32,0.95));
+        padding: var(--sb-space-8) var(--sb-space-10);
+        display: flex;
+        align-items: center;
+        gap: var(--sb-space-6);
+      }
+      .sb-status-banner .dot {
+        width: 14px; height: 14px; border-radius: 50%;
+        background: var(--sb-accent-500);
+        box-shadow: 0 0 0 6px rgba(34,211,183,0.15);
+      }
+      .sb-status-banner h1 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-3xl);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      .sb-status-banner p { margin: 4px 0 0; color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+      .sb-status-banner .meta { margin-left: auto; text-align: right; font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+
+      .sb-status-grid {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        width: 100%;
+        padding: var(--sb-space-8) var(--sb-space-12);
+        display: grid;
+        gap: var(--sb-space-4);
+      }
+      .sb-status-row {
+        display: grid;
+        grid-template-columns: 1fr 280px 100px;
+        align-items: center;
+        gap: var(--sb-space-6);
+        padding: var(--sb-space-5);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-status-row .name { font-family: var(--sb-font-display); font-size: var(--sb-text-md); font-weight: 600; }
+      .sb-status-row .desc { color: var(--sb-text-muted); font-size: var(--sb-text-sm); margin-top: 2px; }
+      .sb-status-uptime {
+        display: grid;
+        grid-template-columns: repeat(60, 1fr);
+        gap: 2px;
+        height: 24px;
+      }
+      .sb-status-uptime i {
+        background: var(--sb-accent-500);
+        border-radius: 1px;
+        opacity: 0.7;
+      }
+      .sb-status-uptime i.warn { background: #fbbf24; opacity: 1; }
+      .sb-status-uptime i.fail { background: #f87171; opacity: 1; }
+      .sb-status-row .pct {
+        text-align: right;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-md);
+        color: var(--sb-accent-300);
+        font-variant-numeric: tabular-nums;
+      }
+      .sb-status-incident {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 var(--sb-space-12) var(--sb-space-16);
+      }
+      .sb-status-incident h2 {
+        margin: var(--sb-space-8) 0 var(--sb-space-4);
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+      }
+      .sb-status-incident .item {
+        padding: var(--sb-space-5);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        background: rgba(11,18,32,0.6);
+        margin-bottom: var(--sb-space-3);
+      }
+      .sb-status-incident .item time {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+      }
+      .sb-status-incident .item .row {
+        display: flex; gap: 12px; align-items: baseline;
+      }
+      .sb-status-incident .item .row b { font-weight: 600; }
+
+      @media (max-width: 900px) {
+        .sb-status-row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sb-status-nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgs)"/><defs><linearGradient id="mgs" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
+        </div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Status</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="index.html">Product</a>
+      <a class="link" href="pricing.html">Pricing</a>
+      <a class="link" href="customer-story.html">Customers</a>
+      <a class="link" href="#">Subscribe</a>
+      <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+    </header>
+
+    <section class="sb-status-banner">
+      <div class="card">
+        <div class="dot"></div>
+        <div>
+          <h1>All systems normal</h1>
+          <p>Render pipeline · API · web · storage all operating within SLA. No incidents in the last 30 days.</p>
+        </div>
+        <div class="meta">
+          Updated <b style="color:var(--sb-text)">just now</b><br/>
+          <span style="font-family:var(--sb-font-mono)">eu-central-1 · us-east-1 · ap-south-1</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-status-grid">
+      <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);letter-spacing:0.1em;text-transform:uppercase">Last 60 minutes · per region</div>
+      <article class="sb-status-row">
+        <div><div class="name">Web app</div><div class="desc">app.shadowblade.io · dashboard, studio, library</div></div>
+        <div class="sb-status-uptime" id="u-web"></div>
+        <div class="pct">100.00%</div>
+      </article>
+      <article class="sb-status-row">
+        <div><div class="name">API · v1</div><div class="desc">api.shadowblade.io/v1 · render, projects, assets</div></div>
+        <div class="sb-status-uptime" id="u-api"></div>
+        <div class="pct">99.98%</div>
+      </article>
+      <article class="sb-status-row">
+        <div><div class="name">Render pipeline</div><div class="desc">script · storyboard · TTS · b-roll · compose · render</div></div>
+        <div class="sb-status-uptime" id="u-render"></div>
+        <div class="pct">99.94%</div>
+      </article>
+      <article class="sb-status-row">
+        <div><div class="name">Asset storage</div><div class="desc">video, audio, brand kits · S3-compatible · multi-region</div></div>
+        <div class="sb-status-uptime" id="u-storage"></div>
+        <div class="pct">100.00%</div>
+      </article>
+      <article class="sb-status-row">
+        <div><div class="name">SSO &amp; SCIM</div><div class="desc">Okta · Microsoft Entra · Google Workspace · custom SAML</div></div>
+        <div class="sb-status-uptime" id="u-auth"></div>
+        <div class="pct">100.00%</div>
+      </article>
+      <article class="sb-status-row">
+        <div><div class="name">Webhooks</div><div class="desc">delivery for render.completed · render.failed · review.requested</div></div>
+        <div class="sb-status-uptime" id="u-hook"></div>
+        <div class="pct">99.92%</div>
+      </article>
+    </section>
+
+    <section class="sb-status-incident">
+      <h2>Recent incidents · last 30 days</h2>
+      <div class="item">
+        <div class="row">
+          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">Resolved</span>
+          <b>Render queue latency briefly above SLA · eu-central-1</b>
+          <time>2026-05-04 · 02:14 → 02:38 UTC</time>
+        </div>
+        <p style="margin:8px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">
+          Spot-instance reclaim spiked queue depth to 14. Auto-scale absorbed within 24 min; no failed renders, no data loss. Post-mortem published.
+        </p>
+      </div>
+      <div class="item">
+        <div class="row">
+          <span class="sb-pill sb-pill--done" style="background:rgba(34,211,183,0.12)">Resolved</span>
+          <b>SSO callback delay for Microsoft Entra customers</b>
+          <time>2026-04-22 · 09:02 → 09:11 UTC</time>
+        </div>
+        <p style="margin:8px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">
+          Upstream MS IDP latency spiked. ShadowBlade auth gateway fell back to cached metadata; sessions established with retry. Zero failed logins.
+        </p>
+      </div>
+    </section>
+
+    <footer class="sb-footer">
+      <span>Status retains 18 months · subscribe via email, SMS, RSS, or Slack</span>
+      <span>SLA · 99.9% web · 99.9% API · 99.5% render</span>
+    </footer>
+
+    <script>
+      // Synthesise per-minute uptime ticks. Demo data; in production read from /api/v1/status/series.
+      const synth = (n, warn = 0, fail = 0) => {
+        const a = Array(n).fill('ok');
+        for (let i = 0; i < warn; i++) a[Math.floor(Math.random() * n)] = 'warn';
+        for (let i = 0; i < fail; i++) a[Math.floor(Math.random() * n)] = 'fail';
+        return a;
+      };
+      const fill = (id, ticks) => {
+        const el = document.getElementById(id);
+        ticks.forEach((t) => {
+          const i = document.createElement('i');
+          if (t !== 'ok') i.classList.add(t);
+          el.appendChild(i);
+        });
+      };
+      fill('u-web', synth(60));
+      fill('u-api', synth(60, 1));
+      fill('u-render', synth(60, 2));
+      fill('u-storage', synth(60));
+      fill('u-auth', synth(60));
+      fill('u-hook', synth(60, 1, 1));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="No search matches — try a different query or remove a filter">
+  <defs>
+    <linearGradient id="sb-empty-search-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1D3A"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sb-empty-search-glow" cx="0.50" cy="0.42" r="0.45">
+      <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#sb-empty-search-bg)"/>
+  <rect width="640" height="360" fill="url(#sb-empty-search-glow)"/>
+
+  <!-- Faint dot grid (denser to suggest the search field) -->
+  <g fill="rgba(255,255,255,0.06)">
+    <circle cx="120" cy="100" r="1.2"/><circle cx="160" cy="100" r="1.2"/><circle cx="200" cy="100" r="1.2"/><circle cx="240" cy="100" r="1.2"/><circle cx="280" cy="100" r="1.2"/><circle cx="320" cy="100" r="1.2"/><circle cx="360" cy="100" r="1.2"/><circle cx="400" cy="100" r="1.2"/><circle cx="440" cy="100" r="1.2"/><circle cx="480" cy="100" r="1.2"/><circle cx="520" cy="100" r="1.2"/>
+    <circle cx="120" cy="140" r="1.2"/><circle cx="160" cy="140" r="1.2"/><circle cx="200" cy="140" r="1.2"/><circle cx="240" cy="140" r="1.2"/><circle cx="280" cy="140" r="1.2"/><circle cx="320" cy="140" r="1.2"/><circle cx="360" cy="140" r="1.2"/><circle cx="400" cy="140" r="1.2"/><circle cx="440" cy="140" r="1.2"/><circle cx="480" cy="140" r="1.2"/><circle cx="520" cy="140" r="1.2"/>
+    <circle cx="120" cy="180" r="1.2"/><circle cx="160" cy="180" r="1.2"/><circle cx="200" cy="180" r="1.2"/><circle cx="240" cy="180" r="1.2"/><circle cx="280" cy="180" r="1.2"/><circle cx="320" cy="180" r="1.2"/><circle cx="360" cy="180" r="1.2"/><circle cx="400" cy="180" r="1.2"/><circle cx="440" cy="180" r="1.2"/><circle cx="480" cy="180" r="1.2"/><circle cx="520" cy="180" r="1.2"/>
+    <circle cx="120" cy="220" r="1.2"/><circle cx="160" cy="220" r="1.2"/><circle cx="200" cy="220" r="1.2"/><circle cx="240" cy="220" r="1.2"/><circle cx="280" cy="220" r="1.2"/><circle cx="320" cy="220" r="1.2"/><circle cx="360" cy="220" r="1.2"/><circle cx="400" cy="220" r="1.2"/><circle cx="440" cy="220" r="1.2"/><circle cx="480" cy="220" r="1.2"/><circle cx="520" cy="220" r="1.2"/>
+  </g>
+
+  <!-- Magnifier illustration -->
+  <g transform="translate(316 160)" stroke="#8590A8" stroke-width="2" fill="none" stroke-linecap="round">
+    <!-- Lens -->
+    <circle cx="-6" cy="-6" r="42" fill="rgba(11,19,38,0.85)"/>
+    <!-- Highlight arc -->
+    <path d="M-32 -20 Q -32 -36, -14 -42" stroke="rgba(247,249,252,0.32)" stroke-width="1.4"/>
+    <!-- Handle -->
+    <line x1="26" y1="26" x2="52" y2="52"/>
+    <!-- Empty inside (status: nothing found) -->
+    <g stroke="#FBBF24" stroke-width="1.6" transform="translate(-6 -6)">
+      <line x1="-12" y1="-12" x2="12" y2="12"/>
+      <line x1="12" y1="-12" x2="-12" y2="12"/>
+    </g>
+  </g>
+
+  <!-- Copy -->
+  <g transform="translate(320 268)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">No matches</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">Try a different query or remove a filter.</text>
+  </g>
+
+  <!-- Active filter chips -->
+  <g transform="translate(208 312)" font-family="Inter, sans-serif">
+    <g>
+      <rect width="100" height="28" rx="14" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.40)"/>
+      <text x="14" y="18" font-size="11" font-weight="600" fill="#FBBF24">format: 9:16</text>
+      <text x="86" y="19" font-size="14" font-weight="700" fill="#FBBF24" text-anchor="end">&#215;</text>
+    </g>
+    <g transform="translate(112 0)">
+      <rect width="112" height="28" rx="14" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.40)"/>
+      <text x="14" y="18" font-size="11" font-weight="600" fill="#FBBF24">owner: maya</text>
+      <text x="98" y="19" font-size="14" font-weight="700" fill="#FBBF24" text-anchor="end">&#215;</text>
+    </g>
+  </g>
+</svg>

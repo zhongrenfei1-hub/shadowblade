@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Inbox is empty — all caught up, no approvals waiting">
+  <defs>
+    <linearGradient id="sb-empty-inbox-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1D3A"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sb-empty-inbox-glow" cx="0.50" cy="0.42" r="0.45">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#sb-empty-inbox-bg)"/>
+  <rect width="640" height="360" fill="url(#sb-empty-inbox-glow)"/>
+
+  <!-- Faint dot grid -->
+  <g fill="rgba(255,255,255,0.05)">
+    <circle cx="80" cy="80" r="1"/><circle cx="160" cy="80" r="1"/><circle cx="240" cy="80" r="1"/><circle cx="320" cy="80" r="1"/><circle cx="400" cy="80" r="1"/><circle cx="480" cy="80" r="1"/><circle cx="560" cy="80" r="1"/>
+    <circle cx="80" cy="160" r="1"/><circle cx="160" cy="160" r="1"/><circle cx="240" cy="160" r="1"/><circle cx="320" cy="160" r="1"/><circle cx="400" cy="160" r="1"/><circle cx="480" cy="160" r="1"/><circle cx="560" cy="160" r="1"/>
+    <circle cx="80" cy="240" r="1"/><circle cx="160" cy="240" r="1"/><circle cx="240" cy="240" r="1"/><circle cx="320" cy="240" r="1"/><circle cx="400" cy="240" r="1"/><circle cx="480" cy="240" r="1"/><circle cx="560" cy="240" r="1"/>
+  </g>
+
+  <!-- Bell illustration -->
+  <g transform="translate(320 160)" stroke="#8590A8" stroke-width="1.6" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Bell body -->
+    <path d="M-44 32 C -44 0, -34 -32, 0 -38 C 34 -32, 44 0, 44 32 Z" fill="rgba(11,19,38,0.85)"/>
+    <!-- Top dot / handle -->
+    <line x1="0" y1="-38" x2="0" y2="-50"/>
+    <circle cx="0" cy="-54" r="4" fill="#8590A8" stroke="none"/>
+    <!-- Bell clapper line -->
+    <line x1="-58" y1="32" x2="58" y2="32"/>
+    <circle cx="0" cy="46" r="6" fill="rgba(11,19,38,0.85)"/>
+
+    <!-- Inner check (accent) -->
+    <g transform="translate(0 -2)" stroke="#A78BFA" stroke-width="2.4">
+      <path d="M-14 0L-2 12L18 -10"/>
+    </g>
+  </g>
+
+  <!-- Soft chime arcs (calm) -->
+  <g transform="translate(320 160)" stroke="rgba(167,139,250,0.32)" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M-78 -32 Q -88 -16 -78 0"/>
+    <path d="M78 -32 Q 88 -16 78 0"/>
+  </g>
+
+  <!-- Copy -->
+  <g transform="translate(320 268)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">All caught up</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">No approvals waiting. Reviewers are clear.</text>
+  </g>
+
+  <!-- Status chip -->
+  <g transform="translate(264 312)">
+    <rect width="112" height="30" rx="15" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.45)"/>
+    <circle cx="18" cy="15" r="4" fill="#A78BFA"/>
+    <text x="30" y="20" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#A78BFA" letter-spacing="2">INBOX ZERO</text>
+  </g>
+</svg>

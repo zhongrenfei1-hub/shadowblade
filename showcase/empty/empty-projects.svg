@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Empty projects — drop a brief here to start">
+  <defs>
+    <linearGradient id="sb-empty-projects-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1D3A"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sb-empty-projects-glow" cx="0.50" cy="0.42" r="0.45">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#sb-empty-projects-bg)"/>
+  <rect width="640" height="360" fill="url(#sb-empty-projects-glow)"/>
+
+  <!-- Faint dot grid -->
+  <g fill="rgba(255,255,255,0.05)">
+    <circle cx="80" cy="80" r="1"/><circle cx="160" cy="80" r="1"/><circle cx="240" cy="80" r="1"/><circle cx="320" cy="80" r="1"/><circle cx="400" cy="80" r="1"/><circle cx="480" cy="80" r="1"/><circle cx="560" cy="80" r="1"/>
+    <circle cx="80" cy="160" r="1"/><circle cx="160" cy="160" r="1"/><circle cx="240" cy="160" r="1"/><circle cx="320" cy="160" r="1"/><circle cx="400" cy="160" r="1"/><circle cx="480" cy="160" r="1"/><circle cx="560" cy="160" r="1"/>
+    <circle cx="80" cy="240" r="1"/><circle cx="160" cy="240" r="1"/><circle cx="240" cy="240" r="1"/><circle cx="320" cy="240" r="1"/><circle cx="400" cy="240" r="1"/><circle cx="480" cy="240" r="1"/><circle cx="560" cy="240" r="1"/>
+  </g>
+
+  <!-- Clapperboard, centered upper -->
+  <g transform="translate(320 138)" stroke="#8590A8" stroke-width="1.6" fill="none" stroke-linejoin="round">
+    <!-- Slate body -->
+    <rect x="-72" y="-12" width="144" height="92" rx="6"/>
+    <!-- Striped top arm -->
+    <g transform="translate(-72 -34)">
+      <path d="M0 0L144 0L144 22L0 22Z" stroke="#8590A8"/>
+      <!-- Stripes (alternating fill) -->
+      <g fill="rgba(255,255,255,0.04)">
+        <path d="M0 0L24 0L18 22L-6 22Z"/>
+        <path d="M48 0L72 0L66 22L42 22Z"/>
+        <path d="M96 0L120 0L114 22L90 22Z"/>
+      </g>
+      <g fill="rgba(34,211,183,0.18)" stroke="#22D3B7">
+        <path d="M24 0L48 0L42 22L18 22Z"/>
+        <path d="M72 0L96 0L90 22L66 22Z"/>
+        <path d="M120 0L144 0L138 22L114 22Z"/>
+      </g>
+      <!-- Hinge -->
+      <circle cx="0" cy="22" r="2" fill="#8590A8" stroke="none"/>
+      <circle cx="144" cy="22" r="2" fill="#8590A8" stroke="none"/>
+    </g>
+    <!-- Lines inside slate -->
+    <line x1="-56" y1="14" x2="56" y2="14"/>
+    <line x1="-56" y1="36" x2="32" y2="36"/>
+    <line x1="-56" y1="58" x2="48" y2="58"/>
+    <!-- Accent dot at corner -->
+    <circle cx="56" cy="68" r="4" fill="#22D3B7" stroke="none"/>
+  </g>
+
+  <!-- Copy -->
+  <g transform="translate(320 264)" font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
+    <text font-size="20" font-weight="600" fill="#F7F9FC" letter-spacing="-0.4">No projects yet</text>
+    <text y="26" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#8590A8">Drop a brief here to start your first cut.</text>
+  </g>
+
+  <!-- CTA chip -->
+  <g transform="translate(254 312)">
+    <rect width="132" height="32" rx="8" fill="rgba(34,211,183,0.14)" stroke="rgba(34,211,183,0.45)"/>
+    <text x="66" y="21" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#22D3B7" text-anchor="middle" letter-spacing="0.4">+ New project</text>
+  </g>
+</svg>

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Components · ShadowBlade design system</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-ds-layout { display: grid; grid-template-columns: 220px 1fr; gap: var(--sb-space-8); }
+      .sb-ds-toc { position: sticky; top: calc(var(--sb-topbar-h) + var(--sb-space-4)); display: grid; gap: 4px; align-content: start; }
+      .sb-ds-toc a {
+        padding: 6px 10px;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+        border-radius: var(--sb-radius-sm);
+      }
+      .sb-ds-toc a:hover { color: var(--sb-text); background: rgba(255,255,255,0.04); }
+      .sb-ds-block { display: grid; gap: var(--sb-space-3); }
+      .sb-ds-block h2 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .sb-ds-block .lede {
+        margin: 0;
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-md);
+        max-width: 64ch;
+      }
+      .sb-ds-demo {
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-6);
+        background: rgba(11,18,32,0.6);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sb-space-3);
+        align-items: center;
+      }
+      .sb-ds-demo--grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--sb-space-3);
+      }
+      .sb-ds-tile {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.025);
+        text-align: center;
+      }
+      .sb-ds-tile b { font-family: var(--sb-font-display); font-size: var(--sb-text-md); display: block; }
+      .sb-ds-tile span { font-family: var(--sb-font-mono); font-size: var(--sb-text-xs); color: var(--sb-text-faint); }
+      .sb-ds-swatch { height: 56px; border-radius: var(--sb-radius); margin-bottom: 8px; border: 1px solid var(--sb-border-strong); }
+      .sb-ds-spec {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-text-faint);
+        margin-top: 4px;
+      }
+      .sb-ds-grid { display: grid; gap: var(--sb-space-6); }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Workspace</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Design system · Components</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <a class="sb-btn sb-btn--ghost" href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+            <button class="sb-btn sb-btn--primary">Copy tokens.css</button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Design system v0.3</div>
+                <h1>Components</h1>
+                <p class="sb-page-head__lead">
+                  The full vocabulary the workspace is built from — every token, every component, in one browsable surface. Pull from this when proposing edits or auditing for drift.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-ds-layout">
+            <aside class="sb-ds-toc">
+              <a href="#colour">Colour</a>
+              <a href="#type">Type</a>
+              <a href="#radii">Radii &amp; spacing</a>
+              <a href="#buttons">Buttons</a>
+              <a href="#pills">Pills · status</a>
+              <a href="#meters">Meters &amp; sparklines</a>
+              <a href="#cards">Cards</a>
+              <a href="#tables">Tables</a>
+              <a href="#stages">Stage rows</a>
+              <a href="#forms">Forms</a>
+              <a href="#empty">Empty states</a>
+            </aside>
+
+            <div class="sb-ds-grid">
+              <article class="sb-ds-block" id="colour">
+                <h2>Colour</h2>
+                <p class="lede">Deep navy for authority, graphite for calm focus, mist for clarity, cyan-green for action. Every translucent surface composites over the body background.</p>
+                <div class="sb-ds-demo sb-ds-demo--grid">
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#0F2A4A"></div><b>Navy</b><span>#0F2A4A</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#11161F"></div><b>Graphite</b><span>#11161F</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#F7F9FC"></div><b>Mist</b><span>#F7F9FC</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#22D3B7"></div><b>Accent</b><span>#22D3B7</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#38BDF8"></div><b>Info</b><span>#38BDF8</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#fbbf24"></div><b>Caution</b><span>#FBBF24</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#f87171"></div><b>Stop</b><span>#F87171</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="background:#a78bfa"></div><b>Review</b><span>#A78BFA</span></div>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="type">
+                <h2>Type</h2>
+                <p class="lede">Inter Display for display, Inter for body, JetBrains Mono for numerics and IDs. Display 600 keeps the workspace feeling instrument-grade.</p>
+                <div class="sb-ds-demo" style="display:grid;gap:12px">
+                  <div><span class="sb-ds-spec">display · Inter Display 600 · 34/40</span><div style="font-family:var(--sb-font-display);font-size:34px;font-weight:600;letter-spacing:-0.022em">Welcome back, Ava.</div></div>
+                  <div><span class="sb-ds-spec">heading · Inter Display 600 · 26/32</span><div style="font-family:var(--sb-font-display);font-size:26px;font-weight:600">In flight · pipeline run</div></div>
+                  <div><span class="sb-ds-spec">subhead · Inter Display 600 · 20/26</span><div style="font-family:var(--sb-font-display);font-size:20px;font-weight:600">Approvals waiting on you</div></div>
+                  <div><span class="sb-ds-spec">body · Inter 400 · 14/22</span><div style="font-family:var(--sb-font-body);color:var(--sb-text-muted)">6 cuts shipped this week. 2 running now. The pipeline is on schedule for the Tuesday product launch.</div></div>
+                  <div><span class="sb-ds-spec">mono · JetBrains Mono 500 · 12</span><div style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">$ shadowblade render --kit acme-core --project wearable-hub</div></div>
+                  <div><span class="sb-ds-spec">eyebrow · Inter 600 · 11 · uppercase 0.16em</span><div class="sb-eyebrow">Workspace overview</div></div>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="radii">
+                <h2>Radii &amp; spacing</h2>
+                <p class="lede">A small set of radius and spacing tokens keeps everything dense, even, and predictable to compose.</p>
+                <div class="sb-ds-demo sb-ds-demo--grid">
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:4px;background:rgba(255,255,255,0.08)"></div><b>XS</b><span>4 px</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:6px;background:rgba(255,255,255,0.08)"></div><b>SM</b><span>6 px</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:10px;background:rgba(255,255,255,0.08)"></div><b>Base</b><span>10 px</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:14px;background:rgba(255,255,255,0.08)"></div><b>LG</b><span>14 px</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:20px;background:rgba(255,255,255,0.08)"></div><b>XL</b><span>20 px</span></div>
+                  <div class="sb-ds-tile"><div class="sb-ds-swatch" style="border-radius:99px;background:rgba(255,255,255,0.08)"></div><b>Pill</b><span>999 px</span></div>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="buttons">
+                <h2>Buttons</h2>
+                <p class="lede">Primary for the one action; ghost for everything else; icon for chrome. Sizes md (34) and sm (28).</p>
+                <div class="sb-ds-demo">
+                  <button class="sb-btn sb-btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>Primary</button>
+                  <button class="sb-btn sb-btn--ghost">Ghost</button>
+                  <button class="sb-btn sb-btn--primary sb-btn--sm">Primary sm</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Ghost sm</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="More"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="pills">
+                <h2>Pills · status</h2>
+                <p class="lede">Drives status across project tables, pipelines, and queues. Each colour is reserved — never repurposed.</p>
+                <div class="sb-ds-demo">
+                  <span class="sb-pill sb-pill--draft">Draft</span>
+                  <span class="sb-pill sb-pill--scripting">Scripting</span>
+                  <span class="sb-pill sb-pill--running">Rendering</span>
+                  <span class="sb-pill sb-pill--queued">Queued</span>
+                  <span class="sb-pill sb-pill--review">Review</span>
+                  <span class="sb-pill sb-pill--done">Done</span>
+                  <span class="sb-pill sb-pill--failed">Failed</span>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="meters">
+                <h2>Meters &amp; sparklines</h2>
+                <p class="lede">Tabular numerics + 6 px meters everywhere, sparklines for KPI tiles.</p>
+                <div class="sb-ds-demo" style="display:grid;gap:12px">
+                  <div class="sb-meter" style="width:280px"><i style="width:12%"></i></div>
+                  <div class="sb-meter" style="width:280px"><i style="width:54%"></i></div>
+                  <div class="sb-meter" style="width:280px"><i style="width:96%"></i></div>
+                  <svg width="180" height="36" data-sparkline="[10,14,12,18,22,28,26,34,38,40]"></svg>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="cards">
+                <h2>Cards</h2>
+                <p class="lede">The single workspace container. Head, body, optional flush body, optional head actions.</p>
+                <div class="sb-ds-demo" style="display:grid">
+                  <article class="sb-card" style="max-width:520px">
+                    <header class="sb-card__head">
+                      <div><div class="sb-card__title">Card title</div><div class="sb-card__subtitle">Optional subtitle</div></div>
+                      <div class="sb-card__head-actions">
+                        <span class="sb-pill sb-pill--running">Live</span>
+                        <button class="sb-btn sb-btn--ghost sb-btn--sm">Action</button>
+                      </div>
+                    </header>
+                    <div class="sb-card__body">
+                      Body content lives here. Use <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">.sb-card__body--flush</code> when wrapping a table.
+                    </div>
+                  </article>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="tables">
+                <h2>Tables</h2>
+                <p class="lede">Dense, scannable. Numbers right-aligned and tabular. One pill per row.</p>
+                <div class="sb-ds-demo" style="padding:0">
+                  <table class="sb-table" style="width:100%">
+                    <thead><tr><th>Project</th><th>Status</th><th>Progress</th><th class="num">Updated</th></tr></thead>
+                    <tbody>
+                      <tr><td><b>Spring launch · wearable hub</b></td><td><span class="sb-pill sb-pill--running">Rendering</span></td><td><div class="sb-meter" style="width:140px"><i style="width:62%"></i></div></td><td class="num">9 min ago</td></tr>
+                      <tr><td><b>AI Copilot · demo</b></td><td><span class="sb-pill sb-pill--scripting">Scripting</span></td><td><div class="sb-meter" style="width:140px"><i style="width:18%"></i></div></td><td class="num">3 hr ago</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="stages">
+                <h2>Stage rows</h2>
+                <p class="lede">The pipeline vocabulary. Indexed glyph + title + log tail + right meta. Re-used across Studio, Dashboard, Job-detail, Inbox.</p>
+                <div class="sb-ds-demo" style="display:grid;gap:8px">
+                  <div class="sb-stage sb-stage--succeeded" style="width:100%"><span class="sb-stage__index">✓</span><div class="sb-stage__body"><div class="sb-stage__title">Script</div><div class="sb-stage__log">6 scenes · 142 words · brand-tone score 0.94</div></div><div class="sb-stage__meta">8.4 s</div></div>
+                  <div class="sb-stage sb-stage--running" style="width:100%"><span class="sb-stage__index">●</span><div class="sb-stage__body"><div class="sb-stage__title">Composition</div><div class="sb-stage__log">62% · waiting on overlay #3</div></div><div class="sb-stage__meta">ETA 0:64</div></div>
+                  <div class="sb-stage" style="width:100%"><span class="sb-stage__index">06</span><div class="sb-stage__body"><div class="sb-stage__title">Render to MP4</div><div class="sb-stage__log">queued behind 2 rush jobs</div></div><div class="sb-stage__meta">queued</div></div>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="forms">
+                <h2>Forms</h2>
+                <p class="lede">Inputs use uppercase eyebrow labels; focus ring is the accent gradient. Toggle is a 38×22 pill.</p>
+                <div class="sb-ds-demo" style="display:grid;gap:12px;max-width:420px">
+                  <label style="display:grid;gap:6px;font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--sb-text-faint);font-weight:600">Brand kit
+                    <select style="padding:10px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text)"><option>Acme · Core</option><option>Acme · Field events</option></select>
+                  </label>
+                  <label style="display:grid;gap:6px;font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--sb-text-faint);font-weight:600">Brief
+                    <textarea rows="3" style="padding:10px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.6);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-md)">Spring product launch — wearable hub.</textarea>
+                  </label>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:var(--sb-text-sm);color:var(--sb-text-muted)">
+                    <span>Auto-render on approval</span>
+                    <div style="width:38px;height:22px;border-radius:99px;background:var(--sb-accent-500);position:relative">
+                      <div style="position:absolute;left:19px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--sb-navy-900)"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-ds-block" id="empty">
+                <h2>Empty states</h2>
+                <p class="lede">Calm, accented, single CTA. Showcase ring v2 is generating the illustrations under <code style="font-family:var(--sb-font-mono);color:var(--sb-accent-300)">showcase/empty/</code>.</p>
+                <div class="sb-ds-demo" style="display:grid;place-items:center;padding:var(--sb-space-10)">
+                  <div style="text-align:center;display:grid;gap:12px;max-width:360px">
+                    <svg width="120" height="80" viewBox="0 0 240 160" style="margin:0 auto">
+                      <rect x="40" y="30" width="160" height="100" rx="10" fill="none" stroke="#22D3B7" stroke-width="1.5"/>
+                      <polygon points="100,70 140,90 100,110" fill="#22D3B7"/>
+                    </svg>
+                    <b style="font-family:var(--sb-font-display);font-size:var(--sb-text-lg);font-weight:600">No projects yet</b>
+                    <span style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Start from a template, or paste a brief and let the pipeline figure it out.</span>
+                    <button class="sb-btn sb-btn--primary" style="justify-self:center">New video</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Design system v0.3 · tokens shared across backend OpenAPI + frontend</span>
+          <span>Audited last by Test ring pass 002</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+    <script src="scripts/charts.js"></script>
+  </body>
+</html>
