@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Launch hero · template · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-td {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--sb-space-6);
+        align-items: start;
+      }
+      .sb-td-preview {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--sb-radius-lg);
+        background: linear-gradient(160deg, #15376a, #050a18);
+        overflow: hidden;
+        border: 1px solid var(--sb-border);
+      }
+      .sb-td-preview svg { width: 100%; height: 100%; }
+      .sb-td-preview .play {
+        position: absolute; inset: 0; display: grid; place-items: center;
+        background: radial-gradient(circle at 50% 50%, transparent, rgba(0,0,0,0.4));
+      }
+      .sb-td-preview .play div {
+        width: 64px; height: 64px; border-radius: 50%;
+        background: var(--sb-accent-500); color: var(--sb-navy-950);
+        display: grid; place-items: center;
+        box-shadow: 0 16px 32px -8px rgba(34,211,183,0.5);
+      }
+      .sb-td-side {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.92), rgba(11,18,32,0.92));
+        padding: var(--sb-space-6);
+        display: grid;
+        gap: var(--sb-space-4);
+      }
+      .sb-td-side dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; margin: 0; font-size: var(--sb-text-sm); }
+      .sb-td-side dt { color: var(--sb-text-muted); }
+      .sb-td-side dd { margin: 0; color: var(--sb-text); }
+
+      .sb-td-scenes {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 200px;
+        gap: var(--sb-space-3);
+        overflow-x: auto;
+        padding-bottom: var(--sb-space-3);
+      }
+      .sb-td-scene {
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.5);
+        overflow: hidden;
+        display: grid; grid-template-rows: 100px 1fr;
+      }
+      .sb-td-scene__thumb {
+        background: linear-gradient(135deg, var(--sb-navy-700), var(--sb-navy-900));
+        display: grid; place-items: center;
+        color: var(--sb-accent-300);
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        letter-spacing: 0.1em;
+        position: relative;
+      }
+      .sb-td-scene__thumb .num {
+        position: absolute; top: 6px; left: 8px;
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        background: rgba(8,14,28,0.7);
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: var(--sb-text-faint);
+      }
+      .sb-td-scene__body { padding: 8px 10px; display: grid; gap: 2px; }
+      .sb-td-scene__body b { font-size: var(--sb-text-sm); font-weight: 600; }
+      .sb-td-scene__body span { font-size: var(--sb-text-xs); color: var(--sb-text-faint); }
+
+      .sb-td-related {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-3);
+      }
+      .sb-td-related .tile {
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        overflow: hidden;
+        background: rgba(11,18,32,0.6);
+        display: grid; grid-template-rows: 100px 1fr;
+      }
+      .sb-td-related .tile .thumb {
+        background: linear-gradient(135deg, var(--sb-navy-700), var(--sb-navy-900));
+      }
+      .sb-td-related .tile .body {
+        padding: 10px 12px;
+        font-size: var(--sb-text-sm);
+        font-family: var(--sb-font-display);
+        font-weight: 600;
+      }
+      .sb-td-related .tile .meta {
+        padding: 0 12px 10px;
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+      }
+
+      @media (max-width: 1100px) { .sb-td { grid-template-columns: 1fr; } .sb-td-related { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="templates">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="templates.html" style="color:var(--sb-text-muted)">Templates</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Launch hero · 30 s</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+              Share
+            </button>
+            <button class="sb-btn sb-btn--ghost">Duplicate &amp; edit</button>
+            <a class="sb-btn sb-btn--primary" href="new-video.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              Use this template
+            </a>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Template · marketing · 30 s · 9:16</div>
+                <h1>Launch hero</h1>
+                <p class="sb-page-head__lead">
+                  Used in 187 spring-launch cuts. 92% approved on first review. Pulls automatically against your active brand kit and the voice you ship most.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-td">
+            <div class="sb-td-preview">
+              <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="td-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#15376a"/>
+                    <stop offset="100%" stop-color="#050a18"/>
+                  </linearGradient>
+                  <radialGradient id="td-glow" cx="0.7" cy="0.3" r="0.7">
+                    <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
+                    <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+                  </radialGradient>
+                </defs>
+                <rect width="800" height="450" fill="url(#td-bg)"/>
+                <rect width="800" height="450" fill="url(#td-glow)"/>
+                <g transform="translate(500 225)">
+                  <circle r="160" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="3 5"/>
+                  <circle r="100" fill="rgba(34,211,183,0.2)"/>
+                  <circle r="56" fill="rgba(34,211,183,0.4)"/>
+                  <circle r="24" fill="#22D3B7"/>
+                </g>
+                <text x="60" y="180" fill="#22D3B7" font-family="Inter" font-size="12" letter-spacing="3">[BRAND · PRODUCT]</text>
+                <text x="60" y="226" fill="#F7F9FC" font-family="Inter Display" font-size="42" font-weight="700">[Hero tagline]</text>
+                <text x="60" y="260" fill="#8590A8" font-family="Inter" font-size="16">[Supporting claim · 14 words max]</text>
+              </svg>
+              <div class="play"><div><svg width="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></div></div>
+            </div>
+
+            <div class="sb-td-side">
+              <div>
+                <div class="sb-eyebrow">Template specs</div>
+                <h2 style="margin:6px 0 0;font-family:var(--sb-font-display);font-size:var(--sb-text-xl);font-weight:600">hero-launch · v3.1</h2>
+              </div>
+              <dl>
+                <dt>Aspect</dt><dd>9:16 vertical · 16:9 wide auto-derives</dd>
+                <dt>Duration</dt><dd>15 s · 30 s · 45 s · 60 s</dd>
+                <dt>Scenes</dt><dd>5 fixed</dd>
+                <dt>Voice slots</dt><dd>1 — narration only</dd>
+                <dt>Music slots</dt><dd>1 — pulse, hold, or none</dd>
+                <dt>Caption style</dt><dd>Inter Display 600 · auto-promoted from voice</dd>
+                <dt>Brand kit</dt><dd>Any · drift checked on render</dd>
+                <dt>Last updated</dt><dd>2026-05-07 · render time -12% post-refresh</dd>
+              </dl>
+              <div style="display:flex;gap:var(--sb-space-3);padding-top:var(--sb-space-3);border-top:1px solid var(--sb-border)">
+                <a class="sb-btn sb-btn--primary" href="new-video.html" style="flex:1;justify-content:center">Use this template</a>
+                <button class="sb-btn sb-btn--ghost" style="flex:1;justify-content:center">Preview with my kit</button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:var(--sb-text-xs);color:var(--sb-text-muted)">
+                <div>Used in<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">187</b><br/>cuts</div>
+                <div>Approval<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">92%</b><br/>first review</div>
+                <div>Render<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">4:12</b><br/>median</div>
+              </div>
+            </div>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Scenes · 5</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Show all timings</button>
+              </div>
+            </header>
+            <div class="sb-card__body">
+              <div class="sb-td-scenes">
+                <div class="sb-td-scene">
+                  <div class="sb-td-scene__thumb"><span class="num">01</span>OPEN</div>
+                  <div class="sb-td-scene__body"><b>Cold open</b><span>4 s · brand flash + tagline</span></div>
+                </div>
+                <div class="sb-td-scene">
+                  <div class="sb-td-scene__thumb"><span class="num">02</span>HERO</div>
+                  <div class="sb-td-scene__body"><b>Hero shot</b><span>6 s · product rotation</span></div>
+                </div>
+                <div class="sb-td-scene">
+                  <div class="sb-td-scene__thumb"><span class="num">03</span>DETAIL</div>
+                  <div class="sb-td-scene__body"><b>UI detail</b><span>6 s · macro shot</span></div>
+                </div>
+                <div class="sb-td-scene">
+                  <div class="sb-td-scene__thumb"><span class="num">04</span>LIFE</div>
+                  <div class="sb-td-scene__body"><b>Lifestyle</b><span>8 s · in-context POV</span></div>
+                </div>
+                <div class="sb-td-scene">
+                  <div class="sb-td-scene__thumb"><span class="num">05</span>CTA</div>
+                  <div class="sb-td-scene__body"><b>Call to action</b><span>6 s · single-line CTA</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <section>
+            <h2 style="margin:var(--sb-space-4) 0;font-family:var(--sb-font-display);font-size:var(--sb-text-xl);font-weight:600;letter-spacing:-0.015em">Related templates</h2>
+            <div class="sb-td-related">
+              <a class="tile" href="template-detail.html">
+                <div class="thumb"></div>
+                <div class="body">Product explainer · 60s</div>
+                <div class="meta">16:9 · 4 scenes</div>
+              </a>
+              <a class="tile" href="template-detail.html">
+                <div class="thumb"></div>
+                <div class="body">Social teaser · 15s</div>
+                <div class="meta">9:16 · 3 scenes</div>
+              </a>
+              <a class="tile" href="template-detail.html">
+                <div class="thumb"></div>
+                <div class="body">Press quote · 20s</div>
+                <div class="meta">9:16 · 3 scenes</div>
+              </a>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Template hero-launch · v3.1 · maintained by Brand kit lead</span>
+          <span>187 cuts on this template · last rendered just now</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
