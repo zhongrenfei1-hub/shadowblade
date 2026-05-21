@@ -47,19 +47,19 @@
     <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="600" letter-spacing="2.4">内部 · 学习发展</text>
   </g>
   <g transform="translate(64 130)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
-    <text font-size="58" font-weight="700" letter-spacing="-1.6">SE Bootcamp</text>
-    <text x="0" y="48" font-size="20" font-weight="500" fill="#8590A8">3 modules · 96 seconds of cut on review</text>
+    <text font-size="58" font-weight="700" letter-spacing="-1.6">售前训练营</text>
+    <text x="0" y="48" font-size="20" font-weight="500" fill="#8590A8">3 个模块 · 96 秒成片待审核</text>
   </g>
 
   <!-- Status pill (top right) -->
   <g transform="translate(870 60)">
     <rect width="142" height="30" rx="15" fill="rgba(167,139,250,0.18)" stroke="rgba(167,139,250,0.45)"/>
     <circle cx="16" cy="15" r="4" fill="#A78BFA"/>
-    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">IN REVIEW</text>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">审核中</text>
   </g>
 
   <!-- Owner badge bottom -->
   <g transform="translate(64 540)" font-family="Inter, sans-serif">
-    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">TRAINING · 16:9 · MARCUS LEE</text>
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">培训 · 16:9 · MARCUS LEE</text>
   </g>
 </svg>

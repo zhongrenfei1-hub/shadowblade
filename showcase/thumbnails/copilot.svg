@@ -33,32 +33,32 @@
   <g transform="translate(64 60)">
     <rect width="148" height="30" rx="15" fill="rgba(34,211,183,0.12)" stroke="rgba(34,211,183,0.45)"/>
     <circle cx="18" cy="15" r="4" fill="#22D3B7"/>
-    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="600" letter-spacing="2.4">PRODUCT DEMO</text>
+    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="600" letter-spacing="2.4">产品演示</text>
   </g>
 
   <!-- Title -->
   <g transform="translate(64 158)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
     <text font-size="64" font-weight="700" letter-spacing="-1.8">AI Copilot</text>
-    <text x="0" y="64" font-size="34" font-weight="500" fill="#B6BDCC">60-second walkthrough</text>
+    <text x="0" y="64" font-size="34" font-weight="500" fill="#B6BDCC">60 秒功能速览</text>
   </g>
 
   <!-- Caption box -->
   <g transform="translate(64 304)">
     <rect width="380" height="92" rx="14" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.10)"/>
-    <text x="22" y="30" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" letter-spacing="2.2" font-weight="600">CAPTION · SCENE 03</text>
-    <text x="22" y="56" font-family="Inter Display, Inter, sans-serif" font-size="17" fill="#F7F9FC" font-weight="600">"Ship a workflow,</text>
-    <text x="22" y="78" font-family="Inter Display, Inter, sans-serif" font-size="17" fill="#F7F9FC" font-weight="600">not a checklist."</text>
+    <text x="22" y="30" font-family="Inter, sans-serif" font-size="11" fill="#8590A8" letter-spacing="2.2" font-weight="600">字幕 · 场景 03</text>
+    <text x="22" y="56" font-family="Inter Display, Inter, sans-serif" font-size="17" fill="#F7F9FC" font-weight="600">「交付的是工作流，</text>
+    <text x="22" y="78" font-family="Inter Display, Inter, sans-serif" font-size="17" fill="#F7F9FC" font-weight="600">不是检查清单。」</text>
   </g>
 
   <!-- Status pill (top right) -->
   <g transform="translate(870 60)">
     <rect width="142" height="30" rx="15" fill="rgba(167,139,250,0.18)" stroke="rgba(167,139,250,0.45)"/>
     <circle cx="16" cy="15" r="4" fill="#A78BFA"/>
-    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">SCRIPTING</text>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="700" letter-spacing="2.4">撰写脚本</text>
   </g>
 
   <!-- Metadata bottom -->
   <g transform="translate(64 540)" font-family="Inter, sans-serif">
-    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">SALES · 16:9 · PRIYA RAO</text>
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">销售 · 16:9 · PRIYA RAO</text>
   </g>
 </svg>

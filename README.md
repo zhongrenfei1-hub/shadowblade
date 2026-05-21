@@ -1,101 +1,114 @@
 # ShadowBlade
 
-Enterprise AI short-video generation cloud. Brief → broadcast-ready video in
-under five minutes, against your brand kit.
+企业级 AI 短视频生成云。一份简报 → 广播级成片，5 分钟内出片，对照你的品牌套件渲染。
 
-## Stack at a glance
+## 技术栈
 
-| Layer        | Tech                                           |
-| ------------ | ---------------------------------------------- |
-| Backend      | FastAPI 0.115 · SQLAlchemy 2 async · Redis     |
-| Workers      | Celery (render, TTS, b-roll, compose)          |
-| Frontend     | Vanilla HTML + design tokens (Inter / JetBrains Mono) |
-| Storage      | S3-compatible object store                     |
-| Auth         | SAML SSO + SCIM provisioning                   |
+| 层 | 技术 |
+| --- | --- |
+| 后端 | FastAPI 0.115 · SQLAlchemy 2 异步 · Redis |
+| Worker | Celery（渲染、TTS、空镜素材、合成）|
+| 前端 | 原生 HTML + 设计令牌（Inter / JetBrains Mono）|
+| 存储 | S3 兼容对象存储 |
+| 身份 | SAML SSO + SCIM 自动配置 |
 
-## Surface map (34 pages shipped)
+## 页面地图（47 页已交付）
 
-> Full clickable index lives at `sitemap.html`.
+> 完整可点击索引：`sitemap.html`。
 
+### 营销侧（公开访问）
 
-### Marketing (public, no auth)
+| 路由 | 页面 |
+| --- | --- |
+| `index.html`         | 落地页 — Hero 流水线可视化、客户 logo、特性 |
+| `features.html`      | 工作原理 — 脚本 / 分镜 / 配音 / 渲染 四阶段 |
+| `pricing.html`       | 4 档计划、年度 / 月度切换、特性对照表 |
+| `customer-story.html`| Helios 客户案例 — Hero、KPI、正文、引用、CTA |
+| `gallery.html`       | 客户作品集（从 showcase 缩略图加载）|
+| `changelog.html`     | 时间轴更新日志 + 分类标签 |
+| `docs.html`          | 知识网格 + curl 示例 + Cmd-K 搜索 |
+| `security.html`      | 信任徽章 + 6 大支柱 + 合规文档表 |
+| `status.html`        | 服务状态页 — 6 个服务、60 分钟节拍条、事故记录 |
+| `help.html`          | 帮助中心 — 搜索 + 8 个分类 + FAQ + 联系入口 |
+| `about.html`         | 关于我们 — 宣言 + 团队 + 媒体引用 |
+| `press-kit.html`     | 媒体资源 — logo、调色板、截图、事实表、品牌规范 |
+| `subscribe.html`     | 订阅 — 邮件 + 主题 + RSS / JSON / Slack 渠道 |
+| `404.html`           | 片段丢失 — glyph + 路径回显 + 工作台入口 |
 
-| Route                | Page                                                     |
-| -------------------- | -------------------------------------------------------- |
-| `index.html`         | Landing — hero pipeline visual, logos, features          |
-| `features.html`      | Pipeline walkthrough — Script / Storyboard / Voice / Render |
-| `pricing.html`       | 4-tier plans, annual/monthly toggle, feature matrix      |
-| `customer-story.html`| Helios case study — hero, KPIs, body, pull-quote, CTA    |
-| `gallery.html`       | Customer reel grid from Showcase thumbnails              |
-| `changelog.html`     | Date-axis timeline with category pills                   |
-| `docs.html`          | Knowledge grid + curl example + Cmd-K search             |
-| `security.html`      | Trust badges + 6 pillars + compliance doc table          |
-| `status.html`        | Statuspage — 6 services, 60-min tick bars, incidents     |
-| `404.html`           | Lost cut — minimal glyph + path echo + workspace nav     |
+### 身份与引导
 
-### Auth + Onboarding
+| 路由 | 页面 |
+| --- | --- |
+| `login.html`             | SSO 优先（Okta · Entra · Google）+ 邮箱 + 品牌侧栏 |
+| `signup.html`            | 分屏 — 营销侧栏 + 60 秒工作空间表单 |
+| `onboarding.html`        | 首启引导 — 品牌套件来源选择器 |
+| `workspace-switcher.html`| Cmd-K 多租户切换器 |
+| `upgrade.html`           | 应用内升级提示 |
+| `review.html`            | 外部审核签名链接预览 |
 
-| Route                | Page                                                     |
-| -------------------- | -------------------------------------------------------- |
-| `login.html`         | SSO-first (Okta · Entra · Google) + email + branded rail |
-| `signup.html`        | Split-screen marketing rail + 60-second workspace form   |
-| `onboarding.html`    | First-launch wizard — brand kit source picker            |
-| `review.html`        | External reviewer signed-share preview surface           |
+### 工作空间（含侧边栏 shell）
 
-### Workspace (app shell + sidebar nav)
+| 路由 | 页面 |
+| --- | --- |
+| `dashboard.html`       | 工作台 — KPI · 实时流水线 · 待审批 · 项目 |
+| `studio.html`          | 编辑器 — 场景导航 + 9:16 画布 + 时间线 + 检视器 + 评审 |
+| `projects.html`        | 项目 — 筛选 chips + 密集表格 |
+| `project-detail.html`  | 项目详情 — 封面 + 元数据 + KPI + 版本历史 |
+| `templates.html`       | 模板库 — 8 张卡片 + 悬停播放 |
+| `template-detail.html` | 模板详情 — 预览 + 场景 + 规格 |
+| `assets.html`          | 素材库 — 文件夹 + 标签 + 拖拽上传 + 网格 |
+| `asset-detail.html`    | 素材详情 — 播放器 + 元数据 + 使用记录 |
+| `render-queue.html`    | 渲染队列 — 集群利用率 + 4 个 worker + 优先级 |
+| `job-detail.html`      | 流程详情 — Gantt + 实时 GPU 图 + 彩色日志 |
+| `compare.html`         | 版本对比 — 双栏 + 变更清单 |
+| `localisation.html`    | 本地化 — 5 语言变体网格 |
+| `analytics.html`       | 数据分析 — KPI + 7 日柱状 + 排行榜 + 偏移告警 |
+| `brand-kit.html`       | 品牌套件 — 切换 + 色板 + 字体 + 语态 + logo |
+| `brand-kit-compare.html`| 品牌套件版本对比（v2 ↔ v3）|
+| `team.html`            | 团队与权限 — 成员 + 权限矩阵 + SSO |
+| `settings.html`        | 设置 — 通用 + 渲染 + 安全 + 计费 + API + 开关 |
+| `billing.html`         | 计费与套餐 — 套餐摘要 + 用量计 + 发票 |
+| `integrations.html`    | 集成 — 15 张卡片市场（Slack/Notion/Figma/YouTube/…）|
+| `dev-console.html`     | 开发者控制台 — Webhook + API 密钥 + 重发 |
+| `webhook-detail.html`  | Webhook 投递详情 |
+| `webhook-new.html`     | 新建 Webhook |
+| `audit-log.html`       | 审计日志 — 防篡改事件流 + 动词色块 |
+| `notifications.html`   | 收件箱 — 分类标签 + glyph + 内联操作 |
+| `components.html`      | 设计系统 — 全部组件一页 |
+| `new-video.html`       | 新建视频向导 — 4 步 + ETA + 智能建议 |
+| `sitemap.html`         | 47 页分类链接图 |
 
-| Route                  | Page                                                  |
-| ---------------------- | ----------------------------------------------------- |
-| `dashboard.html`       | KPIs · in-flight pipeline · approvals · projects      |
-| `studio.html`          | Scene nav + 9:16 canvas + transport + 4-track timeline + inspector + reviews |
-| `projects.html`        | Filter chips + dense project table                    |
-| `project-detail.html`  | Cinematic cover + meta + KPIs + version history       |
-| `templates.html`       | 8-card template gallery with hover-reveal play        |
-| `assets.html`          | Folders + tag filters + drop-zone + content grid      |
-| `render-queue.html`    | Cluster utilisation + 4-worker grid + prioritised queue |
-| `job-detail.html`      | Gantt timeline + live GPU chart + colour-coded log    |
-| `compare.html`         | Side-by-side version diff with change-set list        |
-| `analytics.html`       | KPI strip + 7-day bar + leaderboard + drift alerts    |
-| `brand-kit.html`       | Kit picker + swatches + type + voice/tone + logo lockups |
-| `team.html`            | Members + role/permission matrix + SSO badges         |
-| `settings.html`        | General + Render + Security + Billing + API + Toggles |
-| `integrations.html`    | 15-card marketplace (Slack/Notion/Figma/YouTube/…)    |
-| `audit-log.html`       | Tamper-evident event stream with verb-coded chips     |
-| `notifications.html`   | Inbox with category tabs + glyph categories + inline actions |
-| `components.html`      | Design system docs — every component in one surface   |
-| `new-video.html`       | 4-step create wizard with ETA + smart suggestions     |
-| `sitemap.html`         | 34-page categorised link map (auto-generated)         |
-
-## Run locally
+## 本地运行
 
 ```bash
-make install        # one-time
-make dev            # backend on :8000, frontend on :3000
+make install        # 一次性
+make dev            # 后端跑 :8000，前端跑 :3000
 ```
 
-Open `http://localhost:3000` for the marketing landing, then click "Open
-workspace" to enter the cockpit. The frontend will hit `/api/v1/projects` on
-the backend through the CORS-enabled FastAPI app and gracefully fall back to
-local fixture data if the backend is offline.
+打开 `http://localhost:3000` 看落地页，点「进入工作台」进入主应用。前端会调
+`/api/v1/projects`（FastAPI 已开 CORS），后端不在的话自动回退到本地固件数据。
 
-## Four-ring flywheel
+## 四环飞轮
 
-This repo is being built by four concurrent rings:
+这个仓库由四个并发环构建：
 
-1. **Design** — backend + UI design system + every workspace page. Six waves shipped (v1 → v6).
-2. **Showcase** — brand assets, marketing visuals, product screens, voice spec, empty-state illustrations. Two passes shipped (25 SVGs in `/showcase/`).
-3. **Test** — a11y, contrast, copy, responsive, brand consistency audit. Two passes shipped (`docs/test-ring-report-00{1,2}.md`).
-4. **Refine** — applies Test findings + wires Showcase assets back in. Two passes shipped (17 + 17 fixes folded back).
+1. **Design 设计环** — 后端 + UI 设计系统 + 所有工作空间页面。10 轮交付（v1 → v10）。
+2. **Showcase 展示环** — 品牌素材、营销视觉、产品截图、语态规范、空状态插画。3 轮（45 个 SVG 在 `/showcase/`）。
+3. **Test 测试环** — 无障碍、对比度、文案、响应式、品牌一致性审计。4 轮（`docs/test-ring-report-00{1,2,3,4}.md`）。
+4. **Refine 精修环** — 应用 Test 发现 + 接入 Showcase 素材。4 轮（数十处修复折叠回 Design 提交）。
 
-Outputs live under `frontend/`, `backend/`, `showcase/`, `docs/`. The cycle
-runs concurrently — each ring commits its own work, and rings 2–4 re-trigger
-themselves after every Design wave.
+产物在 `frontend/`、`backend/`、`showcase/`、`docs/`。整个循环并发运行 — 每环单独提交，2–4 环在每轮 Design 后自动重启。
 
-## Vibe
+## 视觉调性
 
-Deep navy `#0F2A4A` + graphite `#11161F` + mist `#F7F9FC` + cyan-green accent
-`#22D3B7`. Inter Display for display; Inter for body; JetBrains Mono for
-numerics. Dark cockpit, instrument-grade typography, status pills as the
-universal vocabulary.
+深蓝 `#0F2A4A` + 石墨 `#11161F` + 灰白 `#F7F9FC` + 青绿强调 `#22D3B7`。
+Inter Display 用于标题，Inter 用于正文，JetBrains Mono 用于数值与代码。
+深色驾驶舱 · 仪表级排版 · 状态药丸是通用词汇表。
 
-See `components.html` for the full design vocabulary in one browsable surface.
+完整设计词汇见 `components.html`。
+
+## 中文化
+
+本项目使用简体中文。术语对照表：`docs/i18n-glossary.md`。
+品牌名 `ShadowBlade` 保留英文（产品名 / 品牌名）。
+所有第三方品牌、技术标准、SDK 名等保留原文。
