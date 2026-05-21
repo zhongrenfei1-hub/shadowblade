@@ -24,6 +24,8 @@
       }
       .sb-marketing__nav .spacer { flex: 1; }
       .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+      .sb-marketing__nav a.link.is-active { color: var(--sb-text); }
+      .sb-marketing__nav nav { display: contents; }
 
       .sb-about-hero {
         max-width: 760px;
@@ -157,16 +159,18 @@
   </head>
   <body>
     <header class="sb-marketing__nav">
-      <a class="sb-brand" href="index.html">
+      <a class="sb-brand" href="index.html" aria-label="ShadowBlade home">
         <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mga)"/><defs><linearGradient id="mga" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
         <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
       </a>
       <span class="spacer"></span>
-      <a class="link" href="features.html">Product</a>
-      <a class="link" href="pricing.html">Pricing</a>
-      <a class="link" href="customer-story.html">Customers</a>
-      <a class="link" href="about.html" style="color:var(--sb-text)">About</a>
-      <a class="link" href="docs.html">Docs</a>
+      <nav aria-label="Primary">
+        <a class="link" href="features.html">Product</a>
+        <a class="link" href="pricing.html">Pricing</a>
+        <a class="link" href="customer-story.html">Customers</a>
+        <a class="link is-active" href="about.html" aria-current="page">About</a>
+        <a class="link" href="docs.html">Docs</a>
+      </nav>
       <a class="sb-btn sb-btn--ghost" href="login.html">Sign in</a>
       <a class="sb-btn sb-btn--primary" href="signup.html">Get started</a>
     </header>

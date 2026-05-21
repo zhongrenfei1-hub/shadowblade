@@ -163,7 +163,7 @@
   </head>
   <body>
     <header class="sb-marketing__nav">
-      <a class="sb-brand" href="index.html">
+      <a class="sb-brand" href="index.html" aria-label="ShadowBlade home">
         <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgh)"/><defs><linearGradient id="mgh" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
         <div class="sb-brand__name"><b>ShadowBlade</b><span>Help center</span></div>
       </a>
@@ -181,7 +181,7 @@
       <p>Quick answers, deep guides, a status page, and a humans-on-the-other-end mailbox. Pick a path.</p>
       <label class="search">
         <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        <input placeholder="Search 412 help articles…" />
+        <input aria-label="Search help articles" placeholder="Search 412 help articles…" />
       </label>
       <div class="suggest">
         <a href="#">render queue stuck</a>
@@ -194,6 +194,7 @@
     </section>
 
     <section class="sb-help-grid">
+      <h2 class="visually-hidden">Browse by topic</h2>
       <article class="sb-help-cat">
         <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
         <h3>Get started</h3>
