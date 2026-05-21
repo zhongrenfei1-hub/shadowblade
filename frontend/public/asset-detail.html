@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Founder b-roll · keynote · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-ad {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: var(--sb-space-6);
+        align-items: start;
+      }
+      .sb-ad-player {
+        aspect-ratio: 16 / 9;
+        border-radius: var(--sb-radius-lg);
+        background: #000;
+        border: 1px solid var(--sb-border);
+        overflow: hidden;
+        position: relative;
+      }
+      .sb-ad-player svg { width: 100%; height: 100%; }
+      .sb-ad-player .controls {
+        position: absolute; bottom: 12px; left: 12px; right: 12px;
+        display: flex; gap: 10px; align-items: center;
+      }
+      .sb-ad-player .controls button {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: rgba(34,211,183,0.95); color: var(--sb-navy-950);
+        display: grid; place-items: center;
+      }
+      .sb-ad-player .controls time {
+        font-family: var(--sb-font-mono); font-size: var(--sb-text-sm);
+        color: #fff;
+      }
+      .sb-ad-player .controls .bar {
+        flex: 1; height: 4px; border-radius: 99px;
+        background: rgba(255,255,255,0.2); position: relative;
+      }
+      .sb-ad-player .controls .bar i {
+        position: absolute; inset: 0 60% 0 0;
+        background: var(--sb-accent-500);
+        border-radius: 99px;
+      }
+      .sb-ad-side {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.92), rgba(11,18,32,0.92));
+        padding: var(--sb-space-5);
+        display: grid; gap: var(--sb-space-4);
+      }
+      .sb-ad-side dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; margin: 0; font-size: var(--sb-text-sm); }
+      .sb-ad-side dt { color: var(--sb-text-muted); }
+      .sb-ad-side dd { margin: 0; color: var(--sb-text); font-family: var(--sb-font-mono); font-size: 12px; }
+
+      .sb-ad-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+      .sb-ad-tags .sb-pill { background: rgba(34,211,183,0.1); color: var(--sb-accent-300); }
+
+      .sb-ad-usage {
+        display: grid; gap: 0;
+      }
+      .sb-ad-usage-row {
+        display: grid; grid-template-columns: 1fr auto;
+        align-items: center;
+        padding: var(--sb-space-3) var(--sb-space-5);
+        border-bottom: 1px solid var(--sb-border);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-ad-usage-row:last-child { border-bottom: none; }
+      .sb-ad-usage-row b { font-weight: 600; }
+      .sb-ad-usage-row span { color: var(--sb-text-faint); font-size: var(--sb-text-xs); display: block; }
+      .sb-ad-usage-row time { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-text-faint); }
+
+      @media (max-width: 1100px) { .sb-ad { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="assets">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="assets.html" style="color:var(--sb-text-muted)">Assets</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Founder b-roll · keynote</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">Replace</button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Use in cut
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Asset · video · approved</div>
+                <h1>Founder b-roll · keynote</h1>
+                <p class="sb-page-head__lead">
+                  Captured 2026-03-22 · Anya Sokolova on stage · 4K H.264 · used in 12 cuts, latest the Helios customer story.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-ad">
+            <div class="sb-ad-player">
+              <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="adp" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#0a1a2e"/>
+                    <stop offset="100%" stop-color="#02060c"/>
+                  </linearGradient>
+                  <radialGradient id="ads" cx="0.5" cy="0.4" r="0.5">
+                    <stop offset="0%" stop-color="rgba(56,189,248,0.35)"/>
+                    <stop offset="100%" stop-color="rgba(56,189,248,0)"/>
+                  </radialGradient>
+                </defs>
+                <rect width="800" height="450" fill="url(#adp)"/>
+                <rect width="800" height="450" fill="url(#ads)"/>
+                <g transform="translate(400 270)">
+                  <ellipse rx="80" ry="14" fill="rgba(0,0,0,0.4)"/>
+                  <circle cx="0" cy="-80" r="40" fill="#1c3a5e"/>
+                  <path d="M-40 0 Q-40 -40 -10 -40 L10 -40 Q40 -40 40 0 L40 50 L-40 50 Z" fill="#1c3a5e"/>
+                </g>
+                <g transform="translate(80 60)">
+                  <rect width="170" height="36" rx="6" fill="rgba(0,0,0,0.65)"/>
+                  <circle cx="14" cy="18" r="5" fill="#f87171"/>
+                  <text x="28" y="22" fill="#fff" font-family="JetBrains Mono" font-size="11">LIVE · KEYNOTE</text>
+                </g>
+              </svg>
+              <div class="controls">
+                <button aria-label="Play"><svg width="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></button>
+                <time>0:38 / 1:42</time>
+                <div class="bar"><i></i></div>
+                <time>4K · 60 fps · H.264</time>
+              </div>
+            </div>
+
+            <div class="sb-ad-side">
+              <div>
+                <div class="sb-eyebrow">Metadata</div>
+                <h2 style="margin:6px 0 0;font-family:var(--sb-font-display);font-size:var(--sb-text-lg);font-weight:600">founder-keynote-march.mp4</h2>
+              </div>
+              <dl>
+                <dt>Kind</dt><dd>video / mp4</dd>
+                <dt>Resolution</dt><dd>3840×2160 · 60 fps</dd>
+                <dt>Codec</dt><dd>H.264 high · 12 Mbps</dd>
+                <dt>Audio</dt><dd>AAC 256 kbps · stereo · -14 LUFS</dd>
+                <dt>Duration</dt><dd>1:42 · 102 s</dd>
+                <dt>Size</dt><dd>184.3 MB</dd>
+                <dt>License</dt><dd>Internal · approved</dd>
+                <dt>Uploaded</dt><dd>2026-03-22 by Ava Chen</dd>
+                <dt>Checksum</dt><dd style="color:var(--sb-accent-300)">sha256:8a44d…ab21</dd>
+              </dl>
+              <div>
+                <div class="sb-eyebrow" style="margin-bottom:6px">Tags</div>
+                <div class="sb-ad-tags">
+                  <span class="sb-pill">approved</span>
+                  <span class="sb-pill">brand</span>
+                  <span class="sb-pill">leadership</span>
+                  <span class="sb-pill">keynote</span>
+                  <span class="sb-pill">2026-q1</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Used in · 12 cuts</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Show all 12</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush sb-ad-usage">
+              <div class="sb-ad-usage-row">
+                <div><b>Q3 customer story — Helios Logistics</b><span>scene 02 · 0:08 → 0:14 · marketing</span></div>
+                <time>Yesterday</time>
+              </div>
+              <div class="sb-ad-usage-row">
+                <div><b>Series C teaser · TikTok</b><span>scene 04 · 0:09 → 0:12 · social</span></div>
+                <time>3 days ago</time>
+              </div>
+              <div class="sb-ad-usage-row">
+                <div><b>Investor letter · Q1 recap</b><span>cold open · 0:00 → 0:04 · internal</span></div>
+                <time>1 week ago</time>
+              </div>
+              <div class="sb-ad-usage-row">
+                <div><b>SE bootcamp · onboarding</b><span>module 1 intro · 0:18 → 0:24 · training</span></div>
+                <time>2 weeks ago</time>
+              </div>
+              <div class="sb-ad-usage-row">
+                <div><b>Brand vision · keynote highlight</b><span>full clip 0:00 → 1:42 · marketing</span></div>
+                <time>2026-03-23</time>
+              </div>
+            </div>
+          </article>
+
+          <section class="sb-grid-2-1">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Frame thumbnails</div>
+              </header>
+              <div class="sb-card__body">
+                <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0a1a2e,#02060c);border-radius:4px"></div>
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0e2238,#040810);border-radius:4px"></div>
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#102842,#050b14);border-radius:4px"></div>
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0e2238,#040810);border-radius:4px;border:1px solid var(--sb-accent-500)"></div>
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0c1f33,#03060e);border-radius:4px"></div>
+                  <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0a1a2e,#02060c);border-radius:4px"></div>
+                </div>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);margin-top:8px;font-family:var(--sb-font-mono)">6 of 24 frames · selected frame marked</div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Content embedding</div>
+              </header>
+              <div class="sb-card__body" style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">
+                <p>Indexed by what's in the frame. The pipeline can match this asset when you brief about:</p>
+                <ul style="padding-left:18px;margin:8px 0 0">
+                  <li><b style="color:var(--sb-text)">Leadership</b> · founder · Anya Sokolova · stage · keynote</li>
+                  <li><b style="color:var(--sb-text)">Mood</b> · confident · grounded · brand-positive</li>
+                  <li><b style="color:var(--sb-text)">Vibe</b> · editorial · cinematic · low-key</li>
+                </ul>
+              </div>
+            </article>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Asset detail · sha256 verified · stored in eu-central-1</span>
+          <span><a href="audit-log.html" style="color:var(--sb-accent-300)">Audit log</a> · 14 events for this asset</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
