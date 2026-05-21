@@ -17,6 +17,7 @@ from app.api import (
     mix_video,
     projects,
     render_queue,
+    stock,
     templates,
     workspaces,
 )
@@ -60,6 +61,7 @@ for router in (
     analytics.router,
     mix_video.router,
     generate.router,
+    stock.router,
 ):
     app.include_router(router, prefix="/api/v1")
 

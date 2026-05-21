@@ -245,7 +245,10 @@ async def post_generate_cover(body: CoverRequest):
 
 class GenerateVideoRequest(BaseModel):
     topic: str = Field(..., description="商家主题，例「春季美容补水套餐」")
-    clip_paths: list[str] = Field(..., description="本地视频素材路径列表")
+    clip_paths: list[str] = Field(
+        default_factory=list,
+        description="本地视频素材路径列表；当 stock_source!='manual' 时可空",
+    )
     voice: str = "xiaoxiao-zh-f"
     rate: str = "+0%"
     asr_model: str = "base"
@@ -261,6 +264,16 @@ class GenerateVideoRequest(BaseModel):
     auto_white_balance: bool = True
     adaptive_bgm_mix: bool = True
     length: int = 220
+    stock_source: str = Field(
+        default="manual",
+        description="manual: 用 clip_paths；pexels: 按 topic/keyword 自动从 Pexels 拉",
+    )
+    stock_query: str | None = Field(
+        default=None,
+        description="覆盖 topic 用作 Pexels 搜索关键词（中文/英文皆可）",
+    )
+    stock_count: int = Field(default=3, ge=1, le=8)
+    stock_orientation: str = "portrait"
 
 
 class GenerateVideoResponse(BaseModel):
@@ -278,6 +291,7 @@ async def post_generate_video(body: GenerateVideoRequest, background_tasks: Back
     _JOBS[job_id] = {
         "status": "queued",
         "steps": {
+            "stock": "pending" if body.stock_source != "manual" else "skipped",
             "script": "pending",
             "tts": "pending",
             "asr": "pending",
@@ -309,6 +323,43 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
     job = _JOBS[job_id]
     job["status"] = "running"
     try:
+        # ---- 0. fetch stock footage if requested ----
+        clip_paths = list(body.clip_paths)
+        if body.stock_source == "pexels":
+            from app.services.stock.pexels import pexels_download, pexels_search
+
+            job["steps"]["stock"] = "running"
+            query = body.stock_query or body.topic
+            try:
+                results = await pexels_search(
+                    query,
+                    per_page=body.stock_count + 4,
+                    orientation=body.stock_orientation,
+                )
+                out_dir = Path(settings.storage_root) / "stock" / "pexels"
+                downloaded: list[str] = []
+                for clip in results[: body.stock_count]:
+                    try:
+                        p = await pexels_download(clip, out_dir, max_seconds=6.0)
+                        downloaded.append(str(p))
+                    except RuntimeError as exc:
+                        log.warning("skip clip %s: %s", clip.id, exc)
+                if not downloaded:
+                    raise RuntimeError(
+                        f"no Pexels clips downloaded for query: {query!r}"
+                    )
+                clip_paths = downloaded
+                job["steps"]["stock"] = "succeeded"
+            except Exception as exc:  # noqa: BLE001
+                job["steps"]["stock"] = f"failed: {exc}"
+                if not clip_paths:
+                    raise
+
+        if not clip_paths:
+            raise RuntimeError(
+                "no clips provided (stock_source=manual but clip_paths is empty)"
+            )
+
         # ---- 1. script ----
         job["steps"]["script"] = "running"
         script = generate_script(body.topic, length=body.length)
@@ -367,7 +418,7 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
         # ---- 4. mix ----
         job["steps"]["mix"] = "running"
         # Sequence the clips evenly across the audio length
-        clips = _build_clip_specs(body.clip_paths, tts_result.duration or script.estimated_seconds)
+        clips = _build_clip_specs(clip_paths, tts_result.duration or script.estimated_seconds)
         if not clips:
             raise RuntimeError("no usable clips supplied")
         mix_req = MixRequest(

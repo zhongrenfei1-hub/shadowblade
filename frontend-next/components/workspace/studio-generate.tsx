@@ -29,6 +29,7 @@ import {
   type GenerateVideoResponse,
   type GenerateVideoSteps,
   type ScriptResponse,
+  type StockStatus,
 } from "@/lib/api";
 
 // 与后端 storage/samples/* 对齐，默认用打包好的演示素材。
@@ -63,8 +64,9 @@ const PRESETS = [
   { key: "square_1x1", label: "方形 1:1" },
 ];
 
-const STEP_ORDER: (keyof GenerateVideoSteps)[] = ["script", "tts", "asr", "mix", "cover"];
+const STEP_ORDER: (keyof GenerateVideoSteps)[] = ["stock", "script", "tts", "asr", "mix", "cover"];
 const STEP_LABEL: Record<string, string> = {
+  stock: "拉素材",
   script: "脚本生成",
   tts: "配音 (edge-tts)",
   asr: "字幕识别",
@@ -81,6 +83,8 @@ const EXAMPLE_TOPICS = [
   "新店开业 — 全场 7 折前三天",
 ];
 
+type StockMode = "sample" | "pexels" | "url";
+
 export function StudioGenerate() {
   const [topic, setTopic] = useState(EXAMPLE_TOPICS[0]);
   const [voice, setVoice] = useState(VOICES[0].alias);
@@ -93,6 +97,13 @@ export function StudioGenerate() {
   const [clipPaths, setClipPaths] = useState<string[]>(DEFAULT_CLIPS);
   const [bgmPath, setBgmPath] = useState(DEFAULT_BGM);
   const [logoPath, setLogoPath] = useState(DEFAULT_LOGO);
+  const [stockMode, setStockMode] = useState<StockMode>("sample");
+  const [pexelsQuery, setPexelsQuery] = useState("");
+  const [pexelsCount, setPexelsCount] = useState(3);
+  const [urlInput, setUrlInput] = useState("");
+  const [urlSection, setUrlSection] = useState("*0:00-0:08");
+  const [stockStatus, setStockStatus] = useState<StockStatus | null>(null);
+  const [stockLoading, setStockLoading] = useState(false);
 
   const [script, setScript] = useState<ScriptResponse | null>(null);
   const [scriptLoading, setScriptLoading] = useState(false);
@@ -107,6 +118,35 @@ export function StudioGenerate() {
       if (pollHandle.current) clearInterval(pollHandle.current);
     };
   }, []);
+
+  useEffect(() => {
+    let alive = true;
+    api.stockStatus().then((s) => {
+      if (alive) setStockStatus(s);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  async function pullFromUrl() {
+    if (!urlInput.trim()) return;
+    setStockLoading(true);
+    setError(null);
+    try {
+      const result = await api.stockFromUrl({
+        url: urlInput.trim(),
+        sections: urlSection || undefined,
+        max_height: 1080,
+      });
+      setClipPaths([result.path, ...clipPaths].slice(0, 5));
+      setUrlInput("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setStockLoading(false);
+    }
+  }
 
   async function previewScript() {
     setScriptLoading(true);
@@ -128,7 +168,7 @@ export function StudioGenerate() {
     try {
       const initial = await api.generateVideo({
         topic,
-        clip_paths: clipPaths.filter(Boolean),
+        clip_paths: stockMode === "pexels" ? [] : clipPaths.filter(Boolean),
         voice,
         bgm_path: bgmPath || undefined,
         watermark_path: logoPath || undefined,
@@ -139,6 +179,10 @@ export function StudioGenerate() {
         adaptive_bgm_mix: adaptiveMix,
         auto_white_balance: autoWB,
         length,
+        stock_source: stockMode === "pexels" ? "pexels" : "manual",
+        stock_query: stockMode === "pexels" ? (pexelsQuery || topic) : undefined,
+        stock_count: pexelsCount,
+        stock_orientation: preset.endsWith("16x9") ? "landscape" : "portrait",
       });
       setJob(initial);
       if (pollHandle.current) clearInterval(pollHandle.current);
@@ -201,6 +245,98 @@ export function StudioGenerate() {
                 </button>
               ))}
             </div>
+          </div>
+
+          <div className="grid gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3">
+            <Label className="text-xs text-muted-foreground">视频素材来源</Label>
+            <div className="grid grid-cols-3 gap-1.5">
+              <SourceChip
+                active={stockMode === "sample"}
+                onClick={() => setStockMode("sample")}
+                label="内置示例"
+                hint="3 个测试素材"
+              />
+              <SourceChip
+                active={stockMode === "pexels"}
+                onClick={() => setStockMode("pexels")}
+                label="Pexels"
+                hint={stockStatus?.pexels.configured ? "已配置 key" : "需要 API key"}
+                warn={!stockStatus?.pexels.configured}
+              />
+              <SourceChip
+                active={stockMode === "url"}
+                onClick={() => setStockMode("url")}
+                label="自定义 URL"
+                hint="yt-dlp"
+                warn={!stockStatus?.ytdlp.configured}
+              />
+            </div>
+
+            {stockMode === "pexels" && (
+              <div className="grid gap-2 pt-2">
+                <Input
+                  value={pexelsQuery}
+                  onChange={(e) => setPexelsQuery(e.target.value)}
+                  placeholder={`关键词（留空则用主题）— 例: skincare, nail salon`}
+                />
+                <div className="flex items-center gap-2">
+                  <Label className="text-xs text-muted-foreground">数量</Label>
+                  <input
+                    type="range"
+                    min={1}
+                    max={6}
+                    value={pexelsCount}
+                    onChange={(e) => setPexelsCount(Number(e.target.value))}
+                    className="flex-1 accent-accent-500"
+                  />
+                  <span className="text-xs text-muted-foreground w-6 text-right">{pexelsCount}</span>
+                </div>
+                {!stockStatus?.pexels.configured && (
+                  <p className="text-[11px] text-amber-200/90">
+                    需要先在终端 <code className="rounded bg-white/10 px-1">export PEXELS_API_KEY=xxx</code>{" "}
+                    再重启后端 · 注册 <a href="https://www.pexels.com/api/" target="_blank" rel="noreferrer" className="underline">pexels.com/api</a>
+                  </p>
+                )}
+              </div>
+            )}
+
+            {stockMode === "url" && (
+              <div className="grid gap-2 pt-2">
+                <Input
+                  value={urlInput}
+                  onChange={(e) => setUrlInput(e.target.value)}
+                  placeholder="粘贴视频 URL（YouTube / B站 / 抖音 / 任意 yt-dlp 支持的站点）"
+                />
+                <div className="flex gap-2">
+                  <Input
+                    value={urlSection}
+                    onChange={(e) => setUrlSection(e.target.value)}
+                    placeholder="时间段，例 *0:00-0:08"
+                    className="flex-1"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={pullFromUrl}
+                    disabled={stockLoading || !urlInput.trim()}
+                  >
+                    {stockLoading ? <Loader2 size={12} className="animate-spin" /> : <Download size={12} />}
+                    拉取
+                  </Button>
+                </div>
+                {clipPaths.filter((p) => p && !p.startsWith("storage/samples/")).length > 0 && (
+                  <div className="text-[11px] text-muted-foreground">
+                    已拉取 {clipPaths.filter((p) => p && !p.startsWith("storage/samples/")).length} 个素材
+                  </div>
+                )}
+              </div>
+            )}
+
+            {stockMode === "sample" && (
+              <p className="text-[11px] text-muted-foreground pt-1">
+                内置 ffmpeg 生成的测试素材（彩条/纯色）。换成 Pexels 或 URL 能拿到真实画面。
+              </p>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -416,14 +552,21 @@ export function StudioGenerate() {
 }
 
 function defaultSteps(): GenerateVideoSteps {
-  return { script: "pending", tts: "pending", asr: "pending", mix: "pending", cover: "pending" };
+  return {
+    stock: "skipped",
+    script: "pending",
+    tts: "pending",
+    asr: "pending",
+    mix: "pending",
+    cover: "pending",
+  };
 }
 
 function StepList({ steps }: { steps: GenerateVideoSteps }) {
   return (
     <ol className="grid gap-1.5 rounded-md border border-white/5 bg-white/[0.02] p-3 text-xs">
       {STEP_ORDER.map((k) => {
-        const s = (steps[k] || "pending") as string;
+        const s = ((steps as Record<string, string>)[k] || "pending") as string;
         return (
           <li key={k} className="flex items-center gap-2">
             <StepIcon status={s} />
@@ -520,6 +663,40 @@ function Stat({ label, value }: { label: string; value: string }) {
       <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">{label}</dt>
       <dd className="font-display text-sm font-medium">{value}</dd>
     </div>
+  );
+}
+
+function SourceChip({
+  active,
+  onClick,
+  label,
+  hint,
+  warn,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+  hint: string;
+  warn?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "grid gap-0.5 rounded-md border px-3 py-2 text-left transition-colors",
+        active
+          ? "border-accent-500/60 bg-accent-500/10"
+          : "border-white/10 bg-white/[0.02] hover:border-white/20",
+      )}
+    >
+      <span className={cn("text-xs font-semibold", active ? "text-accent-200" : "text-foreground")}>
+        {label}
+      </span>
+      <span className={cn("text-[10px]", warn && !active ? "text-amber-300/80" : "text-muted-foreground")}>
+        {hint}
+      </span>
+    </button>
   );
 }
 

@@ -251,6 +251,33 @@ export const api = {
     if (!res.ok) throw new Error(`generate-status ${res.status}`);
     return res.json();
   },
+
+  // ── /stock (real footage) ─────────────────────────────────────────────
+  stockStatus: () =>
+    get<StockStatus>("/stock/status", {
+      pexels: { configured: false, hint: "" },
+      ytdlp: { configured: false, hint: "" },
+    }),
+  stockFromUrl: async (body: StockFromUrlRequest): Promise<StockFromUrlResponse> => {
+    const res = await fetch(`${BASE}/stock/from-url`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`stock-from-url ${res.status}: ${await res.text()}`);
+    return res.json();
+  },
+  stockPexelsSearch: async (body: PexelsSearchRequest): Promise<{ items: PexelsClip[] }> => {
+    const res = await fetch(`${BASE}/stock/pexels/search`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`pexels-search ${res.status}: ${await res.text()}`);
+    return res.json();
+  },
 };
 
 // ─── /mix-video 类型 ──────────────────────────────────────────────────
@@ -343,7 +370,7 @@ export type ScriptResponse = {
 
 export type GenerateVideoRequest = {
   topic: string;
-  clip_paths: string[];
+  clip_paths?: string[];
   voice?: string;
   rate?: string;
   asr_model?: string;
@@ -356,14 +383,62 @@ export type GenerateVideoRequest = {
   auto_white_balance?: boolean;
   adaptive_bgm_mix?: boolean;
   length?: number;
+  stock_source?: "manual" | "pexels";
+  stock_query?: string | null;
+  stock_count?: number;
+  stock_orientation?: "portrait" | "landscape" | "square";
 };
 
 export type GenerateVideoSteps = {
+  stock?: string;
   script: string;
   tts: string;
   asr: string;
   mix: string;
   cover: string;
+};
+
+// ─── /stock ───────────────────────────────────────────────────────────
+
+export type StockStatus = {
+  pexels: { configured: boolean; hint: string };
+  ytdlp: { configured: boolean; hint: string };
+};
+
+export type StockFromUrlRequest = {
+  url: string;
+  sections?: string | null;
+  max_height?: number;
+  cookies_browser?: string | null;
+};
+
+export type StockFromUrlResponse = {
+  path: string;
+  relative_url: string;
+  title: string;
+  duration: number;
+  width: number;
+  height: number;
+};
+
+export type PexelsSearchRequest = {
+  query: string;
+  per_page?: number;
+  orientation?: "portrait" | "landscape" | "square";
+  size?: "large" | "medium" | "small";
+  api_key?: string | null;
+};
+
+export type PexelsClip = {
+  id: number;
+  url: string;
+  download_url: string;
+  width: number;
+  height: number;
+  duration: number;
+  aspect: string;
+  photographer: string;
+  photographer_url: string;
 };
 
 export type GenerateVideoOutput = {
