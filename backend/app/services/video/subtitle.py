@@ -292,9 +292,110 @@ def parse_srt(text: str) -> list[Cue]:
     return cues
 
 
+@dataclass(slots=True)
+class CueQualityIssue:
+    cue_index: int
+    severity: str  # "info" | "warn" | "fail"
+    code: str
+    message: str
+    cps: float
+    char_count: int
+    duration: float
+
+
+@dataclass(slots=True)
+class SubtitleQualityReport:
+    cues: int
+    issues: list[CueQualityIssue]
+    max_cps: float
+    avg_cps: float
+
+    @property
+    def is_ok(self) -> bool:
+        return not any(i.severity == "fail" for i in self.issues)
+
+
+def score_subtitles(
+    cues: list[Cue],
+    *,
+    cps_warn: float = 14.0,
+    cps_fail: float = 18.0,
+    min_duration: float = 0.6,
+    max_duration: float = 7.0,
+    min_gap: float = 0.04,
+) -> SubtitleQualityReport:
+    """Return a per-cue quality report. Useful for surfacing to the UI."""
+    issues: list[CueQualityIssue] = []
+    cps_values: list[float] = []
+    for idx, cue in enumerate(cues):
+        chars = len(cue.text.replace("\n", " ").strip())
+        cps = chars / cue.duration if cue.duration > 0 else 0.0
+        cps_values.append(cps)
+        if cue.duration < min_duration:
+            issues.append(
+                CueQualityIssue(idx, "warn", "too_short",
+                                f"cue is {cue.duration:.2f}s — under {min_duration}s",
+                                cps, chars, cue.duration)
+            )
+        if cue.duration > max_duration:
+            issues.append(
+                CueQualityIssue(idx, "info", "too_long",
+                                f"cue is {cue.duration:.2f}s — consider splitting",
+                                cps, chars, cue.duration)
+            )
+        if cps > cps_fail:
+            issues.append(
+                CueQualityIssue(idx, "fail", "cps_too_high",
+                                f"{cps:.1f} cps — unreadable",
+                                cps, chars, cue.duration)
+            )
+        elif cps > cps_warn:
+            issues.append(
+                CueQualityIssue(idx, "warn", "cps_high",
+                                f"{cps:.1f} cps — borderline readable",
+                                cps, chars, cue.duration)
+            )
+        if idx > 0 and cue.start - cues[idx - 1].end < -1e-3:
+            issues.append(
+                CueQualityIssue(idx, "fail", "overlap",
+                                "cue overlaps the previous one",
+                                cps, chars, cue.duration)
+            )
+        elif idx > 0 and 0 <= cue.start - cues[idx - 1].end < min_gap:
+            issues.append(
+                CueQualityIssue(idx, "info", "tight_gap",
+                                f"gap {cue.start - cues[idx - 1].end:.3f}s — flicker risk",
+                                cps, chars, cue.duration)
+            )
+    max_cps = max(cps_values) if cps_values else 0.0
+    avg_cps = sum(cps_values) / len(cps_values) if cps_values else 0.0
+    return SubtitleQualityReport(
+        cues=len(cues), issues=issues, max_cps=max_cps, avg_cps=avg_cps
+    )
+
+
+def adaptive_font_size(
+    cue: Cue,
+    *,
+    base_size: int,
+    max_chars_per_line: int = 22,
+    line_count: int = 2,
+) -> int:
+    """Scale font size down when a cue has lots of text. Returns size in
+    ASS units (1080p baseline)."""
+    capacity = max_chars_per_line * line_count
+    chars = len(cue.text.replace("\n", " "))
+    if chars <= capacity:
+        return base_size
+    ratio = capacity / chars
+    return max(int(base_size * 0.65), int(round(base_size * ratio)))
+
+
 __all__ = [
     "Cue",
     "SubtitleStyle",
+    "CueQualityIssue",
+    "SubtitleQualityReport",
     "smart_segment",
     "segment_utterances",
     "render_srt",
@@ -302,4 +403,6 @@ __all__ = [
     "write_srt",
     "write_ass",
     "parse_srt",
+    "score_subtitles",
+    "adaptive_font_size",
 ]

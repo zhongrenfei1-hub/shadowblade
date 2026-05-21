@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Iterable
 
 from app.services.video.audio import AudioBus, build_voice_bgm_mix, build_voice_only
+from app.services.video.beat import BeatGrid, detect_beats
 from app.services.video.brand import BrandKit, default_kit
 from app.services.video.covers import CoverSpec, generate_cover
 from app.services.video.encoder import (
@@ -47,7 +48,15 @@ from app.services.video.encoder import (
 )
 from app.services.video.features import detect_features
 from app.services.video.probe import FFMPEG, MediaInfo, probe
-from app.services.video.subtitle import Cue, SubtitleStyle, segment_utterances, write_ass, write_srt
+from app.services.video.subtitle import (
+    Cue,
+    SubtitleQualityReport,
+    SubtitleStyle,
+    score_subtitles,
+    segment_utterances,
+    write_ass,
+    write_srt,
+)
 from app.services.video.text_render import RenderedCue, render_subtitle_track
 from app.services.video.transitions import (
     ShotSignal,
@@ -99,6 +108,7 @@ class MixRequest:
     cover_timestamp: float | None = None
     storage_root: str = "./storage"
     extra_filters: str = ""  # appended right before output
+    snap_to_beats: bool = False  # snap intra-clip cuts to BGM beats when BGM present
 
 
 @dataclass(slots=True)
@@ -114,6 +124,8 @@ class MixResult:
     ffmpeg_command: str
     runtime_seconds: float
     warnings: list[str] = field(default_factory=list)
+    subtitle_report: SubtitleQualityReport | None = None
+    beat_grid: BeatGrid | None = None
 
 
 class MixPipeline:
@@ -131,6 +143,17 @@ class MixPipeline:
         kit = request.brand_kit
         features = detect_features()
         warnings: list[str] = []
+        subtitle_report: SubtitleQualityReport | None = None
+        beat_grid: BeatGrid | None = None
+        if request.snap_to_beats and request.bgm_path:
+            try:
+                beat_grid = await detect_beats(request.bgm_path)
+                warnings.append(
+                    f"detected BGM tempo ≈ {beat_grid.bpm:.0f} BPM "
+                    f"with {len(beat_grid.onsets)} onsets"
+                )
+            except RuntimeError as exc:
+                warnings.append(f"beat detection failed: {exc}")
 
         infos = await asyncio.gather(*(probe(c.path) for c in request.clips))
         for clip, info in zip(request.clips, infos):
@@ -150,6 +173,12 @@ class MixPipeline:
         sub_dir = Path(request.storage_root) / "mix" / str(request.project_id)
         if request.cues:
             segmented = segment_utterances(request.cues, max_chars=22, max_lines=2)
+            subtitle_report = score_subtitles(segmented)
+            for issue in subtitle_report.issues:
+                if issue.severity == "fail":
+                    warnings.append(
+                        f"subtitle #{issue.cue_index}: {issue.code} ({issue.message})"
+                    )
             style = kit.subtitle_style()
             style.size = self._scale_subtitle_size(preset, style.size)
             style.margin_v = self._scale_subtitle_margin(preset, style.margin_v)
@@ -385,6 +414,8 @@ class MixPipeline:
             ffmpeg_command=" ".join(shlex.quote(p) for p in cmd),
             runtime_seconds=round(time.monotonic() - started, 3),
             warnings=warnings,
+            subtitle_report=subtitle_report,
+            beat_grid=beat_grid,
         )
 
     # ---- helpers ---------------------------------------------------------

@@ -215,6 +215,36 @@ async def plan_from_audio(
     return plan
 
 
+async def trim_silence_bounds(
+    audio_path: str,
+    *,
+    noise_db: float = -38.0,
+    min_silence: float = 0.25,
+) -> tuple[float, float]:
+    """Find leading + trailing silence to trim from a voice track.
+
+    Returns ``(trim_start, trim_end)`` — seconds to remove from the head and
+    tail respectively. Always non-negative and bounded by the file length.
+    """
+    from app.services.video.probe import probe
+
+    info = await probe(audio_path)
+    silences = await detect_silences(
+        audio_path, noise_db=noise_db, min_silence=min_silence
+    )
+    if not silences:
+        return 0.0, 0.0
+    trim_start = 0.0
+    trim_end = 0.0
+    leading = silences[0]
+    if leading.start <= 0.05:
+        trim_start = max(0.0, leading.end - 0.05)
+    trailing = silences[-1]
+    if trailing.end >= info.duration - 0.1:
+        trim_end = max(0.0, info.duration - trailing.start - 0.05)
+    return trim_start, trim_end
+
+
 __all__ = [
     "SilenceRange",
     "SpeechSegment",
@@ -223,4 +253,5 @@ __all__ = [
     "speech_from_silences",
     "plan_cuts",
     "plan_from_audio",
+    "trim_silence_bounds",
 ]
