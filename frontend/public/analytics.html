@@ -117,7 +117,7 @@
                 </div>
                 <div class="sb-card__head-actions">
                   <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">Approved 358</span>
-                  <span class="sb-pill" style="color:#fbbf24;background:rgba(251,191,36,0.12)">Rejected 29</span>
+                  <span class="sb-pill" style="color:var(--sb-status-queued);background:rgba(251,191,36,0.12)">Rejected 29</span>
                 </div>
               </header>
               <div class="sb-card__body" style="padding:var(--sb-space-3) var(--sb-space-6)">
@@ -194,7 +194,7 @@
               </header>
               <div class="sb-card__body sb-stack">
                 <div class="sb-stage">
-                  <span class="sb-stage__index" style="background:rgba(251,191,36,0.18);color:#fbbf24">⚠</span>
+                  <span class="sb-stage__index sb-stage__index--queued" aria-hidden="true">⚠</span>
                   <div class="sb-stage__body">
                     <div class="sb-stage__title">Color drift · 2 cuts</div>
                     <div class="sb-stage__log">Used #20D2B5 instead of #22D3B7 · auto-fix available</div>
@@ -202,7 +202,7 @@
                   <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Resolve</button></div>
                 </div>
                 <div class="sb-stage">
-                  <span class="sb-stage__index" style="background:rgba(248,113,113,0.18);color:#f87171">✖</span>
+                  <span class="sb-stage__index sb-stage__index--failed" aria-hidden="true">✖</span>
                   <div class="sb-stage__body">
                     <div class="sb-stage__title">Voice mismatch · 1 cut</div>
                     <div class="sb-stage__log">Used Ember (m) on a Core-kit project · required Alloy (f)</div>
@@ -210,7 +210,7 @@
                   <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Re-render</button></div>
                 </div>
                 <div class="sb-stage">
-                  <span class="sb-stage__index" style="background:rgba(34,211,183,0.18);color:var(--sb-accent-300)">✓</span>
+                  <span class="sb-stage__index sb-stage__index--succeeded" aria-hidden="true">✓</span>
                   <div class="sb-stage__body">
                     <div class="sb-stage__title">Last 100 cuts in compliance</div>
                     <div class="sb-stage__log">No outro missing · no font fallback · no license risk</div>

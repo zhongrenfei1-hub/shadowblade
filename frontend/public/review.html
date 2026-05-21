@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spring product launch · wearable hub · v17 — review · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/hero/hero-cover.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-review-nav {
+        display: flex; align-items: center; gap: var(--sb-space-4);
+        padding: var(--sb-space-4) var(--sb-space-8);
+        border-bottom: 1px solid var(--sb-border);
+        background: rgba(8,14,28,0.6);
+        backdrop-filter: blur(14px);
+        position: sticky; top: 0; z-index: 10;
+      }
+      .sb-review-nav .sub {
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+      }
+      .sb-review-nav .sub b { color: var(--sb-text); font-weight: 600; }
+      .sb-review-nav .spacer { flex: 1; }
+
+      .sb-review-layout {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-6) var(--sb-space-8);
+      }
+      .sb-player {
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border);
+        background: #000;
+        overflow: hidden;
+        aspect-ratio: 9 / 16;
+        max-height: 80vh;
+        position: relative;
+        margin: 0 auto;
+        width: min(420px, 100%);
+      }
+      .sb-player svg { width: 100%; height: 100%; }
+      .sb-player__overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(180deg, transparent 65%, rgba(0,0,0,0.7));
+        display: grid; align-content: end;
+        padding: var(--sb-space-5);
+        color: #fff;
+      }
+      .sb-player__caption {
+        font-family: var(--sb-font-display);
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+      }
+      .sb-player__controls {
+        position: absolute;
+        bottom: 16px; left: 16px; right: 16px;
+        z-index: 3;
+        display: flex; align-items: center; gap: 12px;
+      }
+      .sb-player__play {
+        width: 44px; height: 44px; border-radius: 50%;
+        background: rgba(34,211,183,0.95);
+        color: var(--sb-navy-950);
+        display: grid; place-items: center;
+      }
+      .sb-player__time {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-sm);
+        color: rgba(255,255,255,0.85);
+      }
+      .sb-player__bar {
+        flex: 1; height: 4px; border-radius: 99px;
+        background: rgba(255,255,255,0.2);
+        position: relative;
+      }
+      .sb-player__bar i {
+        position: absolute; inset: 0 65% 0 0;
+        background: var(--sb-accent-500);
+        border-radius: 99px;
+      }
+      .sb-player__bar i::after {
+        content: ''; position: absolute; right: -5px; top: -3px;
+        width: 10px; height: 10px; border-radius: 50%;
+        background: var(--sb-accent-500);
+        box-shadow: 0 0 0 4px rgba(34,211,183,0.3);
+      }
+      .sb-player__corner {
+        position: absolute; top: 12px; right: 12px;
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 4px;
+        backdrop-filter: blur(4px);
+      }
+
+      .sb-review-side { display: grid; gap: var(--sb-space-4); align-content: start; }
+      .sb-decision {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid rgba(34,211,183,0.4);
+        background: linear-gradient(180deg, rgba(34,211,183,0.06), rgba(11,18,32,0.95));
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-decision b {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+      }
+      .sb-decision .row { display: flex; gap: 8px; }
+      .sb-decision .row .sb-btn { flex: 1; justify-content: center; }
+      .sb-comments-card { background: rgba(11,18,32,0.6); border: 1px solid var(--sb-border); border-radius: var(--sb-radius-lg); padding: var(--sb-space-5); display: grid; gap: var(--sb-space-3); }
+      .sb-comments-card .head { display: flex; justify-content: space-between; align-items: center; font-family: var(--sb-font-display); font-size: var(--sb-text-md); font-weight: 600; }
+      .sb-comment-mini {
+        padding: var(--sb-space-3);
+        border-radius: var(--sb-radius);
+        background: rgba(255,255,255,0.025);
+        font-size: var(--sb-text-sm);
+        display: grid; gap: 4px;
+      }
+      .sb-comment-mini .who { display: flex; align-items: center; gap: 8px; color: var(--sb-text); font-weight: 600; }
+      .sb-comment-mini .who time { margin-left: auto; color: var(--sb-text-faint); font-size: var(--sb-text-xs); font-family: var(--sb-font-mono); font-weight: 400; }
+      .sb-comment-mini .body { color: var(--sb-text-muted); }
+      .sb-comment-mini .cite {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        color: var(--sb-accent-300);
+      }
+
+      .sb-share-info {
+        padding: var(--sb-space-4) var(--sb-space-5);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.5);
+        display: grid; gap: 6px;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+      }
+      .sb-share-info b { color: var(--sb-text); font-weight: 600; }
+      .sb-share-info code {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-accent-300);
+        word-break: break-all;
+      }
+
+      @media (max-width: 1000px) {
+        .sb-review-layout { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sb-review-nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgr)"/><defs><linearGradient id="mgr" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Review preview</span></div>
+      </a>
+      <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">Signed link · expires in 3 days</span>
+      <span class="spacer"></span>
+      <span class="sub">Shared by <b>Ava Chen</b> for <b>Diego Alvarez · Reviewer</b></span>
+    </header>
+
+    <section class="sb-review-layout">
+      <div>
+        <div class="sb-page-head" style="margin-bottom:var(--sb-space-4)">
+          <div class="sb-eyebrow">v17 · 28 s · 9:16 · Acme · Core kit</div>
+          <h1 style="margin:6px 0 4px;font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600;letter-spacing:-0.02em">Spring product launch — wearable hub</h1>
+          <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Producer · Ava Chen · v17 ready 4 min ago · brand drift 0.02</p>
+        </div>
+
+        <div class="sb-player">
+          <svg viewBox="0 0 340 605" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="pb" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#15376a"/>
+                <stop offset="100%" stop-color="#050a18"/>
+              </linearGradient>
+              <radialGradient id="pg" cx="0.7" cy="0.3" r="0.7">
+                <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
+                <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+              </radialGradient>
+            </defs>
+            <rect width="340" height="605" fill="url(#pb)"/>
+            <rect width="340" height="605" fill="url(#pg)"/>
+            <g transform="translate(170 280)">
+              <circle r="130" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="2 5"/>
+              <circle r="86" fill="rgba(34,211,183,0.18)"/>
+              <circle r="50" fill="rgba(34,211,183,0.4)"/>
+              <circle r="22" fill="#22D3B7"/>
+            </g>
+            <g transform="translate(30 100)">
+              <text fill="#22D3B7" font-family="Inter" font-size="11" letter-spacing="3">ACME · WEARABLE HUB</text>
+            </g>
+          </svg>
+
+          <div class="sb-player__overlay">
+            <div class="sb-player__caption">Your day, on time — without breaking stride.</div>
+          </div>
+          <div class="sb-player__corner">v17 · 1080×1920</div>
+          <div class="sb-player__controls">
+            <button class="sb-player__play" aria-label="Play"><svg width="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></button>
+            <span class="sb-player__time">0:18 / 0:28</span>
+            <div class="sb-player__bar"><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sb-review-side">
+        <div class="sb-decision">
+          <b>Your decision</b>
+          <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Approve to release the cut for publishing. Request changes to bounce it back to the producer with your comments.</p>
+          <div class="row">
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Approve v17
+            </button>
+            <button class="sb-btn sb-btn--ghost">Request changes</button>
+          </div>
+          <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);text-align:center">2 other reviewers also need to approve · published on majority</span>
+        </div>
+
+        <div class="sb-comments-card">
+          <div class="head">
+            <span>Comments · 2 open</span>
+            <button class="sb-btn sb-btn--ghost sb-btn--sm">New</button>
+          </div>
+          <div class="sb-comment-mini">
+            <div class="who"><div class="sb-workspace-card__avatar" style="width:22px;height:22px;font-size:10px;background:linear-gradient(135deg,#3d2c5f,#1b1230);color:#a78bfa">PR</div>Priya Rao<time>3 min</time></div>
+            <div class="body">Swapped "without lifting a wrist" → "without breaking stride." Reads cleaner in US testing.</div>
+            <div class="cite">scene 04 · script · words 18–22</div>
+          </div>
+          <div class="sb-comment-mini">
+            <div class="who"><div class="sb-workspace-card__avatar" style="width:22px;height:22px;font-size:10px;background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div>Diego Alvarez<time>11 min</time></div>
+            <div class="body">Music ducks too hard on the CTA — bumping to -6 dB on next render.</div>
+            <div class="cite">music · 0:24 → 0:28</div>
+          </div>
+          <textarea placeholder="Add a comment, or @mention the producer…" style="padding:10px 12px;border-radius:var(--sb-radius-sm);border:1px solid var(--sb-border);background:rgba(11,18,32,0.7);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-sm);min-height:60px;outline:none"></textarea>
+          <div style="display:flex;justify-content:flex-end;gap:6px">
+            <button class="sb-btn sb-btn--ghost sb-btn--sm">Cancel</button>
+            <button class="sb-btn sb-btn--primary sb-btn--sm">Comment</button>
+          </div>
+        </div>
+
+        <div class="sb-share-info">
+          <div><b>Signed share link</b></div>
+          <div><code>https://review.shadowblade.io/r/q7M2x…s9</code></div>
+          <div style="display:flex;justify-content:space-between"><span>Expires</span><span><b>2026-05-24</b> · 3 days</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Watermark</span><span><b>DRAFT</b> · v17</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Audit</span><span>2 reviewers · 0 downloads</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="sb-footer">
+      <span>Review preview · external · no full workspace access</span>
+      <span>Powered by ShadowBlade · review.shadowblade.io</span>
+    </footer>
+  </body>
+</html>
