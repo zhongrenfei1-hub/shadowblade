@@ -1,6 +1,24 @@
+import { useId } from "react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { TREND_COLORS } from "@/lib/theme";
+
+// 当 trend prop 缺失时的占位序列（保持视觉节奏，不代表真实数据）。
+// 应当尽可能从父层传入真实 trend；占位仅用于早期 mock。
+const FALLBACK_TREND = [4, 6, 5, 7, 8, 7, 9];
+
+function describeTrend(values: number[]): string {
+  if (values.length < 2) return "趋势平稳";
+  const head = values.slice(0, Math.floor(values.length / 2));
+  const tail = values.slice(Math.floor(values.length / 2));
+  const avgHead = head.reduce((a, b) => a + b, 0) / head.length;
+  const avgTail = tail.reduce((a, b) => a + b, 0) / tail.length;
+  const delta = avgTail - avgHead;
+  const ratio = avgHead === 0 ? 0 : delta / avgHead;
+  if (Math.abs(ratio) < 0.03) return "近 7 期趋势平稳";
+  return ratio > 0 ? "近 7 期持续上升" : "近 7 期持续下降";
+}
 
 export function KpiTile({
   icon: Icon,
@@ -10,6 +28,7 @@ export function KpiTile({
   delta,
   positive = true,
   trend,
+  srHint,
 }: {
   icon: LucideIcon;
   label: string;
@@ -18,14 +37,19 @@ export function KpiTile({
   delta: string;
   positive?: boolean;
   trend?: number[];
+  srHint?: string;
 }) {
+  const reactId = useId();
   const DeltaIcon = positive ? ArrowUpRight : ArrowDownRight;
-  const sparkline = trend && trend.length > 1 ? trend : [4, 6, 5, 7, 8, 7, 9];
+  const usingFallback = !(trend && trend.length > 1);
+  const sparkline = usingFallback ? FALLBACK_TREND : (trend as number[]);
   const max = Math.max(...sparkline);
   const min = Math.min(...sparkline);
   const range = max - min || 1;
-  const stroke = positive ? "rgb(125 232 207)" : "rgb(252 211 77)";
-  const fill = positive ? "rgba(34,211,183,0.22)" : "rgba(245,158,11,0.22)";
+  const stroke = positive ? TREND_COLORS.positiveStroke : TREND_COLORS.negativeStroke;
+  const fillStop = positive ? TREND_COLORS.positiveFill : TREND_COLORS.negativeFill;
+  const gradientId = `kpi-grad-${reactId}`;
+  const hint = srHint ?? `${label} ${value}${suffix ?? ""}，${delta}，${describeTrend(sparkline)}`;
 
   return (
     <Card className="group relative grid gap-3 overflow-hidden p-5 transition-colors hover:border-accent-500/30">
@@ -51,8 +75,8 @@ export function KpiTile({
           className="h-9 w-[78px] shrink-0 opacity-90"
         >
           <defs>
-            <linearGradient id={`kpi-grad-${label}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={fill} />
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={fillStop} />
               <stop offset="100%" stopColor="rgba(0,0,0,0)" />
             </linearGradient>
           </defs>
@@ -66,10 +90,7 @@ export function KpiTile({
               .join(" ");
             return (
               <>
-                <polyline
-                  points={`0,32 ${pts} 80,32`}
-                  fill={`url(#kpi-grad-${label})`}
-                />
+                <polyline points={`0,32 ${pts} 80,32`} fill={`url(#${gradientId})`} />
                 <polyline
                   points={pts}
                   fill="none"
@@ -89,9 +110,10 @@ export function KpiTile({
           positive ? "bg-accent-500/12 text-accent-300" : "bg-amber-500/15 text-amber-300"
         )}
       >
-        <DeltaIcon className="h-3 w-3" />
+        <DeltaIcon className="h-3 w-3" aria-hidden />
         {delta}
       </span>
+      <span className="sr-only">{hint}</span>
     </Card>
   );
 }

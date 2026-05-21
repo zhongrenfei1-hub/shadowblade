@@ -92,8 +92,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes skel {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(200px + 100%) 0; }
+  0% { background-position: -50% 0; }
+  100% { background-position: 150% 0; }
 }
 
 @layer utilities {
@@ -101,16 +101,28 @@
   .animate-fade-up { animation: fade-up 0.35s ease-out both; }
   .skel {
     background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 20%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.02) 100%);
-    background-size: 200px 100%;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
     animation: skel 1.4s linear infinite;
   }
+  /* 标记需要在 reduced-motion 下仍保留动画的元素（loading spinner 等关键状态信号） */
+  .preserve-motion { /* sentinel — see @media block below */ }
 }
 
-/* 减少动画用户偏好 */
+/* 减少动画用户偏好
+   `.preserve-motion` 类下的动画保留（loading spinner、关键状态指示）；
+   `animate-fade-up` 也单独 reset，避免入场 6px translate 引发眩晕。 */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *:not(.preserve-motion):not(.preserve-motion *),
+  *:not(.preserve-motion):not(.preserve-motion *)::before,
+  *:not(.preserve-motion):not(.preserve-motion *)::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+  .animate-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

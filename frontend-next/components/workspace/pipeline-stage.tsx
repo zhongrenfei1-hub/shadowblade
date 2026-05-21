@@ -27,7 +27,7 @@ export function PipelineStage({
       {running && (
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-sky-500/[0.18] via-sky-500/[0.08] to-transparent animate-[shimmer_2.4s_ease-in-out_infinite]"
+          className="pointer-events-none absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-sky-500/[0.18] via-sky-500/[0.08] to-transparent animate-shimmer-slow"
         />
       )}
       <span
@@ -42,7 +42,7 @@ export function PipelineStage({
         {state === "succeeded" ? (
           <Check className="h-3 w-3" />
         ) : running ? (
-          <Loader2 className="h-3 w-3 animate-spin" />
+          <Loader2 className="preserve-motion h-3 w-3 animate-spin" />
         ) : typeof index === "string" ? (
           index
         ) : (

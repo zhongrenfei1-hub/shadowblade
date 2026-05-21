@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
+import { BrandMark } from "@/components/brand/brand-mark";
 
 const NAV = [
   {
@@ -55,17 +56,7 @@ export function Sidebar() {
       className="sticky top-0 hidden h-screen w-[248px] shrink-0 flex-col overflow-y-auto border-r border-border bg-gradient-to-b from-navy-900/95 to-navy-950/95 px-3 py-5 backdrop-blur-md md:flex"
     >
       <Link href="/dashboard" className="flex items-center gap-3 px-2 py-2" aria-label="ShadowBlade 首页">
-        <span className="grid h-8 w-8 place-items-center rounded-md border border-accent-500/30 bg-gradient-to-br from-navy-700 to-navy-900 shadow-[0_4px_12px_rgba(34,211,183,0.18)]">
-          <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden>
-            <path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#sb-mark)" />
-            <defs>
-              <linearGradient id="sb-mark" x1="4" y1="4" x2="20" y2="20">
-                <stop offset="0%" stopColor="#22D3B7" />
-                <stop offset="100%" stopColor="#38BDF8" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </span>
+        <BrandMark />
         <span className="flex flex-col">
           <b className="font-display text-sm tracking-tight">ShadowBlade</b>
           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">视频云</span>

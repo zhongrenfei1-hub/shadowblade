@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   Sparkles,
   Upload,
@@ -15,6 +15,7 @@ import {
   Zap,
   Image as ImageIcon,
   AlertTriangle,
+  RefreshCw,
   RotateCcw,
   X as XIcon,
   Save,
@@ -53,14 +54,24 @@ const PIPELINE = [
 
 const DRAFT_KEY = "sb_create_draft_v2";
 
-type Purpose = "marketing" | "training" | "product_demo" | "social";
+const ALLOWED_PURPOSES = ["marketing", "training", "product_demo", "social"] as const;
+const ALLOWED_ASPECTS = ["9:16", "16:9", "1:1"] as const;
+const ALLOWED_DURATIONS = ["15", "30", "60", "90"] as const;
+const ALLOWED_TEMPLATES = ["hero-launch", "product-explainer", "training-module", "social-teaser"] as const;
+const ALLOWED_VOICES = ["alloy-zh-f", "ember-zh-m", "lumen-zh-f"] as const;
+
+type Purpose = (typeof ALLOWED_PURPOSES)[number];
+type Aspect = (typeof ALLOWED_ASPECTS)[number];
+type Duration = (typeof ALLOWED_DURATIONS)[number];
+type Template = (typeof ALLOWED_TEMPLATES)[number];
+type Voice = (typeof ALLOWED_VOICES)[number];
 
 type Draft = {
-  template: string;
+  template: Template;
   purpose: Purpose;
-  aspect: string;
-  duration: string;
-  voice: string;
+  aspect: Aspect;
+  duration: Duration;
+  voice: Voice;
   brief: string;
   cta: string;
 };
@@ -76,6 +87,33 @@ const DEFAULT_DRAFT: Draft = {
   cta: "现在预定，首批 1000 台免运费",
 };
 
+function pickAllowed<T extends readonly string[]>(allowed: T, val: unknown, fallback: T[number]): T[number] {
+  return typeof val === "string" && (allowed as readonly string[]).includes(val) ? (val as T[number]) : fallback;
+}
+
+function pickString(val: unknown, fallback: string, max = 2000): string {
+  if (typeof val !== "string") return fallback;
+  return val.length > max ? val.slice(0, max) : val;
+}
+
+function safeParseDraft(raw: string): Partial<Draft> | null {
+  try {
+    const obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object") return null;
+    return {
+      template: pickAllowed(ALLOWED_TEMPLATES, obj.template, DEFAULT_DRAFT.template),
+      purpose: pickAllowed(ALLOWED_PURPOSES, obj.purpose, DEFAULT_DRAFT.purpose),
+      aspect: pickAllowed(ALLOWED_ASPECTS, obj.aspect, DEFAULT_DRAFT.aspect),
+      duration: pickAllowed(ALLOWED_DURATIONS, obj.duration, DEFAULT_DRAFT.duration),
+      voice: pickAllowed(ALLOWED_VOICES, obj.voice, DEFAULT_DRAFT.voice),
+      brief: pickString(obj.brief, DEFAULT_DRAFT.brief),
+      cta: pickString(obj.cta, DEFAULT_DRAFT.cta, 200),
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function CreateWizard() {
   const [draft, setDraft] = useState<Draft>(DEFAULT_DRAFT);
   const [running, setRunning] = useState(false);
@@ -83,22 +121,31 @@ export function CreateWizard() {
   const [error, setError] = useState<string | null>(null);
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [restored, setRestored] = useState(false);
-  const stepTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const initialMount = useRef(true);
+  const restoredTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 草稿恢复 + autosave
+  // 草稿恢复（仅首次 mount）
   useEffect(() => {
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as Draft;
-        setDraft({ ...DEFAULT_DRAFT, ...parsed });
-        setRestored(true);
-        setTimeout(() => setRestored(false), 3500);
-      }
+      if (!raw) return;
+      const parsed = safeParseDraft(raw);
+      if (!parsed) return;
+      setDraft({ ...DEFAULT_DRAFT, ...parsed });
+      setRestored(true);
+      restoredTimerRef.current = setTimeout(() => setRestored(false), 3500);
     } catch {}
+    return () => {
+      if (restoredTimerRef.current) clearTimeout(restoredTimerRef.current);
+    };
   }, []);
 
+  // autosave（跳过首次 mount，避免 DEFAULT 覆盖刚 restore 的草稿）
   useEffect(() => {
+    if (initialMount.current) {
+      initialMount.current = false;
+      return;
+    }
     const t = setTimeout(() => {
       try {
         localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
@@ -108,13 +155,13 @@ export function CreateWizard() {
     return () => clearTimeout(t);
   }, [draft]);
 
-  // 流水线推进
+  // 流水线推进 · cleanup 闭包捕获本次 effect 的 id，避免 cancel/start 切换的 race
   useEffect(() => {
     if (!running) return;
-    stepTimer.current = setInterval(() => {
+    const id = setInterval(() => {
       setStep((s) => {
         const next = s + 1;
-        // 演示错误分支：5% 概率在某一步失败（生产请走真实事件流）
+        // 演示错误分支：0.01% 概率注入失败（保持 demo 几乎不触发；生产请走真实事件流）
         if (Math.random() < 0.0001) {
           setError("渲染节点暂时不可用，等几秒重试一次。");
           setRunning(false);
@@ -127,9 +174,7 @@ export function CreateWizard() {
         return next;
       });
     }, 800);
-    return () => {
-      if (stepTimer.current) clearInterval(stepTimer.current);
-    };
+    return () => clearInterval(id);
   }, [running]);
 
   function update<K extends keyof Draft>(key: K, value: Draft[K]) {
@@ -143,7 +188,7 @@ export function CreateWizard() {
   }
 
   function cancel() {
-    if (stepTimer.current) clearInterval(stepTimer.current);
+    // 切 running → false 让 useEffect cleanup 自己 clearInterval，避免双重清理
     setRunning(false);
   }
 
@@ -187,7 +232,7 @@ export function CreateWizard() {
               <button
                 key={t.slug}
                 type="button"
-                onClick={() => update("template", t.slug)}
+                onClick={() => update("template", t.slug as Template)}
                 aria-pressed={draft.template === t.slug}
                 className={cn(
                   "relative flex flex-col gap-3 rounded-md border border-border bg-card/40 p-4 text-left transition-all duration-200 ease-out",
@@ -253,7 +298,7 @@ export function CreateWizard() {
                 <select
                   id="aspect"
                   value={draft.aspect}
-                  onChange={(e) => update("aspect", e.target.value)}
+                  onChange={(e) => update("aspect", e.target.value as Aspect)}
                   className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   <option value="9:16">9:16 竖屏</option>
@@ -266,7 +311,7 @@ export function CreateWizard() {
                 <select
                   id="duration"
                   value={draft.duration}
-                  onChange={(e) => update("duration", e.target.value)}
+                  onChange={(e) => update("duration", e.target.value as Duration)}
                   className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   <option value="15">15 秒</option>
@@ -280,7 +325,7 @@ export function CreateWizard() {
                 <select
                   id="voice"
                   value={draft.voice}
-                  onChange={(e) => update("voice", e.target.value)}
+                  onChange={(e) => update("voice", e.target.value as Voice)}
                   className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   {VOICES.map((v) => (
@@ -351,7 +396,7 @@ export function CreateWizard() {
                   <span className="text-muted-foreground">{error}</span>
                 </div>
                 <Button size="sm" variant="outline" onClick={start} className="border-rose-500/30 hover:border-rose-500/60">
-                  <RotateCcw className="h-3 w-3" /> 重试
+                  <RefreshCw className="h-3 w-3" /> 重试
                 </Button>
               </div>
             )}
@@ -372,7 +417,7 @@ export function CreateWizard() {
             {running ? (
               <div className="grid gap-2">
                 <Button size="xl" disabled className="w-full text-base">
-                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <Loader2 className="preserve-motion h-5 w-5 animate-spin" />
                   正在生成（{step}/{PIPELINE.length}）
                 </Button>
                 <Button size="sm" variant="ghost" onClick={cancel} className="w-full">
@@ -427,7 +472,7 @@ export function CreateWizard() {
                       {done ? (
                         <Check className="h-3.5 w-3.5" />
                       ) : active ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        <Loader2 className="preserve-motion h-3.5 w-3.5 animate-spin" />
                       ) : (
                         <Icon className="h-3.5 w-3.5" />
                       )}

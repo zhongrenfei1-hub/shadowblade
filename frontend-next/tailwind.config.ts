@@ -71,12 +71,12 @@ const config: Config = {
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },
         "accordion-up": { from: { height: "var(--radix-accordion-content-height)" }, to: { height: "0" } },
-        shimmer: { "100%": { transform: "translateX(100%)" } },
+        // shimmer / pulse-ring / fade-up / skel 由 globals.css 定义（语义已收口）
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        shimmer: "shimmer 2s infinite",
+        "shimmer-slow": "shimmer 2.4s ease-in-out infinite",
       },
     },
   },
