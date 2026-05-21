@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compare v16 ↔ v17 · wearable hub · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-cmp {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-5);
+      }
+      .sb-cmp-pane {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        padding: var(--sb-space-5);
+        display: grid;
+        gap: var(--sb-space-4);
+      }
+      .sb-cmp-pane .head {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+      }
+      .sb-cmp-pane .head .v {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-md);
+        color: var(--sb-accent-300);
+        font-weight: 700;
+      }
+      .sb-cmp-pane .head b {
+        font-weight: 600;
+      }
+      .sb-cmp-pane .head time {
+        margin-left: auto;
+        color: var(--sb-text-faint);
+        font-size: var(--sb-text-xs);
+        font-family: var(--sb-font-mono);
+      }
+      .sb-cmp-preview {
+        aspect-ratio: 9/16;
+        max-height: 540px;
+        margin: 0 auto;
+        border-radius: var(--sb-radius);
+        overflow: hidden;
+        background: linear-gradient(160deg, #112646, #050a18);
+        width: min(280px, 100%);
+      }
+      .sb-cmp-preview svg { width: 100%; height: 100%; }
+
+      .sb-cmp-diff {
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-diff-row {
+        padding: var(--sb-space-3);
+        border-radius: var(--sb-radius-sm);
+        background: rgba(255,255,255,0.02);
+        font-size: var(--sb-text-sm);
+        display: grid;
+        gap: 4px;
+      }
+      .sb-diff-row .key {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+      }
+      .sb-diff-row .old { color: var(--sb-text-muted); text-decoration: line-through; }
+      .sb-diff-row .new { color: var(--sb-text); }
+      .sb-diff-row.add { background: rgba(34,211,183,0.05); border-left: 2px solid var(--sb-accent-500); }
+      .sb-diff-row.change { background: rgba(56,189,248,0.05); border-left: 2px solid var(--sb-status-running); }
+      .sb-diff-row.remove { background: rgba(248,113,113,0.05); border-left: 2px solid var(--sb-status-failed); }
+
+      .sb-cmp-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-3);
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.5);
+      }
+      .sb-cmp-stat {
+        text-align: center;
+        display: grid;
+        gap: 2px;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+      }
+      .sb-cmp-stat .v {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--sb-text);
+      }
+      .sb-cmp-stat .delta {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-accent-300);
+      }
+      .sb-cmp-stat .delta.down { color: var(--sb-status-queued); }
+
+      @media (max-width: 1100px) { .sb-cmp { grid-template-columns: 1fr; } .sb-cmp-stats { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+  </head>
+  <body data-route="projects">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="projects.html" style="color:var(--sb-text-muted)">Projects</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="project-detail.html" style="color:var(--sb-text-muted)">Spring product launch</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Compare v16 ↔ v17</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Swap sides
+            </button>
+            <button class="sb-btn sb-btn--ghost">Pick versions…</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Adopt v17
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Compare versions · spring-launch wearable hub</div>
+                <h1>v16 → v17</h1>
+                <p class="sb-page-head__lead">
+                  4 changes · 0 visual regressions · 1 brand-tone uplift · 0.4 s shorter render time.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-cmp-stats">
+            <div class="sb-cmp-stat"><div>Brand drift</div><div class="v">0.04 → 0.02</div><div class="delta">▼ 0.02</div></div>
+            <div class="sb-cmp-stat"><div>Tone score</div><div class="v">0.91 → 0.94</div><div class="delta">▲ 0.03</div></div>
+            <div class="sb-cmp-stat"><div>Render time</div><div class="v">4:12 → 3:48</div><div class="delta">▼ 24 s</div></div>
+            <div class="sb-cmp-stat"><div>File size</div><div class="v">8.6 → 8.4 MB</div><div class="delta">▼ 0.2 MB</div></div>
+          </section>
+
+          <section class="sb-cmp">
+            <article class="sb-cmp-pane">
+              <div class="head">
+                <span class="v">v16</span>
+                <b>Music duck lifted to -6 dB</b>
+                <time>28 min ago · Diego Alvarez</time>
+              </div>
+              <div class="sb-cmp-preview">
+                <svg viewBox="0 0 280 498" preserveAspectRatio="xMidYMid slice">
+                  <defs>
+                    <linearGradient id="vp16" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#14315a"/>
+                      <stop offset="100%" stop-color="#050a18"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="280" height="498" fill="url(#vp16)"/>
+                  <g transform="translate(140 240)">
+                    <circle r="100" fill="rgba(34,211,183,0.15)"/>
+                    <circle r="56" fill="rgba(34,211,183,0.32)"/>
+                    <circle r="22" fill="#22D3B7"/>
+                  </g>
+                  <g transform="translate(20 380)">
+                    <rect width="240" height="92" rx="12" fill="rgba(8,14,28,0.75)" stroke="rgba(255,255,255,0.08)"/>
+                    <text x="16" y="30" fill="#22D3B7" font-family="Inter" font-size="10" letter-spacing="2">ACME · WEARABLE HUB</text>
+                    <text x="16" y="56" fill="#F7F9FC" font-family="Inter Display" font-size="20" font-weight="700">Your day, on time</text>
+                    <text x="16" y="80" fill="#8590A8" font-family="Inter" font-size="11">Without lifting a wrist.</text>
+                  </g>
+                </svg>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">
+                <span>0:28 · 9:16 · -14.1 LUFS</span>
+              </div>
+            </article>
+
+            <article class="sb-cmp-pane">
+              <div class="head">
+                <span class="v">v17</span>
+                <b>Rush render · Priya's CTA copy</b>
+                <time>4 min ago · Ava Chen</time>
+                <span class="sb-pill sb-pill--running" style="margin-left:8px">Current</span>
+              </div>
+              <div class="sb-cmp-preview">
+                <svg viewBox="0 0 280 498" preserveAspectRatio="xMidYMid slice">
+                  <defs>
+                    <linearGradient id="vp17" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#15376a"/>
+                      <stop offset="100%" stop-color="#050a18"/>
+                    </linearGradient>
+                    <radialGradient id="vp17h" cx="0.7" cy="0.3" r="0.7">
+                      <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
+                      <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+                    </radialGradient>
+                  </defs>
+                  <rect width="280" height="498" fill="url(#vp17)"/>
+                  <rect width="280" height="498" fill="url(#vp17h)"/>
+                  <g transform="translate(140 240)">
+                    <circle r="110" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="2 5"/>
+                    <circle r="72" fill="rgba(34,211,183,0.2)"/>
+                    <circle r="40" fill="rgba(34,211,183,0.4)"/>
+                    <circle r="18" fill="#22D3B7"/>
+                  </g>
+                  <g transform="translate(20 380)">
+                    <rect width="240" height="92" rx="12" fill="rgba(8,14,28,0.75)" stroke="rgba(34,211,183,0.4)"/>
+                    <text x="16" y="30" fill="#22D3B7" font-family="Inter" font-size="10" letter-spacing="2">ACME · WEARABLE HUB</text>
+                    <text x="16" y="56" fill="#F7F9FC" font-family="Inter Display" font-size="20" font-weight="700">Your day, on time</text>
+                    <text x="16" y="80" fill="#8590A8" font-family="Inter" font-size="11">Without breaking stride.</text>
+                  </g>
+                </svg>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">
+                <span>0:28 · 9:16 · -14.1 LUFS</span>
+              </div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Change set · 4 items</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">+2 add</span>
+                <span class="sb-pill" style="color:var(--sb-status-running);background:rgba(56,189,248,0.12)">~1 change</span>
+                <span class="sb-pill" style="color:var(--sb-status-failed);background:rgba(248,113,113,0.12)">−1 remove</span>
+              </div>
+            </header>
+            <div class="sb-card__body sb-cmp-diff">
+              <div class="sb-diff-row change">
+                <div class="key">SCENE 04 · SCRIPT · WORD 18–22</div>
+                <div class="old">"…without lifting a wrist."</div>
+                <div class="new">"…without breaking stride."</div>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">tone_score 0.91 → 0.94 · authored by Priya Rao</div>
+              </div>
+              <div class="sb-diff-row change">
+                <div class="key">MUSIC · 0:24 → 0:28 · DUCK</div>
+                <div class="old">-8 dB under voice</div>
+                <div class="new">-6 dB under voice</div>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">EBU R128 LRA 7.2 → 7.0 · authored by Diego Alvarez</div>
+              </div>
+              <div class="sb-diff-row add">
+                <div class="key">SCENE 06 · OUTRO CARD</div>
+                <div class="new">+ Added outro: "Pre-order — first 1,000 ship free."</div>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">runtime +1.4 s · CTA conversion +22% in last cohort</div>
+              </div>
+              <div class="sb-diff-row remove">
+                <div class="key">SCENE 03 · OVERLAY #3</div>
+                <div class="old">- Removed second highlight ring (legibility on small screens)</div>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);font-family:var(--sb-font-mono)">render time -0.4 s · ratio 9:16 verified at 240×426</div>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Compare v16 ↔ v17 · audit hash 6a761f0 · diff cached 2 min ago</span>
+          <span>Adopt to publish · or restore v16 if v17 drifts</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

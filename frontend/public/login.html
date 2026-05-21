@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign in · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="Sign in · ShadowBlade" />
+    <meta property="og:description" content="Sign in to the ShadowBlade workspace with SSO or your guest reviewer email." />
+    <meta property="og:image" content="/showcase/auth/login-art.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/auth/login-art.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -148,6 +153,7 @@
     </style>
   </head>
   <body>
+    <main>
     <article class="sb-auth">
       <section class="sb-auth__left">
         <div class="sb-brand">
@@ -190,7 +196,7 @@
           </label>
           <label>
             Password
-            <input type="password" required placeholder="••••••••••••" value="••••••••••••" autocomplete="current-password" />
+            <input type="password" required placeholder="••••••••••••" autocomplete="current-password" />
           </label>
           <button class="sb-btn sb-btn--primary" type="submit">
             Sign in
@@ -217,5 +223,6 @@
         </div>
       </section>
     </article>
+    </main>
   </body>
 </html>
