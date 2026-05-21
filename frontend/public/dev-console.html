@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Developer console · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-dev-tabs {
+        display: flex; gap: 4px;
+        padding: 4px;
+        border-radius: var(--sb-radius-sm);
+        background: rgba(255,255,255,0.04);
+        margin-bottom: var(--sb-space-4);
+        width: max-content;
+      }
+      .sb-dev-tabs button {
+        padding: 7px 14px;
+        border-radius: var(--sb-radius-xs);
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+        font-weight: 500;
+      }
+      .sb-dev-tabs button.active { background: rgba(34,211,183,0.16); color: var(--sb-text); }
+
+      .sb-dev-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-6); align-items: start; }
+
+      .sb-hook-row {
+        display: grid;
+        grid-template-columns: 80px 1fr auto auto;
+        gap: var(--sb-space-3);
+        align-items: center;
+        padding: var(--sb-space-3) var(--sb-space-5);
+        border-bottom: 1px solid var(--sb-border);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-hook-row:last-child { border-bottom: none; }
+      .sb-hook-row .status {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .sb-hook-row .status.s2xx { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
+      .sb-hook-row .status.s4xx { color: var(--sb-status-queued); background: rgba(251,191,36,0.12); }
+      .sb-hook-row .status.s5xx { color: var(--sb-status-failed); background: rgba(248,113,113,0.12); }
+      .sb-hook-row b { font-weight: 600; }
+      .sb-hook-row .meta { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-text-faint); }
+      .sb-hook-row time { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-text-faint); }
+
+      .sb-key-row {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: var(--sb-space-3);
+        align-items: center;
+        padding: var(--sb-space-4) var(--sb-space-5);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-key-row:last-child { border-bottom: none; }
+      .sb-key-row b { font-weight: 600; font-size: var(--sb-text-md); display: block; }
+      .sb-key-row .key {
+        display: block;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-accent-300);
+        margin-top: 4px;
+        letter-spacing: 0.04em;
+      }
+      .sb-key-row .scope {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.04);
+        color: var(--sb-text-muted);
+      }
+      .sb-key-row .scope.read { color: var(--sb-status-running); background: rgba(56,189,248,0.12); }
+      .sb-key-row .scope.write { color: var(--sb-status-queued); background: rgba(251,191,36,0.12); }
+      .sb-key-row .scope.admin { color: var(--sb-status-failed); background: rgba(248,113,113,0.12); }
+
+      .sb-payload {
+        font-family: var(--sb-font-mono);
+        font-size: 12px;
+        line-height: 1.65;
+        background: rgba(6,10,22,0.7);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius);
+        padding: var(--sb-space-4);
+        max-height: 360px;
+        overflow: auto;
+      }
+      .sb-payload .k { color: var(--sb-status-queued); }
+      .sb-payload .s { color: var(--sb-accent-300); }
+      .sb-payload .n { color: var(--sb-status-running); }
+      .sb-payload .c { color: var(--sb-text-faint); }
+
+      .sb-stat-tile {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-stat-tile .v {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      .sb-stat-tile .label { font-size: var(--sb-text-xs); color: var(--sb-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+
+      @media (max-width: 1100px) { .sb-dev-layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Developer console</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Replay last failure
+            </button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+              New webhook
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              New API key
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Settings · Developer console</div>
+                <h1>API keys, webhooks, replay.</h1>
+                <p class="sb-page-head__lead">
+                  Signed payloads · 30-day delivery retries · replay from anywhere in the log. The control room behind the integrations marketplace.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-stat-tile"><div class="label">Webhooks today</div><div class="v">2,402</div></article>
+            <article class="sb-stat-tile"><div class="label">Delivery success</div><div class="v">99.94<small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">%</small></div></article>
+            <article class="sb-stat-tile"><div class="label">Median delivery</div><div class="v">412 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">ms</small></div></article>
+            <article class="sb-stat-tile"><div class="label">Active API keys</div><div class="v">7 <small style="font-size:var(--sb-text-md);color:var(--sb-text-muted)">of 25 cap</small></div></article>
+          </section>
+
+          <div class="sb-dev-tabs">
+            <button class="active">Webhook deliveries</button>
+            <button>API keys</button>
+            <button>Replay queue</button>
+            <button>Rate limits</button>
+          </div>
+
+          <section class="sb-dev-layout">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Recent deliveries</div>
+                <div class="sb-card__head-actions">
+                  <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">2,398 OK</span>
+                  <span class="sb-pill" style="color:var(--sb-status-queued);background:rgba(251,191,36,0.12)">3 retrying</span>
+                  <span class="sb-pill" style="color:var(--sb-status-failed);background:rgba(248,113,113,0.12)">1 failed</span>
+                </div>
+              </header>
+              <div class="sb-card__body sb-card__body--flush">
+                <div class="sb-hook-row">
+                  <span class="status s2xx">200</span>
+                  <div>
+                    <b>render.completed</b> · run #901 · spring-launch
+                    <div class="meta">acme.example.com/hooks/sb · 412 ms · 4 KB payload</div>
+                  </div>
+                  <time>0.3 s ago</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                </div>
+                <div class="sb-hook-row">
+                  <span class="status s2xx">200</span>
+                  <div>
+                    <b>review.requested</b> · run #896 · SE bootcamp
+                    <div class="meta">acme.example.com/hooks/sb · 388 ms · 3 KB</div>
+                  </div>
+                  <time>14 s ago</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                </div>
+                <div class="sb-hook-row">
+                  <span class="status s2xx">200</span>
+                  <div>
+                    <b>render.started</b> · run #902 · AI Copilot demo
+                    <div class="meta">slack.com/hook/T01… · 244 ms</div>
+                  </div>
+                  <time>1 min ago</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                </div>
+                <div class="sb-hook-row">
+                  <span class="status s4xx">429</span>
+                  <div>
+                    <b>render.queued</b> · run #903
+                    <div class="meta">acme.example.com/hooks/sb · rate-limited · retry in 18 s</div>
+                  </div>
+                  <time>2 min ago</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                </div>
+                <div class="sb-hook-row">
+                  <span class="status s5xx">502</span>
+                  <div>
+                    <b>render.failed</b> · run #894 · helios story
+                    <div class="meta">acme.example.com/hooks/sb · bad gateway · retries exhausted</div>
+                  </div>
+                  <time>14 min ago</time>
+                  <button class="sb-btn sb-btn--primary sb-btn--sm">Replay</button>
+                </div>
+                <div class="sb-hook-row">
+                  <span class="status s2xx">200</span>
+                  <div>
+                    <b>review.approved</b> · run #888 · series-c teaser
+                    <div class="meta">tiktok.com/api/upload · 1,802 ms · 8.4 MB upload</div>
+                  </div>
+                  <time>1 hr ago</time>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Inspect</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Payload · render.completed</div>
+                <div class="sb-card__head-actions">
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Copy</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Resign</button>
+                </div>
+              </header>
+              <div class="sb-card__body">
+                <pre class="sb-payload"><span class="c">// Signed via HMAC-SHA256 · X-ShadowBlade-Signature header</span>
+{
+  <span class="k">"event"</span>:        <span class="s">"render.completed"</span>,
+  <span class="k">"workspace"</span>:    <span class="s">"acme"</span>,
+  <span class="k">"project_id"</span>:   <span class="n">101</span>,
+  <span class="k">"run_id"</span>:       <span class="n">901</span>,
+  <span class="k">"output"</span>: {
+    <span class="k">"url"</span>:        <span class="s">"https://cdn.shadowblade.io/r/901/cut.mp4"</span>,
+    <span class="k">"width"</span>:      <span class="n">1080</span>,
+    <span class="k">"height"</span>:     <span class="n">1920</span>,
+    <span class="k">"duration_ms"</span>: <span class="n">28000</span>,
+    <span class="k">"size_bytes"</span>:  <span class="n">8425184</span>,
+    <span class="k">"loudness_lufs"</span>: <span class="n">-14.1</span>,
+    <span class="k">"checksum"</span>:    <span class="s">"sha256:a9c8…f0b1"</span>
+  },
+  <span class="k">"brand_kit"</span>:    <span class="s">"acme-core"</span>,
+  <span class="k">"drift_score"</span>:  <span class="n">0.02</span>,
+  <span class="k">"started_at"</span>:   <span class="s">"2026-05-21T14:08:02Z"</span>,
+  <span class="k">"finished_at"</span>:  <span class="s">"2026-05-21T14:13:40Z"</span>,
+  <span class="k">"webhook_id"</span>:   <span class="s">"wh_a3b8…f209"</span>
+}</pre>
+                <div style="font-family:var(--sb-font-mono);font-size:11px;color:var(--sb-text-faint);margin-top:var(--sb-space-3)">
+                  X-ShadowBlade-Signature: t=1747837000,v1=8a44d…ab21<br/>
+                  X-ShadowBlade-Webhook-Id: wh_a3b8…f209<br/>
+                  X-ShadowBlade-Attempt: 1
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">API keys · 7 active</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate all</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush">
+              <div class="sb-key-row">
+                <div>
+                  <b>CI · render-on-push</b>
+                  <span class="key">sk_live_•••••••••••••••••6f12</span>
+                </div>
+                <span class="scope write">write</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+              </div>
+              <div class="sb-key-row">
+                <div>
+                  <b>Marketing dashboard · BI export</b>
+                  <span class="key">sk_live_•••••••••••••••••a4d8</span>
+                </div>
+                <span class="scope read">read</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+              </div>
+              <div class="sb-key-row">
+                <div>
+                  <b>Slack bot</b>
+                  <span class="key">sk_live_•••••••••••••••••2c89</span>
+                </div>
+                <span class="scope read">read</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+              </div>
+              <div class="sb-key-row">
+                <div>
+                  <b>Internal · L&amp;D Notion sync</b>
+                  <span class="key">sk_live_•••••••••••••••••0033</span>
+                </div>
+                <span class="scope write">write</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+              </div>
+              <div class="sb-key-row">
+                <div>
+                  <b>Procurement (Helios) · BYOC</b>
+                  <span class="key">sk_live_•••••••••••••••••ff21</span>
+                </div>
+                <span class="scope admin">admin</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Webhook deliveries retained 30 days · keys hashed at rest</span>
+          <span>SDKs · <a href="docs.html" style="color:var(--sb-accent-300)">docs.html</a> · TypeScript · Python · Go · Rust</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

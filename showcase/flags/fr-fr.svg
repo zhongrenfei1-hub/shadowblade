@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 26" width="36" height="26" role="img" aria-label="French (fr-fr) language pill">
+  <defs>
+    <linearGradient id="sb-flag-fr-navy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2C528F"/>
+      <stop offset="100%" stop-color="#0F1D3A"/>
+    </linearGradient>
+    <linearGradient id="sb-flag-fr-red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="sb-flag-fr-white" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F7F8FB"/>
+      <stop offset="100%" stop-color="#D8DDE5"/>
+    </linearGradient>
+    <linearGradient id="sb-flag-fr-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.20)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <clipPath id="sb-flag-fr-clip"><rect width="36" height="26" rx="4"/></clipPath>
+    <filter id="sb-flag-fr-shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="0.6" stdDeviation="0.5" flood-color="#06101F" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#sb-flag-fr-shadow)" clip-path="url(#sb-flag-fr-clip)">
+    <!-- Three stylised diagonal bands (not literal vertical tricolour) -->
+    <rect width="36" height="26" fill="url(#sb-flag-fr-navy)"/>
+    <polygon points="14,0 26,0 0,26 0,16" fill="url(#sb-flag-fr-white)" opacity="0.92"/>
+    <polygon points="26,0 36,0 36,10 0,26" fill="url(#sb-flag-fr-red)" opacity="0.0"/>
+    <polygon points="28,0 36,0 36,12 8,26 0,26 0,22" fill="url(#sb-flag-fr-red)"/>
+    <rect width="36" height="14" fill="url(#sb-flag-fr-sheen)"/>
+    <rect width="36" height="26" rx="4" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+  </g>
+
+  <text x="18" y="17" font-family="Inter Display, Inter, sans-serif" font-size="10" font-weight="700"
+        fill="#FFFFFF" fill-opacity="0.95" text-anchor="middle" letter-spacing="0.4"
+        style="paint-order:stroke;stroke:rgba(15,29,58,0.55);stroke-width:0.6">FR</text>
+</svg>

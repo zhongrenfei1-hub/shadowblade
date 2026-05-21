@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Leader portrait — LM, abstract silhouette glyph">
+  <defs>
+    <linearGradient id="sb-leader-lm-bg" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#142A55"/>
+      <stop offset="100%" stop-color="#060C1A"/>
+    </linearGradient>
+    <linearGradient id="sb-leader-lm-figure" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#2C528F"/>
+    </linearGradient>
+    <radialGradient id="sb-leader-lm-glow" cx="0.70" cy="0.30" r="0.55">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="256" height="256" rx="128" fill="url(#sb-leader-lm-bg)"/>
+  <rect width="256" height="256" rx="128" fill="url(#sb-leader-lm-glow)"/>
+
+  <!-- Faint orbit arc -->
+  <circle cx="128" cy="128" r="108" fill="none" stroke="rgba(56,189,248,0.16)" stroke-width="1" stroke-dasharray="2 5"/>
+
+  <!-- Abstract silhouette: head + shoulders -->
+  <g fill="url(#sb-leader-lm-figure)">
+    <circle cx="128" cy="104" r="34"/>
+    <path d="M52 220 Q52 168 128 162 Q204 168 204 220 Z"/>
+  </g>
+
+  <!-- Highlight stripe across shoulders -->
+  <path d="M64 200 Q128 184 192 200" stroke="rgba(247,249,252,0.22)" stroke-width="1.5" fill="none"/>
+
+  <!-- Accent ring (top-right placement) -->
+  <circle cx="178" cy="58" r="6" fill="#38BDF8"/>
+  <circle cx="178" cy="58" r="11" fill="none" stroke="rgba(56,189,248,0.35)" stroke-width="1.2"/>
+
+  <!-- Monogram overlay -->
+  <g font-family="Inter Display, Inter, sans-serif" text-anchor="middle">
+    <text x="128" y="118" font-size="36" font-weight="700" fill="#0F2A4A" letter-spacing="-1.2">LM</text>
+  </g>
+</svg>
