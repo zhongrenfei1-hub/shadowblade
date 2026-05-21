@@ -1,114 +1,333 @@
 # ShadowBlade
 
-企业级 AI 短视频生成云。一份简报 → 广播级成片，5 分钟内出片，对照你的品牌套件渲染。
+> **企业级 AI 短视频生成 SaaS** · 一句主题 → 真画面成片 · Next.js 14 + FastAPI + ffmpeg
 
-## 技术栈
+![demo](demo/demo-preview.gif)
 
-| 层 | 技术 |
-| --- | --- |
-| 后端 | FastAPI 0.115 · SQLAlchemy 2 异步 · Redis |
-| Worker | Celery（渲染、TTS、空镜素材、合成）|
-| 前端 | 原生 HTML + 设计令牌（Inter / JetBrains Mono）|
-| 存储 | S3 兼容对象存储 |
-| 身份 | SAML SSO + SCIM 自动配置 |
+输入一句"春季美容补水套餐 - 新客首单 5 折"，10–20 秒之后浏览器里出来一段能直接发抖音/小红书的 MP4 — 自带营销文案、配音、字幕、品牌水印、封面、智能过渡。
 
-## 页面地图（47 页已交付）
+完整 demo 视频：[demo/demo-skincare-24s.mp4](demo/demo-skincare-24s.mp4)（4.6 MB · 24 秒）
 
-> 完整可点击索引：`sitemap.html`。
+---
 
-### 营销侧（公开访问）
+## ⚡ 它能干什么
 
-| 路由 | 页面 |
-| --- | --- |
-| `index.html`         | 落地页 — Hero 流水线可视化、客户 logo、特性 |
-| `features.html`      | 工作原理 — 脚本 / 分镜 / 配音 / 渲染 四阶段 |
-| `pricing.html`       | 4 档计划、年度 / 月度切换、特性对照表 |
-| `customer-story.html`| Helios 客户案例 — Hero、KPI、正文、引用、CTA |
-| `gallery.html`       | 客户作品集（从 showcase 缩略图加载）|
-| `changelog.html`     | 时间轴更新日志 + 分类标签 |
-| `docs.html`          | 知识网格 + curl 示例 + Cmd-K 搜索 |
-| `security.html`      | 信任徽章 + 6 大支柱 + 合规文档表 |
-| `status.html`        | 服务状态页 — 6 个服务、60 分钟节拍条、事故记录 |
-| `help.html`          | 帮助中心 — 搜索 + 8 个分类 + FAQ + 联系入口 |
-| `about.html`         | 关于我们 — 宣言 + 团队 + 媒体引用 |
-| `press-kit.html`     | 媒体资源 — logo、调色板、截图、事实表、品牌规范 |
-| `subscribe.html`     | 订阅 — 邮件 + 主题 + RSS / JSON / Slack 渠道 |
-| `404.html`           | 片段丢失 — glyph + 路径回显 + 工作台入口 |
-
-### 身份与引导
-
-| 路由 | 页面 |
-| --- | --- |
-| `login.html`             | SSO 优先（Okta · Entra · Google）+ 邮箱 + 品牌侧栏 |
-| `signup.html`            | 分屏 — 营销侧栏 + 60 秒工作空间表单 |
-| `onboarding.html`        | 首启引导 — 品牌套件来源选择器 |
-| `workspace-switcher.html`| Cmd-K 多租户切换器 |
-| `upgrade.html`           | 应用内升级提示 |
-| `review.html`            | 外部审核签名链接预览 |
-
-### 工作空间（含侧边栏 shell）
-
-| 路由 | 页面 |
-| --- | --- |
-| `dashboard.html`       | 工作台 — KPI · 实时流水线 · 待审批 · 项目 |
-| `studio.html`          | 编辑器 — 场景导航 + 9:16 画布 + 时间线 + 检视器 + 评审 |
-| `projects.html`        | 项目 — 筛选 chips + 密集表格 |
-| `project-detail.html`  | 项目详情 — 封面 + 元数据 + KPI + 版本历史 |
-| `templates.html`       | 模板库 — 8 张卡片 + 悬停播放 |
-| `template-detail.html` | 模板详情 — 预览 + 场景 + 规格 |
-| `assets.html`          | 素材库 — 文件夹 + 标签 + 拖拽上传 + 网格 |
-| `asset-detail.html`    | 素材详情 — 播放器 + 元数据 + 使用记录 |
-| `render-queue.html`    | 渲染队列 — 集群利用率 + 4 个 worker + 优先级 |
-| `job-detail.html`      | 流程详情 — Gantt + 实时 GPU 图 + 彩色日志 |
-| `compare.html`         | 版本对比 — 双栏 + 变更清单 |
-| `localisation.html`    | 本地化 — 5 语言变体网格 |
-| `analytics.html`       | 数据分析 — KPI + 7 日柱状 + 排行榜 + 偏移告警 |
-| `brand-kit.html`       | 品牌套件 — 切换 + 色板 + 字体 + 语态 + logo |
-| `brand-kit-compare.html`| 品牌套件版本对比（v2 ↔ v3）|
-| `team.html`            | 团队与权限 — 成员 + 权限矩阵 + SSO |
-| `settings.html`        | 设置 — 通用 + 渲染 + 安全 + 计费 + API + 开关 |
-| `billing.html`         | 计费与套餐 — 套餐摘要 + 用量计 + 发票 |
-| `integrations.html`    | 集成 — 15 张卡片市场（Slack/Notion/Figma/YouTube/…）|
-| `dev-console.html`     | 开发者控制台 — Webhook + API 密钥 + 重发 |
-| `webhook-detail.html`  | Webhook 投递详情 |
-| `webhook-new.html`     | 新建 Webhook |
-| `audit-log.html`       | 审计日志 — 防篡改事件流 + 动词色块 |
-| `notifications.html`   | 收件箱 — 分类标签 + glyph + 内联操作 |
-| `components.html`      | 设计系统 — 全部组件一页 |
-| `new-video.html`       | 新建视频向导 — 4 步 + ETA + 智能建议 |
-| `sitemap.html`         | 47 页分类链接图 |
-
-## 本地运行
-
-```bash
-make install        # 一次性
-make dev            # 后端跑 :8000，前端跑 :3000
+```
+┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
+│ 商家主题 │ → │ LLM 脚本 │ → │ TTS 配音 │ → │ ASR 字幕 │ → │  混剪    │ → MP4
+└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
+                   ↑               ↑               ↑              ↑
+              模板生成器       edge-tts        faster-whisper   ffmpeg
+              （8 个场景）     （免费、无 key）  （本地 base 74MB）  +
+                                                                智能过渡
+                                                                调色 LUT
+                                                                BGM ducking
+                                                                品牌水印
+                                                                + 自动封面
 ```
 
-打开 `http://localhost:3000` 看落地页，点「进入工作台」进入主应用。前端会调
-`/api/v1/projects`（FastAPI 已开 CORS），后端不在的话自动回退到本地固件数据。
+**真画面素材**通过 **关键词爬取**（无 API key）：
+- `yt-dlp` 的 `ytsearch:` 抓 YouTube
+- `archive.org` 开放搜索 API 兜底（国内可达）
+- 用户也可以贴任意 URL（B 站 / 抖音 / 任何 yt-dlp 支持的 ~1500 站）
 
-## 四环飞轮
+---
 
-这个仓库由四个并发环构建：
+## 🚀 30 秒上手
 
-1. **Design 设计环** — 后端 + UI 设计系统 + 所有工作空间页面。10 轮交付（v1 → v10）。
-2. **Showcase 展示环** — 品牌素材、营销视觉、产品截图、语态规范、空状态插画。3 轮（45 个 SVG 在 `/showcase/`）。
-3. **Test 测试环** — 无障碍、对比度、文案、响应式、品牌一致性审计。4 轮（`docs/test-ring-report-00{1,2,3,4}.md`）。
-4. **Refine 精修环** — 应用 Test 发现 + 接入 Showcase 素材。4 轮（数十处修复折叠回 Design 提交）。
+```bash
+git clone https://github.com/zhongrenfei1-hub/shadowblade.git
+cd shadowblade
 
-产物在 `frontend/`、`backend/`、`showcase/`、`docs/`。整个循环并发运行 — 每环单独提交，2–4 环在每轮 Design 后自动重启。
+make install         # Python venv + pip install (ffmpeg/edge-tts/whisper/yt-dlp)
+make install-next    # npm install
+make next            # 同时起后端 :8000 + 前端 :3001
+```
 
-## 视觉调性
+浏览器开 **http://localhost:3001/studio**，输入主题，点 **「立即生成视频」**。
 
-深蓝 `#0F2A4A` + 石墨 `#11161F` + 灰白 `#F7F9FC` + 青绿强调 `#22D3B7`。
-Inter Display 用于标题，Inter 用于正文，JetBrains Mono 用于数值与代码。
-深色驾驶舱 · 仪表级排版 · 状态药丸是通用词汇表。
+---
 
-完整设计词汇见 `components.html`。
+## 🎬 完整使用流程
 
-## 中文化
+### 第 1 步：进入 Studio
 
-本项目使用简体中文。术语对照表：`docs/i18n-glossary.md`。
-品牌名 `ShadowBlade` 保留英文（产品名 / 品牌名）。
-所有第三方品牌、技术标准、SDK 名等保留原文。
+打开 `http://localhost:3001/studio`，看到这个：
+
+```
+🪄 AI 一键生成     ←  默认模式：主题 → MP4
+🎚️ 手动混剪        ←  专家模式：直接调素材/字幕/过渡
+```
+
+### 第 2 步：选素材来源
+
+```
+🔍 关键词爬取   ←  无需 key，推荐
+🔗 自定义 URL   ←  贴 YouTube/B 站 URL → yt-dlp 下载
+📦 内置示例    ←  彩条测试图
+🌐 Pexels      ←  需 API key（pexels.com/api，免费 1 分钟注册）
+```
+
+### 第 3 步：填表
+
+- **主题** — 一句话，越具体越好（"春季美容护肤套餐 5 折"）
+- **配音音色** — 晓晓女声 / 云扬男声 / 晓伊女声 / 云夏男声 / 晓萱女声
+- **输出格式** — 9:16 竖屏 / 16:9 横屏 / 1:1 方形
+- **调色 LUT** — 自然 / 暖调 / 冷调 / 电影感 / 高对比
+- **脚本字数** — 80–400 字滑动条（影响视频时长）
+- **关键词**（爬取模式）— 留空用主题，或自己填英文（`skincare`/`coffee shop`/`nail salon`）
+
+### 第 4 步：点立即生成
+
+右侧 5 步进度可视化：
+
+```
+✓ 拉素材       (10–120 秒 · 看素材库快慢)
+✓ 脚本生成      ( <1 秒 · smart template)
+✓ 配音 edge-tts  (3–8 秒 · 长脚本更慢)
+✓ 字幕识别      (跳过 OR faster-whisper 5–10 秒)
+✓ 智能混剪      (5–15 秒 · VideoToolbox GPU 加速)
+✓ 封面          ( <1 秒)
+```
+
+### 第 5 步：看片 + 下载
+
+右下出现 `<video>` 直接播放 + "下载 MP4" 链接 + 脚本 + hashtag + 警告面板。
+
+---
+
+## 🧩 架构
+
+### 后端 services 模块
+
+| 模块 | 作用 |
+|---|---|
+| `services/video/probe.py` | ffprobe 包装 — 元数据 + BS.1770 LUFS |
+| `services/video/transitions.py` | 智能过渡选择 — fade/fadeblack/fadewhite/dissolve/smooth\*/hblur |
+| `services/video/subtitle.py` | 字幕智能断句 + SRT/ASS 导出 + CPS 质量评分 |
+| `services/video/audio.py` | 双轨混音 — sidechain ducking + LUFS 归一化 + 自适应 BGM |
+| `services/video/pacing.py` | silencedetect → 智能切分镜头 |
+| `services/video/beat.py` | 纯 Python BPM + onset 检测（不依赖 librosa）|
+| `services/video/color.py` | 7 种 LUT 预设 + .cube LUT 加载 + 自动白平衡 |
+| `services/video/ken_burns.py` | 静图 zoompan 推拉 4 种预设 |
+| `services/video/speed.py` | 变速 0.1× – 8×（setpts + atempo 链式）|
+| `services/video/aspect.py` | 多比例自适应（pad / crop / blur_bg）|
+| `services/video/watermark.py` | 品牌水印 + 时序控制（开头/结尾/脉冲）|
+| `services/video/covers.py` | 封面提取 + 品牌渐变 + 标题叠加 |
+| `services/video/text_render.py` | Pillow 文字栅格化（libass 缺失时的回退）|
+| `services/video/features.py` | ffmpeg 能力探测 |
+| `services/video/encoder.py` | 编码预设（社交/横屏/方形/预览）|
+| `services/video/pipeline.py` | **MixPipeline 主编排器** |
+| `services/llm/script_generator.py` | LLM 替身 — 8 场景模板（美容/美甲/SPA/咖啡/健身/咨询/开业/默认）|
+| `services/audio/tts.py` | edge-tts 包装（5 个中文音色）|
+| `services/audio/asr.py` | faster-whisper 包装（懒加载 base 模型）|
+| `services/stock/pexels.py` | Pexels Videos API 客户端 |
+| `services/stock/youtube.py` | yt-dlp 通用 URL 下载 |
+| `services/stock/searcher.py` | 关键词爬取（ytsearch + archive.org 兜底）|
+
+### API 端点
+
+```
+GET  /api/v1/health                    健康检查 (ffmpeg + 配置状态)
+POST /api/v1/generate                  一键端到端 (topic + clips → MP4)
+GET  /api/v1/generate/jobs/{id}        轮询异步任务状态
+POST /api/v1/generate/script           LLM 脚本生成
+POST /api/v1/generate/audio            edge-tts 配音
+POST /api/v1/generate/subtitle         faster-whisper 字幕识别
+POST /api/v1/generate/cover            ffmpeg 封面提取
+GET  /api/v1/generate/scenarios        列出 8 个场景模板
+GET  /api/v1/generate/voices           列出 5 个 TTS 音色
+POST /api/v1/mix-video/preview         同步 360p 预览
+POST /api/v1/mix-video                 异步混剪 (1080p+)
+GET  /api/v1/mix-video/tasks/{id}      查询混剪任务
+POST /api/v1/mix-video/analyze/beats   音频 BPM + onsets
+POST /api/v1/mix-video/analyze/subtitles  字幕 CPS 质量报告
+POST /api/v1/mix-video/select-clips    智能素材选择器
+GET  /api/v1/mix-video/looks/list      7 种调色 LUT
+GET  /api/v1/mix-video/aspects/list    4 种比例
+GET  /api/v1/mix-video/features        ffmpeg 能力探测
+POST /api/v1/stock/search              关键词爬取（yt-dlp + archive.org，无 key）
+POST /api/v1/stock/from-url            yt-dlp 抓任意 URL
+POST /api/v1/stock/pexels/search       Pexels 搜索（需 key）
+POST /api/v1/stock/pexels/auto         Pexels 自动下载 top N
+GET  /api/v1/stock/status              哪些素材源已配置
+```
+
+### 数据流（一键生成）
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 浏览器
+    participant N as Next.js :3001
+    participant F as FastAPI :8000
+    participant S as services/
+    participant FS as 本地 storage/
+
+    U->>N: POST /api/v1/generate {topic}
+    N->>F: 透传 (rewrite)
+    F->>S: generate_script(topic)
+    S-->>F: 5 句营销文案 + cues
+    F->>S: stock.search(keyword)
+    S->>S: yt-dlp ytsearch / archive.org
+    S-->>FS: storage/stock/search/*.mp4
+    F->>S: tts.generate_audio(script)
+    S-->>FS: storage/work/voice.wav
+    F->>S: MixPipeline.run(clips, voice, cues)
+    S->>S: probe → transitions → subtitle → mix → watermark → encode → cover
+    S-->>FS: storage/mix/job_*/preview.mp4
+    F-->>N: { video_url: /static/storage/... }
+    N-->>U: <video src="..."> 直接播放
+```
+
+---
+
+## 📺 演示视频
+
+**生成的真画面成片**（24 秒 · 4.6 MB · 360×640 9:16）：
+
+- 在线播放：[demo/demo-skincare-24s.mp4](demo/demo-skincare-24s.mp4)
+- 封面：![cover](demo/demo-skincare-cover.jpg)
+
+**主题**：`春季美容护肤套餐 - 新客首单 5 折`
+
+**关键参数**：
+- 8 段 archive.org 化妆品广告画面，关键词 `skincare beauty` 自动爬取
+- 晓晓女声配音（edge-tts 免费）
+- cinematic LUT 调色 + 自动白平衡
+- 自适应 BGM ducking（人声 ≈ -19.8 LUFS → duck 阈值 -13.8dB）
+- fade + fadeblack 智能过渡
+- 字幕峰值 CPS 5.91（远低于阅读上限 18）
+- VideoToolbox GPU 编码
+
+---
+
+## 🛠️ 项目结构
+
+```
+shadowblade/
+├── backend/
+│   ├── app/
+│   │   ├── api/                    FastAPI 路由
+│   │   │   ├── generate.py            ← 一键端到端 /generate
+│   │   │   ├── mix_video.py           ← 视频混剪 /mix-video
+│   │   │   ├── stock.py               ← 素材爬取 /stock
+│   │   │   ├── auth.py, projects.py, ...
+│   │   ├── services/
+│   │   │   ├── video/              ← 16 个混剪模块
+│   │   │   ├── llm/                ← 脚本生成模板
+│   │   │   ├── audio/              ← TTS + ASR
+│   │   │   └── stock/              ← Pexels + yt-dlp + 爬取
+│   │   └── main.py
+│   ├── tests/video/                ← 100+ 测试，pytest
+│   └── requirements.txt
+├── frontend-next/
+│   ├── app/(app)/studio/           ← Studio AI 一键生成 + 手动混剪
+│   ├── app/(app)/dashboard, projects, ... (36 页)
+│   ├── components/workspace/
+│   │   ├── studio-generate.tsx       ← AI 模式 UI
+│   │   ├── studio-workbench.tsx      ← 手动模式 UI
+│   │   └── studio-mode-switch.tsx
+│   └── lib/api.ts                  ← 类型化 API 客户端
+├── storage/
+│   ├── samples/                    ← 测试素材（ffmpeg 合成）
+│   ├── stock/search/               ← 爬取下载的真素材
+│   ├── stock/ytdlp/                ← yt-dlp 抓的 URL 素材
+│   ├── work/                       ← TTS / SRT 中间产物
+│   ├── final/                      ← 封面输出
+│   └── mix/                        ← 成片 MP4 输出
+├── demo/                           ← README 演示资产
+└── Makefile
+```
+
+---
+
+## 🧪 跑测试
+
+```bash
+cd backend
+./.venv/bin/pytest tests/video/ -v
+```
+
+100+ 测试覆盖：
+- probe / transitions / subtitle / audio / pacing / watermark / covers / brand / encoder
+- 端到端 mix pipeline（合成测试素材 → 真 MP4 验证）
+- beat detection（90/120 BPM click track）
+- Ken Burns / 字幕质量评分 / 智能素材选择
+- 色彩 LUT / 变速 / 多比例 / 水印分时 / 字幕入场动画
+- 自适应 BGM 混音 / SRT 读写
+- 脚本生成（8 场景路由 + 时长估算）
+- edge-tts（在线时跑真 TTS）
+
+---
+
+## ⚙️ 配置（可选）
+
+环境变量：
+
+```bash
+# 存储根目录（默认：repo 根目录的 storage/）
+export SHADOWBLADE_STORAGE_ROOT=/path/to/storage
+
+# Pexels API key（可选，只有用 Pexels 模式时需要）
+export PEXELS_API_KEY=your-key-here
+
+# CORS 允许的前端域名（默认包含 localhost:3000/3001）
+export SHADOWBLADE_CORS_ORIGINS='["http://localhost:3001"]'
+
+# JWT 密钥（生产环境务必改）
+export SHADOWBLADE_JWT_SECRET=change-in-prod
+```
+
+---
+
+## 🐛 故障排查
+
+| 症状 | 原因 | 解决 |
+|---|---|---|
+| `/studio` 点生成卡在"混剪"步骤 | 后端 cwd 不对 → 找不到 storage 素材 | 用 `make next`（已修），或确保 `storage_root` 是绝对路径 |
+| `libass missing` 警告 | Homebrew ffmpeg 默认不带 libass | 没事，自动回退到 Pillow PNG 字幕（无视觉差异）|
+| Pexels 搜索 403 | 没设 API key | `export PEXELS_API_KEY=xxx` 重启 backend，或换用"关键词爬取"模式 |
+| yt-dlp 慢 | 国外站点直连慢 | 默认走 archive.org 兜底，或加 `--cookies-from-browser chrome` |
+| Vercel 上 `/studio` 点生成报错 | 生产没 ffmpeg 后端 | 只在本地能跑真混剪；Vercel 仅显示 UI |
+| 视频太短（14 秒） | 素材源单段太短 → 循环到 max_shot 上限 | 拉脚本字数 > 250，或用更长素材源 |
+
+---
+
+## 📦 依赖
+
+**后端**（Python 3.11+）：
+```
+fastapi==0.115.0      # Web framework
+uvicorn==0.30.6       # ASGI server
+sqlalchemy==2.0.35    # ORM (async)
+pydantic==2.9.2       # Schemas
+Pillow==10.4.0        # PNG fallback rendering
+edge-tts==7.2.8       # 微软神经 TTS（免费）
+faster-whisper==1.2.1 # ASR (CTranslate2)
+yt-dlp==2025.10.27    # URL/搜索下载器
+httpx==0.27.2         # HTTP client (Pexels, archive.org)
+```
+
+**系统**：
+- `ffmpeg ≥ 8.x`（带 `videotoolbox` 可选，Mac GPU 加速）
+- `ffprobe`
+
+**前端**（Node 18+）：
+- Next.js 14.2
+- React 18
+- TailwindCSS 3.4
+- Radix UI primitives
+- Lucide icons
+
+---
+
+## 🤝 致谢
+
+API 契约参考自 [finewood2008/shadowblade](https://github.com/finewood2008/shadowblade)（Centaur AI）的 6 端点设计。本仓库的实现是从零编写，混剪能力更深（智能过渡 / LUT / 节拍 / 自适应混音 / 关键词爬取），LLM 部分用模板生成器代替（保留切换为真实 LLM 的接口）。
+
+---
+
+## 📄 许可
+
+待定。当前为个人项目，请勿商用未授权部署。
