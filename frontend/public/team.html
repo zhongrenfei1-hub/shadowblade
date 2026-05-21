@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team &amp; roles · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-role-pill {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 3px 10px; border-radius: var(--sb-radius-pill);
+        font-size: var(--sb-text-xs); font-weight: 600;
+        background: rgba(255,255,255,0.05);
+      }
+      .sb-role-pill--admin    { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
+      .sb-role-pill--producer { color: #38BDF8;             background: rgba(56,189,248,0.12); }
+      .sb-role-pill--brand    { color: #a78bfa;             background: rgba(167,139,250,0.12); }
+      .sb-role-pill--reviewer { color: #fbbf24;             background: rgba(251,191,36,0.12); }
+      .sb-role-pill--viewer   { color: var(--sb-text-muted); }
+
+      .sb-avatar-lg {
+        width: 36px; height: 36px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-weight: 700; font-size: var(--sb-text-sm);
+        background: linear-gradient(135deg, #1c3868, #0a1428);
+        color: var(--sb-accent-300);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      .sb-table .name-cell {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+      }
+      .sb-table .name-cell b { font-weight: 600; }
+      .sb-table .name-cell span { color: var(--sb-text-faint); font-size: var(--sb-text-xs); }
+
+      .sb-permission-grid {
+        display: grid;
+        grid-template-columns: 240px repeat(5, 1fr);
+        align-items: center;
+        font-size: var(--sb-text-sm);
+      }
+      .sb-permission-grid > * {
+        padding: 12px 8px;
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-permission-grid .head {
+        font-size: var(--sb-text-xs); font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--sb-text-faint);
+        text-align: center;
+      }
+      .sb-permission-grid .label { font-weight: 600; }
+      .sb-permission-grid .cell {
+        text-align: center;
+        font-family: var(--sb-font-mono);
+        color: var(--sb-text-muted);
+      }
+      .sb-permission-grid .cell.yes { color: var(--sb-accent-300); }
+      .sb-permission-grid .cell.no  { opacity: 0.4; }
+    </style>
+  </head>
+  <body data-route="team">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Workspace</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Team &amp; roles</b>
+          </div>
+          <label class="sb-topbar__search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" placeholder="Find a teammate, group, or role…" />
+            <kbd>⌘K</kbd>
+          </label>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">SCIM provisioning</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 8v6M19 11h6"/></svg>
+              Invite
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Workspace · 24 seats used of 24</div>
+                <h1>Team &amp; roles</h1>
+                <p class="sb-page-head__lead">
+                  SSO via Okta. SCIM provisioning hourly. 18 producers, 4 reviewers, 2 admins. Reviewer approvals are required before any cut publishes.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-kpi"><div class="sb-kpi__label">Seats</div><div class="sb-kpi__value">24 <small>/ 24</small></div><span class="sb-kpi__delta sb-kpi__delta--up">100% utilised</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">SSO</div><div class="sb-kpi__value">Okta</div><span class="sb-kpi__delta sb-kpi__delta--up">SAML 2.0 · enforced</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">Pending invites</div><div class="sb-kpi__value">2</div><span class="sb-kpi__delta sb-kpi__delta--up">Expire in 5 days</span></article>
+            <article class="sb-kpi"><div class="sb-kpi__label">Audit log</div><div class="sb-kpi__value">Live</div><span class="sb-kpi__delta sb-kpi__delta--up">Last event 12s ago</span></article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Members</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill" style="color:var(--sb-text-muted)">24 total</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Export CSV</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush">
+              <table class="sb-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Role</th>
+                    <th>Brand kits</th>
+                    <th>Last active</th>
+                    <th>Auth</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg">AC</div><div><b>Ava Chen</b><br/><span>ava.chen@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--admin">Workspace admin</span></td><td>All</td><td style="color:var(--sb-text-muted)">2 min ago</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">SSO · Okta</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Manage</button></td></tr>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg">ML</div><div><b>Marcus Lee</b><br/><span>marcus.lee@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--producer">Producer</span></td><td>Core, Field events</td><td style="color:var(--sb-text-muted)">14 min ago</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">SSO · Okta</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Manage</button></td></tr>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg" style="background:linear-gradient(135deg,#3d2c5f,#1b1230);color:#a78bfa">PR</div><div><b>Priya Rao</b><br/><span>priya.rao@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--brand">Brand lead</span></td><td>Core</td><td style="color:var(--sb-text-muted)">1 hr ago</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">SSO · Okta</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Manage</button></td></tr>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg" style="background:linear-gradient(135deg,#3f2d1a,#1a0f06);color:#fbbf24">DA</div><div><b>Diego Alvarez</b><br/><span>diego.alvarez@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--reviewer">Reviewer</span></td><td>All</td><td style="color:var(--sb-text-muted)">Yesterday</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">SSO · Okta</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Manage</button></td></tr>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg" style="background:linear-gradient(135deg,#1a3a3a,#06181a);color:#22D3B7">JS</div><div><b>Jules Sato</b><br/><span>jules.sato@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--producer">Producer</span></td><td>Internal L&amp;D</td><td style="color:var(--sb-text-muted)">3 days ago</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">SSO · Okta</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Manage</button></td></tr>
+                  <tr><td><div class="name-cell"><div class="sb-avatar-lg">NT</div><div><b>Nia Tate</b><br/><span>nia.tate@acme.com</span></div></div></td><td><span class="sb-role-pill sb-role-pill--viewer">Viewer</span></td><td>—</td><td style="color:var(--sb-text-muted)">Pending invite</td><td><span class="sb-pill" style="color:var(--sb-text-muted)">Awaiting</span></td><td style="text-align:right"><button class="sb-btn sb-btn--ghost sb-btn--sm">Resend</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Role &amp; permission matrix</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Custom role</button>
+              </div>
+            </header>
+            <div class="sb-card__body" style="padding-top:8px">
+              <div class="sb-permission-grid">
+                <div></div>
+                <div class="head">Admin</div>
+                <div class="head">Producer</div>
+                <div class="head">Brand</div>
+                <div class="head">Reviewer</div>
+                <div class="head">Viewer</div>
+
+                <div class="label">Render a video</div>
+                <div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell no">○</div><div class="cell no">○</div>
+
+                <div class="label">Approve / publish</div>
+                <div class="cell yes">●</div><div class="cell no">○</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell no">○</div>
+
+                <div class="label">Edit brand kit</div>
+                <div class="cell yes">●</div><div class="cell no">○</div><div class="cell yes">●</div><div class="cell no">○</div><div class="cell no">○</div>
+
+                <div class="label">Manage seats</div>
+                <div class="cell yes">●</div><div class="cell no">○</div><div class="cell no">○</div><div class="cell no">○</div><div class="cell no">○</div>
+
+                <div class="label">View analytics</div>
+                <div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div>
+
+                <div class="label">Export / download</div>
+                <div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell yes">●</div><div class="cell no">○</div>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>SOC 2 Type II · audit log retained 7 years · region eu-central-1</span>
+          <span>SSO Okta · last sync 3 min ago</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
