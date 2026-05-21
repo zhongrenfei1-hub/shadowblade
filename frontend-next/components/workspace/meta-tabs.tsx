@@ -12,8 +12,8 @@ import { StatusBadge } from "@/components/workspace/status-badge";
 import { cn } from "@/lib/utils";
 
 const COMMENTS = [
-  { who: "Priya Rao", presence: "online" as const, when: "3 分钟前", text: '把 "without lifting a wrist" 换成 "无需抬腕"，中国市场测试更顺。', cite: "场景 04 · 字幕 18-22", thread: 2 },
-  { who: "Diego Alvarez", presence: "idle" as const, when: "11 分钟前", text: "CTA 段的音乐压得有点低，建议提到 -6 dB。", cite: "音乐 · 0:24 → 0:28", thread: 0 },
+  { who: "Priya Rao", presence: "online" as const, when: "3 分钟前", whenISO: "2026-05-21T08:57:00Z", text: '把 "without lifting a wrist" 换成 "无需抬腕"，中国市场测试更顺。', cite: "场景 04 · 字幕 18-22", thread: 2 },
+  { who: "Diego Alvarez", presence: "idle" as const, when: "11 分钟前", whenISO: "2026-05-21T08:49:00Z", text: "CTA 段的音乐压得有点低，建议提到 -6 dB。", cite: "音乐 · 0:24 → 0:28", thread: 0 },
 ];
 
 const PRESENCE_DOT: Record<string, string> = {
@@ -91,7 +91,7 @@ export function MetaTabs() {
                   {c.thread} 条回复
                 </span>
               )}
-              <time className="ml-auto font-mono text-[10px] text-muted-foreground">{c.when}</time>
+              <time dateTime={c.whenISO} className="ml-auto font-mono text-[10px] text-muted-foreground">{c.when}</time>
             </div>
             <div className="text-muted-foreground">{c.text}</div>
             <div className="inline-flex items-center gap-1 font-mono text-[10px] text-accent-300">

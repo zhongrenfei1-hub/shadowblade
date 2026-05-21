@@ -117,24 +117,28 @@ export default function NotificationsPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-6 md:grid-cols-[200px_1fr] items-start">
-        <aside className="grid gap-1" aria-label="通知分类" role="toolbar">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setTab(t.id)}
-              aria-pressed={tab === t.id}
-              className={cn(
-                "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                tab === t.id ? "bg-accent-500/12 text-foreground" : "text-muted-foreground hover:bg-white/[0.04]"
-              )}
-            >
-              {t.label}
-              <span className="ml-auto rounded-full bg-white/[0.06] px-2 py-0.5 text-[11px] num text-muted-foreground">
-                {t.count}
-              </span>
-            </button>
-          ))}
+        {/* aside 保留 complementary landmark 语义；role=toolbar 下移到内层 div 防覆盖。
+            见 test ring 004 P1.12 修复（refine 004 引入的副作用）。 */}
+        <aside aria-label="通知分类">
+          <div className="grid gap-1" role="toolbar" aria-label="通知分类筛选">
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setTab(t.id)}
+                aria-pressed={tab === t.id}
+                className={cn(
+                  "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                  tab === t.id ? "bg-accent-500/12 text-foreground" : "text-muted-foreground hover:bg-white/[0.04]"
+                )}
+              >
+                {t.label}
+                <span className="ml-auto rounded-full bg-white/[0.06] px-2 py-0.5 text-[11px] num text-muted-foreground">
+                  {t.count}
+                </span>
+              </button>
+            ))}
+          </div>
         </aside>
 
         <Card>

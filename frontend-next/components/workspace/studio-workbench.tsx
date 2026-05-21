@@ -335,7 +335,7 @@ function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
   return (
     <div className="flex flex-wrap items-center gap-2 text-[11px]">
       <Badge
-        variant="secondary"
+        variant="default"
         className={cn(
           "gap-1",
           features.has_videotoolbox ? "bg-accent-500/15 text-accent-200" : "bg-white/5 text-muted-foreground",
@@ -345,7 +345,7 @@ function FeaturesBadgeRow({ features }: { features: MixFeatures | null }) {
         {features.has_videotoolbox ? "VideoToolbox GPU" : "软件编码"}
       </Badge>
       <Badge
-        variant="secondary"
+        variant="default"
         className={cn(
           "gap-1",
           features.can_burn_subtitles ? "bg-white/5 text-muted-foreground" : "bg-amber-500/15 text-amber-200",

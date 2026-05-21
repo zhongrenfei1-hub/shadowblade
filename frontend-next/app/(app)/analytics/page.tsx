@@ -20,13 +20,15 @@ const RATIO = [
   { label: "1:1 方形", pct: 10 },
 ];
 
-const DRIFT = [
+type DriftKind = "warn" | "stop" | "ok";
+
+const DRIFT: { kind: DriftKind; title: string; desc: string; action?: string }[] = [
   { kind: "warn", title: "色彩偏移 · 2 条成片", desc: "用了 #20D2B5，应为 #22D3B7 · 可一键自动修正", action: "解决" },
   { kind: "stop", title: "配音错配 · 1 条成片", desc: "Acme · 核心版要求灵韵女声，实际用了炽炎男声", action: "重新渲染" },
-  { kind: "ok", title: "最近 100 条全部合规", desc: "无片尾缺失 · 无字体回退 · 无版权风险", action: undefined },
+  { kind: "ok", title: "最近 100 条全部合规", desc: "无片尾缺失 · 无字体回退 · 无版权风险" },
 ];
 
-const KIND_CLASS: Record<string, string> = {
+const KIND_CLASS: Record<DriftKind, string> = {
   warn: "border-amber-500/30 bg-amber-500/[0.05] text-amber-300",
   stop: "border-rose-500/30 bg-rose-500/[0.05] text-rose-300",
   ok: "border-accent-500/30 bg-accent-500/[0.05] text-accent-300",
@@ -82,11 +84,11 @@ export default async function AnalyticsPage() {
       <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" aria-label="关键指标">
         {a.kpis.map((kpi, i) => {
           const f = formatKpi(kpi.label, kpi.value, kpi.unit);
-          // 从 timeseries 推每个 KPI 的 7 点 trend：渲染条数走 rendered，其它指标暂用 approved 比例作为 proxy。
-          const trend = kpi.unit === "count"
+          // 从 timeseries 推每个 KPI 的 7 点 trend。api fallback 的 unit 字面量见 lib/api.ts:373-378。
+          const trend = kpi.unit === "videos"
             ? a.timeseries.map((d) => d.rendered)
             : kpi.unit === "minutes"
-            ? a.timeseries.map((d, idx) => 7 - idx * 0.3) // demo：耗时下降趋势
+            ? a.timeseries.map((_, idx) => 7 - idx * 0.3) // demo：耗时下降趋势
             : kpi.unit === "ratio"
             ? a.timeseries.map((d) => (d.rendered ? (d.approved / d.rendered) * 100 : 0))
             : a.timeseries.map((d) => d.approved * 0.45); // usd proxy: 节省 ≈ 通过 * unit price
