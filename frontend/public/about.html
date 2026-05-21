@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav .spacer { flex: 1; }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-about-hero {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: var(--sb-space-16) var(--sb-space-6) var(--sb-space-10);
+        text-align: center;
+      }
+      .sb-about-hero h1 {
+        margin: var(--sb-space-3) 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4.4vw, 58px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+      }
+      .sb-about-hero p {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-lg);
+        max-width: 60ch;
+        margin: 0 auto;
+      }
+
+      .sb-about-body {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 var(--sb-space-6) var(--sb-space-10);
+        font-size: var(--sb-text-lg);
+        line-height: 1.65;
+        color: var(--sb-text-muted);
+      }
+      .sb-about-body p { margin: 0 0 var(--sb-space-4); }
+      .sb-about-body h2 {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        color: var(--sb-text);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: var(--sb-space-10) 0 var(--sb-space-4);
+      }
+      .sb-about-body em {
+        font-style: normal;
+        background: linear-gradient(90deg, var(--sb-accent-500), var(--sb-status-running));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 600;
+      }
+
+      .sb-leaders {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-12);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-leader {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        text-align: center;
+        display: grid; gap: var(--sb-space-2);
+      }
+      .sb-leader .av {
+        width: 76px; height: 76px; border-radius: 50%;
+        background: linear-gradient(135deg, #1c3868, #0a1428);
+        display: grid; place-items: center;
+        font-weight: 700;
+        font-family: var(--sb-font-display);
+        font-size: 22px;
+        color: var(--sb-accent-300);
+        margin: 0 auto;
+        border: 1px solid var(--sb-border-strong);
+      }
+      .sb-leader b {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+        color: var(--sb-text);
+      }
+      .sb-leader span {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-muted);
+      }
+
+      .sb-press {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-12);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-press article {
+        padding: var(--sb-space-6);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-press h3 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+      }
+      .sb-press a { color: var(--sb-accent-300); font-family: var(--sb-font-mono); font-size: var(--sb-text-sm); }
+
+      .sb-quotes {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-16);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-quote {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.85), rgba(11,18,32,0.85));
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-quote .pub { font-family: var(--sb-font-display); font-weight: 700; color: var(--sb-accent-300); font-size: var(--sb-text-sm); letter-spacing: 0.04em; }
+      .sb-quote .q { font-family: var(--sb-font-display); font-size: var(--sb-text-lg); color: var(--sb-text); font-weight: 500; line-height: 1.4; }
+      .sb-quote .when { font-size: var(--sb-text-xs); color: var(--sb-text-faint); font-family: var(--sb-font-mono); }
+
+      @media (max-width: 1100px) { .sb-leaders { grid-template-columns: repeat(2, 1fr); } .sb-quotes { grid-template-columns: 1fr; } .sb-press { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="sb-marketing__nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mga)"/><defs><linearGradient id="mga" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="features.html">Product</a>
+      <a class="link" href="pricing.html">Pricing</a>
+      <a class="link" href="customer-story.html">Customers</a>
+      <a class="link" href="about.html" style="color:var(--sb-text)">About</a>
+      <a class="link" href="docs.html">Docs</a>
+      <a class="sb-btn sb-btn--ghost" href="login.html">Sign in</a>
+      <a class="sb-btn sb-btn--primary" href="signup.html">Get started</a>
+    </header>
+
+    <section class="sb-about-hero">
+      <div class="sb-eyebrow">About ShadowBlade</div>
+      <h1>We're rebuilding the video factory <em>for the team that ships every week</em>.</h1>
+      <p>ShadowBlade started in 2024 when our founders watched their marketing team spend more time briefing a video than shooting one. Today the pipeline runs in 14 countries, against 1,200 brand kits.</p>
+    </section>
+
+    <article class="sb-about-body">
+      <p>Most "AI video" tools think video is a thing you generate. We think video is a thing your team produces — under brand, under deadline, on a schedule that has nothing to do with how long the render takes. That distinction shows up in every decision we make.</p>
+      <p>It shows up in the brand kit being a first-class object, not a stylesheet. It shows up in reviewers having the same workflow as producers. It shows up in the audit log retaining every decision for seven years. It shows up in the pipeline never asking your team to learn a new tool — it asks the tool to learn your team's voice.</p>
+
+      <h2>What we believe</h2>
+      <p><b style="color:var(--sb-text)">Brand is a constraint, not a coat of paint.</b> Every cut renders against the kit. Drift is flagged before it ships.</p>
+      <p><b style="color:var(--sb-text)">Throughput beats spectacle.</b> A team that ships ten cuts on Tuesday will out-learn the team that shipped one cinematic cut on Friday.</p>
+      <p><b style="color:var(--sb-text)">Auditability is a feature.</b> Procurement, legal, and security are not blockers; they are users.</p>
+
+      <h2>Who we are</h2>
+    </article>
+
+    <section class="sb-leaders">
+      <article class="sb-leader">
+        <div class="av">AS</div>
+        <b>Anya Sokolova</b>
+        <span>Co-founder &amp; CEO</span>
+        <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">Previously head of brand · Northwind</span>
+      </article>
+      <article class="sb-leader">
+        <div class="av">LM</div>
+        <b>Luca Marchetti</b>
+        <span>Co-founder &amp; CTO</span>
+        <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">Built the render farm at Quanta Studios</span>
+      </article>
+      <article class="sb-leader">
+        <div class="av">JR</div>
+        <b>Jordan Reed</b>
+        <span>Head of Product</span>
+        <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">Previously PM at Figma</span>
+      </article>
+      <article class="sb-leader">
+        <div class="av">DM</div>
+        <b>Dr. Demi Moroka</b>
+        <span>Head of Research</span>
+        <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">PhD speech synthesis · CMU</span>
+      </article>
+    </section>
+
+    <section class="sb-press">
+      <article>
+        <h3>Press kit</h3>
+        <p style="color:var(--sb-text-muted);margin:0;font-size:var(--sb-text-sm)">Logos, product screenshots, leadership photos, brand colours, history milestones. ZIP, ~28 MB.</p>
+        <a href="/showcase/INDEX.md">Download press kit (auto-generated from /showcase) →</a>
+      </article>
+      <article>
+        <h3>Press inquiries</h3>
+        <p style="color:var(--sb-text-muted);margin:0;font-size:var(--sb-text-sm)">Reporters, analysts, podcast hosts — our comms team aims for a same-day reply.</p>
+        <a href="mailto:press@shadowblade.io">press@shadowblade.io →</a>
+      </article>
+    </section>
+
+    <section class="sb-quotes">
+      <article class="sb-quote">
+        <span class="pub">TECHCRUNCH</span>
+        <div class="q">"The kind of video tool we've been waiting for — built for the team that ships every week, not the team that shoots once a quarter."</div>
+        <span class="when">2026-03-14</span>
+      </article>
+      <article class="sb-quote">
+        <span class="pub">THE INFORMATION</span>
+        <div class="q">"ShadowBlade's bet is that brand kits are the next OS — the layer every cut renders against, the layer that ages."</div>
+        <span class="when">2026-02-28</span>
+      </article>
+      <article class="sb-quote">
+        <span class="pub">MARTECH WEEKLY</span>
+        <div class="q">"In a year, this is the only AI video tool that ever showed up to the procurement review with a SOC 2 in hand."</div>
+        <span class="when">2026-01-22</span>
+      </article>
+    </section>
+
+    <footer class="sb-footer">
+      <span>© 2026 ShadowBlade Labs · Series B · Berlin · NYC · Tōkyō</span>
+      <span><a href="changelog.html" style="color:var(--sb-accent-300)">Changelog</a> · <a href="status.html" style="color:var(--sb-accent-300)">Status</a> · <a href="security.html" style="color:var(--sb-accent-300)">Security</a></span>
+    </footer>
+  </body>
+</html>
