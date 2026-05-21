@@ -26,9 +26,9 @@
     --ring: 168 71% 48%;
     --radius: 0.625rem;
 
-    --font-display: "Inter Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-display: var(--font-sans-google), "Inter Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-sans: var(--font-sans-google), "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-mono: var(--font-mono-google), "JetBrains Mono", ui-monospace, monospace;
   }
 }
 

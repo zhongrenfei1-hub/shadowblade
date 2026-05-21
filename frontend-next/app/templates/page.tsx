@@ -28,7 +28,7 @@ export default async function TemplatesPage() {
           </div>
           <Button className="ml-auto" asChild>
             <Link href="/create">
-              <Sparkles className="h-4 w-4" /> 自定义新建
+              <Sparkles className="h-4 w-4" /> 新建视频
             </Link>
           </Button>
         </div>
@@ -42,7 +42,7 @@ export default async function TemplatesPage() {
         ))}
       </div>
 
-      <section className="grid grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {items.map((t) => (
           <Card
             key={t.id}

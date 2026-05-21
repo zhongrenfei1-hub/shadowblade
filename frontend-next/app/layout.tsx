@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Topbar } from "@/components/layout/topbar";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans-google",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono-google",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "ShadowBlade · 企业级 AI 视频云",
@@ -12,21 +27,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
-      </head>
+    <html lang="zh-CN" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
-        <div className="grid min-h-screen grid-cols-[248px_1fr]">
+        <div className="grid min-h-screen grid-cols-1 md:grid-cols-[248px_1fr]">
           <Sidebar />
           <div className="grid grid-rows-[60px_1fr] min-w-0">
             <Topbar />
-            <main className="grid content-start gap-8 px-10 py-8">{children}</main>
+            <main className="grid content-start gap-6 px-4 py-6 md:gap-8 md:px-10 md:py-8">{children}</main>
           </div>
         </div>
       </body>

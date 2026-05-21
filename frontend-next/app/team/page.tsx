@@ -1,29 +1,44 @@
-import { UserPlus } from "lucide-react";
+import React from "react";
+import { UserPlus, Users, ShieldCheck, Clock, Activity } from "lucide-react";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { KpiTile } from "@/components/workspace/kpi-tile";
-import { Users, ShieldCheck, Clock, Activity } from "lucide-react";
 
-const ROLE_VARIANT: Record<string, string> = {
+const ROLE_VARIANT: Record<string, BadgeProps["variant"]> = {
   "工作空间管理员": "done",
   "制作人": "rendering",
   "品牌负责人": "review",
   "审核员": "queued",
 };
 
-const PERMISSIONS = [
-  ["渲染视频", true, true, true, false, false],
-  ["批准 / 发布", true, false, true, true, false],
-  ["编辑品牌套件", true, false, true, false, false],
-  ["管理席位", true, false, false, false, false],
-  ["查看分析", true, true, true, true, true],
-  ["导出 / 下载", true, true, true, true, false],
-] as const;
+type Permission = {
+  label: string;
+  admin: boolean;
+  producer: boolean;
+  brand: boolean;
+  reviewer: boolean;
+  viewer: boolean;
+};
 
-const ROLES = ["管理员", "制作人", "品牌", "审核员", "只读"];
+const PERMISSIONS: Permission[] = [
+  { label: "渲染视频", admin: true, producer: true, brand: true, reviewer: false, viewer: false },
+  { label: "批准 / 发布", admin: true, producer: false, brand: true, reviewer: true, viewer: false },
+  { label: "编辑品牌套件", admin: true, producer: false, brand: true, reviewer: false, viewer: false },
+  { label: "管理席位", admin: true, producer: false, brand: false, reviewer: false, viewer: false },
+  { label: "查看分析", admin: true, producer: true, brand: true, reviewer: true, viewer: true },
+  { label: "导出 / 下载", admin: true, producer: true, brand: true, reviewer: true, viewer: false },
+];
+
+const ROLES: { key: keyof Omit<Permission, "label">; label: string }[] = [
+  { key: "admin", label: "管理员" },
+  { key: "producer", label: "制作人" },
+  { key: "brand", label: "品牌" },
+  { key: "reviewer", label: "审核员" },
+  { key: "viewer", label: "只读" },
+];
 
 export default async function TeamPage() {
   const ws = await api.workspace();
@@ -47,7 +62,7 @@ export default async function TeamPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <KpiTile icon={Users} label="席位" value="24" suffix="/ 24" delta="100% 已用" />
         <KpiTile icon={ShieldCheck} label="SSO" value="Okta" delta="SAML 2.0 已强制" />
         <KpiTile icon={Clock} label="待邀请" value="2" delta="5 天后失效" />
@@ -91,7 +106,7 @@ export default async function TeamPage() {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge variant={(ROLE_VARIANT[m.role] || "default") as never}>{m.role}</Badge>
+                    <Badge variant={ROLE_VARIANT[m.role] ?? "default"}>{m.role}</Badge>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{m.id === 1 ? "全部" : "Core"}</td>
                   <td className="px-4 py-3 text-muted-foreground">2 分钟前</td>
@@ -111,28 +126,39 @@ export default async function TeamPage() {
           <CardTitle>角色与权限矩阵</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid" style={{ gridTemplateColumns: "240px repeat(5, 1fr)" }}>
-            <div className="border-b border-border py-3" />
-            {ROLES.map((r) => (
-              <div key={r} className="border-b border-border py-3 text-center text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                {r}
-              </div>
-            ))}
-            {PERMISSIONS.map(([label, ...cells]) => (
-              <>
-                <div key={String(label)} className="border-b border-border py-3 text-sm font-semibold">{label as string}</div>
-                {(cells as boolean[]).map((on, i) => (
-                  <div
-                    key={i}
-                    className={`border-b border-border py-3 text-center font-mono text-sm ${
-                      on ? "text-accent-300" : "text-muted-foreground opacity-40"
-                    }`}
-                  >
-                    {on ? "●" : "○"}
-                  </div>
-                ))}
-              </>
-            ))}
+          <div className="overflow-x-auto">
+            <div
+              className="grid min-w-[640px]"
+              style={{ gridTemplateColumns: "240px repeat(5, 1fr)" }}
+            >
+              <div className="border-b border-border py-3" />
+              {ROLES.map((r) => (
+                <div
+                  key={r.key}
+                  className="border-b border-border py-3 text-center text-[10px] font-semibold uppercase tracking-wider text-muted-foreground"
+                >
+                  {r.label}
+                </div>
+              ))}
+              {PERMISSIONS.map((perm) => (
+                <React.Fragment key={perm.label}>
+                  <div className="border-b border-border py-3 text-sm font-semibold">{perm.label}</div>
+                  {ROLES.map((r) => {
+                    const on = perm[r.key];
+                    return (
+                      <div
+                        key={`${perm.label}-${r.key}`}
+                        className={`border-b border-border py-3 text-center font-mono text-sm ${
+                          on ? "text-accent-300" : "text-muted-foreground opacity-40"
+                        }`}
+                      >
+                        {on ? "●" : "○"}
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>

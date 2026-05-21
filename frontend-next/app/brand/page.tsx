@@ -1,13 +1,13 @@
-import { Plus, Copy, Check } from "lucide-react";
+import { Plus, Check } from "lucide-react";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const KITS = [
-  { id: 1, name: "Acme · 核心版", swatch: "linear-gradient(135deg,#0F2A4A,#22D3B7)", meta: "187 条成片 · v3 启用中", active: true },
-  { id: 2, name: "Acme · 线下活动", swatch: "linear-gradient(135deg,#101728,#FF7849)", meta: "32 条成片 · v1" },
-  { id: 3, name: "Acme · 内部学习发展", swatch: "linear-gradient(135deg,#1f2238,#a78bfa)", meta: "9 条成片 · 草稿" },
-];
+const KIT_META: Record<number, string> = {
+  1: "187 条成片 · v3 启用中",
+  2: "32 条成片 · v1",
+};
 
 const PALETTE = [
   { label: "主色", hex: "#0F2A4A", text: "#F7F9FC" },
@@ -20,7 +20,9 @@ const PALETTE = [
   { label: "审核", hex: "#A78BFA", text: "#06101F" },
 ];
 
-export default function BrandPage() {
+export default async function BrandPage() {
+  const { items: kits } = await api.brandKits();
+
   return (
     <>
       <section className="grid gap-3">
@@ -42,24 +44,33 @@ export default function BrandPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-[260px_1fr] gap-6 items-start">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr] items-start">
         <div className="grid gap-3">
-          {KITS.map((k) => (
-            <Card
-              key={k.id}
-              className={`cursor-pointer p-3 transition-colors ${
-                k.active ? "border-accent-500/40 bg-accent-500/[0.06]" : ""
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <span className="h-9 w-9 rounded-md border border-border" style={{ background: k.swatch }} />
-                <div className="leading-tight">
-                  <b className="text-sm">{k.name}</b>
-                  <span className="block text-[11px] text-muted-foreground">{k.meta}</span>
+          {kits.map((k, i) => {
+            const active = i === 0;
+            return (
+              <Card
+                key={k.id}
+                className={`cursor-pointer p-3 transition-colors ${
+                  active ? "border-accent-500/40 bg-accent-500/[0.06]" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    className="h-9 w-9 rounded-md border border-border"
+                    style={{ background: `linear-gradient(135deg,${k.primary_color},${k.accent_color})` }}
+                  />
+                  <div className="leading-tight">
+                    <b className="text-sm">{k.name}</b>
+                    <span className="block text-[11px] text-muted-foreground">
+                      {KIT_META[k.id] ?? `${k.tone.voice_profile.slice(0, 10)}…`}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
           <Button variant="outline">
             <Plus className="h-4 w-4" /> 新建套件
           </Button>
@@ -72,7 +83,7 @@ export default function BrandPage() {
               <Badge variant="done">WCAG AA 已校验</Badge>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 {PALETTE.map((p) => (
                   <div
                     key={p.label}
@@ -117,7 +128,7 @@ export default function BrandPage() {
               <div className="max-w-prose text-sm text-muted-foreground">
                 自信、平实、不夸张。先讲客户得到了什么。屏幕上每句话不超过 14 字。
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="grid gap-2 rounded-md border border-border bg-card/50 p-4">
                   <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-accent-300">该做</h4>
                   <ul className="list-disc pl-5 text-sm text-muted-foreground">

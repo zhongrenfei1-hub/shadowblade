@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Video, Clock, CheckCircle2, DollarSign, Play, RefreshCw, Sparkles } from "lucide-react";
+import { Video, Clock, CheckCircle2, DollarSign, RefreshCw, Sparkles } from "lucide-react";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,21 +45,21 @@ export default async function DashboardPage() {
             <Button asChild>
               <Link href="/create">
                 <Sparkles className="h-4 w-4" />
-                一键生成视频
+                新建视频
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-4 gap-4" aria-label="关键指标">
+      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" aria-label="关键指标">
         <KpiTile icon={Video} label="本月渲染次数" value="387" suffix="/ 1,000" delta="12.4% 较上月" />
         <KpiTile icon={Clock} label="首版成片耗时" value="4.8" suffix="分钟" delta="提速 31%" />
         <KpiTile icon={CheckCircle2} label="一次审核通过率" value="92" suffix="%" delta="6 个百分点" />
         <KpiTile icon={DollarSign} label="较外包代理节省" value="$168k" suffix="/季度" delta="21%" />
       </section>
 
-      <section className="grid grid-cols-[2fr_1fr] gap-6">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
         <Card>
           <CardHeader className="flex flex-row items-center gap-3">
             <div className="flex-1">
@@ -121,7 +121,7 @@ export default async function DashboardPage() {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => <ProjectCard key={p.id} project={p} />)}
         </div>
       </section>

@@ -1,5 +1,5 @@
 import { Upload, Folder, Video, Image as ImageIcon, Music2, Type, Palette } from "lucide-react";
-import { api } from "@/lib/api";
+import { api, type Asset } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,13 +14,18 @@ const FOLDERS = [
   { id: "logo", label: "品牌", icon: Palette, count: 3 },
 ];
 
-const ICONS: Record<string, React.ReactNode> = {
+const ICONS: Record<Asset["kind"], React.ReactNode> = {
   video: <Video className="h-7 w-7" />,
   image: <ImageIcon className="h-7 w-7" />,
   audio: <Music2 className="h-7 w-7" />,
   font: <span className="font-display text-2xl font-bold">Aa</span>,
-  logo: <Palette className="h-7 w-7" />,
 };
+
+// logo 资源跟 backend 一致用 kind=image + slug 前缀，渲染时用 Palette icon。
+function iconFor(asset: Asset): React.ReactNode {
+  if (asset.slug.startsWith("logo-")) return <Palette className="h-7 w-7" />;
+  return ICONS[asset.kind];
+}
 
 export default async function LibraryPage() {
   const { items } = await api.assets();
@@ -42,7 +47,7 @@ export default async function LibraryPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-[220px_1fr] gap-6 items-start">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] items-start">
         {/* 左侧 · 文件夹 + 标签 + 上传区 */}
         <div className="grid gap-4">
           <Card>
@@ -56,6 +61,7 @@ export default async function LibraryPage() {
                   <button
                     key={f.id}
                     type="button"
+                    aria-pressed={f.active ?? false}
                     className={`flex items-center gap-3 rounded-md px-2.5 py-2 text-sm transition-colors ${
                       f.active ? "bg-accent-500/12 text-foreground" : "text-muted-foreground hover:bg-white/[0.04]"
                     }`}
@@ -93,7 +99,7 @@ export default async function LibraryPage() {
           {items.map((a) => (
             <Card key={a.id} className="cursor-pointer overflow-hidden transition-all hover:-translate-y-0.5 hover:border-accent-500/40">
               <div className="grid h-[110px] place-items-center bg-gradient-to-br from-navy-700 to-navy-900 text-accent-300">
-                {ICONS[a.kind]}
+                {iconFor(a)}
               </div>
               <div className="grid gap-1 p-3">
                 <div className="truncate text-sm font-semibold">{a.name}</div>

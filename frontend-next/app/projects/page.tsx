@@ -53,7 +53,7 @@ export default async function ProjectsPage() {
           <Button size="sm" variant="outline">负责人 · 任意</Button>
           <Button size="sm" variant="outline">品牌套件 · 任意</Button>
         </div>
-        <CardContent className="grid grid-cols-3 gap-4 p-6">
+        <CardContent className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((p) => <ProjectCard key={p.id} project={p} />)}
         </CardContent>
       </Card>

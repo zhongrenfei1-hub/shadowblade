@@ -52,11 +52,11 @@ export function Sidebar() {
   return (
     <aside
       aria-label="主导航"
-      className="sticky top-0 h-screen w-[248px] shrink-0 border-r border-border bg-gradient-to-b from-navy-900/95 to-navy-950/95 px-3 py-5 backdrop-blur-md"
+      className="sticky top-0 hidden h-screen w-[248px] shrink-0 flex-col overflow-y-auto border-r border-border bg-gradient-to-b from-navy-900/95 to-navy-950/95 px-3 py-5 backdrop-blur-md md:flex"
     >
       <Link href="/dashboard" className="flex items-center gap-3 px-2 py-2" aria-label="ShadowBlade 首页">
         <span className="grid h-8 w-8 place-items-center rounded-md border border-accent-500/30 bg-gradient-to-br from-navy-700 to-navy-900 shadow-[0_4px_12px_rgba(34,211,183,0.18)]">
-          <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none">
+          <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden>
             <path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#sb-mark)" />
             <defs>
               <linearGradient id="sb-mark" x1="4" y1="4" x2="20" y2="20">
@@ -72,7 +72,7 @@ export function Sidebar() {
         </span>
       </Link>
 
-      <nav className="mt-6 flex flex-col gap-1">
+      <nav className="mt-6 flex flex-1 flex-col gap-1">
         {NAV.map((group) => (
           <div key={group.group} className="flex flex-col gap-0.5">
             <div className="px-3 pb-1 pt-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
@@ -85,6 +85,7 @@ export function Sidebar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     "text-graphite-200 hover:bg-white/[0.04] hover:text-foreground",
@@ -112,7 +113,7 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="absolute bottom-4 left-3 right-3 rounded-lg border border-border bg-navy-900/55 p-3">
+      <div className="mt-6 rounded-lg border border-border bg-navy-900/55 p-3">
         <div className="flex items-center gap-3">
           <div className="grid h-8 w-8 place-items-center rounded-md bg-gradient-to-br from-navy-700 to-navy-900 text-xs font-bold text-accent-300">
             AC
