@@ -85,3 +85,35 @@ Three new product pages — a Helios customer story, a Login page, and dashboard
 | No matches | `empty/empty-search.svg` | Global search modal, filtered table zero results | Loosen a filter or rephrase | Magnifier outline with amber (`#FBBF24`) ✕ inside the lens, two dismissable filter chips below to model the unblock |
 
 > Handoff for Test/Refine: empty-state illustrations are deliberately calm (no error red) and each carries a single accent so they ladder into status semantics (`#22D3B7` action, `#38BDF8` running, `#A78BFA` review, `#FBBF24` queued). If Refine adds light theme support, the `<defs>` gradients will need a swap pass — palette stops are inline rather than via tokens.
+
+## Pass 003 additions
+
+Eleven new files for the latest Design wave: 5 language-flag pills, 4 abstract leader portraits, a compare-page header decoration, and a help-centre hero banner. All follow the same rules as 001/002: self-contained `<defs>`, file-scoped gradient ids (`sb-flag-es-grad`, `sb-leader-as-figure`, `sb-compare-before`, `sb-help-lens`, etc.), tokens.css palette only, Inter Display / Inter / JetBrains Mono via `font-family=`, no raster, no remote fonts, no emojis. Largest file is `help/help-hero.svg` at 7.1 KB; flag pills are all ~1–2 KB.
+
+### Language pills · 36×26 (stylised, NOT literal national flags)
+
+| Locale | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| Spanish (LATAM) | `flags/es-419.svg` | Language switcher in settings, locale picker in marketing footer, regional ad-targeting UI | Pick the LATAM Spanish locale | Warm orange→yellow→amber gradient, top sheen, Inter Display 700 "ES" centered, 95% white, soft drop shadow |
+| German | `flags/de-de.svg` | Language switcher, locale picker, regional dashboard | Pick the de-DE locale | Deep slate/graphite gradient (graphite-500 → graphite-950), sheen, "DE" mark — restrained, engineering-honest |
+| Japanese | `flags/ja-jp.svg` | Language switcher, locale picker | Pick the ja-JP locale | Pure white background, one cyan-green accent dot top-right (off-axis from the "JA" mark in navy), drop shadow — minimalist, the most distinctive pill in the row |
+| Portuguese (BR) | `flags/pt-br.svg` | Language switcher, locale picker, LATAM dashboard | Pick the pt-BR locale | Accent green → amber gradient, sheen, "PT" mark — tropical, energetic |
+| French | `flags/fr-fr.svg` | Language switcher, locale picker, EU dashboard | Pick the fr-FR locale | Stylised diagonal navy / white / red bands (not the literal vertical tricolour), text-stroke on "FR" for legibility on the white band |
+
+### Leader portraits · 256×256 round (abstract silhouettes, no photos)
+
+| Initials | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| AS | `leaders/as.svg` | About / leadership page, customer-story author byline, sales deck team slide | Recognise the leader without a photo | Accent gradient (`#2EE2C4` → `#14B59A`), top-left accent-ring, "AS" monogram in deep navy on the silhouette |
+| LM | `leaders/lm.svg` | Leadership page, blog post byline, webinar host card | Recognise LM without a photo | Status-running gradient (`#38BDF8` → `#2C528F`), top-right accent-ring, "LM" monogram — diagonal energy mirroring AS |
+| JR | `leaders/jr.svg` | Leadership page, council slate, governance doc author | Recognise JR without a photo | Review-violet gradient (`#A78BFA` → `#7C3AED`), bottom-left accent-ring — calmer, review-tinted |
+| DM | `leaders/dm.svg` | Leadership page, customer advisory board, sponsor slide | Recognise DM without a photo | Queued-amber → orange gradient (`#FBBF24` → `#EA580C`), bottom-right accent-ring — warm, board-of-directors energy |
+
+### Compare + Help
+
+| Asset | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| Compare diff art | `compare/diff-art.svg` | `compare.html` header decoration (800×400), version-diff modal hero | Feel the "before vs after" energy before scrolling into the side-by-side | Two facing waveforms colliding at a centre seam — jittery low-amp running-blue (BEFORE) on the left, smooth high-amp accent-cyan (AFTER) on the right; collision spark + v0…v3 ticks reads as version progression |
+| Help centre hero | `help/help-hero.svg` | `help.html` hero banner (1200×500), help search modal background, support email header | Drop straight into the search field | Left rail: gradient headline "Find the answer in one step", search field with `/` shortcut chip, four colour-coded category pills (Pipeline / Review / Billing / API & SDK). Right rail: magnifier with concentric pipeline rings — outer rings colour-coded by stage (running / review / queued / done), tiny "FOUND" indicator inside the lens, "240 GUIDES" floating chip |
+
+> Handoff for Test/Refine: (1) flag pills are 36×26 by design — if Refine wants a larger surface for hover/expanded states, the gradient stops scale cleanly but the locale-code font-size needs a pass. (2) Leader portraits all share the same head+shoulders glyph and vary only by gradient direction + accent ring placement — Refine can clone the pattern for new leaders by changing the four file-scoped gradient stops and the accent position. (3) `compare/diff-art.svg` is decoration only — the actual diff table lives in the page, not in this SVG. (4) `help/help-hero.svg` has a `/` keyboard-shortcut chip in the search field; if Test wants to swap to `⌘K` semantics, only one tspan needs updating. (5) No flag uses a literal national flag for political safety — Refine should keep this constraint for any future locales.
