@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Helios Logistics ships video like product · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="Helios Logistics ships video like product" />
+    <meta property="og:description" content="How a 1,400-person logistics team replaced their agency stack with ShadowBlade — and cut time-to-first-cut by 68%." />
+    <meta property="og:image" content="/showcase/case-study/helios-hero.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/case-study/helios-hero.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+      .sb-marketing__nav .spacer { flex: 1; }
+
+      .sb-cs-hero {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-12) var(--sb-space-10);
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: var(--sb-space-12);
+        align-items: center;
+      }
+      .sb-cs-hero h1 {
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4.4vw, 58px);
+        margin: var(--sb-space-4) 0;
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+        font-weight: 600;
+      }
+      .sb-cs-hero p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 56ch; }
+      .sb-cs-meta {
+        display: flex; gap: var(--sb-space-6);
+        margin-top: var(--sb-space-6);
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-faint);
+      }
+      .sb-cs-meta b { color: var(--sb-text); font-weight: 600; display:block }
+
+      .sb-cs-art {
+        position: relative;
+        aspect-ratio: 16/9;
+        border-radius: var(--sb-radius-xl);
+        overflow: hidden;
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(160deg, rgba(15,26,47,0.95), rgba(6,12,26,0.95));
+        box-shadow: var(--sb-shadow-lg);
+      }
+      .sb-cs-art svg { width: 100%; height: 100%; display:block }
+      .sb-cs-art img { width:100%; height:100%; object-fit:cover; display:block }
+
+      .sb-cs-metrics {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-12);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-cs-metric {
+        padding: var(--sb-space-6);
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(34,211,183,0.08), rgba(11,18,32,0.95));
+      }
+      .sb-cs-metric .v {
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4vw, 54px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        background: linear-gradient(90deg, var(--sb-accent-500), #38BDF8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+      }
+      .sb-cs-metric .label { color: var(--sb-text-muted); margin-top: 8px; font-size: var(--sb-text-md); }
+
+      .sb-cs-body {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: var(--sb-space-8) var(--sb-space-6);
+        font-size: var(--sb-text-lg);
+        line-height: 1.65;
+        color: var(--sb-text-muted);
+      }
+      .sb-cs-body h2 {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        font-weight: 600;
+        color: var(--sb-text);
+        letter-spacing: -0.02em;
+        margin: var(--sb-space-10) 0 var(--sb-space-4);
+      }
+      .sb-cs-body p { margin: 0 0 var(--sb-space-4); }
+      .sb-cs-quote {
+        margin: var(--sb-space-10) 0;
+        padding: var(--sb-space-8);
+        border-radius: var(--sb-radius-xl);
+        border-left: 4px solid var(--sb-accent-500);
+        background: linear-gradient(180deg, rgba(34,211,183,0.06), rgba(11,18,32,0.6));
+      }
+      .sb-cs-quote .q {
+        font-family: var(--sb-font-display);
+        font-size: 28px;
+        font-weight: 500;
+        color: var(--sb-text);
+        line-height: 1.3;
+        letter-spacing: -0.015em;
+      }
+      .sb-cs-quote .by {
+        margin-top: var(--sb-space-4);
+        font-size: var(--sb-text-md);
+        color: var(--sb-text-muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .sb-cs-cta {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-10) var(--sb-space-12) var(--sb-space-16);
+        text-align: center;
+      }
+      .sb-cs-cta h3 {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-3xl);
+        margin: 0 0 var(--sb-space-3);
+        letter-spacing: -0.025em;
+      }
+      .sb-cs-cta p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); margin-bottom: var(--sb-space-6); }
+
+      @media (max-width: 960px) {
+        .sb-cs-hero { grid-template-columns: 1fr; padding: var(--sb-space-8); gap: var(--sb-space-6); }
+        .sb-cs-metrics { grid-template-columns: 1fr; padding: 0 var(--sb-space-6) var(--sb-space-8); }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="sb-marketing__nav">
+        <a class="sb-brand" href="index.html">
+          <div class="sb-brand__mark">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mg)"/><defs><linearGradient id="mg" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg>
+          </div>
+          <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
+        </a>
+        <span class="spacer"></span>
+        <a class="link" href="index.html">Product</a>
+        <a class="link" href="templates.html">Templates</a>
+        <a class="link" href="#" style="color:var(--sb-text)">Customers</a>
+        <a class="link" href="pricing.html">Pricing</a>
+        <a class="link" href="#">Docs</a>
+        <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
+        <a class="sb-btn sb-btn--primary" href="dashboard.html">Open workspace</a>
+      </header>
+
+      <section class="sb-cs-hero">
+        <div>
+          <div class="sb-eyebrow">Customer story · Helios Logistics</div>
+          <h1>1,400-person logistics team ships video like product.</h1>
+          <p>Helios replaced their agency stack with ShadowBlade in Q1 2026. By month two, their content team was shipping more cuts in a week than they'd shipped in the previous quarter — same writers, same reviewers, same brand kit.</p>
+          <div class="sb-cs-meta">
+            <div><b>Industry</b>Logistics &amp; freight</div>
+            <div><b>Team</b>1,400 · 12 in content</div>
+            <div><b>Region</b>EMEA · APAC · NA</div>
+            <div><b>Plan</b>Scale, annual</div>
+          </div>
+        </div>
+        <div class="sb-cs-art">
+          <!-- Showcase ring will drop helios-hero.svg here; until then, an inline cinematic placeholder authored from the same tokens. -->
+          <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="bgc" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0B2F4C"/>
+                <stop offset="100%" stop-color="#06101F"/>
+              </linearGradient>
+              <radialGradient id="sun" cx="0.8" cy="0.2" r="0.7">
+                <stop offset="0%" stop-color="rgba(56,189,248,0.45)"/>
+                <stop offset="100%" stop-color="rgba(56,189,248,0)"/>
+              </radialGradient>
+            </defs>
+            <rect width="800" height="450" fill="url(#bgc)"/>
+            <rect width="800" height="450" fill="url(#sun)"/>
+            <g transform="translate(650 110)"><circle r="50" fill="rgba(56,189,248,0.5)"/><circle r="30" fill="#38BDF8"/></g>
+            <text x="40" y="170" fill="#F7F9FC" font-family="Inter Display" font-size="36" font-weight="700">Helios Logistics</text>
+            <text x="40" y="200" fill="#8590A8" font-family="Inter" font-size="14" letter-spacing="3">Q3 CUSTOMER STORY</text>
+
+            <g transform="translate(40 280)">
+              <rect width="220" height="60" rx="10" fill="rgba(34,211,183,0.16)" stroke="rgba(34,211,183,0.4)"/>
+              <text x="16" y="28" fill="#6EE2C5" font-family="Inter" font-size="11" letter-spacing="2">FIRST CUT</text>
+              <text x="16" y="50" fill="#F7F9FC" font-family="Inter Display" font-size="20" font-weight="700">4.8 min</text>
+            </g>
+            <g transform="translate(280 280)">
+              <rect width="220" height="60" rx="10" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.4)"/>
+              <text x="16" y="28" fill="#7DD3FC" font-family="Inter" font-size="11" letter-spacing="2">SAVED / QTR</text>
+              <text x="16" y="50" fill="#F7F9FC" font-family="Inter Display" font-size="20" font-weight="700">$184k</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="sb-cs-metrics">
+        <article class="sb-cs-metric">
+          <div class="v">4.8 min</div>
+          <div class="label">Average time to first cut · was 14 min</div>
+        </article>
+        <article class="sb-cs-metric">
+          <div class="v">+128</div>
+          <div class="label">Cuts per month vs Q1 · same headcount</div>
+        </article>
+        <article class="sb-cs-metric">
+          <div class="v">92%</div>
+          <div class="label">Approval rate on first review</div>
+        </article>
+      </section>
+
+      <article class="sb-cs-body">
+        <h2>The week we stopped briefing</h2>
+        <p>Helios' content team spent 60% of every project on the brief — corralling product marketing, brand, legal, regional GTM, then back to brand because legal had moved the goalposts. By the time a cut was rendering, the campaign had drifted.</p>
+        <p>ShadowBlade reverses the loop. Producers paste the brief into one field; the pipeline scripts, voices, captions, and renders against the brand kit before legal has finished their first read. By the time a reviewer opens the cut, the cut is already on-guideline.</p>
+
+        <div class="sb-cs-quote">
+          <div class="q">We ship video like product now. Same week. Same vibe.</div>
+          <div class="by">— Maya Okonkwo · VP Content, Helios Logistics</div>
+        </div>
+
+        <h2>What changed</h2>
+        <p><b style="color:var(--sb-text)">One brand kit, every region.</b> ShadowBlade renders every cut against the Helios Core kit — colour, type, voice, intro, outro, legal. Regional teams stopped re-rendering "to look like us."</p>
+        <p><b style="color:var(--sb-text)">Reviewers approve, not produce.</b> Producers ship a v1 cut in 5 minutes. Reviewers spend their time on substance, not on chasing colour drift or wrong outros.</p>
+        <p><b style="color:var(--sb-text)">Auditable from brief to MP4.</b> Compliance has the full chain — who asked for what, when, on which kit. Procurement signed off in week one.</p>
+
+        <h2>The numbers, six months in</h2>
+        <p>1,720 cuts shipped. 92% approved on first review. $184k saved per quarter against the previous agency baseline. A queue that never sleeps and never drifts.</p>
+      </article>
+
+      <section class="sb-cs-cta">
+        <h3>Want this kind of week?</h3>
+        <p>Talk to us about a 30-day Scale trial on your real brand kit.</p>
+        <a class="sb-btn sb-btn--primary" href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          Open the workspace
+        </a>
+        <a class="sb-btn sb-btn--ghost" href="pricing.html" style="margin-left:var(--sb-space-3)">See pricing</a>
+      </section>
+
+      <footer class="sb-footer">
+        <span>© 2026 ShadowBlade Labs · SOC 2 Type II · ISO 27001</span>
+        <span>Status · all systems normal · v0.1</span>
+      </footer>
+    </main>
+  </body>
+</html>
