@@ -1,6 +1,7 @@
 "use client";
 
-import { MessageSquare } from "lucide-react";
+import { useState } from "react";
+import { MessageSquare, AtSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -8,11 +9,18 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { StatusBadge } from "@/components/workspace/status-badge";
+import { cn } from "@/lib/utils";
 
 const COMMENTS = [
-  { who: "Priya Rao", when: "3 分钟前", text: '把 "without lifting a wrist" 换成 "无需抬腕"，中国市场测试更顺。', cite: "场景 04 · 字幕 18-22" },
-  { who: "Diego Alvarez", when: "11 分钟前", text: "CTA 段的音乐压得有点低，建议提到 -6 dB。", cite: "音乐 · 0:24 → 0:28" },
+  { who: "Priya Rao", presence: "online" as const, when: "3 分钟前", text: '把 "without lifting a wrist" 换成 "无需抬腕"，中国市场测试更顺。', cite: "场景 04 · 字幕 18-22", thread: 2 },
+  { who: "Diego Alvarez", presence: "idle" as const, when: "11 分钟前", text: "CTA 段的音乐压得有点低，建议提到 -6 dB。", cite: "音乐 · 0:24 → 0:28", thread: 0 },
 ];
+
+const PRESENCE_DOT: Record<string, string> = {
+  online: "bg-accent-400 shadow-[0_0_6px_rgba(34,211,183,0.55)]",
+  idle: "bg-amber-400",
+  offline: "bg-graphite-300/60",
+};
 
 const VERSIONS = [
   { v: "v17", title: "加急渲染 · Priya 的 CTA 文案", who: "Ava Chen · 4 分钟前", current: true },
@@ -60,32 +68,46 @@ export function MetaTabs() {
 
       <TabsContent value="comments" className="mt-4 grid gap-3">
         {COMMENTS.map((c) => (
-          <div key={c.cite} className="grid gap-1.5 rounded-md border border-border bg-card/40 p-3 text-sm">
+          <div key={c.cite} className="grid gap-2 rounded-md border border-border bg-card/40 p-3 text-sm transition-colors hover:border-accent-500/25">
             <div className="flex items-center gap-2">
-              <Avatar className="h-5 w-5 text-[9px]">
-                <AvatarFallback>{c.who.slice(0, 2)}</AvatarFallback>
-              </Avatar>
+              <div className="relative">
+                <Avatar className="h-6 w-6 text-[10px]">
+                  <AvatarFallback>{c.who.split(" ").map((s) => s[0]).join("").slice(0, 2)}</AvatarFallback>
+                </Avatar>
+                <span
+                  aria-hidden
+                  className={cn(
+                    "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-2 ring-card",
+                    PRESENCE_DOT[c.presence]
+                  )}
+                />
+              </div>
               <b className="font-semibold">{c.who}</b>
+              {c.thread > 0 && (
+                <span className="rounded-full bg-accent-500/12 px-1.5 py-0.5 text-[9px] font-semibold text-accent-300">
+                  +{c.thread} 回复
+                </span>
+              )}
               <time className="ml-auto font-mono text-[10px] text-muted-foreground">{c.when}</time>
             </div>
             <div className="text-muted-foreground">{c.text}</div>
-            <div className="font-mono text-[10px] text-accent-300">{c.cite}</div>
+            <div className="inline-flex items-center gap-1 font-mono text-[10px] text-accent-300">
+              <span className="h-1 w-1 rounded-full bg-accent-400" aria-hidden />
+              {c.cite}
+            </div>
           </div>
         ))}
-        <Textarea rows={3} placeholder="回复，或 @ 提及制作人…" />
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" size="sm">保存草稿</Button>
-          <Button size="sm">
-            <MessageSquare className="h-3.5 w-3.5" /> 发送
-          </Button>
-        </div>
+        <CommentComposer />
       </TabsContent>
 
       <TabsContent value="versions" className="mt-4 grid gap-2">
         {VERSIONS.map((r) => (
           <div
             key={r.v}
-            className="grid grid-cols-[60px_1fr_auto] items-center gap-3 rounded-md border border-border bg-card/50 p-3"
+            className={cn(
+              "grid grid-cols-[60px_1fr_auto] items-center gap-3 rounded-md border border-border bg-card/50 p-3 transition-colors",
+              r.current && "border-sky-500/30 bg-sky-500/[0.05]"
+            )}
           >
             <div className="text-center font-mono text-sm font-bold text-accent-300">{r.v}</div>
             <div className="min-w-0">
@@ -97,5 +119,43 @@ export function MetaTabs() {
         ))}
       </TabsContent>
     </Tabs>
+  );
+}
+
+function CommentComposer() {
+  const [text, setText] = useState("");
+  const [sending, setSending] = useState(false);
+  const remaining = 500 - text.length;
+  function send() {
+    if (!text.trim()) return;
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setText("");
+    }, 600);
+  }
+  return (
+    <div className="grid gap-2">
+      <Textarea
+        rows={3}
+        placeholder="回复，或 @ 提及制作人…"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        maxLength={500}
+      />
+      <div className="flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
+        <span className="inline-flex items-center gap-1">
+          <AtSign className="h-3 w-3" aria-hidden />
+          支持 @ 提及 · ⌘+Enter 发送
+        </span>
+        <span className="num">{remaining}</span>
+      </div>
+      <div className="flex justify-end gap-2">
+        <Button variant="outline" size="sm" disabled={!text}>保存草稿</Button>
+        <Button size="sm" onClick={send} disabled={!text.trim() || sending}>
+          <MessageSquare className="h-3.5 w-3.5" /> {sending ? "发送中…" : "发送"}
+        </Button>
+      </div>
+    </div>
   );
 }

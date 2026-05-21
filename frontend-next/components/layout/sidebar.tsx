@@ -113,14 +113,14 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="mt-6 rounded-lg border border-border bg-navy-900/55 p-3">
+      <div className="mt-6 rounded-lg border border-border bg-navy-900/55 p-3 hairline">
         <div className="flex items-center gap-3">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-gradient-to-br from-navy-700 to-navy-900 text-xs font-bold text-accent-300">
+          <div className="relative grid h-8 w-8 place-items-center rounded-md bg-gradient-to-br from-navy-700 to-navy-900 text-xs font-bold text-accent-300 dot-online">
             AC
           </div>
-          <div className="flex flex-col leading-tight">
-            <b className="text-sm">Acme · 规模版</b>
-            <span className="text-[11px] text-muted-foreground">24 席 · 管理员</span>
+          <div className="flex min-w-0 flex-col leading-tight">
+            <b className="truncate text-sm">Acme · 规模版</b>
+            <span className="truncate text-[11px] text-muted-foreground">24 席 · 管理员</span>
           </div>
         </div>
         <div className="mt-3 flex items-center justify-between text-[11px] text-muted-foreground">

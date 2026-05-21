@@ -16,19 +16,19 @@ export default function SettingsPage() {
     <>
       <section className="grid gap-3">
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">工作空间设置</span>
-        <div className="flex items-end gap-6">
-          <div>
-            <h1 className="font-display text-[34px] font-semibold tracking-tight">设置</h1>
+        <div className="flex flex-wrap items-end gap-4 md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">设置</h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               流水线、安全、计费、集成。改动作用于整个工作空间，并写入审计日志。
             </p>
           </div>
-          <div className="ml-auto flex gap-3">
+          <div className="flex gap-2 md:gap-3">
             <Button variant="outline">
-              <X className="h-4 w-4" /> 取消
+              <X className="h-4 w-4" /> <span className="hidden sm:inline">取消</span>
             </Button>
             <Button>
-              <Save className="h-4 w-4" /> 保存
+              <Save className="h-4 w-4" /> <span className="hidden sm:inline">保存</span>
             </Button>
           </div>
         </div>

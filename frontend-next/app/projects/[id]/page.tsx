@@ -30,19 +30,19 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">
           项目 #{params.id} · 营销 · 9:16 · 28 秒
         </span>
-        <div className="flex items-end gap-6">
-          <div>
-            <h1 className="font-display text-[34px] font-semibold tracking-tight">春季产品发布 — 智能腕环</h1>
+        <div className="flex flex-wrap items-end gap-4 md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-[26px] font-semibold tracking-tight md:text-[34px]">春季产品发布 — 智能腕环</h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               v17 / 17 · 4 分钟前由 Ava Chen 渲染 · Acme · 核心品牌套件 · 灵韵女声配音
             </p>
           </div>
-          <div className="ml-auto flex gap-3">
+          <div className="flex gap-2 md:gap-3">
             <Button variant="outline">
-              <Archive className="h-4 w-4" /> 归档
+              <Archive className="h-4 w-4" /> <span className="hidden sm:inline">归档</span>
             </Button>
             <Button>
-              <Check className="h-4 w-4" /> 批准并发布
+              <Check className="h-4 w-4" /> <span className="hidden sm:inline">批准并发布</span><span className="sm:hidden">批准</span>
             </Button>
           </div>
         </div>

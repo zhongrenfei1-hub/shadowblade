@@ -19,16 +19,16 @@ export default async function TemplatesPage() {
     <>
       <section className="grid gap-3">
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">模板</span>
-        <div className="flex items-end gap-6">
-          <div>
-            <h1 className="font-display text-[34px] font-semibold tracking-tight">挑一个开头。</h1>
+        <div className="flex flex-wrap items-end gap-4 md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">挑一个开头。</h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               64 个生产级模板，已按你的品牌套件预调。每个都能在 5 分钟内出首版。
             </p>
           </div>
-          <Button className="ml-auto" asChild>
+          <Button asChild>
             <Link href="/create">
-              <Sparkles className="h-4 w-4" /> 新建视频
+              <Sparkles className="h-4 w-4" /> <span className="hidden sm:inline">新建视频</span><span className="sm:hidden">新建</span>
             </Link>
           </Button>
         </div>

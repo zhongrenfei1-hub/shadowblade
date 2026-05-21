@@ -27,18 +27,18 @@ export default async function BrandPage() {
     <>
       <section className="grid gap-3">
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">品牌套件</span>
-        <div className="flex items-end gap-6">
-          <div>
-            <h1 className="font-display text-[34px] font-semibold tracking-tight">Acme · 核心版</h1>
+        <div className="flex flex-wrap items-end gap-4 md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">Acme · 核心版</h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               每条成片都对照这套渲染。改一次——所有项目重新渲染。偏移会被自动检测，可一键修正。
             </p>
           </div>
-          <div className="ml-auto flex gap-3">
-            <Button variant="outline">复制</Button>
-            <Button variant="outline">导出 ZIP</Button>
+          <div className="flex flex-wrap gap-2 md:gap-3">
+            <Button variant="outline" className="hidden sm:inline-flex">复制</Button>
+            <Button variant="outline" className="hidden sm:inline-flex">导出 ZIP</Button>
             <Button>
-              <Check className="h-4 w-4" /> 发布 v4
+              <Check className="h-4 w-4" /> <span className="hidden sm:inline">发布 v4</span><span className="sm:hidden">发布</span>
             </Button>
           </div>
         </div>

@@ -34,15 +34,15 @@ export default async function LibraryPage() {
     <>
       <section className="grid gap-3">
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">素材库</span>
-        <div className="flex items-end gap-6">
-          <div>
-            <h1 className="font-display text-[34px] font-semibold tracking-tight">112 个素材 · 8.4 GB</h1>
+        <div className="flex flex-wrap items-end gap-4 md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">112 个素材 · 8.4 GB</h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               品牌已审、版权清楚、按画面内容索引。直接拖文件进来，或一句话让 AI 生成。
             </p>
           </div>
-          <Button className="ml-auto">
-            <Upload className="h-4 w-4" /> 上传素材
+          <Button>
+            <Upload className="h-4 w-4" /> <span className="hidden sm:inline">上传素材</span><span className="sm:hidden">上传</span>
           </Button>
         </div>
       </section>

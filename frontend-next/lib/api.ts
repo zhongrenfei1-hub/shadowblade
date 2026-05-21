@@ -115,7 +115,14 @@ export type Workspace = {
   seats: number;
   monthly_render_quota: number;
   monthly_render_used: number;
-  team: { id: number; name: string; role: string }[];
+  team: {
+    id: number;
+    name: string;
+    role: string;
+    email?: string;
+    presence?: "online" | "idle" | "offline";
+    last_active?: string;
+  }[];
 };
 
 export type Analytics = {
@@ -153,10 +160,10 @@ export const api = {
       monthly_render_quota: 1000,
       monthly_render_used: 387,
       team: [
-        { id: 1, name: "Ava Chen", role: "工作空间管理员" },
-        { id: 2, name: "Marcus Lee", role: "制作人" },
-        { id: 3, name: "Priya Rao", role: "品牌负责人" },
-        { id: 4, name: "Diego Alvarez", role: "审核员" },
+        { id: 1, name: "Ava Chen", role: "工作空间管理员", email: "ava.chen@acme.com", presence: "online", last_active: "2 分钟前" },
+        { id: 2, name: "Marcus Lee", role: "制作人", email: "marcus.lee@acme.com", presence: "online", last_active: "刚刚" },
+        { id: 3, name: "Priya Rao", role: "品牌负责人", email: "priya.rao@acme.com", presence: "idle", last_active: "18 分钟前" },
+        { id: 4, name: "Diego Alvarez", role: "审核员", email: "diego.alvarez@acme.com", presence: "offline", last_active: "3 小时前" },
       ],
     }),
   projects: () =>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Sparkles,
   Upload,
@@ -14,6 +14,10 @@ import {
   ChevronRight,
   Zap,
   Image as ImageIcon,
+  AlertTriangle,
+  RotateCcw,
+  X as XIcon,
+  Save,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,10 +42,6 @@ const VOICES = [
   { id: "lumen-zh-f", name: "晨曦 · 女声", tone: "明亮、活泼" },
 ];
 
-/**
- * 标准 6 步流水线 · 对齐 Hero 文案：
- * 脚本 → 语音 → 字幕 → 混剪 → 封面 → 品牌水印
- */
 const PIPELINE = [
   { key: "script", label: "脚本", icon: Sparkles },
   { key: "voice", label: "语音", icon: Mic },
@@ -51,24 +51,75 @@ const PIPELINE = [
   { key: "watermark", label: "品牌水印", icon: Droplet },
 ];
 
+const DRAFT_KEY = "sb_create_draft_v2";
+
+type Purpose = "marketing" | "training" | "product_demo" | "social";
+
+type Draft = {
+  template: string;
+  purpose: Purpose;
+  aspect: string;
+  duration: string;
+  voice: string;
+  brief: string;
+  cta: string;
+};
+
+const DEFAULT_DRAFT: Draft = {
+  template: "hero-launch",
+  purpose: "marketing",
+  aspect: "9:16",
+  duration: "30",
+  voice: "alloy-zh-f",
+  brief:
+    "春季智能腕环新品上市。卖点：7 天续航、12 项健康指标、单手轻触。受众：28–42 岁的运动型职场人，覆盖中国一二线城市。语态：自信、平实、不夸张。CTA：现在预定，首批 1000 台免运费。",
+  cta: "现在预定，首批 1000 台免运费",
+};
+
 export function CreateWizard() {
-  const [template, setTemplate] = useState("hero-launch");
-  const [purpose, setPurpose] = useState<"marketing" | "training" | "product_demo" | "social">("marketing");
-  const [aspect, setAspect] = useState("9:16");
-  const [duration, setDuration] = useState("30");
-  const [voice, setVoice] = useState("alloy-zh-f");
-  const [brief, setBrief] = useState(
-    "春季智能腕环新品上市。卖点：7 天续航、12 项健康指标、单手轻触。受众：28–42 岁的运动型职场人，覆盖中国一二线城市。语态：自信、平实、不夸张。CTA：现在预定，首批 1000 台免运费。"
-  );
-  const [cta, setCta] = useState("现在预定，首批 1000 台免运费");
+  const [draft, setDraft] = useState<Draft>(DEFAULT_DRAFT);
   const [running, setRunning] = useState(false);
   const [step, setStep] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [savedAt, setSavedAt] = useState<Date | null>(null);
+  const [restored, setRestored] = useState(false);
+  const stepTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // 草稿恢复 + autosave
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Draft;
+        setDraft({ ...DEFAULT_DRAFT, ...parsed });
+        setRestored(true);
+        setTimeout(() => setRestored(false), 3500);
+      }
+    } catch {}
+  }, []);
 
   useEffect(() => {
+    const t = setTimeout(() => {
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+        setSavedAt(new Date());
+      } catch {}
+    }, 600);
+    return () => clearTimeout(t);
+  }, [draft]);
+
+  // 流水线推进
+  useEffect(() => {
     if (!running) return;
-    const t = setInterval(() => {
+    stepTimer.current = setInterval(() => {
       setStep((s) => {
         const next = s + 1;
+        // 演示错误分支：5% 概率在某一步失败（生产请走真实事件流）
+        if (Math.random() < 0.0001) {
+          setError("渲染节点暂时不可用，等几秒重试一次。");
+          setRunning(false);
+          return s;
+        }
         if (next >= PIPELINE.length) {
           setRunning(false);
           return PIPELINE.length;
@@ -76,16 +127,54 @@ export function CreateWizard() {
         return next;
       });
     }, 800);
-    return () => clearInterval(t);
+    return () => {
+      if (stepTimer.current) clearInterval(stepTimer.current);
+    };
   }, [running]);
 
+  function update<K extends keyof Draft>(key: K, value: Draft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+  }
+
   function start() {
+    setError(null);
     setStep(0);
     setRunning(true);
   }
 
+  function cancel() {
+    if (stepTimer.current) clearInterval(stepTimer.current);
+    setRunning(false);
+  }
+
+  function reset() {
+    cancel();
+    setError(null);
+    setStep(0);
+    try {
+      localStorage.removeItem(DRAFT_KEY);
+    } catch {}
+    setDraft(DEFAULT_DRAFT);
+  }
+
+  const stepProgress = (step / PIPELINE.length) * 100;
+  const finished = !running && step >= PIPELINE.length;
+  const saveLabel = savedAt
+    ? `${savedAt.getHours().toString().padStart(2, "0")}:${savedAt.getMinutes().toString().padStart(2, "0")}`
+    : "暂未保存";
+
   return (
     <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_1fr] items-start">
+      {restored && (
+        <div className="lg:col-span-2 -mt-2 flex animate-fade-up items-center gap-3 rounded-md border border-accent-500/30 bg-accent-500/[0.06] px-4 py-2.5 text-xs text-accent-300">
+          <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+          <span>已恢复上一次的草稿。</span>
+          <Button variant="link" size="sm" onClick={reset} className="ml-auto h-auto p-0 text-xs text-accent-300">
+            清空重来
+          </Button>
+        </div>
+      )}
+
       {/* ── 左：表单 ─────────────────────── */}
       <div className="grid gap-6">
         <Card>
@@ -98,11 +187,13 @@ export function CreateWizard() {
               <button
                 key={t.slug}
                 type="button"
-                onClick={() => setTemplate(t.slug)}
+                onClick={() => update("template", t.slug)}
+                aria-pressed={draft.template === t.slug}
                 className={cn(
-                  "relative flex flex-col gap-3 rounded-md border border-border bg-card/40 p-4 text-left transition-all",
-                  "hover:-translate-y-0.5 hover:border-accent-500/40",
-                  template === t.slug && "border-accent-500 bg-accent-500/[0.06]"
+                  "relative flex flex-col gap-3 rounded-md border border-border bg-card/40 p-4 text-left transition-all duration-200 ease-out",
+                  "hover:-translate-y-0.5 hover:border-accent-500/40 hover:shadow-[0_8px_22px_-12px_rgba(34,211,183,0.4)]",
+                  "active:translate-y-0 active:duration-75",
+                  draft.template === t.slug && "border-accent-500 bg-accent-500/[0.07] shadow-[0_0_0_1px_rgba(34,211,183,0.4)_inset]"
                 )}
               >
                 <div className="h-[60px] rounded bg-gradient-to-br from-navy-700 to-navy-900" />
@@ -113,6 +204,11 @@ export function CreateWizard() {
                   )}
                 </div>
                 <span className="text-xs text-muted-foreground">{t.desc}</span>
+                {draft.template === t.slug && (
+                  <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-accent-500 text-navy-950">
+                    <Check className="h-3 w-3" aria-hidden />
+                  </span>
+                )}
               </button>
             ))}
           </CardContent>
@@ -124,7 +220,7 @@ export function CreateWizard() {
             <p className="text-sm text-muted-foreground">越清楚的简报，越对得起品牌的成片。</p>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <Tabs value={purpose} onValueChange={(v) => setPurpose(v as typeof purpose)}>
+            <Tabs value={draft.purpose} onValueChange={(v) => update("purpose", v as Purpose)}>
               <TabsList className="w-full">
                 <TabsTrigger value="marketing" className="flex-1">营销</TabsTrigger>
                 <TabsTrigger value="product_demo" className="flex-1">产品演示</TabsTrigger>
@@ -138,12 +234,15 @@ export function CreateWizard() {
             </Tabs>
 
             <div className="grid gap-1.5">
-              <Label htmlFor="brief">简报</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="brief">简报</Label>
+                <span className="text-[11px] text-muted-foreground num">{draft.brief.length} 字</span>
+              </div>
               <Textarea
                 id="brief"
                 rows={5}
-                value={brief}
-                onChange={(e) => setBrief(e.target.value)}
+                value={draft.brief}
+                onChange={(e) => update("brief", e.target.value)}
                 placeholder="一段话写清楚：是给谁看的、说什么卖点、什么语态、最后让用户做什么。"
               />
             </div>
@@ -153,9 +252,9 @@ export function CreateWizard() {
                 <Label htmlFor="aspect">画幅</Label>
                 <select
                   id="aspect"
-                  value={aspect}
-                  onChange={(e) => setAspect(e.target.value)}
-                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={draft.aspect}
+                  onChange={(e) => update("aspect", e.target.value)}
+                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   <option value="9:16">9:16 竖屏</option>
                   <option value="16:9">16:9 横屏</option>
@@ -166,9 +265,9 @@ export function CreateWizard() {
                 <Label htmlFor="duration">时长</Label>
                 <select
                   id="duration"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={draft.duration}
+                  onChange={(e) => update("duration", e.target.value)}
+                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   <option value="15">15 秒</option>
                   <option value="30">30 秒</option>
@@ -180,9 +279,9 @@ export function CreateWizard() {
                 <Label htmlFor="voice">配音</Label>
                 <select
                   id="voice"
-                  value={voice}
-                  onChange={(e) => setVoice(e.target.value)}
-                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={draft.voice}
+                  onChange={(e) => update("voice", e.target.value)}
+                  className="h-10 rounded-md border border-input bg-card/60 px-3 text-sm transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25"
                 >
                   {VOICES.map((v) => (
                     <option key={v.id} value={v.id}>{v.name}</option>
@@ -195,8 +294,8 @@ export function CreateWizard() {
               <Label htmlFor="cta">行动号召</Label>
               <Input
                 id="cta"
-                value={cta}
-                onChange={(e) => setCta(e.target.value)}
+                value={draft.cta}
+                onChange={(e) => update("cta", e.target.value)}
                 placeholder="一句话告诉观众下一步做什么。"
               />
             </div>
@@ -212,9 +311,9 @@ export function CreateWizard() {
             <button
               type="button"
               aria-label="上传素材文件"
-              className="grid place-items-center gap-3 rounded-lg border-[1.5px] border-dashed border-accent-500/40 bg-accent-500/[0.05] p-6 text-center transition-colors hover:bg-accent-500/[0.08]"
+              className="group grid place-items-center gap-3 rounded-lg border-[1.5px] border-dashed border-accent-500/40 bg-accent-500/[0.04] p-6 text-center transition-all duration-200 hover:border-accent-500/70 hover:bg-accent-500/[0.08] active:scale-[0.99]"
             >
-              <Upload className="h-7 w-7 text-accent-300" aria-hidden />
+              <Upload className="h-7 w-7 text-accent-300 transition-transform group-hover:-translate-y-0.5" aria-hidden />
               <b className="font-display text-sm">拖入文件，或点击上传</b>
               <span className="text-xs text-muted-foreground">MP4 / MOV / PNG / JPG / MP3 · 单个最大 4 GB</span>
             </button>
@@ -232,34 +331,68 @@ export function CreateWizard() {
 
       {/* ── 右：一键生成 + 进度 ─────────── */}
       <div className="sticky top-[76px] grid gap-4">
-        <Card className="border-accent-500/50 bg-gradient-to-b from-accent-500/[0.08] to-card/85">
+        <Card className="border-accent-500/50 bg-gradient-to-b from-accent-500/[0.09] to-card/85">
           <CardHeader>
-            <CardTitle>4. 一键生成</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle>4. 一键生成</CardTitle>
+              <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+                <Save className="h-3 w-3" aria-hidden />
+                草稿 · {saveLabel}
+              </span>
+            </div>
             <p className="text-sm text-muted-foreground">流水线并行 6 步。首版预计 <b className="text-foreground num">4 分 32 秒</b>。</p>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <Button
-              size="xl"
-              onClick={start}
-              disabled={running}
-              className="w-full text-base shadow-[0_24px_48px_-16px_rgba(34,211,183,0.7)]"
-            >
-              {running ? (
-                <>
+            {error && (
+              <div role="alert" className="flex animate-fade-up items-start gap-3 rounded-md border border-rose-500/30 bg-rose-500/[0.06] p-3 text-xs">
+                <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-rose-300" aria-hidden />
+                <div className="grid flex-1 gap-1">
+                  <b className="text-rose-300">渲染失败</b>
+                  <span className="text-muted-foreground">{error}</span>
+                </div>
+                <Button size="sm" variant="outline" onClick={start} className="border-rose-500/30 hover:border-rose-500/60">
+                  <RotateCcw className="h-3 w-3" /> 重试
+                </Button>
+              </div>
+            )}
+
+            {finished && !error && (
+              <div role="status" className="flex animate-fade-up items-center gap-3 rounded-md border border-accent-500/40 bg-accent-500/[0.08] p-3 text-xs">
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-accent-500 text-navy-950 animate-pulse-ring">
+                  <Check className="h-4 w-4" aria-hidden />
+                </span>
+                <div className="grid flex-1 gap-0.5">
+                  <b className="text-accent-300">首版已渲染</b>
+                  <span className="text-muted-foreground">下一步：审核或直接发布。</span>
+                </div>
+                <Button size="sm" variant="outline">查看成片</Button>
+              </div>
+            )}
+
+            {running ? (
+              <div className="grid gap-2">
+                <Button size="xl" disabled className="w-full text-base">
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  正在生成（{step}/6）
-                </>
-              ) : (
-                <>
-                  <Zap className="h-5 w-5 fill-current" />
-                  一键生成视频
-                </>
-              )}
-            </Button>
+                  正在生成（{step}/{PIPELINE.length}）
+                </Button>
+                <Button size="sm" variant="ghost" onClick={cancel} className="w-full">
+                  <XIcon className="h-3.5 w-3.5" /> 取消生成
+                </Button>
+              </div>
+            ) : (
+              <Button
+                size="xl"
+                onClick={start}
+                className="w-full text-base shadow-[0_24px_48px_-16px_rgba(34,211,183,0.7)]"
+              >
+                <Zap className="h-5 w-5 fill-current" />
+                {finished ? "再渲染一版" : "一键生成视频"}
+              </Button>
+            )}
 
             <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
               <span>预计时长</span>
-              <span className="text-right font-mono text-foreground">{duration} 秒 · {aspect}</span>
+              <span className="text-right font-mono text-foreground">{draft.duration} 秒 · {draft.aspect}</span>
               <span>当前队列</span>
               <span className="text-right font-mono text-foreground">3 个加急 · 1 个常规</span>
               <span>预计费用</span>
@@ -268,16 +401,16 @@ export function CreateWizard() {
               <span className="text-right font-mono text-foreground">立即可下载 / 分享</span>
             </div>
 
-            <div className="rounded-md border border-border bg-card/60 p-3">
+            <div className="rounded-md border border-border bg-card/60 p-3 hairline">
               <div className="mb-3 flex items-center justify-between text-xs">
                 <span className="font-semibold uppercase tracking-wider text-muted-foreground">流水线进度</span>
-                {running && (
-                  <span className="font-mono text-accent-300">
-                    {Math.round((step / PIPELINE.length) * 100)}%
+                {(running || finished) && (
+                  <span className="font-mono text-accent-300 num">
+                    {Math.round(stepProgress)}%
                   </span>
                 )}
               </div>
-              <Progress value={(step / PIPELINE.length) * 100} className="mb-3" />
+              <Progress value={stepProgress} className="mb-3" />
               <ul className="grid gap-2">
                 {PIPELINE.map((p, i) => {
                   const Icon = p.icon;
@@ -287,7 +420,7 @@ export function CreateWizard() {
                     <li
                       key={p.key}
                       className={cn(
-                        "flex items-center gap-2 text-xs transition-colors",
+                        "flex items-center gap-2 text-xs transition-colors duration-300",
                         done ? "text-accent-300" : active ? "text-foreground" : "text-muted-foreground"
                       )}
                     >
@@ -299,7 +432,7 @@ export function CreateWizard() {
                         <Icon className="h-3.5 w-3.5" />
                       )}
                       <span>{p.label}</span>
-                      {active && <span className="ml-auto font-mono text-[10px]">运行中</span>}
+                      {active && <span className="ml-auto font-mono text-[10px] text-sky-300">运行中</span>}
                       {done && <span className="ml-auto font-mono text-[10px]">完成</span>}
                     </li>
                   );
