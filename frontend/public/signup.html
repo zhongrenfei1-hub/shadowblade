@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get started · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; place-items: center; min-height: 100vh; padding: var(--sb-space-6); }
+      .sb-su {
+        width: min(960px, 100%);
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.96), rgba(11,18,32,0.96));
+        box-shadow: var(--sb-shadow-lg);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+      }
+      .sb-su__left {
+        padding: var(--sb-space-12) var(--sb-space-10);
+        background: linear-gradient(160deg, #102447, #050a18);
+        position: relative;
+        display: grid; align-content: space-between;
+      }
+      .sb-su__left::after {
+        content: ''; position: absolute; inset: 0;
+        background: radial-gradient(circle at 80% 20%, rgba(34,211,183,0.18), transparent 55%);
+        pointer-events: none;
+      }
+      .sb-su__left h1 {
+        position: relative; z-index: 1;
+        margin: var(--sb-space-3) 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(28px, 3vw, 38px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+      }
+      .sb-su__left p { color: var(--sb-text-muted); font-size: var(--sb-text-md); position: relative; z-index: 1; }
+      .sb-su__bullets {
+        margin-top: var(--sb-space-6);
+        display: grid; gap: var(--sb-space-3);
+        position: relative; z-index: 1;
+      }
+      .sb-su__bullets li {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: var(--sb-text-md);
+        color: var(--sb-text);
+      }
+      .sb-su__bullets li svg { color: var(--sb-accent-300); margin-top: 3px; flex-shrink: 0; }
+      .sb-su__quote {
+        position: relative; z-index: 1;
+        margin-top: var(--sb-space-8);
+        padding: var(--sb-space-4) 0 0;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      .sb-su__quote .q { font-family: var(--sb-font-display); color: var(--sb-text); font-size: var(--sb-text-lg); }
+      .sb-su__quote .by { font-size: var(--sb-text-xs); color: var(--sb-text-faint); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
+
+      .sb-su__right {
+        padding: var(--sb-space-12) var(--sb-space-10);
+        display: grid;
+        align-content: center;
+        gap: var(--sb-space-5);
+      }
+      .sb-su__form { display: grid; gap: var(--sb-space-3); }
+      .sb-su__form label {
+        display: grid; gap: 6px;
+        font-size: var(--sb-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sb-text-faint);
+        font-weight: 600;
+      }
+      .sb-su__form input, .sb-su__form select {
+        padding: 12px 14px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        outline: none;
+      }
+      .sb-su__form input:focus, .sb-su__form select:focus {
+        border-color: var(--sb-accent-500);
+        box-shadow: 0 0 0 3px rgba(34,211,183,0.18);
+      }
+      .sb-su__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-3); }
+      .sb-su__legal {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        margin-top: 4px;
+      }
+      .sb-su__legal a { color: var(--sb-accent-300); }
+      .sb-su__sso {
+        margin-top: var(--sb-space-4);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--sb-space-2);
+      }
+      .sb-su__sso button {
+        padding: 8px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border-strong);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-sm);
+        font-weight: 600;
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+      }
+      .sb-su__sso button svg { width: 16px; height: 16px; }
+
+      .sb-su__divider {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: var(--sb-space-3);
+        font-size: 10px;
+        color: var(--sb-text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+      .sb-su__divider::before, .sb-su__divider::after {
+        content: ''; height: 1px; background: var(--sb-border);
+      }
+
+      @media (max-width: 800px) {
+        .sb-su { grid-template-columns: 1fr; }
+        .sb-su__left { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="sb-su">
+      <section class="sb-su__left">
+        <div>
+          <div class="sb-brand">
+            <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgsu)"/><defs><linearGradient id="mgsu" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+            <div class="sb-brand__name"><b>ShadowBlade</b><span>Get started</span></div>
+          </div>
+
+          <div style="margin-top:var(--sb-space-8)">
+            <div class="sb-eyebrow">Free for 30 days · no card</div>
+            <h1>Your video factory, ready by lunch.</h1>
+            <p>Free Studio plan up to 25 renders / month. Upgrade only when your team's shipping at scale.</p>
+          </div>
+
+          <ul class="sb-su__bullets" style="list-style:none;padding:0;margin-top:var(--sb-space-6)">
+            <li><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>4-minute first cut on your real brand kit</li>
+            <li><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>64 templates · marketing, training, demo, social</li>
+            <li><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Bring your team in via SSO (Okta, Entra, Google)</li>
+            <li><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Render in EU, US, or APAC region</li>
+          </ul>
+        </div>
+
+        <div class="sb-su__quote">
+          <div class="q">"We ship video like product now. Same week. Same vibe."</div>
+          <div class="by">— Maya Okonkwo · VP Content, Helios Logistics</div>
+        </div>
+      </section>
+
+      <section class="sb-su__right">
+        <div>
+          <div class="sb-eyebrow">Create your workspace</div>
+          <h2 style="margin:6px 0 var(--sb-space-3);font-family:var(--sb-font-display);font-size:var(--sb-text-2xl);font-weight:600;letter-spacing:-0.02em">Start in 60 seconds</h2>
+          <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Already have a workspace? <a href="login.html" style="color:var(--sb-accent-300)">Sign in</a> instead.</p>
+        </div>
+
+        <form class="sb-su__form" onsubmit="event.preventDefault();window.location='onboarding.html'">
+          <div class="sb-su__row">
+            <label>First name<input required value="Ava" autocomplete="given-name" /></label>
+            <label>Last name<input required value="Chen" autocomplete="family-name" /></label>
+          </div>
+          <label>Work email<input type="email" required value="ava.chen@acme.com" autocomplete="email" /></label>
+          <label>Workspace name<input required value="Acme Marketing Cloud" /></label>
+          <div class="sb-su__row">
+            <label>Region<select><option>eu-central-1 · Frankfurt</option><option>us-east-1 · Virginia</option><option>ap-south-1 · Mumbai</option></select></label>
+            <label>Team size<select><option>Just me</option><option>2–10</option><option selected>11–50</option><option>50+</option></select></label>
+          </div>
+          <button class="sb-btn sb-btn--primary" type="submit">
+            Create workspace
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <div class="sb-su__legal">
+            By continuing you agree to the <a href="#">Terms</a> and <a href="#">Privacy</a>. We won't email you anything you didn't ask for.
+          </div>
+        </form>
+
+        <div class="sb-su__divider"><span>or sign up with SSO</span></div>
+        <div class="sb-su__sso">
+          <button><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#007DC1"/><text x="12" y="16" font-family="Inter" font-size="8" font-weight="700" fill="#FFF" text-anchor="middle">Okta</text></svg>Okta</button>
+          <button><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" fill="#F25022"/><rect x="13" y="3" width="8" height="8" fill="#7FBA00"/><rect x="3" y="13" width="8" height="8" fill="#00A4EF"/><rect x="13" y="13" width="8" height="8" fill="#FFB900"/></svg>Microsoft</button>
+          <button><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-9-9c2.5 0 4.7 1 6.3 2.6L16 8a5.5 5.5 0 00-4-1.5 5.5 5.5 0 100 11A5.5 5.5 0 0017.4 13H12v-2.5h9V12z" fill="#4285F4"/></svg>Google</button>
+        </div>
+      </section>
+    </article>
+  </body>
+</html>
