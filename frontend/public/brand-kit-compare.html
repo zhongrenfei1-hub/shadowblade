@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand kit · v2 ↔ v3 · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-bkc {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-5);
+      }
+      .sb-bkc-pane {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: grid; gap: var(--sb-space-4);
+      }
+      .sb-bkc-pane .head { display: flex; align-items: center; gap: var(--sb-space-3); }
+      .sb-bkc-pane .head .v {
+        font-family: var(--sb-font-mono);
+        color: var(--sb-accent-300);
+        font-weight: 700;
+      }
+      .sb-bkc-pane .head time {
+        margin-left: auto;
+        color: var(--sb-text-faint);
+        font-size: var(--sb-text-xs);
+        font-family: var(--sb-font-mono);
+      }
+      .sb-bkc-row {
+        padding: var(--sb-space-3);
+        border-radius: var(--sb-radius-sm);
+        background: rgba(255,255,255,0.025);
+        display: grid;
+        grid-template-columns: 110px 1fr auto;
+        gap: var(--sb-space-3);
+        align-items: center;
+        font-size: var(--sb-text-sm);
+      }
+      .sb-bkc-row.change { background: rgba(56,189,248,0.05); border-left: 2px solid var(--sb-status-running); }
+      .sb-bkc-row.add { background: rgba(34,211,183,0.05); border-left: 2px solid var(--sb-accent-500); }
+      .sb-bkc-row .label {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sb-text-muted);
+      }
+      .sb-bkc-row .from, .sb-bkc-row .to {
+        display: flex; align-items: center; gap: 8px;
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-text-muted);
+      }
+      .sb-bkc-row .to { color: var(--sb-text); }
+      .sb-bkc-row .chip {
+        width: 18px; height: 18px; border-radius: 4px;
+        border: 1px solid var(--sb-border-strong);
+      }
+
+      .sb-bkc-impact {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid rgba(251,191,36,0.4);
+        background: linear-gradient(180deg, rgba(251,191,36,0.06), rgba(11,18,32,0.6));
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-bkc-impact b { font-family: var(--sb-font-display); font-size: var(--sb-text-md); font-weight: 600; }
+      .sb-bkc-impact .row { display: flex; justify-content: space-between; font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-bkc-impact .row b { color: var(--sb-text); font-family: var(--sb-font-body); font-weight: 600; }
+
+      @media (max-width: 1100px) { .sb-bkc { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="brand">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="brand-kit.html" style="color:var(--sb-text-muted)">Brand kits</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="brand-kit.html" style="color:var(--sb-text-muted)">Acme · Core</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Compare v2 ↔ v3</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">Pick versions…</button>
+            <button class="sb-btn sb-btn--ghost">Revert to v2</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Publish v3 (187 re-renders)
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Brand kit · Acme · Core · diff</div>
+                <h1>v2 → v3</h1>
+                <p class="sb-page-head__lead">
+                  6 changes · 1 new tone constraint · 0 colour-contrast regressions. 187 existing cuts flag for re-render on publish.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-bkc-impact">
+            <b>Impact preview</b>
+            <div class="row"><span>Existing cuts using v2</span><b>187 · Helios, Spring launch, SE bootcamp, …</b></div>
+            <div class="row"><span>Brand-drift threshold</span><b>0.10 → 0.07 (tighter)</b></div>
+            <div class="row"><span>Re-render cost estimate</span><b>$261.80 · charged on publish</b></div>
+            <div class="row"><span>Window</span><b>Off-peak · finishes Tuesday 06:00 UTC</b></div>
+          </section>
+
+          <section class="sb-bkc">
+            <article class="sb-bkc-pane">
+              <div class="head"><span class="v">v2</span><b>Pre-Series-C tune</b><time>2025-12-04 · Priya Rao</time></div>
+              <div class="sb-bkc-row"><span class="label">PRIMARY</span><span class="from"><span class="chip" style="background:#0F2A4A"></span>#0F2A4A</span><span></span></div>
+              <div class="sb-bkc-row"><span class="label">ACCENT</span><span class="from"><span class="chip" style="background:#20D2B5"></span>#20D2B5</span><span></span></div>
+              <div class="sb-bkc-row"><span class="label">DISPLAY</span><span class="from">Inter · 600</span><span></span></div>
+              <div class="sb-bkc-row"><span class="label">VOICE</span><span class="from">Alloy · EN female</span><span></span></div>
+              <div class="sb-bkc-row"><span class="label">CAP / LINE</span><span class="from">18 words on-screen</span><span></span></div>
+              <div class="sb-bkc-row"><span class="label">DRIFT</span><span class="from">≤ 0.10</span><span></span></div>
+              <div class="sb-bkc-row" style="background:rgba(255,255,255,0.015);color:var(--sb-text-faint)"><span class="label">VOICE PROFILE</span><span class="from" style="font-style:italic">(not set)</span><span></span></div>
+            </article>
+
+            <article class="sb-bkc-pane" style="border-color:rgba(34,211,183,0.4)">
+              <div class="head"><span class="v">v3</span><b>Tightened drift + voice profile</b><time>4 min ago · Ava Chen</time><span class="sb-pill sb-pill--running" style="margin-left:8px">Draft</span></div>
+              <div class="sb-bkc-row"><span class="label">PRIMARY</span><span class="to"><span class="chip" style="background:#0F2A4A"></span>#0F2A4A</span><span style="font-size:10px;color:var(--sb-text-faint)">unchanged</span></div>
+              <div class="sb-bkc-row change"><span class="label">ACCENT</span><span class="to"><span class="chip" style="background:#22D3B7"></span>#22D3B7</span><span style="font-size:10px;color:var(--sb-status-running)">corrected</span></div>
+              <div class="sb-bkc-row"><span class="label">DISPLAY</span><span class="to">Inter Display · 600</span><span style="font-size:10px;color:var(--sb-text-faint)">renamed</span></div>
+              <div class="sb-bkc-row"><span class="label">VOICE</span><span class="to">Alloy · EN female</span><span style="font-size:10px;color:var(--sb-text-faint)">unchanged</span></div>
+              <div class="sb-bkc-row change"><span class="label">CAP / LINE</span><span class="to">14 words on-screen</span><span style="font-size:10px;color:var(--sb-status-running)">tightened</span></div>
+              <div class="sb-bkc-row change"><span class="label">DRIFT</span><span class="to">≤ 0.07</span><span style="font-size:10px;color:var(--sb-status-running)">tightened</span></div>
+              <div class="sb-bkc-row add"><span class="label">VOICE PROFILE</span><span class="to" style="font-style:italic">Confident, plainspoken, never breathless</span><span style="font-size:10px;color:var(--sb-accent-300)">+ added</span></div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">What will re-render</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill" style="color:var(--sb-text-muted)">187 cuts</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">List them</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-stack">
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(34,211,183,0.18);color:var(--sb-accent-300)">●</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">62 cuts · accent colour drift &gt; 0.07</div>
+                  <div class="sb-stage__log">All used #20D2B5 — re-render swaps to #22D3B7</div>
+                </div>
+                <div class="sb-stage__meta">~31 min queue</div>
+              </div>
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(56,189,248,0.18);color:var(--sb-status-running)">●</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">94 cuts · sentence cap violation</div>
+                  <div class="sb-stage__log">v3 caps at 14 words; v2 cuts averaged 16.4 — script re-pass needed</div>
+                </div>
+                <div class="sb-stage__meta">~58 min queue</div>
+              </div>
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(167,139,250,0.18);color:var(--sb-status-review)">●</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">31 cuts · tone-profile mismatch</div>
+                  <div class="sb-stage__log">"Breathless" phrases flagged — auto-rewrite available</div>
+                </div>
+                <div class="sb-stage__meta">~16 min queue</div>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Brand kit Acme · Core · diff v2 ↔ v3 · audit hash chain verified</span>
+          <span>Re-render queue · estimated 1h 45m at current cluster load</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

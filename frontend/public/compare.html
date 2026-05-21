@@ -120,7 +120,7 @@
 
       <div class="sb-shell__main">
         <header class="sb-topbar">
-          <div class="sb-breadcrumb">
+          <nav class="sb-breadcrumb" aria-label="Breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
             <a href="projects.html" style="color:var(--sb-text-muted)">Projects</a>
@@ -128,17 +128,18 @@
             <a href="project-detail.html" style="color:var(--sb-text-muted)">Spring product launch</a>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
             <b>Compare v16 ↔ v17</b>
-          </div>
+          </nav>
           <div class="sb-topbar__actions">
             <button class="sb-btn sb-btn--ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
               Swap sides
             </button>
             <button class="sb-btn sb-btn--ghost">Pick versions…</button>
-            <button class="sb-btn sb-btn--primary">
+            <button class="sb-btn sb-btn--primary" aria-describedby="adopt-help">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
               Adopt v17
             </button>
+            <span id="adopt-help" class="visually-hidden">Adopting v17 publishes it as the live cut. You can restore v16 from the Versions tab if needed.</span>
           </div>
         </header>
 
