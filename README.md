@@ -13,21 +13,41 @@ under five minutes, against your brand kit.
 | Storage      | S3-compatible object store                     |
 | Auth         | SAML SSO + SCIM provisioning                   |
 
-## Workspace surface (Design ring shipped)
+## Surface map (24 pages shipped)
 
-| Route               | Page                                          |
-| ------------------- | --------------------------------------------- |
-| `index.html`        | Marketing landing with hero pipeline visual   |
-| `dashboard.html`    | KPIs · in-flight pipeline · approvals · projects |
-| `studio.html`       | Three-column scene editor + multi-track timeline |
-| `projects.html`     | Filter chips + dense project table            |
-| `templates.html`    | Template gallery with hover-reveal play       |
-| `assets.html`       | Folders · tags · drop-zone · content grid    |
-| `render-queue.html` | Cluster utilisation · worker grid · queue     |
-| `analytics.html`    | KPI strip · 7-day chart · leaderboard · drift |
-| `brand-kit.html`    | Kit picker · swatches · type · voice & tone   |
-| `team.html`         | Members · roles · permission matrix · SCIM    |
-| `settings.html`     | Workspace · render · security · billing · API |
+### Marketing (public, no auth)
+
+| Route                | Page                                                     |
+| -------------------- | -------------------------------------------------------- |
+| `index.html`         | Landing — hero pipeline visual, logos, features          |
+| `pricing.html`       | 4-tier plans, annual/monthly toggle, feature matrix      |
+| `customer-story.html`| Helios case study — hero, KPIs, body, pull-quote, CTA    |
+| `gallery.html`       | Customer reel grid from Showcase thumbnails              |
+| `changelog.html`     | Date-axis timeline with category pills                   |
+| `docs.html`          | Knowledge grid + curl example + Cmd-K search             |
+| `status.html`        | Statuspage — 6 services, 60-min tick bars, incidents     |
+| `login.html`         | SSO-first (Okta · Entra · Google) + email + branded rail |
+
+### Workspace (app shell + sidebar nav)
+
+| Route                  | Page                                                  |
+| ---------------------- | ----------------------------------------------------- |
+| `dashboard.html`       | KPIs · in-flight pipeline · approvals · projects      |
+| `studio.html`          | Scene nav + 9:16 canvas + transport + 4-track timeline + inspector + reviews |
+| `projects.html`        | Filter chips + dense project table                    |
+| `project-detail.html`  | Cinematic cover + meta + KPIs + version history       |
+| `templates.html`       | 8-card template gallery with hover-reveal play        |
+| `assets.html`          | Folders + tag filters + drop-zone + content grid      |
+| `render-queue.html`    | Cluster utilisation + 4-worker grid + prioritised queue |
+| `job-detail.html`      | Gantt timeline + live GPU chart + colour-coded log    |
+| `analytics.html`       | KPI strip + 7-day bar + leaderboard + drift alerts    |
+| `brand-kit.html`       | Kit picker + swatches + type + voice/tone + logo lockups |
+| `team.html`            | Members + role/permission matrix + SSO badges         |
+| `settings.html`        | General + Render + Security + Billing + API + Toggles |
+| `integrations.html`    | 15-card marketplace (Slack/Notion/Figma/YouTube/…)    |
+| `notifications.html`   | Inbox with category tabs + glyph categories + inline actions |
+| `components.html`      | Design system docs — every component in one surface   |
+| `new-video.html`       | 4-step create wizard with ETA + smart suggestions     |
 
 ## Run locally
 
@@ -45,11 +65,20 @@ local fixture data if the backend is offline.
 
 This repo is being built by four concurrent rings:
 
-1. **Design** — backend + UI design system + every workspace page.
-2. **Showcase** — brand assets, marketing visuals, product screens, voice spec.
-3. **Test** — a11y, contrast, copy, responsive, brand consistency audit.
-4. **Refine** — applies Test findings + wires Showcase assets back in.
+1. **Design** — backend + UI design system + every workspace page. Six waves shipped (v1 → v6).
+2. **Showcase** — brand assets, marketing visuals, product screens, voice spec, empty-state illustrations. Two passes shipped (25 SVGs in `/showcase/`).
+3. **Test** — a11y, contrast, copy, responsive, brand consistency audit. Two passes shipped (`docs/test-ring-report-00{1,2}.md`).
+4. **Refine** — applies Test findings + wires Showcase assets back in. Two passes shipped (17 + 17 fixes folded back).
 
-Outputs live under `frontend/`, `backend/`, `showcase/`, `docs/`. Each ring
-commits its own work; refine the cycle by re-running rings 2-4 after the next
-Design wave.
+Outputs live under `frontend/`, `backend/`, `showcase/`, `docs/`. The cycle
+runs concurrently — each ring commits its own work, and rings 2–4 re-trigger
+themselves after every Design wave.
+
+## Vibe
+
+Deep navy `#0F2A4A` + graphite `#11161F` + mist `#F7F9FC` + cyan-green accent
+`#22D3B7`. Inter Display for display; Inter for body; JetBrains Mono for
+numerics. Dark cockpit, instrument-grade typography, status pills as the
+universal vocabulary.
+
+See `components.html` for the full design vocabulary in one browsable surface.

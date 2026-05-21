@@ -672,6 +672,11 @@ select {
   background: rgba(56, 189, 248, 0.18);
   color: var(--sb-status-running);
 }
+.sb-stage__index--review    { background: rgba(167, 139, 250, 0.18); color: var(--sb-status-review); }
+.sb-stage__index--running   { background: rgba(56, 189, 248, 0.18);  color: var(--sb-status-running); }
+.sb-stage__index--succeeded { background: rgba(34, 211, 183, 0.18);  color: var(--sb-status-done); }
+.sb-stage__index--queued    { background: rgba(251, 191, 36, 0.18);  color: var(--sb-status-queued); }
+.sb-stage__index--failed    { background: rgba(248, 113, 113, 0.18); color: var(--sb-status-failed); }
 .sb-stage__body {
   display: grid;
   gap: 4px;
