@@ -41,6 +41,15 @@
         letter-spacing: -0.025em;
       }
       .sb-help-hero p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 60ch; margin: 0 auto; }
+      .sb-help-hero__banner {
+        margin: var(--sb-space-6) auto 0;
+        max-width: 720px;
+        border-radius: var(--sb-radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-help-hero__banner img { width: 100%; height: auto; display: block; }
       .sb-help-hero .search {
         margin: var(--sb-space-6) auto 0;
         max-width: 620px;
@@ -184,6 +193,9 @@
       <div class="sb-eyebrow">Help center</div>
       <h1>How can we help?</h1>
       <p>Quick answers, deep guides, a status page, and a humans-on-the-other-end mailbox. Pick a path.</p>
+      <figure class="sb-help-hero__banner" aria-hidden="true">
+        <img src="/showcase/help/help-hero.svg" alt="" />
+      </figure>
       <label class="search">
         <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
         <input aria-label="Search help articles" placeholder="Search 412 help articles…" />

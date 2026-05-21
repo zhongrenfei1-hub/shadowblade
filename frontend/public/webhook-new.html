@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New webhook · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-wf-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-6);
+        align-items: start;
+      }
+      .sb-wf-form { display: grid; gap: var(--sb-space-4); }
+      .sb-wf-form label { display: grid; gap: 6px; font-size: var(--sb-text-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--sb-text-faint); font-weight: 600; }
+      .sb-wf-form input, .sb-wf-form select, .sb-wf-form textarea {
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        outline: none;
+      }
+      .sb-wf-form input:focus, .sb-wf-form select:focus, .sb-wf-form textarea:focus { border-color: var(--sb-accent-500); box-shadow: 0 0 0 3px rgba(34,211,183,0.18); }
+      .sb-wf-form textarea { font-family: var(--sb-font-mono); font-size: 12px; min-height: 80px; resize: vertical; }
+
+      .sb-event-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      }
+      .sb-event {
+        display: flex; align-items: flex-start; gap: 8px;
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.02);
+        font-size: var(--sb-text-sm);
+        cursor: pointer;
+      }
+      .sb-event input { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--sb-accent-500); }
+      .sb-event b { font-weight: 600; display: block; color: var(--sb-text); }
+      .sb-event span { color: var(--sb-text-faint); font-family: var(--sb-font-mono); font-size: 10px; }
+
+      .sb-wf-test {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px dashed rgba(34,211,183,0.4);
+        background: rgba(34,211,183,0.04);
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-wf-test b { font-family: var(--sb-font-display); font-size: var(--sb-text-md); font-weight: 600; }
+      .sb-wf-test code { font-family: var(--sb-font-mono); font-size: 11px; color: var(--sb-accent-300); background: rgba(34,211,183,0.08); padding: 2px 6px; border-radius: 4px; }
+
+      .sb-wf-preview {
+        font-family: var(--sb-font-mono); font-size: 11px;
+        background: rgba(6,10,22,0.7);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius);
+        padding: var(--sb-space-4);
+        line-height: 1.65;
+      }
+      .sb-wf-preview .k { color: var(--sb-status-queued); }
+      .sb-wf-preview .s { color: var(--sb-accent-300); }
+      .sb-wf-preview .n { color: var(--sb-status-running); }
+
+      @media (max-width: 1100px) { .sb-wf-grid { grid-template-columns: 1fr; } .sb-event-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="dev-console.html" style="color:var(--sb-text-muted)">Developer console</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>New webhook</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <a class="sb-btn sb-btn--ghost" href="dev-console.html">Cancel</a>
+            <button class="sb-btn sb-btn--ghost">Test delivery</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Create webhook
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Developer console · new webhook</div>
+                <h1>Listen for pipeline events.</h1>
+                <p class="sb-page-head__lead">
+                  Pick an endpoint, choose the events you care about, and we'll sign every payload with HMAC-SHA256. Failed deliveries retry for 30 days.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-wf-grid">
+            <article class="sb-card">
+              <header class="sb-card__head"><div class="sb-card__title">Configure</div></header>
+              <div class="sb-card__body sb-wf-form">
+                <label>Endpoint name<input value="Acme · render notifier" /></label>
+                <label>URL<input type="url" value="https://acme.example.com/hooks/sb" /></label>
+                <label>Secret · HMAC-SHA256
+                  <div style="display:flex;gap:8px">
+                    <input value="whsec_••••••••••••••••" style="flex:1" readonly />
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Rotate</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Copy</button>
+                  </div>
+                </label>
+
+                <div>
+                  <div style="font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--sb-text-faint);font-weight:600;margin-bottom:8px">Events</div>
+                  <div class="sb-event-grid">
+                    <label class="sb-event"><input type="checkbox" checked /><div><b>render.queued</b><span>render.queued</span></div></label>
+                    <label class="sb-event"><input type="checkbox" checked /><div><b>render.started</b><span>render.started</span></div></label>
+                    <label class="sb-event"><input type="checkbox" checked /><div><b>render.completed</b><span>render.completed</span></div></label>
+                    <label class="sb-event"><input type="checkbox" /><div><b>render.failed</b><span>render.failed</span></div></label>
+                    <label class="sb-event"><input type="checkbox" checked /><div><b>review.requested</b><span>review.requested</span></div></label>
+                    <label class="sb-event"><input type="checkbox" /><div><b>review.approved</b><span>review.approved</span></div></label>
+                    <label class="sb-event"><input type="checkbox" /><div><b>brand.drift</b><span>brand.drift</span></div></label>
+                    <label class="sb-event"><input type="checkbox" /><div><b>seat.added</b><span>seat.added</span></div></label>
+                  </div>
+                </div>
+
+                <label>Custom headers<textarea placeholder="X-Acme-Source: shadowblade">X-Acme-Source: shadowblade
+X-Acme-Env: production</textarea></label>
+
+                <div style="display:flex;gap:8px;align-items:center">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:var(--sb-text-sm);text-transform:none;letter-spacing:0;color:var(--sb-text-muted)">
+                    <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--sb-accent-500)" /> Enable on save
+                  </label>
+                </div>
+              </div>
+            </article>
+
+            <div class="sb-stack">
+              <article class="sb-wf-test">
+                <b>Test delivery</b>
+                <p style="margin:0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">We'll POST a real <code>render.completed</code> payload to your endpoint. The response shows up in your <a href="dev-console.html" style="color:var(--sb-accent-300)">delivery log</a> within a second.</p>
+                <button class="sb-btn sb-btn--primary" style="width:max-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                  Send test payload
+                </button>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head"><div class="sb-card__title">Sample payload</div></header>
+                <div class="sb-card__body">
+                  <pre class="sb-wf-preview">POST <span class="s">"https://acme.example.com/hooks/sb"</span>
+Headers:
+  <span class="k">Content-Type</span>:                application/json
+  <span class="k">X-ShadowBlade-Signature</span>:     t=…,v1=…
+  <span class="k">X-ShadowBlade-Webhook-Id</span>:    wh_…
+  <span class="k">X-Acme-Source</span>:               shadowblade
+  <span class="k">X-Acme-Env</span>:                  production
+
+{
+  <span class="k">"event"</span>:        <span class="s">"render.completed"</span>,
+  <span class="k">"project_id"</span>:   <span class="n">101</span>,
+  <span class="k">"run_id"</span>:       <span class="n">901</span>,
+  <span class="k">"output"</span>: { <span class="k">"url"</span>: <span class="s">"…cut.mp4"</span> }
+}</pre>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head"><div class="sb-card__title">Delivery policy</div></header>
+                <div class="sb-card__body" style="font-size:var(--sb-text-sm);color:var(--sb-text-muted);display:grid;gap:8px">
+                  <div style="display:flex;justify-content:space-between"><span>Timeout</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">10 s</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>Retry on 5xx / timeout</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">30 attempts · exponential</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>Final retry</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">+ 30 days</b></div>
+                  <div style="display:flex;justify-content:space-between"><span>Signature</span><b style="color:var(--sb-text);font-family:var(--sb-font-mono)">HMAC-SHA256</b></div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>SDK examples · <a href="docs.html" style="color:var(--sb-accent-300)">TypeScript / Python / Go / Rust</a></span>
+          <span>Need help verifying signatures? <a href="docs.html" style="color:var(--sb-accent-300)">Read the verify guide</a></span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

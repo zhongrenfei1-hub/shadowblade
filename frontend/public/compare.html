@@ -111,6 +111,15 @@
       }
       .sb-cmp-stat .delta.down { color: var(--sb-status-queued); }
 
+      .sb-cmp-banner {
+        margin: 0 0 var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-cmp-banner img { width: 100%; height: auto; display: block; }
+
       @media (max-width: 1100px) { .sb-cmp { grid-template-columns: 1fr; } .sb-cmp-stats { grid-template-columns: repeat(2, 1fr); } }
     </style>
   </head>
@@ -162,6 +171,10 @@
             <div class="sb-cmp-stat"><div>Render time</div><div class="v">4:12 → 3:48</div><div class="delta">▼ 24 s</div></div>
             <div class="sb-cmp-stat"><div>File size</div><div class="v">8.6 → 8.4 MB</div><div class="delta">▼ 0.2 MB</div></div>
           </section>
+
+          <figure class="sb-cmp-banner" aria-hidden="true">
+            <img src="/showcase/compare/diff-art.svg" alt="" />
+          </figure>
 
           <section class="sb-cmp">
             <article class="sb-cmp-pane">
