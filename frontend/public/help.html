@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help center · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; }
+      .sb-marketing__nav {
+        display: flex; align-items: center;
+        padding: var(--sb-space-5) var(--sb-space-12);
+        gap: var(--sb-space-6);
+        max-width: var(--sb-container); margin: 0 auto; width: 100%;
+      }
+      .sb-marketing__nav .spacer { flex: 1; }
+      .sb-marketing__nav a.link { color: var(--sb-text-muted); font-size: var(--sb-text-md); }
+
+      .sb-help-hero {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-12) var(--sb-space-12) var(--sb-space-8);
+        text-align: center;
+      }
+      .sb-help-hero h1 {
+        margin: var(--sb-space-3) 0;
+        font-family: var(--sb-font-display);
+        font-size: clamp(36px, 4vw, 52px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      .sb-help-hero p { color: var(--sb-text-muted); font-size: var(--sb-text-lg); max-width: 60ch; margin: 0 auto; }
+      .sb-help-hero .search {
+        margin: var(--sb-space-6) auto 0;
+        max-width: 620px;
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: 14px 18px;
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border-strong);
+        background: rgba(11,18,32,0.75);
+      }
+      .sb-help-hero .search input {
+        flex: 1; background: transparent; border: 0; outline: none;
+        color: var(--sb-text); font-size: var(--sb-text-md);
+      }
+      .sb-help-hero .suggest {
+        margin-top: var(--sb-space-3);
+        display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+        font-size: var(--sb-text-sm); color: var(--sb-text-faint);
+      }
+      .sb-help-hero .suggest a {
+        padding: 4px 10px; border-radius: var(--sb-radius-pill);
+        border: 1px solid var(--sb-border);
+      }
+
+      .sb-help-grid {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: 0 var(--sb-space-12) var(--sb-space-10);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-help-cat {
+        padding: var(--sb-space-5);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-help-cat .icon {
+        width: 38px; height: 38px; border-radius: 10px;
+        background: rgba(34,211,183,0.12);
+        color: var(--sb-accent-300);
+        display: grid; place-items: center;
+      }
+      .sb-help-cat h3 { margin: 0; font-family: var(--sb-font-display); font-size: var(--sb-text-md); font-weight: 600; }
+      .sb-help-cat span { font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+
+      .sb-faq {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 var(--sb-space-6) var(--sb-space-12);
+      }
+      .sb-faq h2 {
+        margin: 0 0 var(--sb-space-4);
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      details.sb-q {
+        border-bottom: 1px solid var(--sb-border);
+        padding: var(--sb-space-4) 0;
+      }
+      details.sb-q summary {
+        list-style: none;
+        cursor: pointer;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+        color: var(--sb-text);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -0.01em;
+      }
+      details.sb-q summary::-webkit-details-marker { display: none; }
+      details.sb-q summary::after {
+        content: '+';
+        font-family: var(--sb-font-mono);
+        font-size: 22px;
+        color: var(--sb-accent-300);
+        font-weight: 400;
+        line-height: 1;
+      }
+      details.sb-q[open] summary::after { content: '−'; }
+      details.sb-q .a {
+        margin: var(--sb-space-3) 0 0;
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-md);
+        line-height: 1.6;
+      }
+
+      .sb-contact {
+        max-width: var(--sb-container);
+        margin: 0 auto;
+        padding: var(--sb-space-10) var(--sb-space-12) var(--sb-space-16);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-contact-card {
+        padding: var(--sb-space-6);
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.85), rgba(11,18,32,0.85));
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-contact-card b {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+      }
+      .sb-contact-card p { color: var(--sb-text-muted); font-size: var(--sb-text-sm); margin: 0; }
+      .sb-contact-card .meta {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+      }
+
+      @media (max-width: 1100px) { .sb-help-grid { grid-template-columns: repeat(2, 1fr); } .sb-contact { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="sb-marketing__nav">
+      <a class="sb-brand" href="index.html">
+        <div class="sb-brand__mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#mgh)"/><defs><linearGradient id="mgh" x1="4" y1="4" x2="20" y2="20"><stop offset="0%" stop-color="#22D3B7"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs></svg></div>
+        <div class="sb-brand__name"><b>ShadowBlade</b><span>Help center</span></div>
+      </a>
+      <span class="spacer"></span>
+      <a class="link" href="docs.html">Docs</a>
+      <a class="link" href="changelog.html">Changelog</a>
+      <a class="link" href="status.html">Status</a>
+      <a class="sb-btn sb-btn--ghost" href="login.html">Sign in</a>
+      <a class="sb-btn sb-btn--primary" href="dashboard.html">Open workspace</a>
+    </header>
+
+    <section class="sb-help-hero">
+      <div class="sb-eyebrow">Help center</div>
+      <h1>How can we help?</h1>
+      <p>Quick answers, deep guides, a status page, and a humans-on-the-other-end mailbox. Pick a path.</p>
+      <label class="search">
+        <svg width="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Search 412 help articles…" />
+      </label>
+      <div class="suggest">
+        <a href="#">render queue stuck</a>
+        <a href="#">change brand kit</a>
+        <a href="#">add SSO</a>
+        <a href="#">export MP4 at 4K</a>
+        <a href="#">connect Slack</a>
+        <a href="#">rotate API key</a>
+      </div>
+    </section>
+
+    <section class="sb-help-grid">
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+        <h3>Get started</h3>
+        <span>First cut, brand kit, inviting your team.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg></div>
+        <h3>Studio &amp; editing</h3>
+        <span>Scenes, timeline, captions, music ducking.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+        <h3>Brand kits</h3>
+        <span>Colours, type, voice, intros, drift.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h16"/></svg></div>
+        <h3>Render queue</h3>
+        <span>Priorities, workers, cost, region pinning.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0M16 11a3 3 0 100-6M21 20a5 5 0 00-5-5"/></svg></div>
+        <h3>Team &amp; SSO</h3>
+        <span>Roles, SAML, SCIM, MFA, IP allow-lists.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5A3.5 3.5 0 006 8.5 3.5 3.5 0 009.5 12h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Billing</h3>
+        <span>Plans, top-up renders, invoices, procurement.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6L2 12l6 6"/></svg></div>
+        <h3>API &amp; SDKs</h3>
+        <span>REST, webhooks, TypeScript / Python / Go.</span>
+      </article>
+      <article class="sb-help-cat">
+        <div class="icon"><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Security &amp; trust</h3>
+        <span>SOC 2, ISO 27001, GDPR, DPA, BYOC.</span>
+      </article>
+    </section>
+
+    <section class="sb-faq">
+      <h2>Most-asked</h2>
+      <details class="sb-q" open>
+        <summary>How long does the first render take?</summary>
+        <div class="a">Median first cut lands in 4 minutes 48 seconds against your brand kit. Rush priority cuts that to about 3 minutes when the cluster has a warm worker available.</div>
+      </details>
+      <details class="sb-q">
+        <summary>Can I bring my own voice?</summary>
+        <div class="a">Yes. Upload a 30-second clean sample under <code>Brand kits → Voice</code> and we'll clone it. Cloned voices are usable on Scale + Enterprise plans. The clone never leaves your tenant.</div>
+      </details>
+      <details class="sb-q">
+        <summary>Where is my render data stored?</summary>
+        <div class="a">Whichever region you picked when you created the workspace — currently eu-central-1, us-east-1, or ap-south-1. Renders never cross-region without explicit consent. Enterprise customers can self-host or BYOC.</div>
+      </details>
+      <details class="sb-q">
+        <summary>How are reviewers added if they don't have a workspace seat?</summary>
+        <div class="a">Share a signed link from the cut. Reviewers can watch, comment, and approve from the link itself — no account required. Links expire when you decide, watermark every frame, and log every action.</div>
+      </details>
+      <details class="sb-q">
+        <summary>What happens when I publish a new brand kit version?</summary>
+        <div class="a">All future renders use the new kit immediately. Existing cuts are flagged for re-evaluation in the Analytics drift panel — auto-fix is one click.</div>
+      </details>
+    </section>
+
+    <section class="sb-contact">
+      <article class="sb-contact-card">
+        <b>Email support</b>
+        <p>Best for non-urgent. Real humans, English + DE + JA, 4-hour SLA on Scale and up.</p>
+        <span class="meta">hello@shadowblade.io</span>
+      </article>
+      <article class="sb-contact-card">
+        <b>Slack Connect</b>
+        <p>Available on Scale + Enterprise. Direct line to your CSM and the on-call engineer.</p>
+        <span class="meta">Provisioned via Settings → Integrations</span>
+      </article>
+      <article class="sb-contact-card">
+        <b>24×7 SEV-1</b>
+        <p>Enterprise only. Page our oncall directly. 15-minute acknowledgement target.</p>
+        <span class="meta">+1 (415) ··· · ··· · ····</span>
+      </article>
+    </section>
+
+    <footer class="sb-footer">
+      <span>© 2026 ShadowBlade Labs · we read every reply</span>
+      <span>Real-time status · <a href="status.html" style="color:var(--sb-accent-300)">status.shadowblade.io</a></span>
+    </footer>
+  </body>
+</html>
