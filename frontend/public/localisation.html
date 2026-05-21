@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Localise · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-loc-grid {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-loc-source {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        padding: var(--sb-space-5);
+        display: grid;
+        gap: var(--sb-space-3);
+        align-content: start;
+      }
+      .sb-loc-source .swatch {
+        aspect-ratio: 9/16;
+        max-height: 320px;
+        border-radius: var(--sb-radius);
+        background: linear-gradient(160deg, #15376a, #050a18);
+        overflow: hidden;
+      }
+      .sb-loc-source .swatch svg { width: 100%; height: 100%; }
+      .sb-loc-source dl { display: grid; grid-template-columns: 90px 1fr; gap: 6px 12px; margin: 0; font-size: var(--sb-text-sm); }
+      .sb-loc-source dt { color: var(--sb-text-muted); }
+      .sb-loc-source dd { margin: 0; color: var(--sb-text); }
+
+      .sb-langs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sb-space-3);
+      }
+      .sb-lang {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.85), rgba(11,18,32,0.85));
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-lang__head { display: flex; align-items: center; gap: var(--sb-space-3); }
+      .sb-lang__flag {
+        width: 36px; height: 26px; border-radius: 4px;
+        display: grid; place-items: center;
+        font-family: var(--sb-font-mono); font-size: 11px; font-weight: 700;
+        background: var(--sb-graphite-700);
+        color: var(--sb-text);
+        letter-spacing: 0.06em;
+      }
+      .sb-lang__name b { font-weight: 600; }
+      .sb-lang__name span { font-size: var(--sb-text-xs); color: var(--sb-text-faint); display: block; }
+      .sb-lang__state {
+        margin-left: auto;
+      }
+      .sb-lang__rows {
+        display: grid; gap: 4px;
+        font-size: var(--sb-text-xs);
+      }
+      .sb-lang__rows .row {
+        display: grid; grid-template-columns: 80px 1fr auto; gap: 8px;
+        align-items: center;
+        color: var(--sb-text-muted);
+      }
+      .sb-lang__rows .row b { color: var(--sb-text); font-weight: 500; }
+      .sb-lang__caption {
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: rgba(255,255,255,0.025);
+        font-style: italic;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-muted);
+      }
+      .sb-lang--queued    .sb-lang__state { color: var(--sb-status-queued); }
+      .sb-lang--running   .sb-lang__state { color: var(--sb-status-running); }
+      .sb-lang--done      .sb-lang__state { color: var(--sb-accent-300); }
+
+      @media (max-width: 1100px) { .sb-loc-grid { grid-template-columns: 1fr; } .sb-langs { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="projects">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="projects.html" style="color:var(--sb-text-muted)">Projects</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="project-detail.html" style="color:var(--sb-text-muted)">Spring product launch</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Localise</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">+ Add language</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              Render 5 variants
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Project · Localise · 5 variants</div>
+                <h1>One cut. Five languages. Same voice.</h1>
+                <p class="sb-page-head__lead">
+                  Source v17 is the master. ShadowBlade clones the Alloy voice into each target language, retimes captions, and respects local punctuation and reading speed.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-loc-grid">
+            <aside class="sb-loc-source">
+              <span class="sb-eyebrow">Source · v17</span>
+              <div class="swatch">
+                <svg viewBox="0 0 280 498" preserveAspectRatio="xMidYMid slice">
+                  <defs>
+                    <linearGradient id="locbg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#15376a"/>
+                      <stop offset="100%" stop-color="#050a18"/>
+                    </linearGradient>
+                    <radialGradient id="locgh" cx="0.7" cy="0.3" r="0.7">
+                      <stop offset="0%" stop-color="rgba(34,211,183,0.4)"/>
+                      <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+                    </radialGradient>
+                  </defs>
+                  <rect width="280" height="498" fill="url(#locbg)"/>
+                  <rect width="280" height="498" fill="url(#locgh)"/>
+                  <g transform="translate(140 240)">
+                    <circle r="110" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="2 5"/>
+                    <circle r="56" fill="rgba(34,211,183,0.35)"/>
+                    <circle r="22" fill="#22D3B7"/>
+                  </g>
+                  <g transform="translate(20 380)">
+                    <rect width="240" height="92" rx="12" fill="rgba(8,14,28,0.75)" stroke="rgba(34,211,183,0.4)"/>
+                    <text x="16" y="30" fill="#22D3B7" font-family="Inter" font-size="10" letter-spacing="2">ACME · WEARABLE HUB</text>
+                    <text x="16" y="56" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">Your day, on time</text>
+                    <text x="16" y="80" fill="#8590A8" font-family="Inter" font-size="11">Without breaking stride.</text>
+                  </g>
+                </svg>
+              </div>
+              <dl>
+                <dt>Language</dt><dd>English (US)</dd>
+                <dt>Voice</dt><dd>Alloy · EN female</dd>
+                <dt>Duration</dt><dd>28.0 s</dd>
+                <dt>Captions</dt><dd>Per-word, 14 wpm cap</dd>
+                <dt>Reading</dt><dd>198 wpm · OK</dd>
+              </dl>
+              <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);padding-top:var(--sb-space-3);border-top:1px solid var(--sb-border)">
+                Source script changes auto-flag every variant for re-render.
+              </div>
+            </aside>
+
+            <div class="sb-langs">
+              <article class="sb-lang sb-lang--done">
+                <div class="sb-lang__head">
+                  <div class="sb-lang__flag">ES</div>
+                  <div class="sb-lang__name"><b>Spanish (LATAM)</b><span>es-419 · Alloy · cloned 92% similarity</span></div>
+                  <span class="sb-lang__state sb-pill sb-pill--done">Ready</span>
+                </div>
+                <div class="sb-lang__caption">"Tu día, a tiempo — sin perder el ritmo."</div>
+                <div class="sb-lang__rows">
+                  <div class="row"><span>Duration</span><b>27.8 s</b><span>−0.2 s</span></div>
+                  <div class="row"><span>Reading</span><b>176 wpm</b><span>−22 wpm</span></div>
+                  <div class="row"><span>Approver</span><b>Sofia Vargas</b><span>Reviewer · CDMX</span></div>
+                </div>
+              </article>
+
+              <article class="sb-lang sb-lang--done">
+                <div class="sb-lang__head">
+                  <div class="sb-lang__flag">DE</div>
+                  <div class="sb-lang__name"><b>German</b><span>de-DE · Alloy · cloned 94% similarity</span></div>
+                  <span class="sb-lang__state sb-pill sb-pill--done">Ready</span>
+                </div>
+                <div class="sb-lang__caption">"Dein Tag, pünktlich — ohne den Takt zu verlieren."</div>
+                <div class="sb-lang__rows">
+                  <div class="row"><span>Duration</span><b>29.4 s</b><span>+1.4 s</span></div>
+                  <div class="row"><span>Reading</span><b>168 wpm</b><span>−30 wpm</span></div>
+                  <div class="row"><span>Approver</span><b>Anika Holzer</b><span>Reviewer · München</span></div>
+                </div>
+              </article>
+
+              <article class="sb-lang sb-lang--running">
+                <div class="sb-lang__head">
+                  <div class="sb-lang__flag">JA</div>
+                  <div class="sb-lang__name"><b>Japanese</b><span>ja-JP · Alloy · cloned 88% similarity</span></div>
+                  <span class="sb-lang__state sb-pill sb-pill--running">Rendering · 42%</span>
+                </div>
+                <div class="sb-lang__caption">"あなたの一日を、時間通りに ― 歩みを止めずに。"</div>
+                <div class="sb-lang__rows">
+                  <div class="row"><span>Duration</span><b>est 26.9 s</b><span>−1.1 s</span></div>
+                  <div class="row"><span>Reading</span><b>est 22 cps</b><span>nominal</span></div>
+                  <div class="row"><span>Approver</span><b>Yuki Tanabe</b><span>Reviewer · Tōkyō</span></div>
+                </div>
+              </article>
+
+              <article class="sb-lang sb-lang--queued">
+                <div class="sb-lang__head">
+                  <div class="sb-lang__flag">FR</div>
+                  <div class="sb-lang__name"><b>French</b><span>fr-FR · Alloy · cloned 93% similarity</span></div>
+                  <span class="sb-lang__state sb-pill sb-pill--queued">Queued</span>
+                </div>
+                <div class="sb-lang__caption">"Votre journée, à l'heure — sans rompre le rythme."</div>
+                <div class="sb-lang__rows">
+                  <div class="row"><span>Duration</span><b>est 28.6 s</b><span>+0.6 s</span></div>
+                  <div class="row"><span>Reading</span><b>est 172 wpm</b><span>−26 wpm</span></div>
+                  <div class="row"><span>Approver</span><b>Camille Roy</b><span>Reviewer · Paris</span></div>
+                </div>
+              </article>
+
+              <article class="sb-lang sb-lang--queued">
+                <div class="sb-lang__head">
+                  <div class="sb-lang__flag">PT</div>
+                  <div class="sb-lang__name"><b>Portuguese (BR)</b><span>pt-BR · Alloy · cloned 90% similarity</span></div>
+                  <span class="sb-lang__state sb-pill sb-pill--queued">Queued</span>
+                </div>
+                <div class="sb-lang__caption">"Seu dia, no tempo certo — sem perder o ritmo."</div>
+                <div class="sb-lang__rows">
+                  <div class="row"><span>Duration</span><b>est 28.2 s</b><span>+0.2 s</span></div>
+                  <div class="row"><span>Reading</span><b>est 174 wpm</b><span>−24 wpm</span></div>
+                  <div class="row"><span>Approver</span><b>Lucas Pinto</b><span>Reviewer · São Paulo</span></div>
+                </div>
+              </article>
+
+              <article class="sb-lang" style="border-style:dashed;background:rgba(34,211,183,0.04);display:grid;place-items:center;text-align:center;padding:var(--sb-space-6)">
+                <svg width="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--sb-accent-300);margin:0 auto"><path d="M12 5v14M5 12h14"/></svg>
+                <b style="font-family:var(--sb-font-display);font-size:var(--sb-text-md);font-weight:600">Add a language</b>
+                <span style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">37 languages supported · cloned voice on Scale+</span>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Voice clones never leave your tenant · 37 languages · 6 caption alphabets</span>
+          <span>Pipeline elapsed · 2 min 14 s · ETA tail · 1 min 02 s</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
