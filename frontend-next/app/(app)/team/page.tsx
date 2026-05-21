@@ -87,7 +87,7 @@ export default async function TeamPage() {
             </p>
           </div>
           <Button>
-            <UserPlus className="h-4 w-4" /> <span className="hidden sm:inline">邀请成员</span><span className="sm:hidden">邀请</span>
+            <UserPlus className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">邀请成员</span><span className="sm:hidden">邀请</span>
           </Button>
         </div>
       </section>
@@ -119,17 +119,19 @@ export default async function TeamPage() {
               return (
                 <div key={m.id} className="grid gap-3 rounded-md border border-border bg-card/40 p-4">
                   <div className="flex items-center gap-3">
-                    <div className="relative">
+                    <div className="relative shrink-0">
                       <Avatar>
                         <AvatarFallback>{initials(m.name)}</AvatarFallback>
                       </Avatar>
                       <span
+                        role="img"
                         aria-label={PRESENCE_LABEL[presence]}
                         className={cn(
-                          "absolute -right-0.5 -bottom-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-card",
+                          "absolute bottom-0 right-0 h-2.5 w-2.5 translate-x-1/3 translate-y-1/3 rounded-full ring-2 ring-card",
                           PRESENCE_COLOR[presence]
                         )}
                       />
+                      <span className="sr-only">{PRESENCE_LABEL[presence]}</span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
@@ -171,18 +173,20 @@ export default async function TeamPage() {
                     <tr key={m.id} className="border-b border-border last:border-0 transition-colors hover:bg-white/[0.025]">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="relative">
+                          <div className="relative shrink-0">
                             <Avatar>
                               <AvatarFallback>{initials(m.name)}</AvatarFallback>
                             </Avatar>
                             <span
+                              role="img"
                               aria-label={PRESENCE_LABEL[presence]}
                               title={PRESENCE_LABEL[presence]}
                               className={cn(
-                                "absolute -right-0.5 -bottom-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-card",
+                                "absolute bottom-0 right-0 h-2.5 w-2.5 translate-x-1/3 translate-y-1/3 rounded-full ring-2 ring-card",
                                 PRESENCE_COLOR[presence]
                               )}
                             />
+                            <span className="sr-only">{PRESENCE_LABEL[presence]}</span>
                           </div>
                           <div className="min-w-0">
                             <div className="flex items-center gap-1.5">

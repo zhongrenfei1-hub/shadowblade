@@ -33,7 +33,7 @@ export default function Error({
         )}
         <div className="grid place-items-center">
           <Button onClick={reset}>
-            <RefreshCw className="h-4 w-4" /> 重试
+            <RefreshCw className="h-4 w-4" aria-hidden /> 重试
           </Button>
         </div>
       </div>

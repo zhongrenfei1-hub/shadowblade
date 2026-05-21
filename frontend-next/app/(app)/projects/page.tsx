@@ -7,7 +7,10 @@ import { ProjectsBoard } from "@/components/workspace/projects-board";
 
 export default async function ProjectsPage() {
   const { items, total } = await api.projects();
-  const inProgress = items.filter((p) => ["rendering", "scripting", "storyboard", "review", "running"].includes(p.status)).length;
+  // 项目级状态语义：scripting / storyboard / rendering / review 都算「进行中」。
+  // running / succeeded / queued 是 Job/RenderTask 语义，Project.status 不会取这些值。
+  const PROJECT_IN_PROGRESS: ReadonlyArray<string> = ["rendering", "scripting", "storyboard", "review"];
+  const inProgress = items.filter((p) => PROJECT_IN_PROGRESS.includes(p.status)).length;
 
   return (
     <>
@@ -24,7 +27,7 @@ export default async function ProjectsPage() {
           </div>
           <Button asChild>
             <Link href="/create">
-              <Sparkles className="h-4 w-4" /> <span className="hidden sm:inline">新建视频</span><span className="sm:hidden">新建</span>
+              <Sparkles className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">新建视频</span><span className="sm:hidden">新建</span>
             </Link>
           </Button>
         </div>

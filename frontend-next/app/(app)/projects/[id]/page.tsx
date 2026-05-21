@@ -39,10 +39,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           </div>
           <div className="flex gap-2 md:gap-3">
             <Button variant="outline">
-              <Archive className="h-4 w-4" /> <span className="hidden sm:inline">归档</span>
+              <Archive className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">归档</span>
             </Button>
             <Button>
-              <Check className="h-4 w-4" /> <span className="hidden sm:inline">批准并发布</span><span className="sm:hidden">批准</span>
+              <Check className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">批准并发布</span><span className="sm:hidden">批准</span>
             </Button>
           </div>
         </div>
@@ -56,16 +56,16 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
             <div className="flex flex-wrap items-center gap-3 border-t border-border bg-card/60 px-5 py-3">
               <Button>
-                <Download className="h-4 w-4" /> 下载 MP4
+                <Download className="h-4 w-4" aria-hidden /> 下载 MP4
               </Button>
               <Button variant="outline">
-                <Share2 className="h-4 w-4" /> 分享给审核员
+                <Share2 className="h-4 w-4" aria-hidden /> 分享给审核员
               </Button>
               <Button variant="outline">
-                <Globe className="h-4 w-4" /> 翻译成 5 语言
+                <Globe className="h-4 w-4" aria-hidden /> 翻译成 5 语言
               </Button>
               <Button variant="outline">
-                <Sparkles className="h-4 w-4" /> 再渲染一版
+                <Sparkles className="h-4 w-4" aria-hidden /> 再渲染一版
               </Button>
               <div className="ml-auto font-mono text-xs text-muted-foreground">
                 1080×1920 · H.264 · 60 fps · 8.4 MB

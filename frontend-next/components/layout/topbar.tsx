@@ -39,7 +39,7 @@ export function Topbar() {
           className="md:hidden"
           onClick={() => setDrawer((d) => !d)}
         >
-          {drawer ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          {drawer ? <X className="h-4 w-4" aria-hidden /> : <Menu className="h-4 w-4" aria-hidden />}
         </Button>
         <nav className="flex min-w-0 items-center gap-2 text-sm text-muted-foreground" aria-label="面包屑">
           <span className="hidden sm:inline">Acme</span>
@@ -47,13 +47,13 @@ export function Topbar() {
           <b className="truncate font-semibold text-foreground">{label}</b>
           {segments[0] === "projects" && segments[1] && (
             <>
-              <ChevronRight className="h-3 w-3 opacity-40" />
+              <ChevronRight className="h-3 w-3 opacity-40" aria-hidden />
               <b className="truncate font-semibold text-foreground">项目 #{decodeURIComponent(segments[1])}</b>
             </>
           )}
           {segments[0] !== "projects" && segments[1] && (
             <>
-              <ChevronRight className="h-3 w-3 opacity-40" />
+              <ChevronRight className="h-3 w-3 opacity-40" aria-hidden />
               <b className="truncate font-semibold text-foreground">{decodeURIComponent(segments[1])}</b>
             </>
           )}
@@ -72,10 +72,10 @@ export function Topbar() {
 
         <div className="ml-auto flex items-center gap-2 md:gap-3">
           <Button variant="ghost" size="icon" aria-label="搜索" className="md:hidden">
-            <Search className="h-4 w-4" />
+            <Search className="h-4 w-4" aria-hidden />
           </Button>
           <Button variant="ghost" size="icon" aria-label="通知" className="relative">
-            <Bell className="h-4 w-4" />
+            <Bell className="h-4 w-4" aria-hidden />
             <span
               aria-hidden
               className="absolute right-2 top-2 grid h-3.5 w-3.5 place-items-center rounded-full bg-accent-500 text-[9px] font-bold text-navy-950 num shadow-[0_0_0_2px_hsl(var(--background))]"
@@ -84,11 +84,11 @@ export function Topbar() {
             </span>
           </Button>
           <Button variant="ghost" size="icon" aria-label="帮助" className="hidden sm:inline-flex">
-            <HelpCircle className="h-4 w-4" />
+            <HelpCircle className="h-4 w-4" aria-hidden />
           </Button>
           <Button asChild>
             <Link href="/create">
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-4 w-4" aria-hidden />
               <span className="hidden sm:inline">新建视频</span>
             </Link>
           </Button>

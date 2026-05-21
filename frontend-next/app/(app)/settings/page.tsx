@@ -1,6 +1,7 @@
 import { Save, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SettingsForm } from "@/components/workspace/settings-form";
+import { SettingsNav } from "@/components/workspace/settings-nav";
 
 const SECTIONS = [
   { id: "general", label: "通用" },
@@ -25,30 +26,17 @@ export default function SettingsPage() {
           </div>
           <div className="flex gap-2 md:gap-3">
             <Button variant="outline">
-              <X className="h-4 w-4" /> <span className="hidden sm:inline">取消</span>
+              <X className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">取消</span>
             </Button>
             <Button>
-              <Save className="h-4 w-4" /> <span className="hidden sm:inline">保存</span>
+              <Save className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">保存</span>
             </Button>
           </div>
         </div>
       </section>
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] items-start">
-        <nav className="sticky top-[76px] grid gap-1">
-          {SECTIONS.map((s, i) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className={`rounded-md px-3 py-2 text-sm transition-colors ${
-                i === 0 ? "bg-accent-500/12 text-foreground" : "text-muted-foreground hover:bg-white/[0.04]"
-              }`}
-            >
-              {s.label}
-            </a>
-          ))}
-        </nav>
-
+        <SettingsNav sections={SECTIONS} />
         <SettingsForm />
       </section>
     </>

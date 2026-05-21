@@ -156,7 +156,7 @@ export function MobileSidebar({ open, onClose }: { open: boolean; onClose: () =>
                     {active && (
                       <span className="absolute -left-4 top-2 bottom-2 w-0.5 rounded-full bg-accent-500" aria-hidden />
                     )}
-                    <Icon className="h-4 w-4 opacity-90" />
+                    <Icon className="h-4 w-4 opacity-90" aria-hidden />
                     <span>{item.label}</span>
                     {item.cta && (
                       <Zap className="ml-auto h-3 w-3 fill-accent-500 text-accent-500" aria-hidden />

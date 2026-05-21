@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageSquare, AtSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -51,12 +51,14 @@ export function MetaTabs() {
       </TabsList>
 
       <TabsContent value="meta" className="mt-4 grid gap-2 text-sm">
-        {META.map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[100px_1fr] gap-3 py-1.5">
-            <dt className="text-muted-foreground">{k}</dt>
-            <dd className="text-foreground">{v}</dd>
-          </div>
-        ))}
+        <dl className="grid gap-1.5">
+          {META.map(([k, v]) => (
+            <div key={k as string} className="grid grid-cols-[100px_1fr] gap-3 py-1.5">
+              <dt className="text-muted-foreground">{k}</dt>
+              <dd className="text-foreground">{v}</dd>
+            </div>
+          ))}
+        </dl>
         <div className="mt-3 grid gap-1.5 rounded-md bg-card/50 p-3 text-xs">
           <div className="flex justify-between">
             <span className="text-muted-foreground">品牌偏移评分</span>
@@ -70,22 +72,23 @@ export function MetaTabs() {
         {COMMENTS.map((c) => (
           <div key={c.cite} className="grid gap-2 rounded-md border border-border bg-card/40 p-3 text-sm transition-colors hover:border-accent-500/25">
             <div className="flex items-center gap-2">
-              <div className="relative">
+              <div className="relative shrink-0">
                 <Avatar className="h-6 w-6 text-[10px]">
                   <AvatarFallback>{c.who.split(" ").map((s) => s[0]).join("").slice(0, 2)}</AvatarFallback>
                 </Avatar>
                 <span
                   aria-hidden
                   className={cn(
-                    "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-2 ring-card",
+                    "absolute bottom-0 right-0 h-2 w-2 translate-x-1/3 translate-y-1/3 rounded-full ring-2 ring-card",
                     PRESENCE_DOT[c.presence]
                   )}
                 />
+                <span className="sr-only">{c.who} · {c.presence === "online" ? "在线" : c.presence === "idle" ? "离开" : "离线"}</span>
               </div>
               <b className="font-semibold">{c.who}</b>
               {c.thread > 0 && (
                 <span className="rounded-full bg-accent-500/12 px-1.5 py-0.5 text-[9px] font-semibold text-accent-300">
-                  +{c.thread} 回复
+                  {c.thread} 条回复
                 </span>
               )}
               <time className="ml-auto font-mono text-[10px] text-muted-foreground">{c.when}</time>
@@ -126,14 +129,27 @@ function CommentComposer() {
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
   const remaining = 500 - text.length;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  }, []);
+
   function send() {
     if (!text.trim()) return;
     setSending(true);
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setSending(false);
       setText("");
     }, 600);
   }
+
+  const remainColor = remaining < 0
+    ? "text-rose-300"
+    : remaining < 50
+    ? "text-amber-300"
+    : "text-muted-foreground";
+
   return (
     <div className="grid gap-2">
       <Textarea
@@ -148,12 +164,12 @@ function CommentComposer() {
           <AtSign className="h-3 w-3" aria-hidden />
           支持 @ 提及 · ⌘+Enter 发送
         </span>
-        <span className="num">{remaining}</span>
+        <span className={cn("num", remainColor)}>{remaining}</span>
       </div>
       <div className="flex justify-end gap-2">
-        <Button variant="outline" size="sm" disabled={!text}>保存草稿</Button>
+        <Button variant="outline" size="sm" disabled={!text.trim()}>保存草稿</Button>
         <Button size="sm" onClick={send} disabled={!text.trim() || sending}>
-          <MessageSquare className="h-3.5 w-3.5" /> {sending ? "发送中…" : "发送"}
+          <MessageSquare className="h-3.5 w-3.5" aria-hidden /> {sending ? "发送中…" : "发送"}
         </Button>
       </div>
     </div>

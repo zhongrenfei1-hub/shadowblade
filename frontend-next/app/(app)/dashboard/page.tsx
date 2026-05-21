@@ -44,12 +44,12 @@ export default async function DashboardPage() {
           </div>
           <div className="flex gap-2 md:gap-3">
             <Button variant="outline" aria-label="刷新数据">
-              <RefreshCw className="h-3.5 w-3.5" />
+              <RefreshCw className="h-3.5 w-3.5" aria-hidden />
               <span className="hidden sm:inline">刷新</span>
             </Button>
             <Button asChild>
               <Link href="/create">
-                <Sparkles className="h-4 w-4" />
+                <Sparkles className="h-4 w-4" aria-hidden />
                 <span className="hidden sm:inline">新建视频</span>
                 <span className="sm:hidden">新建</span>
               </Link>

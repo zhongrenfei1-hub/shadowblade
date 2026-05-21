@@ -32,15 +32,14 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
 
   return (
     <div className="grid gap-4">
-      <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="按用途筛选">
+      <div className="flex flex-wrap items-center gap-2" role="toolbar" aria-label="按用途过滤项目">
         {FILTERS.map((f) => (
           <Button
             key={f.id}
             size="sm"
             variant={active === f.id ? "default" : "outline"}
             onClick={() => setActive(f.id)}
-            role="tab"
-            aria-selected={active === f.id}
+            aria-pressed={active === f.id}
             className="gap-1.5"
           >
             {f.label}

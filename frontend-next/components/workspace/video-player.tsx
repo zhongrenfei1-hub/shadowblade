@@ -61,7 +61,7 @@ export function VideoPlayer() {
             aria-hidden
             className="grid h-16 w-16 place-items-center rounded-full bg-accent-500 text-navy-950 shadow-[0_16px_32px_-8px_rgba(34,211,183,0.5)]"
           >
-            <Play className="h-7 w-7 fill-current" />
+            <Play className="h-7 w-7 fill-current" aria-hidden />
           </span>
         )}
       </button>
@@ -73,7 +73,7 @@ export function VideoPlayer() {
           className="grid h-9 w-9 place-items-center rounded-full bg-accent-500 text-navy-950"
           aria-label={playing ? "暂停" : "播放"}
         >
-          {playing ? <Pause className="h-4 w-4 fill-current" /> : <Play className="h-4 w-4 fill-current" />}
+          {playing ? <Pause className="h-4 w-4 fill-current" aria-hidden /> : <Play className="h-4 w-4 fill-current" aria-hidden />}
         </button>
         <time className="font-mono text-xs text-white">0:16.8</time>
         <div className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/20">
@@ -81,10 +81,10 @@ export function VideoPlayer() {
         </div>
         <time className="font-mono text-xs text-white">0:28.0</time>
         <Button size="icon" variant="ghost" aria-label="音量" className="text-white hover:bg-white/10">
-          <Volume2 className="h-4 w-4" />
+          <Volume2 className="h-4 w-4" aria-hidden />
         </Button>
         <Button size="icon" variant="ghost" aria-label="全屏" className="text-white hover:bg-white/10">
-          <Maximize2 className="h-4 w-4" />
+          <Maximize2 className="h-4 w-4" aria-hidden />
         </Button>
       </div>
     </div>

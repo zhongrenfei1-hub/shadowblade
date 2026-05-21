@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Project } from "@/lib/api";
+import type { Project, Status } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { ProjectCard } from "./project-card";
@@ -14,9 +14,11 @@ const FILTERS: { id: "all" | Project["purpose"]; label: string }[] = [
   { id: "social", label: "社交" },
 ];
 
+type StatusFilter = "any" | Status;
+
 export function ProjectsBoard({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<(typeof FILTERS)[number]["id"]>("all");
-  const [status, setStatus] = useState<string>("any");
+  const [status, setStatus] = useState<StatusFilter>("any");
   const [owner, setOwner] = useState<string>("any");
 
   const counts = useMemo(() => {
@@ -44,7 +46,7 @@ export function ProjectsBoard({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-2 border-b border-border px-4 py-3 sm:gap-3 sm:px-6 sm:py-4" role="tablist" aria-label="按用途筛选">
+      <div className="flex flex-wrap items-center gap-2 border-b border-border px-4 py-3 sm:gap-3 sm:px-6 sm:py-4" role="toolbar" aria-label="按用途过滤项目">
         {FILTERS.map((f) => (
           <Button
             key={f.id}
@@ -52,8 +54,7 @@ export function ProjectsBoard({ projects }: { projects: Project[] }) {
             variant={active === f.id ? "default" : "outline"}
             className="rounded-full"
             onClick={() => setActive(f.id)}
-            role="tab"
-            aria-selected={active === f.id}
+            aria-pressed={active === f.id}
           >
             {f.label}
             <span
@@ -71,7 +72,7 @@ export function ProjectsBoard({ projects }: { projects: Project[] }) {
         <select
           aria-label="按状态过滤"
           value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          onChange={(e) => setStatus(e.target.value as StatusFilter)}
           className="hidden h-8 rounded-md border border-input bg-card/60 px-2 text-xs transition-colors hover:border-border focus-visible:border-accent-500/60 focus-visible:bg-card/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500/25 sm:inline-flex"
         >
           <option value="any">状态 · 任意</option>

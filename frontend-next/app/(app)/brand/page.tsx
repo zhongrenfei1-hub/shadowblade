@@ -38,7 +38,7 @@ export default async function BrandPage() {
             <Button variant="outline" className="hidden sm:inline-flex">复制</Button>
             <Button variant="outline" className="hidden sm:inline-flex">导出 ZIP</Button>
             <Button>
-              <Check className="h-4 w-4" /> <span className="hidden sm:inline">发布 v4</span><span className="sm:hidden">发布</span>
+              <Check className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">发布 v4</span><span className="sm:hidden">发布</span>
             </Button>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default async function BrandPage() {
             );
           })}
           <Button variant="outline">
-            <Plus className="h-4 w-4" /> 新建套件
+            <Plus className="h-4 w-4" aria-hidden /> 新建套件
           </Button>
         </div>
 

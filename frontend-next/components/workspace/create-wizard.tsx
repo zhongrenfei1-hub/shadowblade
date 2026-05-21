@@ -364,10 +364,10 @@ export function CreateWizard() {
             </button>
             <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
               <Button variant="outline" className="justify-start">
-                <Folder className="h-4 w-4" /> 从素材库选
+                <Folder className="h-4 w-4" aria-hidden /> 从素材库选
               </Button>
               <Button variant="outline" className="justify-start">
-                <Sparkles className="h-4 w-4" /> AI 自动匹配
+                <Sparkles className="h-4 w-4" aria-hidden /> AI 自动匹配
               </Button>
             </div>
           </CardContent>
@@ -396,7 +396,7 @@ export function CreateWizard() {
                   <span className="text-muted-foreground">{error}</span>
                 </div>
                 <Button size="sm" variant="outline" onClick={start} className="border-rose-500/30 hover:border-rose-500/60">
-                  <RefreshCw className="h-3 w-3" /> 重试
+                  <RefreshCw className="h-3 w-3" aria-hidden /> 重试
                 </Button>
               </div>
             )}
@@ -421,7 +421,7 @@ export function CreateWizard() {
                   正在生成（{step}/{PIPELINE.length}）
                 </Button>
                 <Button size="sm" variant="ghost" onClick={cancel} className="w-full">
-                  <XIcon className="h-3.5 w-3.5" /> 取消生成
+                  <XIcon className="h-3.5 w-3.5" aria-hidden /> 取消生成
                 </Button>
               </div>
             ) : (
@@ -430,7 +430,7 @@ export function CreateWizard() {
                 onClick={start}
                 className="w-full text-base shadow-[0_24px_48px_-16px_rgba(34,211,183,0.7)]"
               >
-                <Zap className="h-5 w-5 fill-current" />
+                <Zap className="h-5 w-5 fill-current" aria-hidden />
                 {finished ? "再渲染一版" : "一键生成视频"}
               </Button>
             )}
@@ -470,11 +470,11 @@ export function CreateWizard() {
                       )}
                     >
                       {done ? (
-                        <Check className="h-3.5 w-3.5" />
+                        <Check className="h-3.5 w-3.5" aria-hidden />
                       ) : active ? (
                         <Loader2 className="preserve-motion h-3.5 w-3.5 animate-spin" />
                       ) : (
-                        <Icon className="h-3.5 w-3.5" />
+                        <Icon className="h-3.5 w-3.5" aria-hidden />
                       )}
                       <span>{p.label}</span>
                       {active && <span className="ml-auto font-mono text-[10px] text-sky-300">运行中</span>}
@@ -505,7 +505,7 @@ export function CreateWizard() {
               <span>同时翻译成英文 / 日文 · 多语种版本会加约 2 分钟</span>
             </div>
             <Button variant="link" size="sm" className="ml-auto h-auto p-0">
-              查看全部建议 <ChevronRight className="h-3 w-3" />
+              查看全部建议 <ChevronRight className="h-3 w-3" aria-hidden />
             </Button>
           </CardContent>
         </Card>
