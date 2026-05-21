@@ -49,9 +49,9 @@ async def ytsearch_download(
     out_dir: str | Path,
     *,
     count: int = 3,
-    max_seconds: float = 6.0,
+    max_seconds: float = 10.0,
     max_height: int = 720,
-    max_duration_filter: int = 120,  # skip very long uploads
+    max_duration_filter: int = 300,  # skip very long uploads
     prefix: str = "ytsearch",  # ytsearch / scsearch / bilisearch
 ) -> list[FoundClip]:
     """Search via yt-dlp's ``<prefix>N:keyword`` syntax and download N matches."""
@@ -142,7 +142,7 @@ async def archive_search_download(
     out_dir: str | Path,
     *,
     count: int = 3,
-    max_seconds: float = 6.0,
+    max_seconds: float = 10.0,
     rows: int = 12,
 ) -> list[FoundClip]:
     """Hit archive.org's advanced-search JSON, pick MP4 derivatives, download."""
@@ -299,7 +299,7 @@ async def search_and_download(
     out_dir: str | Path,
     *,
     count: int = 3,
-    max_seconds: float = 6.0,
+    max_seconds: float = 10.0,
     sources: tuple[str, ...] = ("youtube", "archive"),
 ) -> list[FoundClip]:
     """Try each source in order until we have ``count`` usable clips.

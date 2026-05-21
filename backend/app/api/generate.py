@@ -332,11 +332,12 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
 
         # ---- 0. fetch stock footage (auto-scaling clip count) ----
         clip_paths = list(body.clip_paths)
-        # Each clip max ~8s; we want clips × 8 ≈ script_duration with a bit of
-        # safety. Floor at the user-requested count so manual >3 still wins.
-        max_per_clip = 8.0
-        needed = max(body.stock_count, math.ceil(script.estimated_seconds / max_per_clip))
-        needed = min(needed, 8)  # hard cap so a 600-char essay doesn't pull 20
+        # Each clip caps at ~10s; we want clips × 10 ≈ script_duration with a
+        # bit of safety. Floor at the user-requested count, cap at 10 so a
+        # 600-char essay doesn't try to pull 30 clips.
+        max_per_clip = 10.0
+        needed = max(body.stock_count, math.ceil(script.estimated_seconds / 7.0))
+        needed = min(needed, 10)
 
         if body.stock_source in {"pexels", "search"}:
             job["steps"]["stock"] = "running"
