@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Audit log · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="Audit log · ShadowBlade" />
+    <meta property="og:description" content="Tamper-evident, retained 7 years, streamable to your SIEM. Every event in the workspace." />
+    <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -82,10 +87,20 @@
         text-transform: uppercase;
       }
       .sb-audit-row .verb--create { color: var(--sb-accent-300); background: rgba(34,211,183,0.1); }
-      .sb-audit-row .verb--update { color: #38BDF8; background: rgba(56,189,248,0.1); }
-      .sb-audit-row .verb--delete { color: #f87171; background: rgba(248,113,113,0.1); }
-      .sb-audit-row .verb--auth   { color: #a78bfa; background: rgba(167,139,250,0.1); }
-      .sb-audit-row .verb--render { color: #fbbf24; background: rgba(251,191,36,0.1); }
+      .sb-audit-row .verb--update { color: var(--sb-status-running); background: rgba(56,189,248,0.1); }
+      .sb-audit-row .verb--delete { color: var(--sb-status-failed);  background: rgba(248,113,113,0.1); }
+      .sb-audit-row .verb--auth   { color: var(--sb-status-review);  background: rgba(167,139,250,0.1); }
+      .sb-audit-row .verb--render { color: var(--sb-status-queued);  background: rgba(251,191,36,0.1); }
+      @media (max-width: 720px) {
+        .sb-audit-row {
+          grid-template-columns: 1fr;
+          gap: var(--sb-space-2);
+          padding: var(--sb-space-3) var(--sb-space-4);
+        }
+        .sb-audit-row .meta { text-align: left; }
+        .sb-audit-filter { padding: var(--sb-space-3) var(--sb-space-4); }
+        .sb-audit-filter input[type="search"] { min-width: 100% !important; }
+      }
     </style>
   </head>
   <body data-route="settings">
