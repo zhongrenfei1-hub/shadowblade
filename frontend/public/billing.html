@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plan &amp; billing · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-bill-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--sb-space-6); align-items: start; }
+      .sb-bill-plan {
+        padding: var(--sb-space-6);
+        border-radius: var(--sb-radius-xl);
+        border: 1px solid rgba(34,211,183,0.4);
+        background: linear-gradient(180deg, rgba(34,211,183,0.06), rgba(11,18,32,0.95));
+        display: grid;
+        gap: var(--sb-space-4);
+      }
+      .sb-bill-plan h2 {
+        margin: 0;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-2xl);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .sb-bill-plan .price {
+        font-family: var(--sb-font-display);
+        font-size: 44px; font-weight: 600;
+        letter-spacing: -0.025em; line-height: 1;
+      }
+      .sb-bill-plan .price small { font-size: var(--sb-text-md); color: var(--sb-text-muted); font-weight: 500; margin-left: 6px; }
+      .sb-bill-meter-row {
+        display: grid; gap: 8px;
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        background: rgba(11,18,32,0.5);
+        border: 1px solid var(--sb-border);
+      }
+      .sb-bill-meter-row .head { display: flex; justify-content: space-between; font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-bill-meter-row .head b { color: var(--sb-text); font-weight: 600; font-family: var(--sb-font-display); }
+
+      .sb-bill-invoice-row {
+        display: grid;
+        grid-template-columns: 110px 1fr 100px 100px auto;
+        gap: var(--sb-space-4);
+        align-items: center;
+        padding: var(--sb-space-3) var(--sb-space-5);
+        border-bottom: 1px solid var(--sb-border);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-bill-invoice-row:last-child { border-bottom: none; }
+      .sb-bill-invoice-row time { font-family: var(--sb-font-mono); color: var(--sb-text-faint); font-size: var(--sb-text-xs); }
+      .sb-bill-invoice-row .amount { font-family: var(--sb-font-mono); text-align: right; color: var(--sb-text); }
+      .sb-bill-invoice-row .num { font-family: var(--sb-font-mono); color: var(--sb-accent-300); font-size: 11px; }
+      .sb-bill-invoice-row .state {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 2px 8px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .sb-bill-invoice-row .state.paid { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
+      .sb-bill-invoice-row .state.due { color: var(--sb-status-queued); background: rgba(251,191,36,0.12); }
+
+      .sb-card-form { display: grid; gap: var(--sb-space-3); padding: var(--sb-space-5); }
+      .sb-card-form label { font-size: var(--sb-text-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--sb-text-faint); font-weight: 600; display: grid; gap: 6px; }
+      .sb-card-form input {
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        font-family: var(--sb-font-mono);
+        outline: none;
+      }
+      .sb-card-form input:focus { border-color: var(--sb-accent-500); box-shadow: 0 0 0 3px rgba(34,211,183,0.18); }
+      .sb-card-form .row { display: grid; grid-template-columns: 1fr 90px 80px; gap: var(--sb-space-3); }
+
+      @media (max-width: 1100px) { .sb-bill-grid { grid-template-columns: 1fr; } .sb-card-form .row { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="settings">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="settings.html" style="color:var(--sb-text-muted)">Settings</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Plan &amp; billing</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <a class="sb-btn sb-btn--ghost" href="pricing.html">Compare plans</a>
+            <button class="sb-btn sb-btn--ghost">Download statement</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Add renders pack
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Settings · Plan &amp; billing</div>
+                <h1>Scale · $4,200 / mo · annual</h1>
+                <p class="sb-page-head__lead">
+                  Renewal Mar 14, 2027 · last invoice paid · 387 of 1,000 renders used this cycle.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-bill-grid">
+            <article class="sb-bill-plan">
+              <div style="display:flex;align-items:flex-end;gap:var(--sb-space-4)">
+                <div>
+                  <h2>Scale · annual</h2>
+                  <div style="color:var(--sb-text-muted);font-size:var(--sb-text-sm)">Locked in 2026-03-14 · save 18% vs monthly</div>
+                </div>
+                <div style="margin-left:auto" class="price">$4,200<small>/ mo</small></div>
+              </div>
+
+              <div class="sb-bill-meter-row">
+                <div class="head"><span>Renders this cycle</span><span><b>387</b> / 1,000 · top-up $1.40 each</span></div>
+                <div class="sb-meter"><i style="width:38.7%"></i></div>
+              </div>
+              <div class="sb-bill-meter-row">
+                <div class="head"><span>Seats</span><span><b>24</b> / 24 · +$120/mo per extra</span></div>
+                <div class="sb-meter"><i style="width:100%"></i></div>
+              </div>
+              <div class="sb-bill-meter-row">
+                <div class="head"><span>Storage</span><span><b>8.4 GB</b> / 100 GB plan</span></div>
+                <div class="sb-meter"><i style="width:8.4%"></i></div>
+              </div>
+              <div class="sb-bill-meter-row">
+                <div class="head"><span>Cloned voices</span><span><b>3</b> · unlimited on plan</span></div>
+                <div class="sb-meter"><i style="width:18%"></i></div>
+              </div>
+
+              <div style="display:flex;gap:var(--sb-space-3);flex-wrap:wrap;padding-top:var(--sb-space-3);border-top:1px solid var(--sb-border)">
+                <a class="sb-btn sb-btn--primary" href="pricing.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  Upgrade to Enterprise
+                </a>
+                <button class="sb-btn sb-btn--ghost">Pause workspace</button>
+                <button class="sb-btn sb-btn--ghost" style="color:var(--sb-status-failed)">Cancel renewal</button>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Payment method</div>
+              </header>
+              <div class="sb-card-form">
+                <label>Card number<input value="•••• •••• •••• 4242" autocomplete="cc-number" /></label>
+                <div class="row">
+                  <label>Cardholder<input value="Acme Inc." autocomplete="cc-name" /></label>
+                  <label>Expiry<input value="08 / 27" autocomplete="cc-exp" /></label>
+                  <label>CVV<input value="•••" autocomplete="cc-csc" /></label>
+                </div>
+                <label>Billing email<input value="ap@acme.com" autocomplete="email" type="email" /></label>
+                <label>Tax ID<input value="EU-DE-123456789" /></label>
+                <button class="sb-btn sb-btn--primary" style="margin-top:6px">Save</button>
+                <div style="font-size:var(--sb-text-xs);color:var(--sb-text-faint);text-align:center;margin-top:4px">
+                  Card payments via Stripe · invoice on net-60 available on Enterprise
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Invoices · last 12 months</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Export CSV</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Send to procurement</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush">
+              <div class="sb-bill-invoice-row" style="background:rgba(255,255,255,0.02);font-size:var(--sb-text-xs);text-transform:uppercase;letter-spacing:0.08em;color:var(--sb-text-faint);font-weight:600">
+                <div>Date</div><div>Description</div><div>Number</div><div style="text-align:right">Amount</div><div></div>
+              </div>
+              <div class="sb-bill-invoice-row">
+                <time>2026-05-14</time>
+                <div>Scale · monthly cycle · 24 seats · 387 renders</div>
+                <div class="num">INV-26-05-A</div>
+                <div class="amount">$4,200.00</div>
+                <span class="state paid">Paid</span>
+              </div>
+              <div class="sb-bill-invoice-row">
+                <time>2026-04-14</time>
+                <div>Scale · monthly cycle · 24 seats · 412 renders</div>
+                <div class="num">INV-26-04-A</div>
+                <div class="amount">$4,200.00</div>
+                <span class="state paid">Paid</span>
+              </div>
+              <div class="sb-bill-invoice-row">
+                <time>2026-04-02</time>
+                <div>Renders top-up · 50 × $1.40</div>
+                <div class="num">INV-26-04-T</div>
+                <div class="amount">$70.00</div>
+                <span class="state paid">Paid</span>
+              </div>
+              <div class="sb-bill-invoice-row">
+                <time>2026-03-14</time>
+                <div>Scale · annual renewal · 24 seats</div>
+                <div class="num">INV-26-03-R</div>
+                <div class="amount">$50,400.00</div>
+                <span class="state paid">Paid</span>
+              </div>
+              <div class="sb-bill-invoice-row">
+                <time>2026-02-14</time>
+                <div>Growth · monthly cycle · 12 seats · 248 renders</div>
+                <div class="num">INV-26-02-A</div>
+                <div class="amount">$890.00</div>
+                <span class="state paid">Paid</span>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Stripe · region eu-central-1 · invoices retained 7 years</span>
+          <span>Procurement contact · <a href="mailto:ap@acme.com" style="color:var(--sb-accent-300)">ap@acme.com</a></span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>
