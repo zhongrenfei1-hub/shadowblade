@@ -55,3 +55,33 @@ The table below is the canonical map: where each asset slots into the product, a
 
 > Note for the **Test** ring: every SVG is self-contained (`<defs>` per file, no shared symbols, no remote fonts). Safe to inline into emails or `<img src>`.
 > Note for the **Refine** ring: thumbnails were authored against `tokens.css` palette; if you change accent `#22D3B7` you'll want to regen the gradient stops in every file.
+
+## Pass 002 additions
+
+Three new product pages — a Helios customer story, a Login page, and dashboard empty states — needed visuals on-brand with pass 001. All nine new files follow the same rules: self-contained `<defs>`, file-scoped gradient ids (`sb-helios-hero-…`, `sb-login-…`, `sb-empty-*-…`), tokens.css palette, Inter / Inter Display / JetBrains Mono via `font-family=`, no raster, no remote fonts. All files are well under 50 KB (largest is `login-art.svg` at 8.4 KB).
+
+### Case study · `customer-story.html` (Helios Logistics)
+
+| Asset | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| Case-study hero | `case-study/helios-hero.svg` | `customer-story.html` hero (1600×900), customer-story `og:image`, sales deck cover slide | Read the headline metric in one breath, scroll for the proof | Editorial-warm dark — sky-blue sun motif top right with rays, gradient headline (38BDF8 → 22D3B7), two KPI badges ("68% faster", "$184k saved"), right-rail mini stat dashboard with Q1 → Q3 bars |
+| Pull quote | `case-study/helios-quote.svg` | Customer story mid-page section break (1200×600), social pull, sales deck quote slide | Linger on the customer's verb, trust the source | Oversized `"` glyph at 16% alpha behind 56px Inter Display 600 quote, gradient rule, monogram avatar, Inter 500 small-caps attribution, echo sun mark right side |
+| KPI strip | `case-study/helios-metrics.svg` | Customer story KPI band (1200×400), email recap, exec one-pager | Compare three outcomes side-by-side | Three dark cards with file-scoped accent rules — accent (4.8 min · ▼68%), running (+128 cuts with sparkline), review (92% with R1 ring) |
+
+### Auth · `login.html`
+
+| Asset | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| Login art | `auth/login-art.svg` | Right rail of `login.html` (900×1200 vertical), invite emails, deck slide for sales | Believe the factory is humming, sign in | Dark cockpit framed vertically — "Sign in to your video factory" heading top, four concentric rings with colour-coded orbit nodes (one per pipeline stage), centered play disk, ETA 64s chip floating top-right, scene strip + composition meter floating, pipeline-stage legend bottom |
+
+### Empty states · 640×360, monochrome-with-accent
+
+| Asset | Path | Placement | User action | Vibe / aesthetic |
+| --- | --- | --- | --- | --- |
+| No projects | `empty/empty-projects.svg` | Dashboard project grid (zero state), `/projects` empty | Drop a brief and start the first cut | Graphite clapperboard outline, accent (#22D3B7) striped slate corners, "+ New project" CTA chip |
+| Library empty | `empty/empty-assets.svg` | `/assets` library zero state, brand kit upload modal | Upload a logo or kit | Three stacked frame outlines fanned diagonally, front frame in `#38BDF8`, dashed `+` upload glyph on the corner |
+| Queue clear | `empty/empty-queue.svg` | `/render-queue` when no jobs running, scale-up dashboard | Trust the farm is warm | 4×3 dashed slot grid for 12 workers, one accent (`#22D3B7`) IDLE slot pulsing — restful, not alarming |
+| Inbox zero | `empty/empty-inbox.svg` | `/approvals` zero state, notification panel empty | Close the tab, walk away | Bell outline with violet (`#A78BFA`) check inside, soft chime arcs, "INBOX ZERO" status chip |
+| No matches | `empty/empty-search.svg` | Global search modal, filtered table zero results | Loosen a filter or rephrase | Magnifier outline with amber (`#FBBF24`) ✕ inside the lens, two dismissable filter chips below to model the unblock |
+
+> Handoff for Test/Refine: empty-state illustrations are deliberately calm (no error red) and each carries a single accent so they ladder into status semantics (`#22D3B7` action, `#38BDF8` running, `#A78BFA` review, `#FBBF24` queued). If Refine adds light theme support, the `<defs>` gradients will need a swap pass — palette stops are inline rather than via tokens.
