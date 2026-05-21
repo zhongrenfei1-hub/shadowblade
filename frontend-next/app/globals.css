@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn/ui semantic tokens · 深色驾驶舱 */
+@layer base {
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 210 20% 98%;
+    --card: 222 33% 11%;
+    --card-foreground: 210 20% 98%;
+    --popover: 222 33% 9%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 168 71% 48%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 222 25% 18%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 25% 14%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 168 71% 48%;
+    --accent-foreground: 222 47% 8%;
+    --destructive: 0 75% 65%;
+    --destructive-foreground: 222 47% 8%;
+    --border: 222 25% 18%;
+    --input: 222 25% 18%;
+    --ring: 168 71% 48%;
+    --radius: 0.625rem;
+
+    --font-display: "Inter Display", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background:
+      radial-gradient(circle at 18% -10%, rgba(16, 36, 71, 0.55) 0%, transparent 55%),
+      radial-gradient(circle at 92% 110%, rgba(11, 61, 54, 0.45) 0%, transparent 60%),
+      hsl(var(--background));
+    background-attachment: fixed;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  ::selection { background: rgba(34, 211, 183, 0.35); color: hsl(var(--foreground)); }
+}
+
+/* 自定义实用类 */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .glow-accent { box-shadow: 0 0 0 1px rgba(34, 211, 183, 0.35), 0 8px 32px -8px rgba(34, 211, 183, 0.45); }
+  .gradient-text { @apply bg-gradient-to-r from-accent-500 to-sky-400 bg-clip-text text-transparent; }
+  .num { font-variant-numeric: tabular-nums; }
+}
+
+/* 滚动条 · 暗色 */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary));
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted)); background-clip: padding-box; }
