@@ -1,0 +1,19 @@
+from datetime import datetime
+
+from sqlalchemy import DateTime, Integer, String, func
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.core.db import Base
+
+
+class Workspace(Base):
+    __tablename__ = "workspaces"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    slug: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    name: Mapped[str] = mapped_column(String(255))
+    plan: Mapped[str] = mapped_column(String(32), default="growth")
+    seats: Mapped[int] = mapped_column(Integer, default=5)
+    monthly_render_quota: Mapped[int] = mapped_column(Integer, default=200)
+    monthly_render_used: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
