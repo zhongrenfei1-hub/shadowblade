@@ -10,7 +10,7 @@ export interface EmptyStateAction {
   variant?: "default" | "outline" | "ghost";
 }
 
-export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface EmptyStateProps extends React.HTMLAttributes<HTMLElement> {
   /** 主图标（lucide-react），居中放在 accent-cyan 描边圆环内 */
   icon: LucideIcon;
   /** 一句话标题，14 字内最佳 */
@@ -49,10 +49,11 @@ export function EmptyState({
   className,
   ...rest
 }: EmptyStateProps) {
+  // 不再用 role="status" + aria-live — 否则 filter 切换会被 SR 反复念出
+  // （test ring 003 P2.27 反馈）。空态作为普通 section 即可。
   return (
-    <div
-      role="status"
-      aria-live="polite"
+    <section
+      aria-label={title}
       className={cn(
         "grid place-items-center gap-5 rounded-xl border border-border bg-card/40 px-6 py-14 text-center backdrop-blur-sm",
         className
@@ -84,7 +85,7 @@ export function EmptyState({
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

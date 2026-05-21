@@ -192,7 +192,7 @@ export default async function TeamPage() {
                             <div className="flex items-center gap-1.5">
                               <b className="block font-semibold">{m.name}</b>
                               {m.role === "工作空间管理员" && (
-                                <Crown className="h-3 w-3 text-accent-300" aria-label="管理员" />
+                                <Crown className="h-3 w-3 text-accent-300" aria-hidden />
                               )}
                             </div>
                             <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">

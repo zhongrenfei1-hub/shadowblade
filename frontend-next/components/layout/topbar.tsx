@@ -6,17 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MobileSidebar } from "./mobile-sidebar";
-
-const ROUTE_LABEL: Record<string, string> = {
-  "/dashboard": "工作台",
-  "/create": "新建视频",
-  "/projects": "项目库",
-  "/templates": "模板",
-  "/library": "素材库",
-  "/brand": "品牌套件",
-  "/team": "团队",
-  "/settings": "设置",
-};
+import { ROUTE_LABEL } from "@/lib/nav";
 
 export function Topbar() {
   const pathname = usePathname();
@@ -74,14 +64,16 @@ export function Topbar() {
           <Button variant="ghost" size="icon" aria-label="搜索" className="md:hidden">
             <Search className="h-4 w-4" aria-hidden />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="通知" className="relative">
-            <Bell className="h-4 w-4" aria-hidden />
-            <span
-              aria-hidden
-              className="absolute right-2 top-2 grid h-3.5 w-3.5 place-items-center rounded-full bg-accent-500 text-[9px] font-bold text-navy-950 num shadow-[0_0_0_2px_hsl(var(--background))]"
-            >
-              3
-            </span>
+          <Button variant="ghost" size="icon" asChild className="relative">
+            <Link href="/notifications" aria-label="通知 · 3 条未读">
+              <Bell className="h-4 w-4" aria-hidden />
+              <span
+                aria-hidden
+                className="absolute right-2 top-2 grid h-3.5 w-3.5 place-items-center rounded-full bg-accent-500 text-[9px] font-bold text-navy-950 num shadow-[0_0_0_2px_hsl(var(--background))]"
+              >
+                3
+              </span>
+            </Link>
           </Button>
           <Button variant="ghost" size="icon" aria-label="帮助" className="hidden sm:inline-flex">
             <HelpCircle className="h-4 w-4" aria-hidden />

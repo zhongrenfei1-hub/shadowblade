@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Plus, ExternalLink, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -54,13 +53,16 @@ export default function IntegrationsPage() {
   const [tab, setTab] = useState<Category>("all");
   const [q, setQ] = useState("");
 
+  // 先按 tab 收窄、再按搜索词过滤 — 不要把 connected 当成排他短路，否则 q 被吞掉。
   const list = INTEGRATIONS.filter((i) => {
-    if (tab === "connected") return i.connected;
-    if (tab !== "all" && i.cat !== tab) return false;
-    return !q || i.name.toLowerCase().includes(q.toLowerCase()) || i.desc.toLowerCase().includes(q.toLowerCase());
+    if (tab === "connected" && !i.connected) return false;
+    if (tab !== "all" && tab !== "connected" && i.cat !== tab) return false;
+    if (!q) return true;
+    const needle = q.toLowerCase();
+    return i.name.toLowerCase().includes(needle) || i.desc.toLowerCase().includes(needle);
   });
 
-  const counts = {
+  const counts: Record<"all" | "connected", number> = {
     all: INTEGRATIONS.length,
     connected: INTEGRATIONS.filter((i) => i.connected).length,
   };
@@ -79,7 +81,7 @@ export default function IntegrationsPage() {
             </p>
           </div>
           <Button>
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="h-3.5 w-3.5" aria-hidden />
             自建一个
           </Button>
         </div>
@@ -97,7 +99,7 @@ export default function IntegrationsPage() {
               className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
             />
           </label>
-          <div className="ml-auto flex flex-wrap gap-1.5">
+          <div className="ml-auto flex flex-wrap gap-1.5" role="toolbar" aria-label="按分类过滤集成">
             {TABS.map((t) => (
               <button
                 key={t.id}
@@ -113,7 +115,7 @@ export default function IntegrationsPage() {
               >
                 {t.label}
                 {(t.id === "all" || t.id === "connected") && (
-                  <span className="ml-1.5 text-[10px] text-muted-foreground">{counts[t.id as "all" | "connected"]}</span>
+                  <span className="ml-1.5 text-[10px] text-muted-foreground">{counts[t.id]}</span>
                 )}
               </button>
             ))}
@@ -125,8 +127,8 @@ export default function IntegrationsPage() {
             <article
               key={i.slug}
               className={cn(
-                "grid gap-3 rounded-lg border border-border bg-card/55 p-4 transition-colors",
-                "hover:-translate-y-0.5 hover:border-accent-500/40 hover:shadow-[0_8px_22px_-12px_rgba(34,211,183,0.35)] transition-all",
+                "grid gap-3 rounded-lg border border-border bg-card/55 p-4 transition-all",
+                "hover:-translate-y-0.5 hover:border-accent-500/40 hover:shadow-[0_8px_22px_-12px_rgba(34,211,183,0.35)]",
                 i.connected && "border-accent-500/30"
               )}
             >
@@ -169,16 +171,16 @@ export default function IntegrationsPage() {
 
         {list.length === 0 && (
           <div className="grid place-items-center py-12 text-sm text-muted-foreground">
-            没匹配到「{q || tab}」相关的集成。
+            没匹配到「{q || TABS.find((t) => t.id === tab)?.label || "全部"}」相关的集成。
           </div>
         )}
       </Card>
 
       <p className="text-center text-xs text-muted-foreground">
         没找到要的？
-        <a className="ml-1 text-accent-300 hover:underline" href="https://api.shadowblade.io/v1" target="_blank" rel="noopener">
+        <a className="ml-1 text-accent-300 hover:underline" href="https://api.shadowblade.io/v1" target="_blank" rel="noopener noreferrer">
           自己接 REST API
-          <ExternalLink className="ml-1 inline h-3 w-3" />
+          <ExternalLink className="ml-1 inline h-3 w-3" aria-hidden />
         </a>
       </p>
     </>

@@ -1,3 +1,5 @@
+"use client";
+
 import { useId } from "react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";

@@ -139,6 +139,41 @@ export function SettingsForm() {
         </CardContent>
       </Card>
 
+      <Card id="billing">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle>套餐与计费</CardTitle>
+          <Badge variant="default">规模版 · 月付</Badge>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-4 border-b border-border pb-4">
+            <div>
+              <div className="text-sm font-semibold">本月用量</div>
+              <div className="mt-0.5 text-xs text-muted-foreground">387 / 1,000 条渲染 · 周期重置 5 月 31 日。</div>
+            </div>
+            <span className="font-mono text-sm text-accent-300 num">38.7%</span>
+          </div>
+          <div className="grid grid-cols-[1fr_auto] items-center gap-4">
+            <div>
+              <div className="text-sm font-semibold">支付方式</div>
+              <div className="mt-0.5 text-xs text-muted-foreground">Visa ···· 4242 · 6 月到期</div>
+            </div>
+            <Button size="sm" variant="outline">管理</Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card id="integrations">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle>集成快捷入口</CardTitle>
+          <Button size="sm" variant="outline" asChild>
+            <a href="/integrations">查看全部</a>
+          </Button>
+        </CardHeader>
+        <CardContent className="text-sm text-muted-foreground">
+          已连接 Slack · Figma · Okta · Notion。改动会同步到工作空间所有成员，权限由角色控制。
+        </CardContent>
+      </Card>
+
       <Card id="api">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>API 与 Webhook</CardTitle>

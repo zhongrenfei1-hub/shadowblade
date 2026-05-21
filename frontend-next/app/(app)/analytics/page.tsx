@@ -46,7 +46,8 @@ function formatDelta(delta: number) {
 
 export default async function AnalyticsPage() {
   const a = await api.analytics();
-  const maxRendered = Math.max(...a.timeseries.map((d) => d.rendered));
+  // 抗空 / 全 0：max 至少为 1，避免 -Infinity 让 SR 读「NaN」。
+  const maxRendered = Math.max(1, ...a.timeseries.map((d) => d.rendered));
 
   return (
     <>
@@ -63,15 +64,15 @@ export default async function AnalyticsPage() {
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3">
             <Button variant="outline" aria-label="切换时间窗口">
-              <Calendar className="h-3.5 w-3.5" />
+              <Calendar className="h-3.5 w-3.5" aria-hidden />
               <span className="hidden sm:inline">最近 7 天</span>
             </Button>
-            <Button variant="outline">
-              <Download className="h-3.5 w-3.5" />
+            <Button variant="outline" aria-label="导出 CSV">
+              <Download className="h-3.5 w-3.5" aria-hidden />
               <span className="hidden sm:inline">导出 CSV</span>
             </Button>
-            <Button>
-              <RefreshCw className="h-3.5 w-3.5" />
+            <Button aria-label="刷新">
+              <RefreshCw className="h-3.5 w-3.5" aria-hidden />
               <span className="hidden sm:inline">刷新</span>
             </Button>
           </div>
@@ -81,6 +82,21 @@ export default async function AnalyticsPage() {
       <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" aria-label="关键指标">
         {a.kpis.map((kpi, i) => {
           const f = formatKpi(kpi.label, kpi.value, kpi.unit);
+          // 从 timeseries 推每个 KPI 的 7 点 trend：渲染条数走 rendered，其它指标暂用 approved 比例作为 proxy。
+          const trend = kpi.unit === "count"
+            ? a.timeseries.map((d) => d.rendered)
+            : kpi.unit === "minutes"
+            ? a.timeseries.map((d, idx) => 7 - idx * 0.3) // demo：耗时下降趋势
+            : kpi.unit === "ratio"
+            ? a.timeseries.map((d) => (d.rendered ? (d.approved / d.rendered) * 100 : 0))
+            : a.timeseries.map((d) => d.approved * 0.45); // usd proxy: 节省 ≈ 通过 * unit price
+          // 「首版耗时」语义反向：下降是好事 → trend 数值减小但 positive = true，
+          // 这里把 trend 翻转，让 sparkline 视觉走「上升 = 改善」。
+          const visualTrend = kpi.unit === "minutes" ? trend.map((v) => -v) : trend;
+          const isPositive = kpi.delta > 0 || (kpi.unit === "minutes" && kpi.delta < 0);
+          const direction = kpi.unit === "minutes"
+            ? kpi.delta < 0 ? "本周耗时下降" : "本周耗时上升"
+            : kpi.delta > 0 ? "本周持续上升" : "本周持续下降";
           return (
             <KpiTile
               key={kpi.label}
@@ -89,7 +105,9 @@ export default async function AnalyticsPage() {
               value={f.value}
               suffix={f.suffix}
               delta={formatDelta(kpi.delta)}
-              positive={kpi.delta > 0 || (kpi.unit === "minutes" && kpi.delta < 0)}
+              positive={isPositive}
+              trend={visualTrend}
+              srHint={`${kpi.label} ${f.value}${f.suffix ?? ""}，${formatDelta(kpi.delta)}，${direction}`}
             />
           );
         })}
@@ -106,22 +124,37 @@ export default async function AnalyticsPage() {
             <Badge variant="queued">驳回 29</Badge>
           </CardHeader>
           <CardContent>
-            <div className="flex h-[240px] items-end gap-3 px-2">
-              {a.timeseries.map((d) => {
-                const approvedH = (d.approved / maxRendered) * 100;
-                const rejectedH = (d.rejected / maxRendered) * 100;
-                return (
-                  <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
-                    <div className="flex w-full flex-1 flex-col-reverse gap-0.5">
-                      <div className="rounded-t bg-accent-500/85" style={{ height: `${approvedH}%` }} aria-label={`${d.day} 通过 ${d.approved}`} />
-                      <div className="rounded-t bg-amber-400/85" style={{ height: `${rejectedH}%` }} aria-label={`${d.day} 驳回 ${d.rejected}`} />
+            <figure aria-label="最近 7 天渲染条形图">
+              <figcaption className="sr-only">
+                {a.timeseries
+                  .map((d) => `${d.day} ${d.rendered} 条（通过 ${d.approved}、驳回 ${d.rejected}）`)
+                  .join("、")}
+              </figcaption>
+              <div className="flex h-[240px] items-end gap-3 px-2">
+                {a.timeseries.map((d) => {
+                  const approvedH = (d.approved / maxRendered) * 100;
+                  const rejectedH = (d.rejected / maxRendered) * 100;
+                  return (
+                    <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
+                      <div className="flex w-full flex-1 flex-col-reverse gap-0.5">
+                        <div
+                          aria-hidden
+                          className="rounded-t bg-accent-500/85"
+                          style={{ height: `${approvedH}%` }}
+                        />
+                        <div
+                          aria-hidden
+                          className="rounded-t bg-amber-400/85"
+                          style={{ height: `${rejectedH}%` }}
+                        />
+                      </div>
+                      <span className="text-[11px] text-muted-foreground">{d.day}</span>
+                      <span className="font-mono text-[10px] text-foreground/80">{d.rendered}</span>
                     </div>
-                    <span className="text-[11px] text-muted-foreground">{d.day}</span>
-                    <span className="font-mono text-[10px] text-foreground/80">{d.rendered}</span>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            </figure>
           </CardContent>
         </Card>
 

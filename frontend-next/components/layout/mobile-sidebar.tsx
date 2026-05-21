@@ -3,45 +3,10 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Sparkles,
-  FolderOpen,
-  Library,
-  Palette,
-  LayoutTemplate,
-  Users,
-  Settings,
-  Zap,
-} from "lucide-react";
+import { Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BrandMark } from "@/components/brand/brand-mark";
-
-const NAV = [
-  {
-    group: "制作",
-    items: [
-      { href: "/dashboard", label: "工作台", icon: LayoutDashboard },
-      { href: "/create", label: "新建视频", icon: Sparkles, cta: true },
-      { href: "/projects", label: "项目库", icon: FolderOpen },
-      { href: "/templates", label: "模板", icon: LayoutTemplate },
-    ],
-  },
-  {
-    group: "素材与品牌",
-    items: [
-      { href: "/library", label: "素材库", icon: Library },
-      { href: "/brand", label: "品牌套件", icon: Palette },
-    ],
-  },
-  {
-    group: "工作空间",
-    items: [
-      { href: "/team", label: "团队", icon: Users },
-      { href: "/settings", label: "设置", icon: Settings },
-    ],
-  },
-];
+import { NAV } from "@/lib/nav";
 
 export function MobileSidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();

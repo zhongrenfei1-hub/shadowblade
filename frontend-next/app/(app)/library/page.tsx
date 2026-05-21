@@ -1,18 +1,10 @@
-import { Upload, Folder, Video, Image as ImageIcon, Music2, Type, Palette } from "lucide-react";
+import { Upload, Video, Image as ImageIcon, Music2, Palette } from "lucide-react";
 import { api, type Asset } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn, formatBytes } from "@/lib/utils";
-
-const FOLDER_DEFS = [
-  { id: "all", label: "全部素材", icon: Folder, totalKey: "_total" as const },
-  { id: "video", label: "视频", icon: Video, totalKey: "video" as const },
-  { id: "image", label: "图片", icon: ImageIcon, totalKey: "image" as const },
-  { id: "audio", label: "音频", icon: Music2, totalKey: "audio" as const },
-  { id: "font", label: "字体", icon: Type, totalKey: "font" as const },
-  { id: "logo", label: "品牌", icon: Palette, totalKey: "logo" as const },
-];
+import { formatBytes } from "@/lib/utils";
+import { LibraryFolders } from "@/components/workspace/library-folders";
 
 const ICONS: Record<Asset["kind"], React.ReactNode> = {
   video: <Video className="h-7 w-7" aria-hidden />,
@@ -30,10 +22,6 @@ function iconFor(asset: Asset): React.ReactNode {
 export default async function LibraryPage() {
   const { items, totals } = await api.assets();
   const totalAll = Object.values(totals).reduce((a, b) => a + b, 0);
-  const folderCount = (key: (typeof FOLDER_DEFS)[number]["totalKey"]): number => {
-    if (key === "_total") return totalAll;
-    return totals[key] ?? 0;
-  };
   const totalBytes = items.reduce((a, b) => a + b.size_bytes, 0);
 
   return (
@@ -42,7 +30,9 @@ export default async function LibraryPage() {
         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">素材库</span>
         <div className="flex flex-wrap items-end gap-4 md:gap-6">
           <div className="min-w-0 flex-1">
-            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]"><span className="num">{totalAll}</span> 个素材 · {formatBytes(totalBytes)}</h1>
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">
+              <span className="num">{totalAll}</span> 个素材 · {formatBytes(totalBytes)}
+            </h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
               品牌已审、版权清楚、按画面内容索引。直接拖文件进来，或一句话让 AI 生成。
             </p>
@@ -56,32 +46,7 @@ export default async function LibraryPage() {
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr] items-start">
         {/* 左侧 · 文件夹 + 标签 + 上传区 */}
         <div className="grid gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm">文件夹</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-1 p-2">
-              {FOLDER_DEFS.map((f, i) => {
-                const Icon = f.icon;
-                const active = i === 0;
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    aria-pressed={active}
-                    className={cn(
-                      "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm transition-colors",
-                      active ? "bg-accent-500/12 text-foreground" : "text-muted-foreground hover:bg-white/[0.04]"
-                    )}
-                  >
-                    <Icon className="h-3.5 w-3.5" aria-hidden />
-                    {f.label}
-                    <span className="ml-auto font-mono text-[11px] text-muted-foreground num">{folderCount(f.totalKey)}</span>
-                  </button>
-                );
-              })}
-            </CardContent>
-          </Card>
+          <LibraryFolders totals={totals} totalAll={totalAll} />
 
           <Card>
             <CardHeader>
