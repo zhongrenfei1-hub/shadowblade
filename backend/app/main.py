@@ -11,6 +11,7 @@ from app.api import (
     assets,
     auth,
     brand_kits,
+    generate,
     health,
     jobs,
     mix_video,
@@ -58,6 +59,7 @@ for router in (
     brand_kits.router,
     analytics.router,
     mix_video.router,
+    generate.router,
 ):
     app.include_router(router, prefix="/api/v1")
 
