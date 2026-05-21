@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120" role="img" aria-label="ShadowBlade · Video Cloud">
+  <defs>
+    <linearGradient id="sb-logo-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sb-logo-mark-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#142A55"/>
+      <stop offset="100%" stop-color="#0A1428"/>
+    </linearGradient>
+    <linearGradient id="sb-logo-blade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: shielded blade -->
+  <g transform="translate(16 16)">
+    <rect width="88" height="88" rx="20" fill="url(#sb-logo-mark-glow)" stroke="rgba(34,211,183,0.35)" stroke-width="1"/>
+    <g transform="translate(20 20) scale(2)">
+      <path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#sb-logo-blade)"/>
+    </g>
+    <circle cx="78" cy="14" r="3" fill="#22D3B7" opacity="0.85"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(124 0)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
+    <text x="0" y="62" font-size="40" font-weight="700" letter-spacing="-1.2">ShadowBlade</text>
+    <text x="2" y="90" font-size="12" font-weight="600" letter-spacing="3.4" fill="#8590A8">VIDEO CLOUD · ENTERPRISE</text>
+  </g>
+</svg>

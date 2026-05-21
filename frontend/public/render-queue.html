@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Render queue · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-worker-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-worker {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.9), rgba(11,18,32,0.9));
+        padding: var(--sb-space-4);
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .sb-worker__head {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+      }
+      .sb-worker__dot {
+        width: 10px; height: 10px; border-radius: 50%;
+        background: var(--sb-accent-500);
+        box-shadow: 0 0 0 4px rgba(34,211,183,0.18);
+      }
+      .sb-worker__dot--idle {
+        background: var(--sb-graphite-400);
+        box-shadow: 0 0 0 4px rgba(255,255,255,0.04);
+      }
+      .sb-worker__name b { font-weight: 600; }
+      .sb-worker__name span {
+        display: block;
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        color: var(--sb-text-faint);
+      }
+      .sb-worker__usage {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--sb-space-3);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-muted);
+      }
+      .sb-worker__usage b {
+        display: block;
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        color: var(--sb-text);
+        font-variant-numeric: tabular-nums;
+      }
+      .sb-priority {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 8px;
+        border-radius: var(--sb-radius-pill);
+        font-size: var(--sb-text-xs);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .sb-priority--rush   { color: #f87171; background: rgba(248,113,113,0.12); }
+      .sb-priority--high   { color: #fbbf24; background: rgba(251,191,36,0.12); }
+      .sb-priority--normal { color: #94a3b8; background: rgba(148,163,184,0.12); }
+      .sb-priority--low    { color: #64748b; background: rgba(100,116,139,0.12); }
+
+      @media (max-width: 1200px) { .sb-worker-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+  </head>
+  <body data-route="queue">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Pipeline</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Render queue</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              Schedule a window
+            </button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              Cost report
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5h14v14H5z"/></svg>
+              Pause queue
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Pipeline · render cluster</div>
+                <h1>5 jobs · 2 running</h1>
+                <p class="sb-page-head__lead">
+                  Cluster is at 78% utilisation. ETA for last queued job: 22 min. Next billing checkpoint at midnight UTC.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Cluster utilisation</div>
+              <div class="sb-kpi__value">78<small>%</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">3 of 4 workers busy</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[40,55,60,52,68,72,75,78]"></svg>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Avg render time</div>
+              <div class="sb-kpi__value">3:48 <small>min</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 12% faster</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[6,5.5,5,4.6,4.2,4,3.9,3.8]"></svg>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Jobs today</div>
+              <div class="sb-kpi__value">42</div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 18% vs avg</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[12,18,22,28,32,36,40,42]"></svg>
+            </article>
+            <article class="sb-kpi">
+              <div class="sb-kpi__label">Spend today</div>
+              <div class="sb-kpi__value">$184 <small>/ $400 budget</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">46% of cap</span>
+              <svg class="sb-kpi__sparkline" data-sparkline="[20,40,60,82,110,140,168,184]"></svg>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Render cluster</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill sb-pill--running">4 workers · eu-central-1</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Auto-scale settings</button>
+              </div>
+            </header>
+            <div class="sb-card__body">
+              <div class="sb-worker-grid">
+                <article class="sb-worker">
+                  <div class="sb-worker__head">
+                    <span class="sb-worker__dot"></span>
+                    <div class="sb-worker__name"><b>gpu-cluster-1</b><span>L40S · 48 GB · v1.4.2</span></div>
+                  </div>
+                  <div class="sb-worker__usage">
+                    <div>GPU<b>91%</b></div>
+                    <div>VRAM<b>38G</b></div>
+                    <div>Temp<b>67°C</b></div>
+                  </div>
+                  <div class="sb-meter"><i style="width:91%"></i></div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Running · AI Copilot · scene 4 / 12</div>
+                </article>
+                <article class="sb-worker">
+                  <div class="sb-worker__head">
+                    <span class="sb-worker__dot"></span>
+                    <div class="sb-worker__name"><b>gpu-cluster-2</b><span>L40S · 48 GB · v1.4.2</span></div>
+                  </div>
+                  <div class="sb-worker__usage">
+                    <div>GPU<b>72%</b></div>
+                    <div>VRAM<b>22G</b></div>
+                    <div>Temp<b>61°C</b></div>
+                  </div>
+                  <div class="sb-meter"><i style="width:72%"></i></div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Compiling captions · helios</div>
+                </article>
+                <article class="sb-worker">
+                  <div class="sb-worker__head">
+                    <span class="sb-worker__dot"></span>
+                    <div class="sb-worker__name"><b>gpu-cluster-3</b><span>L40S · 48 GB · v1.4.2</span></div>
+                  </div>
+                  <div class="sb-worker__usage">
+                    <div>GPU<b>88%</b></div>
+                    <div>VRAM<b>41G</b></div>
+                    <div>Temp<b>71°C</b></div>
+                  </div>
+                  <div class="sb-meter"><i style="width:88%"></i></div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Rush · wearable hub · final pass</div>
+                </article>
+                <article class="sb-worker">
+                  <div class="sb-worker__head">
+                    <span class="sb-worker__dot sb-worker__dot--idle"></span>
+                    <div class="sb-worker__name"><b>gpu-cluster-4</b><span>L40S · 48 GB · v1.4.2</span></div>
+                  </div>
+                  <div class="sb-worker__usage">
+                    <div>GPU<b>0%</b></div>
+                    <div>VRAM<b>0G</b></div>
+                    <div>Temp<b>42°C</b></div>
+                  </div>
+                  <div class="sb-meter"><i style="width:0%"></i></div>
+                  <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted)">Warm · idle 12s · ready for next pull</div>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Queue</div>
+              <div class="sb-card__head-actions">
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Reorder</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Filter</button>
+              </div>
+            </header>
+            <div class="sb-card__body sb-card__body--flush" id="queue"></div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Worker pool v1.4.2 · region eu-central-1</span>
+          <span>Auto-scale 1–8 · spot pricing $0.92/hr</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="qrow-tpl">
+      <div class="sb-queue-row">
+        <div class="sb-queue-row__name"><b></b><span></span></div>
+        <span class="sb-priority"></span>
+        <div class="sb-meter sb-queue-row__meter"><i></i></div>
+        <div class="sb-queue-row__eta"></div>
+      </div>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script src="scripts/charts.js"></script>
+    <script>
+      const QUEUE = [
+        { name: 'Spring product launch — wearable hub', stage: 'gpu-cluster-3 · Compose 62% · scene 4', priority: 'rush', progress: 0.62, eta: 'ETA 0:64' },
+        { name: 'AI Copilot — 60s product demo', stage: 'gpu-cluster-1 · TTS pass · scene 8', priority: 'high', progress: 0.31, eta: 'ETA 2:22' },
+        { name: 'Onboarding · Sales engineering bootcamp', stage: 'Waiting · brand-kit assets', priority: 'normal', progress: 0.0, eta: 'ETA 10:12' },
+        { name: 'Press quote · Series C announcement', stage: 'Waiting · render slot', priority: 'normal', progress: 0.0, eta: 'ETA 12:20' },
+        { name: 'Compliance refresher — GDPR essentials', stage: 'Waiting · batch window', priority: 'low', progress: 0.0, eta: 'ETA 22:20' },
+      ];
+      const tpl = document.getElementById('qrow-tpl');
+      const list = document.getElementById('queue');
+      QUEUE.forEach(q => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.querySelector('b').textContent = q.name;
+        node.querySelector('span').textContent = q.stage;
+        const pri = node.querySelector('.sb-priority');
+        pri.textContent = q.priority;
+        pri.classList.add(`sb-priority--${q.priority}`);
+        node.querySelector('.sb-meter i').style.width = `${Math.round(q.progress * 100)}%`;
+        node.querySelector('.sb-queue-row__eta').textContent = q.eta;
+        list.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

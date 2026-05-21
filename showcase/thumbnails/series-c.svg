@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 608" width="1080" height="608" role="img" aria-label="TikTok teaser — Series C announcement">
+  <defs>
+    <linearGradient id="sc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0E2E4A"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="sc-glow" cx="0.5" cy="0.6" r="0.55">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sc-text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="608" fill="url(#sc-bg)"/>
+  <rect width="1080" height="608" fill="url(#sc-glow)"/>
+
+  <!-- Diagonal accents -->
+  <g stroke="rgba(34,211,183,0.18)" stroke-width="1">
+    <path d="M-40 460L1120 240"/>
+    <path d="M-40 520L1120 300"/>
+    <path d="M-40 580L1120 360"/>
+  </g>
+
+  <!-- 9:16 phone frame mock -->
+  <g transform="translate(820 100)">
+    <rect width="180" height="320" rx="22" fill="rgba(8,14,28,0.85)" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+    <rect x="12" y="40" width="156" height="240" rx="6" fill="rgba(34,211,183,0.10)"/>
+    <text x="90" y="160" text-anchor="middle" font-family="Inter Display, Inter, sans-serif" font-size="22" font-weight="700" fill="url(#sc-text)">SERIES C</text>
+    <text x="90" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="2.2" fill="#B6BDCC">$120M · SCALE</text>
+    <rect x="12" y="296" width="156" height="6" rx="3" fill="rgba(255,255,255,0.10)"/>
+    <rect x="12" y="296" width="148" height="6" rx="3" fill="#22D3B7"/>
+    <circle cx="90" cy="22" r="4" fill="rgba(255,255,255,0.25)"/>
+  </g>
+
+  <!-- Title (large gradient) -->
+  <g transform="translate(64 60)">
+    <rect width="120" height="30" rx="15" fill="rgba(34,211,183,0.16)" stroke="rgba(34,211,183,0.45)"/>
+    <circle cx="18" cy="15" r="4" fill="#22D3B7"/>
+    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="600" letter-spacing="2.4">TIKTOK</text>
+  </g>
+
+  <text x="64" y="240" font-family="Inter Display, Inter, sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="url(#sc-text)">Series C</text>
+  <text x="64" y="304" font-family="Inter Display, Inter, sans-serif" font-size="44" font-weight="600" fill="#F7F9FC" letter-spacing="-1">Announcement teaser</text>
+  <text x="64" y="356" font-family="Inter, sans-serif" font-size="18" fill="#8590A8">$120M to scale the enterprise video cloud</text>
+
+  <!-- Done pill -->
+  <g transform="translate(890 60)">
+    <rect width="120" height="30" rx="15" fill="rgba(34,211,183,0.18)" stroke="rgba(34,211,183,0.45)"/>
+    <circle cx="16" cy="15" r="4" fill="#22D3B7"/>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#22D3B7" font-weight="700" letter-spacing="2.4">SHIPPED</text>
+  </g>
+
+  <!-- Metadata bottom -->
+  <g transform="translate(64 540)" font-family="Inter, sans-serif">
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">SOCIAL · 9:16 · 15s · DIEGO ALVAREZ</text>
+  </g>
+</svg>

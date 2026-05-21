@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sb-space-3);
+        padding: var(--sb-space-4) var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: var(--sb-text-sm);
+        padding: 6px 10px;
+        border-radius: var(--sb-radius-pill);
+        border: 1px solid var(--sb-border);
+        color: var(--sb-text-muted);
+        background: rgba(255,255,255,0.03);
+      }
+      .sb-chip--active {
+        color: var(--sb-text);
+        background: rgba(34,211,183,0.14);
+        border-color: rgba(34,211,183,0.4);
+      }
+      .sb-row-cover {
+        width: 80px;
+        height: 46px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--sb-navy-700), var(--sb-navy-900));
+        position: relative;
+      }
+      .sb-row-cover svg { width: 100%; height: 100%; }
+      .sb-row-cover .ratio {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        font-family: var(--sb-font-mono);
+        font-size: 9px;
+        padding: 1px 4px;
+        border-radius: 3px;
+        background: rgba(8,14,28,0.7);
+      }
+      .sb-table .sb-meter { width: 140px; }
+      .sb-table-row__name {
+        display: flex; align-items: center; gap: var(--sb-space-3); min-width: 0;
+      }
+      .sb-table-row__name b {
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 320px;
+        display: block;
+      }
+      .sb-table-row__name span {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+      }
+    </style>
+  </head>
+  <body data-route="projects">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Projects</b>
+          </div>
+          <label class="sb-topbar__search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" placeholder="Filter 38 projects…" />
+            <kbd>⌘K</kbd>
+          </label>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+              Sort · last touched
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              New video
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">All projects</div>
+                <h1>38 projects · 6 in flight</h1>
+                <p class="sb-page-head__lead">
+                  Marketing leads with 41% of output. Avg time-to-publish dropped to 1.4 days this month.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <article class="sb-card">
+            <div class="sb-filters">
+              <span class="sb-chip sb-chip--active">All <small style="color:var(--sb-text-faint);margin-left:4px">38</small></span>
+              <span class="sb-chip">Marketing <small style="color:var(--sb-text-faint);margin-left:4px">16</small></span>
+              <span class="sb-chip">Training <small style="color:var(--sb-text-faint);margin-left:4px">9</small></span>
+              <span class="sb-chip">Product demo <small style="color:var(--sb-text-faint);margin-left:4px">7</small></span>
+              <span class="sb-chip">Social <small style="color:var(--sb-text-faint);margin-left:4px">6</small></span>
+              <span style="flex:1"></span>
+              <span class="sb-chip">Status · any</span>
+              <span class="sb-chip">Owner · anyone</span>
+              <span class="sb-chip">Brand kit · any</span>
+            </div>
+
+            <div class="sb-card__body sb-card__body--flush">
+              <table class="sb-table">
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Owner</th>
+                    <th>Updated</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Showing 6 of 38 · 32 more in archive</span>
+          <span>Region eu-central-1 · sync 4 sec ago</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="row-tpl">
+      <tr>
+        <td>
+          <div class="sb-table-row__name">
+            <div class="sb-row-cover"><svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"></svg><span class="ratio"></span></div>
+            <div>
+              <b></b>
+              <span class="tags"></span>
+            </div>
+          </div>
+        </td>
+        <td><span class="sb-pill"></span></td>
+        <td><div class="sb-meter"><i></i></div></td>
+        <td class="owner"></td>
+        <td class="updated" style="color:var(--sb-text-muted)"></td>
+        <td style="text-align:right">
+          <button class="sb-btn sb-btn--ghost sb-btn--sm">Open</button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script>
+      const COVERS = {
+        'wearable-hub': '<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F3A72"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g1)"/><circle cx="240" cy="90" r="50" fill="rgba(34,211,183,0.18)"/><circle cx="240" cy="90" r="22" fill="#22D3B7"/>',
+        'bootcamp': '<defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#162844"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g2)"/><g transform="translate(20 60)"><rect width="60" height="60" rx="6" fill="rgba(34,211,183,0.2)"/><rect x="80" width="60" height="60" rx="6" fill="rgba(56,189,248,0.2)"/><rect x="160" width="60" height="60" rx="6" fill="rgba(167,139,250,0.2)"/></g>',
+        'copilot': '<defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#093d54"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g3)"/><circle cx="160" cy="90" r="40" fill="none" stroke="#22D3B7" stroke-width="1.5"/><circle cx="160" cy="90" r="14" fill="#22D3B7"/>',
+        'series-c': '<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0E2E4A"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g4)"/><text x="160" y="105" fill="#22D3B7" font-family="Inter Display" font-size="38" font-weight="700" text-anchor="middle">Series C</text>',
+        'helios': '<defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0B2F4C"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g5)"/><g transform="translate(220 50)"><circle r="36" fill="rgba(56,189,248,0.2)"/><circle r="16" fill="rgba(56,189,248,0.4)"/></g><text x="20" y="100" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">Helios</text>',
+        'gdpr': '<defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f2238"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g6)"/><g transform="translate(28 40)" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect width="60" height="80" rx="6"/><path d="M10 24h40M10 40h40M10 56h28"/></g><text x="108" y="80" fill="#F7F9FC" font-family="Inter Display" font-size="16" font-weight="700">GDPR</text>',
+      };
+      const ROWS = [
+        { name: 'Spring product launch — wearable hub', tags: 'Marketing · Hero · Paid social', status: 'rendering', progress: 0.62, owner: 'Ava Chen', updated: '9 min ago', cover: 'wearable-hub', ratio: '9:16' },
+        { name: 'Onboarding · Sales engineering bootcamp', tags: 'Training · Internal · L&D', status: 'review', progress: 1.0, owner: 'Marcus Lee', updated: '44 min ago', cover: 'bootcamp', ratio: '16:9' },
+        { name: 'AI Copilot — 60s product demo', tags: 'Product demo · Sales', status: 'scripting', progress: 0.18, owner: 'Priya Rao', updated: '3 hr ago', cover: 'copilot', ratio: '16:9' },
+        { name: 'TikTok teaser — Series C announcement', tags: 'Social · Brand', status: 'done', progress: 1.0, owner: 'Diego Alvarez', updated: 'Yesterday', cover: 'series-c', ratio: '9:16' },
+        { name: 'Q3 customer story — Helios Logistics', tags: 'Marketing · Case study', status: 'draft', progress: 0.04, owner: 'Ava Chen', updated: '2 min ago', cover: 'helios', ratio: '16:9' },
+        { name: 'Compliance refresher — GDPR essentials', tags: 'Training · Compliance', status: 'draft', progress: 0.0, owner: 'Marcus Lee', updated: '12 hr ago', cover: 'gdpr', ratio: '16:9' },
+      ];
+      const tpl = document.getElementById('row-tpl');
+      const body = document.getElementById('rows');
+      ROWS.forEach(r => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.querySelector('.sb-row-cover svg').innerHTML = COVERS[r.cover];
+        node.querySelector('.sb-row-cover .ratio').textContent = r.ratio;
+        node.querySelector('b').textContent = r.name;
+        node.querySelector('.tags').textContent = r.tags;
+        const pill = node.querySelector('.sb-pill');
+        pill.classList.add(`sb-pill--${r.status}`);
+        pill.textContent = r.status;
+        node.querySelector('.sb-meter i').style.width = `${Math.round(r.progress * 100)}%`;
+        node.querySelector('.owner').textContent = r.owner;
+        node.querySelector('.updated').textContent = r.updated;
+        body.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

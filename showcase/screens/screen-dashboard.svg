@@ -1,0 +1,370 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="ShadowBlade Dashboard screen mockup">
+  <defs>
+    <linearGradient id="d-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="d-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(11,20,40,0.95)"/>
+      <stop offset="100%" stop-color="rgba(8,14,28,0.85)"/>
+    </linearGradient>
+    <linearGradient id="d-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="d-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="d-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <radialGradient id="d-glow" cx="0.95" cy="0" r="0.6">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#06101F"/>
+  <rect width="1600" height="1000" fill="url(#d-bg)"/>
+  <rect width="1600" height="1000" fill="url(#d-glow)"/>
+
+  <!-- ── Sidebar ── -->
+  <rect width="248" height="1000" fill="url(#d-side)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- Brand -->
+  <g transform="translate(20 22)">
+    <rect width="32" height="32" rx="10" fill="#0F1D3A" stroke="rgba(34,211,183,0.30)"/>
+    <g transform="translate(7 7) scale(0.75)">
+      <path d="M2 2L24 12L2 22V14L14 12L2 10V2Z" fill="url(#d-mark)"/>
+    </g>
+    <text x="46" y="16" font-family="Inter Display, Inter, sans-serif" font-size="14" font-weight="700" fill="#F7F9FC">ShadowBlade</text>
+    <text x="46" y="30" font-family="Inter, sans-serif" font-size="10" letter-spacing="1.2" fill="#5A667F">VIDEO CLOUD</text>
+  </g>
+
+  <!-- Nav groups -->
+  <g font-family="Inter, sans-serif">
+    <text x="22" y="100" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">PRODUCE</text>
+    <!-- Dashboard (active) -->
+    <g transform="translate(14 116)">
+      <rect width="220" height="32" rx="6" fill="rgba(34,211,183,0.10)"/>
+      <rect x="-2" y="6" width="2" height="20" rx="1" fill="#22D3B7"/>
+      <rect x="14" y="9" width="14" height="14" rx="2" fill="none" stroke="#F7F9FC" stroke-width="1.6"/>
+      <text x="38" y="21" font-size="13" font-weight="600" fill="#F7F9FC">Dashboard</text>
+    </g>
+    <g transform="translate(14 156)">
+      <rect width="14" height="14" x="14" y="9" rx="2" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Studio</text>
+    </g>
+    <g transform="translate(14 196)">
+      <rect width="14" height="14" x="14" y="9" rx="2" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Projects</text>
+      <g transform="translate(190 9)">
+        <rect width="24" height="14" rx="7" fill="rgba(255,255,255,0.06)"/>
+        <text x="12" y="10" font-size="9" text-anchor="middle" fill="#8590A8" font-weight="600">38</text>
+      </g>
+    </g>
+    <g transform="translate(14 236)">
+      <rect width="14" height="14" x="14" y="9" rx="2" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Templates</text>
+    </g>
+
+    <text x="22" y="296" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">LIBRARY</text>
+    <g transform="translate(14 312)">
+      <rect width="14" height="14" x="14" y="9" rx="2" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Asset library</text>
+    </g>
+    <g transform="translate(14 352)">
+      <circle cx="21" cy="16" r="7" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Brand kits</text>
+    </g>
+
+    <text x="22" y="412" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">PIPELINE</text>
+    <g transform="translate(14 428)">
+      <rect width="14" height="2" x="14" y="11" fill="#B6BDCC"/>
+      <rect width="14" height="2" x="14" y="16" fill="#B6BDCC"/>
+      <rect width="14" height="2" x="14" y="21" fill="#B6BDCC"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Render queue</text>
+      <g transform="translate(190 9)">
+        <rect width="20" height="14" rx="7" fill="rgba(255,255,255,0.06)"/>
+        <text x="10" y="10" font-size="9" text-anchor="middle" fill="#8590A8" font-weight="600">5</text>
+      </g>
+    </g>
+    <g transform="translate(14 468)">
+      <path d="M18 23L24 16l4 4 6-8" stroke="#B6BDCC" stroke-width="1.4" fill="none"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Analytics</text>
+    </g>
+
+    <text x="22" y="528" font-size="10" letter-spacing="2" font-weight="700" fill="#5A667F">WORKSPACE</text>
+    <g transform="translate(14 544)">
+      <circle cx="21" cy="16" r="3" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Team &amp; roles</text>
+    </g>
+    <g transform="translate(14 584)">
+      <circle cx="21" cy="16" r="3" fill="none" stroke="#B6BDCC" stroke-width="1.4"/>
+      <text x="38" y="21" font-size="13" fill="#B6BDCC">Settings</text>
+    </g>
+  </g>
+
+  <!-- Workspace card bottom -->
+  <g transform="translate(14 870)">
+    <rect width="220" height="110" rx="10" fill="rgba(11,20,40,0.55)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="12" y="12" width="30" height="30" rx="8" fill="#0F1D3A"/>
+    <text x="27" y="32" text-anchor="middle" font-family="Inter Display, Inter, sans-serif" font-size="12" font-weight="700" fill="#6EE2C5">AC</text>
+    <text x="50" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">Acme · Scale</text>
+    <text x="50" y="38" font-family="Inter, sans-serif" font-size="10" fill="#5A667F">24 seats · Workspace admin</text>
+
+    <text x="12" y="64" font-family="Inter, sans-serif" font-size="10" fill="#8590A8">Render quota</text>
+    <text x="208" y="64" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#8590A8"><tspan fill="#F7F9FC" font-weight="700">387</tspan> / 1,000</text>
+    <rect x="12" y="74" width="196" height="6" rx="3" fill="#161C28"/>
+    <rect x="12" y="74" width="76" height="6" rx="3" fill="url(#d-meter)"/>
+  </g>
+
+  <!-- ── Topbar ── -->
+  <g transform="translate(248 0)">
+    <rect width="1352" height="60" fill="rgba(8,14,28,0.6)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <!-- breadcrumb -->
+    <text x="40" y="36" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">Acme  ›  <tspan fill="#F7F9FC" font-weight="700">Dashboard</tspan></text>
+    <!-- search -->
+    <g transform="translate(220 14)">
+      <rect width="460" height="32" rx="8" fill="rgba(15,22,38,0.7)" stroke="rgba(255,255,255,0.06)"/>
+      <circle cx="18" cy="16" r="5" fill="none" stroke="#8590A8" stroke-width="1.4"/>
+      <text x="34" y="20" font-family="Inter, sans-serif" font-size="12" fill="#5A667F">Search projects, assets, templates…</text>
+      <g transform="translate(420 8)">
+        <rect width="28" height="16" rx="4" fill="rgba(255,255,255,0.06)"/>
+        <text x="14" y="12" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#8590A8">⌘K</text>
+      </g>
+    </g>
+    <!-- actions -->
+    <g transform="translate(1132 14)">
+      <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <circle cx="16" cy="14" r="6" fill="none" stroke="#F7F9FC" stroke-width="1.4"/>
+      <circle cx="16" cy="22" r="2" fill="#22D3B7"/>
+    </g>
+    <g transform="translate(1172 14)">
+      <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <circle cx="16" cy="16" r="7" fill="none" stroke="#F7F9FC" stroke-width="1.4"/>
+      <text x="16" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#F7F9FC" font-weight="700">?</text>
+    </g>
+    <g transform="translate(1212 14)">
+      <rect width="120" height="32" rx="6" fill="url(#d-mark)"/>
+      <text x="60" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A1428">+ New video</text>
+    </g>
+  </g>
+
+  <!-- ── Page head ── -->
+  <g transform="translate(296 100)">
+    <text font-family="Inter, sans-serif" font-size="11" letter-spacing="2.6" font-weight="700" fill="#6EE2C5">WORKSPACE OVERVIEW</text>
+    <text y="40" font-family="Inter Display, Inter, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.7">Welcome back, Ava.</text>
+    <text y="74" font-family="Inter, sans-serif" font-size="14" fill="#B6BDCC">6 cuts shipped this week. 2 running now. The pipeline is on schedule for the Tuesday product launch.</text>
+
+    <g transform="translate(992 12)">
+      <rect width="108" height="34" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+      <text x="54" y="22" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#F7F9FC">↻ Refresh</text>
+      <g transform="translate(120 0)">
+        <rect width="184" height="34" rx="6" fill="url(#d-mark)"/>
+        <text x="92" y="22" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A1428">▶ Resume last project</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── KPI grid (4) ── -->
+  <g transform="translate(296 220)">
+    <g>
+      <rect width="295" height="148" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="34" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">▶ Renders this month</text>
+      <text x="20" y="78" font-family="Inter Display, Inter, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">387 <tspan font-size="14" fill="#5A667F" font-weight="500">/ 1,000</tspan></text>
+      <g transform="translate(20 96)"><rect width="118" height="20" rx="10" fill="rgba(34,211,183,0.10)"/><text x="59" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#6EE2C5">▲ 12.4% vs last</text></g>
+      <polyline points="20,140 50,134 80,138 110,130 140,124 170,118 200,118 230,114 260,110 290,108" stroke="#22D3B7" stroke-width="1.6" fill="none"/>
+    </g>
+    <g transform="translate(305 0)">
+      <rect width="295" height="148" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="34" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">◷ Time to first cut</text>
+      <text x="20" y="78" font-family="Inter Display, Inter, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">4.8 <tspan font-size="14" fill="#5A667F" font-weight="500">min</tspan></text>
+      <g transform="translate(20 96)"><rect width="108" height="20" rx="10" fill="rgba(34,211,183,0.10)"/><text x="54" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#6EE2C5">▲ 31% faster</text></g>
+      <polyline points="20,118 50,124 80,128 110,128 140,132 170,130 200,134 230,136 260,138 290,140" stroke="#22D3B7" stroke-width="1.6" fill="none"/>
+    </g>
+    <g transform="translate(610 0)">
+      <rect width="295" height="148" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="34" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">✓ Approval rate</text>
+      <text x="20" y="78" font-family="Inter Display, Inter, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">92 <tspan font-size="14" fill="#5A667F" font-weight="500">%</tspan></text>
+      <g transform="translate(20 96)"><rect width="84" height="20" rx="10" fill="rgba(34,211,183,0.10)"/><text x="42" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#6EE2C5">▲ 6 pts</text></g>
+      <polyline points="20,134 50,132 80,130 110,128 140,128 170,124 200,122 230,120 260,116 290,114" stroke="#22D3B7" stroke-width="1.6" fill="none"/>
+    </g>
+    <g transform="translate(915 0)">
+      <rect width="295" height="148" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+      <text x="20" y="34" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">$ Saved vs agency</text>
+      <text x="20" y="78" font-family="Inter Display, Inter, sans-serif" font-size="34" font-weight="700" fill="#F7F9FC" letter-spacing="-0.6">$168k <tspan font-size="14" fill="#5A667F" font-weight="500">/qtr</tspan></text>
+      <g transform="translate(20 96)"><rect width="62" height="20" rx="10" fill="rgba(34,211,183,0.10)"/><text x="31" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#6EE2C5">▲ 21%</text></g>
+      <polyline points="20,134 50,128 80,122 110,118 140,114 170,110 200,108 230,106 260,104 290,102" stroke="#22D3B7" stroke-width="1.6" fill="none"/>
+    </g>
+  </g>
+
+  <!-- ── In-flight pipeline card ── -->
+  <g transform="translate(296 392)">
+    <rect width="810" height="350" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+    <!-- head -->
+    <g transform="translate(28 22)">
+      <text font-family="Inter Display, Inter, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">In flight · pipeline run</text>
+      <text y="20" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">Spring product launch — wearable hub · 28s · 9:16</text>
+      <g transform="translate(602 0)">
+        <rect width="98" height="22" rx="11" fill="rgba(56,189,248,0.10)" stroke="rgba(56,189,248,0.30)"/>
+        <circle cx="14" cy="11" r="3.5" fill="#38BDF8"/>
+        <text x="24" y="15" font-family="Inter, sans-serif" font-size="10" letter-spacing="1.6" font-weight="700" fill="#38BDF8">RENDERING</text>
+        <g transform="translate(110 -4)"><rect width="112" height="28" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="56" y="18" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#F7F9FC">Open in Studio</text></g>
+      </g>
+    </g>
+    <!-- divider -->
+    <line x1="0" y1="68" x2="810" y2="68" stroke="rgba(255,255,255,0.06)"/>
+
+    <!-- stages -->
+    <g transform="translate(20 84)" font-family="Inter, sans-serif">
+      <g>
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(34,211,183,0.18)"/>
+        <text x="20" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#6EE2C5">✓</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">Script</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">6 scenes · 142 words · brand-tone score 0.94</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#B6BDCC">8.4s</text>
+      </g>
+      <g transform="translate(0 46)">
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(34,211,183,0.18)"/>
+        <text x="20" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#6EE2C5">✓</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">Storyboard</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">6/6 boards rendered · editorial style</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#B6BDCC">12.1s</text>
+      </g>
+      <g transform="translate(0 92)">
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(34,211,183,0.18)"/>
+        <text x="20" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#6EE2C5">✓</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">Voiceover</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">alloy-en-female · 4 takes · -14 LUFS</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#B6BDCC">18.6s</text>
+      </g>
+      <g transform="translate(0 138)">
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(34,211,183,0.18)"/>
+        <text x="20" y="25" text-anchor="middle" font-size="12" font-weight="700" fill="#6EE2C5">✓</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">B-roll match</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">18 clips matched · CC license filter on</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#B6BDCC">41.0s</text>
+      </g>
+      <g transform="translate(0 184)">
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(56,189,248,0.35)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(56,189,248,0.18)"/>
+        <text x="20" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#38BDF8">●</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">Composition</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">62% · waiting on overlay #3 · 1280×2272</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#38BDF8">ETA 0:64</text>
+      </g>
+      <g transform="translate(0 230)">
+        <rect width="770" height="40" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="8" y="8" width="24" height="24" rx="6" fill="rgba(255,255,255,0.04)"/>
+        <text x="20" y="24" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#8590A8">06</text>
+        <text x="46" y="18" font-size="13" font-weight="700" fill="#F7F9FC">Render to MP4</text>
+        <text x="46" y="32" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">queued behind 2 rush jobs · H.264 high · 60 fps</text>
+        <text x="752" y="26" text-anchor="end" font-size="12" font-variant-numeric="tabular-nums" fill="#8590A8">queued</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Approvals card (right) ── -->
+  <g transform="translate(1130 392)">
+    <rect width="376" height="350" rx="14" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+    <g transform="translate(22 22)">
+      <text font-family="Inter Display, Inter, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC">Approvals waiting on you</text>
+      <g transform="translate(244 -4)"><rect width="76" height="24" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="38" y="16" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#F7F9FC">See all</text></g>
+    </g>
+    <line x1="0" y1="60" x2="376" y2="60" stroke="rgba(255,255,255,0.06)"/>
+
+    <g transform="translate(16 76)" font-family="Inter, sans-serif">
+      <g>
+        <rect width="344" height="56" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="10" y="14" width="28" height="28" rx="6" fill="rgba(167,139,250,0.18)"/>
+        <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#A78BFA">SE</text>
+        <text x="50" y="26" font-size="13" font-weight="700" fill="#F7F9FC">Onboarding · SE bootcamp</text>
+        <text x="50" y="42" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">Marcus Lee · 2 comments · 96s</text>
+        <g transform="translate(266 16)"><rect width="64" height="24" rx="6" fill="url(#d-mark)"/><text x="32" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#0A1428">Review</text></g>
+      </g>
+      <g transform="translate(0 64)">
+        <rect width="344" height="56" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="10" y="14" width="28" height="28" rx="6" fill="rgba(56,189,248,0.18)"/>
+        <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#38BDF8">CP</text>
+        <text x="50" y="26" font-size="13" font-weight="700" fill="#F7F9FC">AI Copilot · product demo</text>
+        <text x="50" y="42" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">Priya Rao · revision 3 · 60s</text>
+        <g transform="translate(280 16)"><rect width="50" height="24" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="25" y="16" text-anchor="middle" font-size="11" font-weight="600" fill="#F7F9FC">Open</text></g>
+      </g>
+      <g transform="translate(0 128)">
+        <rect width="344" height="56" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="10" y="14" width="28" height="28" rx="6" fill="rgba(34,211,183,0.18)"/>
+        <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#6EE2C5">SR</text>
+        <text x="50" y="26" font-size="13" font-weight="700" fill="#F7F9FC">Series C teaser · TikTok</text>
+        <text x="50" y="42" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">Diego Alvarez · ready to publish</text>
+        <g transform="translate(260 16)"><rect width="70" height="24" rx="6" fill="url(#d-mark)"/><text x="35" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#0A1428">Approve</text></g>
+      </g>
+      <line x1="6" y1="200" x2="338" y2="200" stroke="rgba(255,255,255,0.06)"/>
+      <g transform="translate(0 210)">
+        <rect width="344" height="56" rx="8" fill="rgba(11,18,32,0.5)" stroke="rgba(251,191,36,0.30)"/>
+        <rect x="10" y="14" width="28" height="28" rx="6" fill="rgba(251,191,36,0.18)"/>
+        <text x="24" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#FBBF24">!</text>
+        <text x="50" y="26" font-size="13" font-weight="700" fill="#F7F9FC">Brand guideline drift</text>
+        <text x="50" y="42" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A667F">2 cuts use #20D2B5 — should be #22D3B7</text>
+        <g transform="translate(266 16)"><rect width="64" height="24" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/><text x="32" y="16" text-anchor="middle" font-size="11" font-weight="600" fill="#F7F9FC">Resolve</text></g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── Recent projects strip ── -->
+  <g transform="translate(296 770)">
+    <text font-family="Inter Display, Inter, sans-serif" font-size="18" font-weight="700" fill="#F7F9FC">Recent projects</text>
+    <text y="20" font-family="Inter, sans-serif" font-size="12" fill="#8590A8">38 total · sorted by last touched</text>
+
+    <g transform="translate(0 38)">
+      <g>
+        <rect width="396" height="160" rx="12" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="396" height="98" rx="12" fill="#1F3A72"/>
+        <circle cx="320" cy="50" r="40" fill="rgba(34,211,183,0.34)"/>
+        <circle cx="320" cy="50" r="22" fill="#22D3B7"/>
+        <g transform="translate(12 12)"><rect width="74" height="20" rx="10" fill="rgba(56,189,248,0.16)"/><text x="37" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#38BDF8" letter-spacing="1">RENDERING</text></g>
+        <g transform="translate(14 116)"><text font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">Spring launch — wearable hub</text></g>
+        <rect x="14" y="130" width="368" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="14" y="130" width="228" height="6" rx="3" fill="url(#d-meter)"/>
+        <text x="14" y="152" font-family="Inter, sans-serif" font-size="11" fill="#5A667F">Ava Chen · 9 min ago</text>
+      </g>
+      <g transform="translate(408 0)">
+        <rect width="396" height="160" rx="12" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="396" height="98" rx="12" fill="#162844"/>
+        <g transform="translate(80 26)">
+          <rect width="64" height="48" rx="6" fill="rgba(34,211,183,0.18)"/>
+          <rect x="80" width="64" height="48" rx="6" fill="rgba(56,189,248,0.18)"/>
+          <rect x="160" width="64" height="48" rx="6" fill="rgba(167,139,250,0.18)"/>
+        </g>
+        <g transform="translate(12 12)"><rect width="64" height="20" rx="10" fill="rgba(167,139,250,0.16)"/><text x="32" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#A78BFA" letter-spacing="1">REVIEW</text></g>
+        <g transform="translate(14 116)"><text font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">SE bootcamp · Onboarding</text></g>
+        <rect x="14" y="130" width="368" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="14" y="130" width="368" height="6" rx="3" fill="url(#d-meter)"/>
+        <text x="14" y="152" font-family="Inter, sans-serif" font-size="11" fill="#5A667F">Marcus Lee · 44 min ago</text>
+      </g>
+      <g transform="translate(816 0)">
+        <rect width="396" height="160" rx="12" fill="url(#d-card)" stroke="rgba(255,255,255,0.06)"/>
+        <rect width="396" height="98" rx="12" fill="#093D54"/>
+        <circle cx="198" cy="50" r="32" fill="none" stroke="#22D3B7" stroke-width="1.4"/>
+        <circle cx="198" cy="50" r="14" fill="#22D3B7"/>
+        <g transform="translate(12 12)"><rect width="76" height="20" rx="10" fill="rgba(167,139,250,0.16)"/><text x="38" y="14" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#A78BFA" letter-spacing="1">SCRIPTING</text></g>
+        <g transform="translate(14 116)"><text font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#F7F9FC">AI Copilot · 60s demo</text></g>
+        <rect x="14" y="130" width="368" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="14" y="130" width="66" height="6" rx="3" fill="url(#d-meter)"/>
+        <text x="14" y="152" font-family="Inter, sans-serif" font-size="11" fill="#5A667F">Priya Rao · 3 hr ago</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <g transform="translate(296 974)" font-family="Inter, sans-serif" font-size="10" fill="#5A667F" letter-spacing="1.2">
+    <text>WORKSPACE · ACME MARKETING CLOUD · REGION EU-CENTRAL-1</text>
+    <text x="1216" text-anchor="end">PIPELINE HEALTHY · 4 WORKERS · LAST SYNC JUST NOW</text>
+  </g>
+</svg>

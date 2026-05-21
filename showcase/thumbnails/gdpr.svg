@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 608" width="1080" height="608" role="img" aria-label="Compliance refresher — GDPR essentials">
+  <defs>
+    <linearGradient id="gd-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1F2238"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <radialGradient id="gd-glow" cx="0.18" cy="0.28" r="0.5">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="608" fill="url(#gd-bg)"/>
+  <rect width="1080" height="608" fill="url(#gd-glow)"/>
+
+  <!-- Document stack -->
+  <g transform="translate(720 130)">
+    <g transform="translate(40 30)">
+      <rect width="200" height="270" rx="12" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.32)"/>
+    </g>
+    <g transform="translate(20 18)">
+      <rect width="200" height="270" rx="12" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.40)"/>
+    </g>
+    <g>
+      <rect width="200" height="270" rx="12" fill="rgba(167,139,250,0.20)" stroke="rgba(167,139,250,0.55)"/>
+      <g transform="translate(22 28)" stroke="#A78BFA" stroke-width="1.5" fill="none">
+        <rect width="156" height="22" rx="4" fill="rgba(167,139,250,0.18)" stroke="none"/>
+        <path d="M0 56h156M0 78h156M0 100h120M0 122h156M0 144h140M0 166h100M0 188h156M0 210h130"/>
+      </g>
+      <g transform="translate(22 240)">
+        <circle r="10" fill="#A78BFA"/>
+        <path d="M-5 0l3 4 7-7" stroke="#0A1428" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Eyebrow -->
+  <g transform="translate(64 60)">
+    <rect width="190" height="30" rx="15" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.45)"/>
+    <circle cx="18" cy="15" r="4" fill="#A78BFA"/>
+    <text x="32" y="20" font-family="Inter, sans-serif" font-size="11" fill="#A78BFA" font-weight="600" letter-spacing="2.4">COMPLIANCE · 3 MIN</text>
+  </g>
+
+  <!-- Title -->
+  <g transform="translate(64 158)" fill="#F7F9FC" font-family="Inter Display, Inter, sans-serif">
+    <text font-size="80" font-weight="800" letter-spacing="-2.6">GDPR</text>
+    <text x="0" y="62" font-size="36" font-weight="500" fill="#B6BDCC">essentials refresher</text>
+  </g>
+
+  <!-- Checklist -->
+  <g transform="translate(64 336)" font-family="Inter, sans-serif" fill="#F7F9FC" font-size="17">
+    <g>
+      <circle cx="12" cy="-4" r="9" fill="rgba(167,139,250,0.20)" stroke="#A78BFA" stroke-width="1.2"/>
+      <path d="M7 -4l4 4 6-8" stroke="#A78BFA" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="32" y="0">Data subject rights · 6 scenarios</text>
+    </g>
+    <g transform="translate(0 36)">
+      <circle cx="12" cy="-4" r="9" fill="rgba(167,139,250,0.20)" stroke="#A78BFA" stroke-width="1.2"/>
+      <path d="M7 -4l4 4 6-8" stroke="#A78BFA" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="32" y="0">Cross-border transfer rules</text>
+    </g>
+    <g transform="translate(0 72)">
+      <circle cx="12" cy="-4" r="9" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+      <text x="32" y="0" fill="#8590A8">Incident response · 72-hour clock</text>
+    </g>
+  </g>
+
+  <!-- Draft pill (top right) -->
+  <g transform="translate(890 60)">
+    <rect width="120" height="30" rx="15" fill="rgba(148,163,184,0.16)" stroke="rgba(148,163,184,0.40)"/>
+    <circle cx="16" cy="15" r="4" fill="#94A3B8"/>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="11" fill="#94A3B8" font-weight="700" letter-spacing="2.4">DRAFT</text>
+  </g>
+
+  <!-- Metadata bottom -->
+  <g transform="translate(64 540)" font-family="Inter, sans-serif">
+    <text font-size="11" fill="#8590A8" letter-spacing="2.4" font-weight="600">TRAINING · 16:9 · 180s · MARCUS LEE</text>
+  </g>
+</svg>

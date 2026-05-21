@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Asset library · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-assets-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-folder {
+        display: flex;
+        align-items: center;
+        gap: var(--sb-space-3);
+        padding: 8px 10px;
+        border-radius: var(--sb-radius-sm);
+        font-size: var(--sb-text-md);
+        color: var(--sb-text-muted);
+      }
+      .sb-folder svg { width: 14px; height: 14px; }
+      .sb-folder--active {
+        background: rgba(34,211,183,0.12);
+        color: var(--sb-text);
+      }
+      .sb-folder span.count {
+        margin-left: auto;
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        font-variant-numeric: tabular-nums;
+      }
+      .sb-upload {
+        border: 1.5px dashed rgba(34,211,183,0.4);
+        background: rgba(34,211,183,0.05);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-6);
+        text-align: center;
+        display: grid;
+        gap: var(--sb-space-3);
+        place-items: center;
+      }
+      .sb-upload svg { width: 28px; height: 28px; color: var(--sb-accent-300); }
+      .sb-upload b { font-family: var(--sb-font-display); font-size: var(--sb-text-md); }
+      .sb-upload span { font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+
+      @media (max-width: 1000px) { .sb-assets-layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="assets">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Library</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Assets</b>
+          </div>
+          <label class="sb-topbar__search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" placeholder="Search 112 assets · tags, brand, source…" />
+            <kbd>⌘K</kbd>
+          </label>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+              Grid
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              Upload
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Library</div>
+                <h1>Asset library · 112 files · 8.4 GB</h1>
+                <p class="sb-page-head__lead">
+                  Brand-approved, license-clean, indexed by what's in the frame. Drop new files here, or generate b-roll straight from a prompt.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-assets-layout">
+            <aside class="sb-stack">
+              <article class="sb-card">
+                <header class="sb-card__head"><div class="sb-card__title">Folders</div></header>
+                <div class="sb-card__body" style="padding:8px">
+                  <div class="sb-folder sb-folder--active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h5l2 2h7a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    All assets <span class="count">112</span>
+                  </div>
+                  <div class="sb-folder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+                    Video <span class="count">14</span>
+                  </div>
+                  <div class="sb-folder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M3 16l5-5 5 5 4-4 4 4"/></svg>
+                    Image <span class="count">86</span>
+                  </div>
+                  <div class="sb-folder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13M9 14a3 3 0 11-3 3M21 12a3 3 0 11-3 3"/></svg>
+                    Audio <span class="count">9</span>
+                  </div>
+                  <div class="sb-folder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2M4 7h16M9 12h6M8 17h8"/></svg>
+                    Fonts <span class="count">4</span>
+                  </div>
+                  <div class="sb-folder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+                    Brand <span class="count">3</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head"><div class="sb-card__title">Tags</div></header>
+                <div class="sb-card__body" style="display:flex;flex-wrap:wrap;gap:6px">
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">approved</span>
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">brand</span>
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">stock</span>
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">licensed</span>
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">CC-BY</span>
+                  <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:5px 10px;border-radius:99px;border:1px solid var(--sb-border);color:var(--sb-text-muted)">spring-2026</span>
+                </div>
+              </article>
+
+              <div class="sb-upload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                <b>Drop files or paste a URL</b>
+                <span>MP4, MOV, PNG, JPG, MP3, WAV, OTF · up to 4 GB</span>
+                <button class="sb-btn sb-btn--primary sb-btn--sm">Browse</button>
+              </div>
+            </aside>
+
+            <div class="sb-stack">
+              <div class="sb-asset-grid" id="grid"></div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Storage 8.4 GB / 100 GB plan · region eu-central-1</span>
+          <span>Indexed by content embedding · last scan 2 min ago</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="asset-tpl">
+      <article class="sb-asset">
+        <div class="sb-asset__thumb"><svg viewBox="0 0 100 100"></svg></div>
+        <div class="sb-asset__body">
+          <div class="sb-asset__name"></div>
+          <div class="sb-asset__meta"><span class="kind"></span><span class="size"></span></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script>
+      const ICONS = {
+        video: '<rect x="20" y="28" width="60" height="44" rx="6" fill="rgba(34,211,183,0.18)" stroke="#22D3B7" stroke-width="1.4"/><polygon points="44,42 64,52 44,62" fill="#22D3B7"/>',
+        image: '<rect x="18" y="22" width="64" height="56" rx="6" fill="rgba(56,189,248,0.16)" stroke="#38BDF8" stroke-width="1.4"/><circle cx="36" cy="42" r="6" fill="#38BDF8"/><path d="M22 72l16-18 10 8 12-12 18 22" fill="none" stroke="#38BDF8" stroke-width="1.4"/>',
+        audio: '<path d="M28 36v32M40 28v44M52 32v36M64 38v22M76 42v18" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>',
+        font: '<text x="50" y="64" font-family="Inter Display" font-size="44" font-weight="700" text-anchor="middle" fill="#22D3B7">Aa</text>',
+        logo: '<path d="M30 30L70 50L30 70V60L50 50L30 40V30Z" fill="#22D3B7"/>',
+      };
+      function fmt(b) {
+        if (b < 1024) return `${b} B`;
+        if (b < 1024*1024) return `${(b/1024).toFixed(1)} KB`;
+        if (b < 1024*1024*1024) return `${(b/1024/1024).toFixed(1)} MB`;
+        return `${(b/1024/1024/1024).toFixed(2)} GB`;
+      }
+      const ASSETS = [
+        { name: 'Brand logo · primary', kind: 'logo', size: 48212 },
+        { name: 'Brand logo · monochrome', kind: 'logo', size: 41900 },
+        { name: 'Founder b-roll · keynote', kind: 'video', size: 184300000 },
+        { name: 'Voice · Ava narration', kind: 'audio', size: 5840000 },
+        { name: 'Product UI · dashboard', kind: 'image', size: 612440 },
+        { name: 'Product UI · studio', kind: 'image', size: 588212 },
+        { name: 'Stock · skyline drone', kind: 'video', size: 92111000 },
+        { name: 'Stock · server room dolly', kind: 'video', size: 88900000 },
+        { name: 'Font · Inter Display', kind: 'font', size: 412000 },
+        { name: 'Font · JetBrains Mono', kind: 'font', size: 388000 },
+        { name: 'Lifestyle · desk POV', kind: 'image', size: 320120 },
+        { name: 'Lifestyle · wrist macro', kind: 'image', size: 298110 },
+      ];
+      const tpl = document.getElementById('asset-tpl');
+      const grid = document.getElementById('grid');
+      ASSETS.forEach(a => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.querySelector('svg').innerHTML = ICONS[a.kind] || ICONS.image;
+        node.querySelector('.sb-asset__name').textContent = a.name;
+        node.querySelector('.kind').textContent = a.kind;
+        node.querySelector('.size').textContent = fmt(a.size);
+        grid.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

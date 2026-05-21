@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Templates · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-tpl-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-4);
+      }
+      .sb-tpl {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(22,30,48,0.92), rgba(11,18,32,0.92));
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 200px 1fr;
+        transition: transform var(--sb-dur) var(--sb-ease-out), border-color var(--sb-dur);
+        cursor: pointer;
+      }
+      .sb-tpl:hover {
+        transform: translateY(-3px);
+        border-color: rgba(34,211,183,0.4);
+        box-shadow: var(--sb-shadow);
+      }
+      .sb-tpl__thumb { position: relative; overflow: hidden; }
+      .sb-tpl__thumb svg { width: 100%; height: 100%; }
+      .sb-tpl__thumb .badges {
+        position: absolute; top: 10px; left: 10px;
+        display: flex; gap: 6px; z-index: 2;
+      }
+      .sb-tpl__thumb .ratio {
+        position: absolute; bottom: 10px; right: 10px; z-index: 2;
+        font-family: var(--sb-font-mono); font-size: 10px;
+        background: rgba(8,14,28,0.7); padding: 3px 6px; border-radius: 4px;
+      }
+      .sb-tpl__thumb .play {
+        position: absolute; inset: 0; display: grid; place-items: center;
+        opacity: 0; transition: opacity var(--sb-dur);
+        background: linear-gradient(180deg, transparent, rgba(6,10,22,0.55));
+      }
+      .sb-tpl:hover .sb-tpl__thumb .play { opacity: 1; }
+      .sb-tpl__thumb .play div {
+        width: 48px; height: 48px; border-radius: 50%;
+        background: var(--sb-accent-500); display: grid; place-items: center;
+        color: var(--sb-navy-950);
+      }
+      .sb-tpl__body { padding: var(--sb-space-4); display: grid; gap: 8px; }
+      .sb-tpl__name {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+      }
+      .sb-tpl__meta {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        display: flex; justify-content: space-between;
+      }
+
+      @media (max-width: 1200px) { .sb-tpl-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 900px)  { .sb-tpl-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+  </head>
+  <body data-route="templates">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Templates</b>
+          </div>
+          <label class="sb-topbar__search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" placeholder="Search 64 templates…" />
+            <kbd>⌘K</kbd>
+          </label>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">My drafts</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Save current as template
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Templates</div>
+                <h1>Pick a starting point.</h1>
+                <p class="sb-page-head__lead">
+                  64 production-grade templates. Tuned to your brand kit. Every one lands a first cut in under 5 minutes.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <article class="sb-card">
+            <div class="sb-filters" style="display:flex;flex-wrap:wrap;gap:var(--sb-space-3);padding:var(--sb-space-4) var(--sb-space-6);border-bottom:1px solid var(--sb-border)">
+              <span class="sb-chip sb-chip--active" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text);background:rgba(34,211,183,0.14);border:1px solid rgba(34,211,183,0.4)">All</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Marketing</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Product demo</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Training</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Social</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Onboarding</span>
+              <span style="flex:1"></span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Ratio · any</span>
+              <span class="sb-chip" style="display:inline-flex;align-items:center;gap:6px;font-size:var(--sb-text-sm);padding:6px 10px;border-radius:99px;color:var(--sb-text-muted);border:1px solid var(--sb-border)">Length · any</span>
+            </div>
+
+            <div class="sb-card__body">
+              <div class="sb-tpl-grid" id="tpl-grid"></div>
+            </div>
+          </article>
+        </main>
+
+        <footer class="sb-footer">
+          <span>64 templates · 12 built for the Acme brand kit</span>
+          <span>Last template added · 2 days ago</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="tpl-card">
+      <article class="sb-tpl">
+        <div class="sb-tpl__thumb">
+          <div class="badges"></div>
+          <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"></svg>
+          <span class="ratio"></span>
+          <div class="play"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></div></div>
+        </div>
+        <div class="sb-tpl__body">
+          <div class="sb-tpl__name"></div>
+          <div class="sb-tpl__meta"><span class="cat"></span><span class="dur"></span></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script>
+      const ART = {
+        'hero-launch':       '<defs><linearGradient id="l1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F3A72"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l1)"/><circle cx="220" cy="100" r="64" fill="rgba(34,211,183,0.18)"/><circle cx="220" cy="100" r="28" fill="#22D3B7"/><text x="20" y="120" fill="#F7F9FC" font-family="Inter Display" font-size="22" font-weight="700">Launch hero</text>',
+        'product-explainer': '<defs><linearGradient id="l2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a2a48"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l2)"/><g transform="translate(40 50)"><rect width="240" height="100" rx="12" fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.4)"/><text x="120" y="58" fill="#F7F9FC" font-family="Inter Display" font-size="18" text-anchor="middle">Product explainer</text></g>',
+        'training-module':   '<defs><linearGradient id="l3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a223a"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l3)"/><g transform="translate(40 60)"><rect width="50" height="80" rx="6" fill="rgba(167,139,250,0.25)"/><rect x="70" width="50" height="80" rx="6" fill="rgba(167,139,250,0.18)"/><rect x="140" width="50" height="80" rx="6" fill="rgba(167,139,250,0.12)"/></g><text x="20" y="50" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">Training module</text>',
+        'social-teaser':     '<defs><linearGradient id="l4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d3a45"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l4)"/><text x="160" y="120" fill="#22D3B7" font-family="Inter Display" font-size="40" font-weight="700" text-anchor="middle">Now</text><text x="160" y="146" fill="#8590A8" font-family="Inter" font-size="11" text-anchor="middle" letter-spacing="3">TEASER · 15S</text>',
+        'case-study':        '<defs><linearGradient id="l5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0F2A4A"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l5)"/><circle cx="80" cy="100" r="40" fill="rgba(56,189,248,0.25)"/><text x="140" y="92" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">"68% faster"</text><text x="140" y="118" fill="#8590A8" font-family="Inter" font-size="11">— Helios Logistics</text>',
+        'onboarding-loop':   '<defs><linearGradient id="l6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#142a55"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l6)"/><g transform="translate(160 100)"><circle r="60" fill="none" stroke="rgba(34,211,183,0.4)" stroke-width="1.5" stroke-dasharray="3 5"/><circle r="32" fill="#22D3B7"/></g><text x="20" y="34" fill="#F7F9FC" font-family="Inter Display" font-size="14" font-weight="600">Welcome loop</text>',
+        'recap-monthly':     '<defs><linearGradient id="l7" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0E2E4A"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l7)"/><g transform="translate(40 60)"><rect width="240" height="20" rx="4" fill="rgba(34,211,183,0.15)"/><rect y="30" width="180" height="20" rx="4" fill="rgba(34,211,183,0.15)"/><rect y="60" width="220" height="20" rx="4" fill="rgba(34,211,183,0.15)"/></g><text x="20" y="40" fill="#F7F9FC" font-family="Inter Display" font-size="16" font-weight="700">Monthly recap</text>',
+        'press-quote':       '<defs><linearGradient id="l8" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f1e3a"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="200" fill="url(#l8)"/><text x="40" y="80" fill="#22D3B7" font-family="Inter Display" font-size="50" font-weight="700">"</text><text x="40" y="110" fill="#F7F9FC" font-family="Inter Display" font-size="14" font-weight="600">Best video tool</text><text x="40" y="130" fill="#F7F9FC" font-family="Inter Display" font-size="14" font-weight="600">we have shipped.</text><text x="40" y="160" fill="#8590A8" font-family="Inter" font-size="10" letter-spacing="2">— TECHCRUNCH</text>',
+      };
+      const TEMPLATES = [
+        { slug: 'hero-launch', name: 'Launch hero · 30s', cat: 'Marketing', dur: '30s · 9:16', badges: ['Brand kit'] },
+        { slug: 'product-explainer', name: 'Product explainer · 60s', cat: 'Product demo', dur: '60s · 16:9', badges: ['Popular'] },
+        { slug: 'training-module', name: 'Training module · 3 min', cat: 'Training', dur: '3:00 · 16:9', badges: [] },
+        { slug: 'social-teaser', name: 'Social teaser · 15s', cat: 'Social', dur: '15s · 9:16', badges: ['New'] },
+        { slug: 'case-study', name: 'Case study · 75s', cat: 'Marketing', dur: '75s · 16:9', badges: [] },
+        { slug: 'onboarding-loop', name: 'Onboarding loop · 45s', cat: 'Training', dur: '45s · 1:1', badges: [] },
+        { slug: 'recap-monthly', name: 'Monthly recap · 90s', cat: 'Marketing', dur: '90s · 16:9', badges: [] },
+        { slug: 'press-quote', name: 'Press quote · 20s', cat: 'Social', dur: '20s · 9:16', badges: ['New'] },
+      ];
+      const tpl = document.getElementById('tpl-card');
+      const grid = document.getElementById('tpl-grid');
+      TEMPLATES.forEach(t => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.querySelector('svg').innerHTML = ART[t.slug];
+        node.querySelector('.sb-tpl__name').textContent = t.name;
+        node.querySelector('.cat').textContent = t.cat;
+        node.querySelector('.dur').textContent = t.dur;
+        node.querySelector('.ratio').textContent = t.dur.split('·')[1].trim();
+        const badges = node.querySelector('.badges');
+        t.badges.forEach(b => {
+          const pill = document.createElement('span');
+          pill.className = 'sb-pill';
+          pill.style.background = b === 'New' ? 'rgba(34,211,183,0.18)' : 'rgba(56,189,248,0.18)';
+          pill.style.color = b === 'New' ? 'var(--sb-accent-300)' : '#7dd3fc';
+          pill.textContent = b;
+          badges.appendChild(pill);
+        });
+        grid.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

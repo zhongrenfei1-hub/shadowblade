@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studio · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-studio {
+        display: grid;
+        grid-template-columns: 280px 1fr 320px;
+        gap: var(--sb-space-5);
+        align-items: start;
+      }
+      .sb-stage-canvas {
+        aspect-ratio: 9/16;
+        max-height: 70vh;
+        border-radius: var(--sb-radius-lg);
+        background: linear-gradient(160deg, #112646, #050a18);
+        border: 1px solid var(--sb-border);
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+      }
+      .sb-stage-canvas__inner svg { width: 100%; height: 100%; }
+      .sb-stage-canvas__overlay {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-content: end;
+        padding: var(--sb-space-5);
+        background: linear-gradient(180deg, transparent 60%, rgba(6, 10, 22, 0.8));
+        color: var(--sb-text);
+      }
+      .sb-stage-canvas__caption {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+        line-height: 1.2;
+        max-width: 86%;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+      }
+      .sb-stage-canvas__corner {
+        position: absolute;
+        top: var(--sb-space-4);
+        right: var(--sb-space-4);
+        background: rgba(8, 14, 28, 0.7);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--sb-border-strong);
+        padding: 6px 10px;
+        border-radius: var(--sb-radius);
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        color: var(--sb-text);
+      }
+      .sb-transport {
+        display: flex;
+        align-items: center;
+        gap: var(--sb-space-3);
+        padding: var(--sb-space-3) var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: var(--sb-surface);
+      }
+      .sb-transport__time {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-md);
+        font-variant-numeric: tabular-nums;
+        color: var(--sb-text-muted);
+      }
+      .sb-transport__bar {
+        flex: 1;
+        height: 6px;
+        border-radius: 99px;
+        background: rgba(255,255,255,0.06);
+        position: relative;
+        overflow: hidden;
+      }
+      .sb-transport__bar i {
+        position: absolute;
+        inset: 0 60% 0 0;
+        background: linear-gradient(90deg, var(--sb-accent-500), #38BDF8);
+        border-radius: 99px;
+      }
+      .sb-transport__bar .markers {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+      }
+      .sb-transport__bar .markers i {
+        position: relative;
+        height: 2px;
+        background: rgba(255,255,255,0.18);
+      }
+      .sb-brief-fields { display: grid; gap: var(--sb-space-4); }
+      .sb-field { display: grid; gap: 6px; }
+      .sb-field label {
+        font-size: var(--sb-text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--sb-text-faint);
+        font-weight: 600;
+      }
+      .sb-field input, .sb-field textarea, .sb-field select {
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.7);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        outline: none;
+        transition: border-color var(--sb-dur);
+      }
+      .sb-field input:focus, .sb-field textarea:focus, .sb-field select:focus {
+        border-color: var(--sb-accent-500);
+        box-shadow: 0 0 0 3px rgba(34,211,183,0.18);
+      }
+      .sb-field textarea { resize: vertical; min-height: 92px; font-family: var(--sb-font-body); }
+      .sb-field__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-3); }
+      .sb-tabs {
+        display: flex;
+        gap: var(--sb-space-1);
+        padding: 4px;
+        border-radius: var(--sb-radius-sm);
+        background: rgba(255,255,255,0.04);
+        margin-bottom: var(--sb-space-4);
+        width: max-content;
+      }
+      .sb-tab {
+        padding: 6px 12px;
+        border-radius: var(--sb-radius-xs);
+        font-size: var(--sb-text-sm);
+        font-weight: 500;
+        color: var(--sb-text-muted);
+      }
+      .sb-tab--active { background: rgba(34,211,183,0.16); color: var(--sb-text); }
+      .sb-comment {
+        padding: var(--sb-space-3);
+        border-radius: var(--sb-radius);
+        background: rgba(11,18,32,0.55);
+        border: 1px solid var(--sb-border);
+        display: grid;
+        gap: 6px;
+      }
+      .sb-comment__head {
+        display: flex; align-items: center; gap: var(--sb-space-2);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-comment__head b { font-weight: 600; }
+      .sb-comment__head time { color: var(--sb-text-faint); font-size: var(--sb-text-xs); }
+      .sb-comment__body { font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-comment__cite {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        color: var(--sb-accent-300);
+      }
+
+      @media (max-width: 1200px) {
+        .sb-studio { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body data-route="studio">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Projects</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Spring product launch — wearable hub</b>
+          </div>
+          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">Rendering 62%</span>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export MP4
+            </button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+              Share for review
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Re-render with edits
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Studio · marketing · 9:16 · 28 s</div>
+                <h1>Spring product launch — wearable hub</h1>
+                <p class="sb-page-head__lead">
+                  Six scenes. Voice: Alloy · EN female. Brand kit: Acme · Core. The composition is rendering at 62% — caption and music will lock when stage 5 finishes.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-studio">
+            <!-- LEFT · Scene navigator + brief -->
+            <div class="sb-stack">
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Scenes</div>
+                  <div class="sb-card__head-actions">
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                      Add
+                    </button>
+                  </div>
+                </header>
+                <div class="sb-card__body sb-stack" id="scene-list"></div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Brief</div>
+                </header>
+                <div class="sb-card__body sb-brief-fields">
+                  <div class="sb-field">
+                    <label>Goal</label>
+                    <select>
+                      <option>Drive pre-orders for new wearable</option>
+                      <option>Awareness boost</option>
+                    </select>
+                  </div>
+                  <div class="sb-field">
+                    <label>Audience</label>
+                    <input value="Fitness-curious knowledge workers, 28–42, US/EU" />
+                  </div>
+                  <div class="sb-field__row">
+                    <div class="sb-field">
+                      <label>Ratio</label>
+                      <select><option>9:16 Vertical</option><option>16:9 Wide</option><option>1:1 Square</option></select>
+                    </div>
+                    <div class="sb-field">
+                      <label>Length</label>
+                      <select><option>15 s</option><option selected>28 s</option><option>45 s</option><option>60 s</option></select>
+                    </div>
+                  </div>
+                  <div class="sb-field">
+                    <label>Tone</label>
+                    <input value="Confident, plainspoken, never breathless" />
+                  </div>
+                  <div class="sb-field">
+                    <label>Call to action</label>
+                    <input value="Pre-order — first 1,000 ship free" />
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- CENTER · Preview canvas -->
+            <div class="sb-stack">
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Preview · Scene 04 / 06</div>
+                  <div class="sb-card__head-actions">
+                    <div class="sb-tabs">
+                      <button class="sb-tab sb-tab--active">Preview</button>
+                      <button class="sb-tab">Script</button>
+                      <button class="sb-tab">Captions</button>
+                      <button class="sb-tab">Music</button>
+                    </div>
+                  </div>
+                </header>
+                <div class="sb-card__body" style="display:grid;gap:var(--sb-space-4);justify-items:center">
+                  <div class="sb-stage-canvas" style="width:340px">
+                    <div class="sb-stage-canvas__inner">
+                      <svg viewBox="0 0 340 605" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                          <linearGradient id="prevbg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#15376a"/>
+                            <stop offset="100%" stop-color="#050a18"/>
+                          </linearGradient>
+                          <radialGradient id="prevglow" cx="0.7" cy="0.3" r="0.7">
+                            <stop offset="0%" stop-color="rgba(34,211,183,0.45)"/>
+                            <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
+                          </radialGradient>
+                        </defs>
+                        <rect width="340" height="605" fill="url(#prevbg)"/>
+                        <rect width="340" height="605" fill="url(#prevglow)"/>
+
+                        <!-- product hero shape -->
+                        <g transform="translate(170 280)">
+                          <circle r="120" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="2 5"/>
+                          <circle r="78" fill="rgba(34,211,183,0.18)"/>
+                          <circle r="46" fill="rgba(34,211,183,0.35)"/>
+                          <circle r="20" fill="#22D3B7"/>
+                        </g>
+
+                        <!-- bottom text block -->
+                        <g transform="translate(28 460)">
+                          <rect width="284" height="110" rx="14" fill="rgba(8,14,28,0.75)" stroke="rgba(255,255,255,0.08)"/>
+                          <text x="20" y="34" fill="#22D3B7" font-family="Inter" font-size="11" letter-spacing="2">ACME WEARABLE · HUB</text>
+                          <text x="20" y="64" fill="#F7F9FC" font-family="Inter Display" font-size="22" font-weight="700">Your day, on time</text>
+                          <text x="20" y="92" fill="#8590A8" font-family="Inter" font-size="12">12 metrics. 7-day battery. One discreet tap.</text>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="sb-stage-canvas__corner">9:16 · 1080×1920</div>
+                  </div>
+                  <div class="sb-transport">
+                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Previous scene">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5v14M5 12l9-7v14l-9-7z"/></svg>
+                    </button>
+                    <button class="sb-btn sb-btn--primary sb-btn--icon" aria-label="Play">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+                    </button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Next scene">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5v14M19 12l-9-7v14l9-7z"/></svg>
+                    </button>
+                    <span class="sb-transport__time">0:16.8</span>
+                    <div class="sb-transport__bar"><i></i></div>
+                    <span class="sb-transport__time">0:28.0</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Timeline</div>
+                  <div class="sb-card__head-actions">
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Snap</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Ripple</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Zoom 100%</button>
+                  </div>
+                </header>
+                <div class="sb-card__body">
+                  <div class="sb-timeline" style="padding-left:104px">
+                    <div class="sb-timeline__ruler">
+                      <span>0:00</span><span>0:04</span><span>0:08</span><span>0:12</span><span>0:16</span><span>0:20</span><span>0:24</span><span>0:28</span>
+                    </div>
+                    <div class="sb-timeline__track">
+                      <span class="sb-timeline__track-label">Video</span>
+                      <div class="sb-timeline__block" style="width:14%">Cold open</div>
+                      <div class="sb-timeline__block" style="width:18%">Hero</div>
+                      <div class="sb-timeline__block" style="width:16%">Detail · screen</div>
+                      <div class="sb-timeline__block" style="width:18%">Lifestyle</div>
+                      <div class="sb-timeline__block" style="width:18%">Battery + tap</div>
+                      <div class="sb-timeline__block" style="width:14%">CTA</div>
+                      <div class="sb-timeline__playhead" style="left:60%"></div>
+                    </div>
+                    <div class="sb-timeline__track">
+                      <span class="sb-timeline__track-label">Voice</span>
+                      <div class="sb-timeline__block sb-timeline__block--voice" style="width:96%">Alloy · EN female · -14 LUFS · "Your day, on time…"</div>
+                    </div>
+                    <div class="sb-timeline__track">
+                      <span class="sb-timeline__track-label">Captions</span>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">12pt · Inter</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">Bold accent</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:16%">Number pop</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">Inline</div>
+                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">CTA reveal</div>
+                    </div>
+                    <div class="sb-timeline__track">
+                      <span class="sb-timeline__track-label">Music</span>
+                      <div class="sb-timeline__block sb-timeline__block--music" style="width:96%">Pulse · upbeat · ducked -8 dB under voice</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- RIGHT · Inspector + reviews -->
+            <div class="sb-stack">
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Inspector · Scene 04</div>
+                </header>
+                <div class="sb-card__body sb-brief-fields">
+                  <div class="sb-field">
+                    <label>Scene script</label>
+                    <textarea>Eight hours, one charge. Twelve metrics. Three taps. Your day, on time — without lifting a wrist.</textarea>
+                  </div>
+                  <div class="sb-field__row">
+                    <div class="sb-field">
+                      <label>Visual style</label>
+                      <select><option>Editorial · still</option><option>Cinematic dolly</option><option>UI motion</option></select>
+                    </div>
+                    <div class="sb-field">
+                      <label>Pace</label>
+                      <select><option>Steady</option><option>Quick cut</option><option>Hold</option></select>
+                    </div>
+                  </div>
+                  <div class="sb-field">
+                    <label>B-roll</label>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap">
+                      <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">wrist-shot.mp4</span>
+                      <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">desk-scene.mp4</span>
+                      <button class="sb-btn sb-btn--ghost sb-btn--sm">+ swap</button>
+                    </div>
+                  </div>
+                  <div class="sb-field">
+                    <label>On-screen caption</label>
+                    <input value="Your day, on time" />
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Review thread</div>
+                  <div class="sb-card__head-actions">
+                    <span class="sb-pill sb-pill--review">2 open</span>
+                  </div>
+                </header>
+                <div class="sb-card__body sb-stack">
+                  <div class="sb-comment">
+                    <div class="sb-comment__head">
+                      <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px">PR</div>
+                      <b>Priya Rao</b>
+                      <time>3 min ago</time>
+                    </div>
+                    <div class="sb-comment__body">
+                      Let's swap "without lifting a wrist" — it tests poorly with the US audience. Try "without breaking stride."
+                    </div>
+                    <div class="sb-comment__cite">scene 04 · script · word 18-22</div>
+                  </div>
+                  <div class="sb-comment">
+                    <div class="sb-comment__head">
+                      <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px;background:linear-gradient(135deg,#3d2c5f,#1b1230);color:#a78bfa">DA</div>
+                      <b>Diego Alvarez</b>
+                      <time>11 min ago</time>
+                    </div>
+                    <div class="sb-comment__body">
+                      Music duck is a touch aggressive on the CTA — bump to -6 dB?
+                    </div>
+                    <div class="sb-comment__cite">music · 0:24 → 0:28</div>
+                  </div>
+                  <div class="sb-divider"></div>
+                  <textarea class="sb-field" style="padding:10px 12px;border-radius:8px;border:1px solid var(--sb-border);background:rgba(11,18,32,0.7);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-md);min-height:60px" placeholder="Reply, or @mention to assign…"></textarea>
+                  <div style="display:flex;justify-content:flex-end;gap:8px">
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Save draft</button>
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">Send reply</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Auto-saved 12 sec ago · v17 by Ava Chen</span>
+          <span>Brand kit · Acme · Core · drift score 0.02</span>
+        </footer>
+      </div>
+    </div>
+
+    <template id="scene-tpl">
+      <button class="sb-stage" style="text-align:left;width:100%">
+        <span class="sb-stage__index"></span>
+        <div class="sb-stage__body">
+          <div class="sb-stage__title"></div>
+          <div class="sb-stage__log"></div>
+        </div>
+        <div class="sb-stage__meta"></div>
+      </button>
+    </template>
+
+    <script src="scripts/shell.js"></script>
+    <script>
+      const SCENES = [
+        { i: '01', t: 'Cold open', log: 'Black → quick logo flash', dur: '4.0s', state: 'succeeded' },
+        { i: '02', t: 'Hero shot', log: 'Wearable rotates 360°', dur: '5.0s', state: 'succeeded' },
+        { i: '03', t: 'Detail · screen', log: 'UI macro · health rings', dur: '4.5s', state: 'succeeded' },
+        { i: '04', t: 'Lifestyle', log: 'Knowledge-worker desk POV', dur: '5.0s', state: 'running' },
+        { i: '05', t: 'Battery + tap', log: '7-day arc + tap demo', dur: '5.0s', state: '' },
+        { i: '06', t: 'CTA', log: '"Pre-order — first 1,000 ship free"', dur: '4.5s', state: '' },
+      ];
+      const tpl = document.getElementById('scene-tpl');
+      const list = document.getElementById('scene-list');
+      SCENES.forEach((s, i) => {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        if (s.state) node.classList.add(`sb-stage--${s.state}`);
+        if (i === 3) node.classList.add('sb-scene--active');
+        node.querySelector('.sb-stage__index').textContent = s.i;
+        node.querySelector('.sb-stage__title').textContent = s.t;
+        node.querySelector('.sb-stage__log').textContent = s.log;
+        node.querySelector('.sb-stage__meta').textContent = s.dur;
+        list.appendChild(node);
+      });
+    </script>
+  </body>
+</html>

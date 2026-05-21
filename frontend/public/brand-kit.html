@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand kits · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-brand-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-kit-list .item {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: var(--sb-space-3);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.02);
+        cursor: pointer;
+        transition: border-color var(--sb-dur), background var(--sb-dur);
+      }
+      .sb-kit-list .item--active {
+        border-color: rgba(34,211,183,0.4);
+        background: rgba(34,211,183,0.06);
+      }
+      .sb-kit-list .swatch {
+        width: 36px; height: 36px; border-radius: 8px;
+        border: 1px solid var(--sb-border-strong);
+      }
+      .sb-kit-list .item b { display: block; font-weight: 600; }
+      .sb-kit-list .item span { font-size: var(--sb-text-xs); color: var(--sb-text-faint); }
+      .sb-swatch-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-3);
+      }
+      .sb-swatch-card {
+        border-radius: var(--sb-radius);
+        padding: var(--sb-space-4);
+        height: 92px;
+        display: grid;
+        align-content: end;
+        gap: 4px;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        border: 1px solid var(--sb-border);
+      }
+      .sb-swatch-card b {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-md);
+        font-weight: 600;
+      }
+      .sb-type-sample {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-type-sample .label {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .sb-type-sample .h1 {
+        font-family: var(--sb-font-display);
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+        margin-top: 6px;
+      }
+      .sb-type-sample .h2 {
+        font-family: var(--sb-font-display);
+        font-size: 24px;
+        font-weight: 600;
+        margin-top: 8px;
+      }
+      .sb-type-sample .body {
+        font-family: var(--sb-font-body);
+        margin-top: 6px;
+        max-width: 60ch;
+        color: var(--sb-text-muted);
+      }
+      .sb-type-sample .mono {
+        font-family: var(--sb-font-mono);
+        margin-top: 6px;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-accent-300);
+      }
+      .sb-tone {
+        display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-4);
+      }
+      .sb-tone .col {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        display: grid; gap: 6px;
+      }
+      .sb-tone .col h4 {
+        margin: 0; font-size: var(--sb-text-xs);
+        text-transform: uppercase; letter-spacing: 0.1em;
+        color: var(--sb-text-faint); font-weight: 600;
+      }
+      .sb-tone .col ul {
+        margin: 0; padding-left: 18px;
+        font-size: var(--sb-text-md); color: var(--sb-text-muted);
+      }
+      .sb-tone .col ul li { margin: 4px 0; }
+      .sb-tone .col--do h4 { color: var(--sb-accent-300); }
+      .sb-tone .col--avoid h4 { color: #fbbf24; }
+
+      @media (max-width: 1000px) {
+        .sb-brand-layout { grid-template-columns: 1fr; }
+        .sb-swatch-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+  </head>
+  <body data-route="brand">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <span>Library</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Brand kits</b>
+          </div>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">Duplicate</button>
+            <button class="sb-btn sb-btn--ghost">Export ZIP</button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Publish v4
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Brand kits</div>
+                <h1>Acme · Core</h1>
+                <p class="sb-page-head__lead">
+                  Every cut renders against this kit. Change once — re-render everywhere. Drift is flagged in Analytics with one-click auto-fix.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-brand-layout">
+            <aside class="sb-stack sb-kit-list">
+              <div class="item item--active">
+                <div class="swatch" style="background:linear-gradient(135deg,#0F2A4A,#22D3B7)"></div>
+                <div><b>Acme · Core</b><span>187 renders · v3 active</span></div>
+              </div>
+              <div class="item">
+                <div class="swatch" style="background:linear-gradient(135deg,#101728,#FF7849)"></div>
+                <div><b>Acme · Field events</b><span>32 renders · v1</span></div>
+              </div>
+              <div class="item">
+                <div class="swatch" style="background:linear-gradient(135deg,#1f2238,#a78bfa)"></div>
+                <div><b>Acme · Internal L&D</b><span>9 renders · draft</span></div>
+              </div>
+
+              <button class="sb-btn sb-btn--ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                New kit
+              </button>
+            </aside>
+
+            <div class="sb-stack">
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Colour</div>
+                  <div class="sb-card__head-actions">
+                    <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">WCAG AA verified</span>
+                  </div>
+                </header>
+                <div class="sb-card__body">
+                  <div class="sb-swatch-grid">
+                    <div class="sb-swatch-card" style="background:linear-gradient(135deg,#0F2A4A,#06101F);color:#F7F9FC"><b>Primary</b><span>#0F2A4A</span></div>
+                    <div class="sb-swatch-card" style="background:#22D3B7;color:#06101F"><b>Accent</b><span>#22D3B7</span></div>
+                    <div class="sb-swatch-card" style="background:#11161F;color:#F7F9FC"><b>Graphite</b><span>#11161F</span></div>
+                    <div class="sb-swatch-card" style="background:#F7F9FC;color:#0F2A4A"><b>Surface</b><span>#F7F9FC</span></div>
+                    <div class="sb-swatch-card" style="background:#38BDF8;color:#06101F"><b>Info</b><span>#38BDF8</span></div>
+                    <div class="sb-swatch-card" style="background:#fbbf24;color:#06101F"><b>Caution</b><span>#FBBF24</span></div>
+                    <div class="sb-swatch-card" style="background:#f87171;color:#06101F"><b>Stop</b><span>#F87171</span></div>
+                    <div class="sb-swatch-card" style="background:#a78bfa;color:#06101F"><b>Review</b><span>#A78BFA</span></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Typography</div>
+                </header>
+                <div class="sb-card__body sb-stack">
+                  <div class="sb-type-sample">
+                    <div class="label">Display · Inter Display 600</div>
+                    <div class="h1">Ship video like product.</div>
+                    <div class="h2">Subhead — Inter Display 600 · 24 / 32</div>
+                  </div>
+                  <div class="sb-type-sample">
+                    <div class="label">Body · Inter 400</div>
+                    <div class="body">
+                      ShadowBlade renders every scene against the brand kit you publish here. Change a single token and we re-render every cut on schedule. Reviewers see drift before clients do.
+                    </div>
+                    <div class="mono">$ shadowblade render --kit acme-core --project wearable-hub</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Voice &amp; tone</div>
+                </header>
+                <div class="sb-card__body sb-stack">
+                  <div style="font-size:var(--sb-text-md);color:var(--sb-text-muted);max-width:60ch">
+                    Confident, plainspoken, never breathless. Lead with the customer outcome. Cap sentences at 14 words on-screen.
+                  </div>
+                  <div class="sb-tone">
+                    <div class="col col--do">
+                      <h4>Do</h4>
+                      <ul>
+                        <li>Lead with the customer outcome.</li>
+                        <li>Use single-syllable verbs.</li>
+                        <li>Cap sentences at 14 words on-screen.</li>
+                        <li>End with one clear call to action.</li>
+                      </ul>
+                    </div>
+                    <div class="col col--avoid">
+                      <h4>Avoid</h4>
+                      <ul>
+                        <li>Buzzwords (synergy, ecosystem, leverage).</li>
+                        <li>Stock metaphors (journey, ladder, north star).</li>
+                        <li>Exclamation marks anywhere on-screen.</li>
+                        <li>More than two adjectives in a row.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sb-card">
+                <header class="sb-card__head">
+                  <div class="sb-card__title">Logo · intro · outro</div>
+                </header>
+                <div class="sb-card__body sb-grid-3">
+                  <div style="border:1px solid var(--sb-border);border-radius:var(--sb-radius);height:120px;display:grid;place-items:center;background:linear-gradient(135deg,#0F2A4A,#06101F)">
+                    <svg viewBox="0 0 200 60" width="160">
+                      <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#22D3B7"/>
+                      <text x="58" y="38" fill="#F7F9FC" font-family="Inter Display" font-size="22" font-weight="700">Acme</text>
+                    </svg>
+                  </div>
+                  <div style="border:1px solid var(--sb-border);border-radius:var(--sb-radius);height:120px;display:grid;place-items:center;background:#F7F9FC">
+                    <svg viewBox="0 0 200 60" width="160">
+                      <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#0F2A4A"/>
+                      <text x="58" y="38" fill="#0F2A4A" font-family="Inter Display" font-size="22" font-weight="700">Acme</text>
+                    </svg>
+                  </div>
+                  <div style="border:1px solid var(--sb-border);border-radius:var(--sb-radius);height:120px;display:grid;place-items:center;background:linear-gradient(135deg,#22D3B7,#38BDF8)">
+                    <svg viewBox="0 0 200 60" width="160">
+                      <path d="M14 14L46 30L14 46V36L30 30L14 24V14Z" fill="#06101F"/>
+                      <text x="58" y="38" fill="#06101F" font-family="Inter Display" font-size="22" font-weight="700">Acme</text>
+                    </svg>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Acme · Core · v3 published 2026-05-14</span>
+          <span>187 renders bound to this kit</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

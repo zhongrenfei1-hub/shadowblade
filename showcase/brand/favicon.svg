@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="ShadowBlade">
+  <defs>
+    <linearGradient id="sb-fav-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#142A55"/>
+      <stop offset="100%" stop-color="#0A1428"/>
+    </linearGradient>
+    <linearGradient id="sb-fav-blade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3B7"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#sb-fav-bg)" stroke="rgba(34,211,183,0.45)" stroke-width="0.75"/>
+  <path d="M7 7L25 16L7 25V19.2L16 16L7 12.8V7Z" fill="url(#sb-fav-blade)"/>
+  <circle cx="24" cy="7" r="1.6" fill="#22D3B7"/>
+</svg>
