@@ -143,11 +143,11 @@
                   </div>
                   <div class="sb-row">
                     <div><div class="sb-row__title">Auto-render on approval</div><div class="sb-row__sub">Final MP4 is rendered the moment the last reviewer approves.</div></div>
-                    <div class="sb-toggle on"></div>
+                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="Auto-render on approval"></div>
                   </div>
                   <div class="sb-row">
                     <div><div class="sb-row__title">Watermark drafts</div><div class="sb-row__sub">Subtle "DRAFT" added to unpublished cuts shared externally.</div></div>
-                    <div class="sb-toggle"></div>
+                    <div class="sb-toggle" role="switch" aria-checked="false" tabindex="0" aria-label="Watermark drafts"></div>
                   </div>
                 </div>
               </article>
@@ -164,7 +164,7 @@
                   </div>
                   <div class="sb-row">
                     <div><div class="sb-row__title">Require MFA</div><div class="sb-row__sub">Webauthn or TOTP — applies to all members.</div></div>
-                    <div class="sb-toggle on"></div>
+                    <div class="sb-toggle on" role="switch" aria-checked="true" tabindex="0" aria-label="Require MFA"></div>
                   </div>
                   <div class="sb-row">
                     <div><div class="sb-row__title">Session length</div><div class="sb-row__sub">Auto-logout after inactivity.</div></div>
@@ -238,7 +238,14 @@ Content-Type: application/json
     <script src="scripts/shell.js"></script>
     <script>
       document.querySelectorAll('.sb-toggle').forEach((t) => {
-        t.addEventListener('click', () => t.classList.toggle('on'));
+        const flip = () => {
+          const on = t.classList.toggle('on');
+          t.setAttribute('aria-checked', String(on));
+        };
+        t.addEventListener('click', flip);
+        t.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+        });
       });
     </script>
   </body>
