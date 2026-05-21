@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ShadowBlade · Status</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="ShadowBlade · Status" />
+    <meta property="og:description" content="Live render-queue, pipeline, and edge health for the ShadowBlade workspace." />
     <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/brand/og-image.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -82,8 +86,8 @@
         border-radius: 1px;
         opacity: 0.7;
       }
-      .sb-status-uptime i.warn { background: #fbbf24; opacity: 1; }
-      .sb-status-uptime i.fail { background: #f87171; opacity: 1; }
+      .sb-status-uptime i.warn { background: var(--sb-status-queued); opacity: 1; }
+      .sb-status-uptime i.fail { background: var(--sb-status-failed); opacity: 1; }
       .sb-status-row .pct {
         text-align: right;
         font-family: var(--sb-font-mono);

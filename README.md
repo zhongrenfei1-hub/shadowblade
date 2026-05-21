@@ -13,7 +13,10 @@ under five minutes, against your brand kit.
 | Storage      | S3-compatible object store                     |
 | Auth         | SAML SSO + SCIM provisioning                   |
 
-## Surface map (30 pages shipped)
+## Surface map (34 pages shipped)
+
+> Full clickable index lives at `sitemap.html`.
+
 
 ### Marketing (public, no auth)
 
@@ -51,14 +54,17 @@ under five minutes, against your brand kit.
 | `assets.html`          | Folders + tag filters + drop-zone + content grid      |
 | `render-queue.html`    | Cluster utilisation + 4-worker grid + prioritised queue |
 | `job-detail.html`      | Gantt timeline + live GPU chart + colour-coded log    |
+| `compare.html`         | Side-by-side version diff with change-set list        |
 | `analytics.html`       | KPI strip + 7-day bar + leaderboard + drift alerts    |
 | `brand-kit.html`       | Kit picker + swatches + type + voice/tone + logo lockups |
 | `team.html`            | Members + role/permission matrix + SSO badges         |
 | `settings.html`        | General + Render + Security + Billing + API + Toggles |
 | `integrations.html`    | 15-card marketplace (Slack/Notion/Figma/YouTube/…)    |
+| `audit-log.html`       | Tamper-evident event stream with verb-coded chips     |
 | `notifications.html`   | Inbox with category tabs + glyph categories + inline actions |
 | `components.html`      | Design system docs — every component in one surface   |
 | `new-video.html`       | 4-step create wizard with ETA + smart suggestions     |
+| `sitemap.html`         | 34-page categorised link map (auto-generated)         |
 
 ## Run locally
 

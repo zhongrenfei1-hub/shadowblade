@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Changelog · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="Changelog · ShadowBlade" />
+    <meta property="og:description" content="What shipped, and why. Weekly notes on the ShadowBlade pipeline, brand kit, and API." />
     <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/brand/og-image.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -91,9 +95,9 @@
       }
       .sb-log-entry .pills .sb-pill { background: rgba(255,255,255,0.04); color: var(--sb-text-muted); }
       .sb-log-entry .pills .sb-pill.feat { color: var(--sb-accent-300); background: rgba(34,211,183,0.12); }
-      .sb-log-entry .pills .sb-pill.fix { color: #fbbf24; background: rgba(251,191,36,0.12); }
-      .sb-log-entry .pills .sb-pill.perf { color: #38BDF8; background: rgba(56,189,248,0.12); }
-      .sb-log-entry .pills .sb-pill.brand { color: #a78bfa; background: rgba(167,139,250,0.12); }
+      .sb-log-entry .pills .sb-pill.fix { color: var(--sb-status-queued); background: rgba(251,191,36,0.12); }
+      .sb-log-entry .pills .sb-pill.perf { color: var(--sb-status-running); background: rgba(56,189,248,0.12); }
+      .sb-log-entry .pills .sb-pill.brand { color: var(--sb-status-review); background: rgba(167,139,250,0.12); }
       .sb-log-entry ul { margin: var(--sb-space-3) 0 0; padding-left: 20px; color: var(--sb-text-muted); font-size: var(--sb-text-md); }
       .sb-log-entry li { margin: 6px 0; }
       .sb-log-entry li b { color: var(--sb-text); font-weight: 600; }
