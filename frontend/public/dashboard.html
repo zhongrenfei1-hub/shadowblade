@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard · ShadowBlade</title>
+    <title>工作台 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="Dashboard · ShadowBlade" />
-    <meta property="og:description" content="ShadowBlade workspace — KPI, live pipeline, approvals, recent projects." />
+    <meta property="og:title" content="工作台 · ShadowBlade" />
+    <meta property="og:description" content="ShadowBlade 工作空间——关键指标、实时流水线、待审批、最近项目。" />
     <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
@@ -24,23 +24,23 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>Dashboard</b>
+            <b>工作台</b>
           </div>
-          <label class="sb-topbar__search" aria-label="Search">
+          <label class="sb-topbar__search" aria-label="搜索">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-            <input type="search" aria-label="Search projects, assets, templates" placeholder="Search projects, assets, templates…" />
+            <input type="search" aria-label="搜索项目、素材、模板" placeholder="搜索项目、素材、模板…" />
             <kbd>⌘K</kbd>
           </label>
           <div class="sb-topbar__actions">
-            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Notifications">
+            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="通知">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 004 0"/></svg>
             </button>
-            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="Help">
+            <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="帮助">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 2-2.5 2.5-2.5 4M12 17h.01"/></svg>
             </button>
             <button class="sb-btn sb-btn--primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              New video
+              新建视频
             </button>
           </div>
         </header>
@@ -49,62 +49,62 @@
           <section class="sb-page-head">
             <div class="sb-page-head__row">
               <div>
-                <div class="sb-eyebrow">Workspace overview</div>
-                <h1>Welcome back, Ava.</h1>
+                <div class="sb-eyebrow">工作台概览</div>
+                <h1>Ava，欢迎回来。</h1>
                 <p class="sb-page-head__lead">
-                  6 cuts shipped this week. 2 running now. The pipeline is on schedule for the Tuesday product launch.
+                  本周已交付 6 条成片，当前 2 条在跑。流水线按周二产品发布日程推进中。
                 </p>
               </div>
               <div class="sb-page-head__actions">
                 <button class="sb-btn sb-btn--ghost">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
-                  Refresh
+                  刷新
                 </button>
                 <button class="sb-btn sb-btn--primary">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                  Resume last project
+                  继续上次项目
                 </button>
               </div>
             </div>
           </section>
 
-          <section class="sb-kpi-grid" aria-label="Key results">
+          <section class="sb-kpi-grid" aria-label="关键指标">
             <article class="sb-kpi">
               <div class="sb-kpi__label">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
-                Renders this month
+                本月渲染次数
               </div>
               <div class="sb-kpi__value">387 <small>/ 1,000</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 12.4% vs last month</span>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 12.4% 较上月</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[10,14,12,18,22,28,26,34,38,40]"></svg>
             </article>
 
             <article class="sb-kpi">
               <div class="sb-kpi__label">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                Time to first cut
+                首版成片耗时
               </div>
-              <div class="sb-kpi__value">4.8 <small>min</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 31% faster</span>
+              <div class="sb-kpi__value">4.8 <small>分钟</small></div>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 提速 31%</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[12,11,9,9,7,8,6,6,5,4.8]"></svg>
             </article>
 
             <article class="sb-kpi">
               <div class="sb-kpi__label">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4L19 7"/></svg>
-                Approval rate
+                一次审核通过率
               </div>
               <div class="sb-kpi__value">92 <small>%</small></div>
-              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 6 pts</span>
+              <span class="sb-kpi__delta sb-kpi__delta--up">▲ 6 个百分点</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[80,82,84,85,84,87,88,89,90,92]"></svg>
             </article>
 
             <article class="sb-kpi">
               <div class="sb-kpi__label">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5A3.5 3.5 0 006 8.5 3.5 3.5 0 009.5 12h5a3.5 3.5 0 010 7H6"/></svg>
-                Saved vs agency
+                较外包代理节省
               </div>
-              <div class="sb-kpi__value">$168k <small>/qtr</small></div>
+              <div class="sb-kpi__value">$168k <small>/季度</small></div>
               <span class="sb-kpi__delta sb-kpi__delta--up">▲ 21%</span>
               <svg class="sb-kpi__sparkline" data-sparkline="[80,90,110,120,140,150,160,162,165,168]"></svg>
             </article>
@@ -114,12 +114,12 @@
             <article class="sb-card">
               <header class="sb-card__head">
                 <div>
-                  <div class="sb-card__title">In flight · pipeline run</div>
-                  <div class="sb-card__subtitle">Spring product launch — wearable hub · 28s · 9:16</div>
+                  <div class="sb-card__title">进行中 · 流程运行</div>
+                  <div class="sb-card__subtitle">春季产品发布 — 智能腕环 · 28 秒 · 9:16</div>
                 </div>
                 <div class="sb-card__head-actions">
-                  <span class="sb-pill sb-pill--running">Rendering</span>
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">Open in Studio</button>
+                  <span class="sb-pill sb-pill--running">渲染中</span>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">在编辑器中打开</button>
                 </div>
               </header>
               <div class="sb-card__body">
@@ -127,50 +127,50 @@
                   <div class="sb-stage sb-stage--succeeded">
                     <span class="sb-stage__index">✓</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">Script</div>
-                      <div class="sb-stage__log">6 scenes · 142 words · brand-tone score 0.94</div>
+                      <div class="sb-stage__title">脚本</div>
+                      <div class="sb-stage__log">6 个场景 · 142 字 · 品牌语态评分 0.94</div>
                     </div>
-                    <div class="sb-stage__meta">8.4s</div>
+                    <div class="sb-stage__meta">8.4 秒</div>
                   </div>
                   <div class="sb-stage sb-stage--succeeded">
                     <span class="sb-stage__index">✓</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">Storyboard</div>
-                      <div class="sb-stage__log">6/6 boards rendered · editorial style</div>
+                      <div class="sb-stage__title">分镜</div>
+                      <div class="sb-stage__log">6/6 分镜已渲染 · 编辑风格</div>
                     </div>
-                    <div class="sb-stage__meta">12.1s</div>
+                    <div class="sb-stage__meta">12.1 秒</div>
                   </div>
                   <div class="sb-stage sb-stage--succeeded">
                     <span class="sb-stage__index">✓</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">Voiceover</div>
-                      <div class="sb-stage__log">alloy-en-female · 4 takes · -14 LUFS</div>
+                      <div class="sb-stage__title">配音</div>
+                      <div class="sb-stage__log">alloy-en-female · 4 个版本 · -14 LUFS</div>
                     </div>
-                    <div class="sb-stage__meta">18.6s</div>
+                    <div class="sb-stage__meta">18.6 秒</div>
                   </div>
                   <div class="sb-stage sb-stage--succeeded">
                     <span class="sb-stage__index">✓</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">B-roll match</div>
-                      <div class="sb-stage__log">18 clips matched · CC license filter on</div>
+                      <div class="sb-stage__title">空镜素材匹配</div>
+                      <div class="sb-stage__log">匹配 18 段素材 · 已开启 CC 协议过滤</div>
                     </div>
-                    <div class="sb-stage__meta">41.0s</div>
+                    <div class="sb-stage__meta">41.0 秒</div>
                   </div>
                   <div class="sb-stage sb-stage--running">
                     <span class="sb-stage__index">●</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">Composition</div>
-                      <div class="sb-stage__log">62% · waiting on overlay #3 · 1280×2272</div>
+                      <div class="sb-stage__title">合成</div>
+                      <div class="sb-stage__log">62% · 等待叠加层 #3 · 1280×2272</div>
                     </div>
-                    <div class="sb-stage__meta">ETA 0:64</div>
+                    <div class="sb-stage__meta">预计 0:64</div>
                   </div>
                   <div class="sb-stage">
                     <span class="sb-stage__index">06</span>
                     <div class="sb-stage__body">
-                      <div class="sb-stage__title">Render to MP4</div>
-                      <div class="sb-stage__log">queued behind 2 rush jobs · H.264 high · 60 fps</div>
+                      <div class="sb-stage__title">渲染为 MP4</div>
+                      <div class="sb-stage__log">排在 2 个加急任务之后 · H.264 high · 60 fps</div>
                     </div>
-                    <div class="sb-stage__meta">queued</div>
+                    <div class="sb-stage__meta">排队中</div>
                   </div>
                 </div>
               </div>
@@ -178,51 +178,51 @@
 
             <article class="sb-card">
               <header class="sb-card__head">
-                <div class="sb-card__title">Approvals waiting on you</div>
+                <div class="sb-card__title">等你审批</div>
                 <div class="sb-card__head-actions">
-                  <button class="sb-btn sb-btn--ghost sb-btn--sm">See all</button>
+                  <button class="sb-btn sb-btn--ghost sb-btn--sm">查看全部</button>
                 </div>
               </header>
               <div class="sb-card__body sb-stack">
                 <div class="sb-stage">
                   <span class="sb-stage__index sb-stage__index--review">SE</span>
                   <div class="sb-stage__body">
-                    <div class="sb-stage__title">Onboarding · SE bootcamp</div>
-                    <div class="sb-stage__log">Marcus Lee · 2 comments · 96s</div>
+                    <div class="sb-stage__title">入职培训 · 销售工程师训练营</div>
+                    <div class="sb-stage__log">Marcus Lee · 2 条评论 · 96 秒</div>
                   </div>
                   <div class="sb-stage__meta">
-                    <button class="sb-btn sb-btn--primary sb-btn--sm">Review</button>
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">审核</button>
                   </div>
                 </div>
                 <div class="sb-stage">
                   <span class="sb-stage__index sb-stage__index--running">CP</span>
                   <div class="sb-stage__body">
-                    <div class="sb-stage__title">AI Copilot · product demo</div>
-                    <div class="sb-stage__log">Priya Rao · revision 3 · 60s</div>
+                    <div class="sb-stage__title">AI Copilot · 产品演示</div>
+                    <div class="sb-stage__log">Priya Rao · 第 3 版 · 60 秒</div>
                   </div>
                   <div class="sb-stage__meta">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Open</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">打开</button>
                   </div>
                 </div>
                 <div class="sb-stage">
                   <span class="sb-stage__index sb-stage__index--succeeded">SR</span>
                   <div class="sb-stage__body">
-                    <div class="sb-stage__title">Series C teaser · TikTok</div>
-                    <div class="sb-stage__log">Diego Alvarez · ready to publish</div>
+                    <div class="sb-stage__title">C 轮预告 · TikTok</div>
+                    <div class="sb-stage__log">Diego Alvarez · 待发布</div>
                   </div>
                   <div class="sb-stage__meta">
-                    <button class="sb-btn sb-btn--primary sb-btn--sm">Approve</button>
+                    <button class="sb-btn sb-btn--primary sb-btn--sm">批准</button>
                   </div>
                 </div>
                 <div class="sb-divider"></div>
                 <div class="sb-stage">
                   <span class="sb-stage__index" aria-hidden="true">📌</span>
                   <div class="sb-stage__body">
-                    <div class="sb-stage__title"><span class="visually-hidden">Pinned: </span>Brand guideline drift</div>
-                    <div class="sb-stage__log">2 cuts use #20D2B5 — should be #22D3B7. Auto-fix available.</div>
+                    <div class="sb-stage__title"><span class="visually-hidden">已置顶：</span>品牌规范偏移</div>
+                    <div class="sb-stage__log">2 条成片使用了 #20D2B5——应为 #22D3B7。可一键自动修正。</div>
                   </div>
                   <div class="sb-stage__meta">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">Resolve</button>
+                    <button class="sb-btn sb-btn--ghost sb-btn--sm">解决</button>
                   </div>
                 </div>
               </div>
@@ -232,15 +232,15 @@
           <section>
             <header class="sb-page-head__row" style="margin-bottom:var(--sb-space-4)">
               <div>
-                <h2 style="margin:0;font-family:var(--sb-font-display);font-size:var(--sb-text-xl);font-weight:600">Recent projects</h2>
-                <p style="margin:4px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">38 total · sorted by last touched</p>
+                <h2 style="margin:0;font-family:var(--sb-font-display);font-size:var(--sb-text-xl);font-weight:600">最近项目</h2>
+                <p style="margin:4px 0 0;color:var(--sb-text-muted);font-size:var(--sb-text-sm)">共 38 个 · 按最近编辑排序</p>
               </div>
               <div class="sb-page-head__actions">
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">All</button>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Marketing</button>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Training</button>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Demos</button>
-                <button class="sb-btn sb-btn--ghost sb-btn--sm">Social</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">全部</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">营销</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">培训</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">演示</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">社交</button>
               </div>
             </header>
 
@@ -249,8 +249,8 @@
         </main>
 
         <footer class="sb-footer">
-          <span>Workspace · Acme Marketing Cloud · region eu-central-1</span>
-          <span>Pipeline healthy · 4 workers · last sync just now</span>
+          <span>工作空间 · Acme Marketing Cloud · 区域 eu-central-1</span>
+          <span>流水线正常 · 4 个 worker · 刚刚同步</span>
         </footer>
       </div>
     </div>
@@ -291,15 +291,25 @@
           '<defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f2238"/><stop offset="100%" stop-color="#06101F"/></linearGradient></defs><rect width="320" height="180" fill="url(#g6)"/><g transform="translate(28 28)" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect width="60" height="80" rx="6"/><path d="M10 24h40M10 40h40M10 56h28"/></g><text x="108" y="80" fill="#F7F9FC" font-family="Inter Display" font-size="18" font-weight="700">GDPR · refresher</text><text x="108" y="100" fill="#8590A8" font-family="Inter" font-size="11">COMPLIANCE TRAINING · 3 MIN</text>',
       };
 
+      const STATUS_LABEL = {
+        rendering: '渲染中',
+        review: '待审核',
+        scripting: '撰写脚本',
+        done: '已完成',
+        draft: '草稿',
+        queued: '排队中',
+        failed: '失败',
+      };
+
       async function loadProjects() {
         const fallback = {
           items: [
-            { id: 101, name: 'Spring product launch — wearable hub', status: 'rendering', progress: 0.62, aspect_ratio: '9:16', duration_seconds: 28, owner: 'Ava Chen', updated_at: '9 min ago', cover: 'wearable-hub' },
-            { id: 102, name: 'Onboarding · Sales engineering bootcamp', status: 'review', progress: 1.0, aspect_ratio: '16:9', duration_seconds: 96, owner: 'Marcus Lee', updated_at: '44 min ago', cover: 'bootcamp' },
-            { id: 103, name: 'AI Copilot — 60s product demo', status: 'scripting', progress: 0.18, aspect_ratio: '16:9', duration_seconds: 60, owner: 'Priya Rao', updated_at: '3 hr ago', cover: 'copilot' },
-            { id: 104, name: 'TikTok teaser — Series C announcement', status: 'done', progress: 1.0, aspect_ratio: '9:16', duration_seconds: 15, owner: 'Diego Alvarez', updated_at: 'Yesterday', cover: 'series-c' },
-            { id: 105, name: 'Q3 customer story — Helios Logistics', status: 'draft', progress: 0.04, aspect_ratio: '16:9', duration_seconds: 75, owner: 'Ava Chen', updated_at: '2 min ago', cover: 'helios' },
-            { id: 106, name: 'Compliance refresher — GDPR essentials', status: 'draft', progress: 0.0, aspect_ratio: '16:9', duration_seconds: 180, owner: 'Marcus Lee', updated_at: '12 hr ago', cover: 'gdpr' },
+            { id: 101, name: '春季产品发布 — 智能腕环', status: 'rendering', progress: 0.62, aspect_ratio: '9:16', duration_seconds: 28, owner: 'Ava Chen', updated_at: '9 分钟前', cover: 'wearable-hub' },
+            { id: 102, name: '入职培训 · 销售工程师训练营', status: 'review', progress: 1.0, aspect_ratio: '16:9', duration_seconds: 96, owner: 'Marcus Lee', updated_at: '44 分钟前', cover: 'bootcamp' },
+            { id: 103, name: 'AI Copilot · 60 秒产品演示', status: 'scripting', progress: 0.18, aspect_ratio: '16:9', duration_seconds: 60, owner: 'Priya Rao', updated_at: '3 小时前', cover: 'copilot' },
+            { id: 104, name: 'TikTok 预告 — C 轮发布', status: 'done', progress: 1.0, aspect_ratio: '9:16', duration_seconds: 15, owner: 'Diego Alvarez', updated_at: '昨天', cover: 'series-c' },
+            { id: 105, name: 'Q3 客户故事 — Helios Logistics', status: 'draft', progress: 0.04, aspect_ratio: '16:9', duration_seconds: 75, owner: 'Ava Chen', updated_at: '2 分钟前', cover: 'helios' },
+            { id: 106, name: '合规培训 — GDPR 要点', status: 'draft', progress: 0.0, aspect_ratio: '16:9', duration_seconds: 180, owner: 'Marcus Lee', updated_at: '12 小时前', cover: 'gdpr' },
           ],
         };
         try {
@@ -314,10 +324,10 @@
         if (typeof value === 'string' && !value.includes('T')) return value;
         const date = new Date(value);
         const diff = (Date.now() - date.getTime()) / 60000;
-        if (diff < 1) return 'just now';
-        if (diff < 60) return `${Math.round(diff)} min ago`;
-        if (diff < 60 * 24) return `${Math.round(diff / 60)} hr ago`;
-        return date.toLocaleDateString();
+        if (diff < 1) return '刚刚';
+        if (diff < 60) return `${Math.round(diff)} 分钟前`;
+        if (diff < 60 * 24) return `${Math.round(diff / 60)} 小时前`;
+        return date.toLocaleDateString('zh-CN');
       }
 
       const tpl = document.getElementById('project-card-tpl');
@@ -329,8 +339,8 @@
           node.querySelector('.sb-project__name').textContent = p.name;
           const pill = node.querySelector('.sb-pill');
           pill.classList.add(`sb-pill--${p.status}`);
-          pill.textContent = p.status;
-          node.querySelector('.sb-aspect-tag').textContent = `${p.aspect_ratio} · ${p.duration_seconds}s`;
+          pill.textContent = STATUS_LABEL[p.status] || p.status;
+          node.querySelector('.sb-aspect-tag').textContent = `${p.aspect_ratio} · ${p.duration_seconds} 秒`;
           const pct = Math.max(0, Math.min(1, p.progress ?? 0));
           node.querySelector('.sb-meter i').style.width = `${Math.round(pct * 100)}%`;
           node.querySelector('.meta-owner').textContent = p.owner;
