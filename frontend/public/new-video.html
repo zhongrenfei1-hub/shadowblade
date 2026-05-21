@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New video · ShadowBlade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: var(--sb-space-8);
+      }
+      .sb-wizard {
+        width: min(960px, 96vw);
+        max-height: 92vh;
+        border-radius: var(--sb-radius-xl);
+        background: linear-gradient(180deg, rgba(22,30,48,0.96), rgba(11,18,32,0.96));
+        border: 1px solid var(--sb-border-strong);
+        box-shadow: var(--sb-shadow-lg);
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+      }
+      .sb-wizard__head {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: var(--sb-space-5) var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-wizard__head .title {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-xl);
+        font-weight: 600;
+        letter-spacing: var(--sb-tracking-tight);
+      }
+      .sb-wizard__head .close {
+        margin-left: auto;
+        width: 34px; height: 34px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: rgba(255,255,255,0.04);
+        color: var(--sb-text-muted);
+      }
+      .sb-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 0 var(--sb-space-6);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-step {
+        padding: var(--sb-space-4) 0;
+        display: grid; gap: 4px;
+        position: relative;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-faint);
+      }
+      .sb-step b { color: var(--sb-text-muted); font-weight: 600; }
+      .sb-step--active b { color: var(--sb-text); }
+      .sb-step--active::after {
+        content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+        height: 2px; background: var(--sb-accent-500);
+      }
+      .sb-step--done b { color: var(--sb-accent-300); }
+      .sb-step__index {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+      .sb-wizard__body {
+        padding: var(--sb-space-6);
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-template-pick {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sb-space-3);
+      }
+      .sb-template-pick label {
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        padding: var(--sb-space-3);
+        cursor: pointer;
+        display: grid;
+        gap: 6px;
+        background: rgba(11,18,32,0.5);
+      }
+      .sb-template-pick label .swatch {
+        width: 100%; height: 70px; border-radius: 6px;
+        background: linear-gradient(135deg, var(--sb-navy-700), var(--sb-navy-900));
+      }
+      .sb-template-pick label b { font-size: var(--sb-text-sm); font-weight: 600; }
+      .sb-template-pick label span { font-size: var(--sb-text-xs); color: var(--sb-text-faint); }
+      .sb-template-pick input { display: none; }
+      .sb-template-pick input:checked + .opt {
+        border-color: var(--sb-accent-500);
+        background: rgba(34,211,183,0.06);
+      }
+      .opt {
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        padding: var(--sb-space-3);
+        cursor: pointer;
+        display: grid;
+        gap: 6px;
+        background: rgba(11,18,32,0.5);
+      }
+      .sb-stack-form { display: grid; gap: var(--sb-space-4); }
+      .sb-field { display: grid; gap: 6px; }
+      .sb-field label { font-size: var(--sb-text-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--sb-text-faint); font-weight: 600; }
+      .sb-field input, .sb-field textarea, .sb-field select {
+        padding: 10px 12px;
+        border-radius: var(--sb-radius-sm);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+        color: var(--sb-text);
+        font-size: var(--sb-text-md);
+        outline: none;
+      }
+      .sb-field input:focus, .sb-field textarea:focus, .sb-field select:focus {
+        border-color: var(--sb-accent-500);
+        box-shadow: 0 0 0 3px rgba(34,211,183,0.18);
+      }
+      .sb-field textarea { resize: vertical; min-height: 100px; font-family: var(--sb-font-body); }
+      .sb-field__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-3); }
+      .sb-eta-card {
+        border-radius: var(--sb-radius-lg);
+        border: 1px solid rgba(34,211,183,0.3);
+        background: linear-gradient(180deg, rgba(34,211,183,0.08), rgba(34,211,183,0.02));
+        padding: var(--sb-space-5);
+        display: grid; gap: var(--sb-space-3);
+      }
+      .sb-eta-card b {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-3xl);
+        font-weight: 600;
+        letter-spacing: var(--sb-tracking-tight);
+      }
+      .sb-eta-card small { color: var(--sb-text-muted); font-size: var(--sb-text-sm); }
+      .sb-eta-card .row { display: flex; justify-content: space-between; font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
+      .sb-eta-card .row b { font-family: var(--sb-font-body); font-size: var(--sb-text-md); color: var(--sb-text); }
+      .sb-wizard__foot {
+        display: flex; align-items: center; gap: var(--sb-space-3);
+        padding: var(--sb-space-4) var(--sb-space-6);
+        border-top: 1px solid var(--sb-border);
+        background: rgba(8,14,28,0.5);
+      }
+      .sb-wizard__foot .spacer { flex: 1; }
+      @media (max-width: 720px) {
+        .sb-wizard__body { grid-template-columns: 1fr; }
+        .sb-template-pick { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body data-route="wizard">
+    <article class="sb-wizard" role="dialog" aria-labelledby="wiz-title">
+      <header class="sb-wizard__head">
+        <div class="sb-brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="#22D3B7"/></svg>
+        </div>
+        <div id="wiz-title" class="title">Create new video</div>
+        <button class="close" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M6 18L18 6"/></svg>
+        </button>
+      </header>
+
+      <nav class="sb-steps" aria-label="Wizard steps">
+        <div class="sb-step sb-step--done"><span class="sb-step__index">01</span><b>Template</b></div>
+        <div class="sb-step sb-step--active"><span class="sb-step__index">02</span><b>Brief</b></div>
+        <div class="sb-step"><span class="sb-step__index">03</span><b>Brand</b></div>
+        <div class="sb-step"><span class="sb-step__index">04</span><b>Review</b></div>
+      </nav>
+
+      <div class="sb-wizard__body">
+        <div class="sb-stack-form">
+          <div class="sb-field">
+            <label>Picked template</label>
+            <div class="opt" style="border-color:rgba(34,211,183,0.5);background:rgba(34,211,183,0.06);display:flex;align-items:center;gap:12px">
+              <div style="width:60px;height:38px;border-radius:6px;background:linear-gradient(135deg,#1F3A72,#06101F);display:grid;place-items:center"><svg width="22" viewBox="0 0 24 24" fill="#22D3B7"><circle cx="12" cy="12" r="6"/></svg></div>
+              <div style="display:grid;gap:2px">
+                <b>Launch hero · 30s</b>
+                <span style="font-size:var(--sb-text-xs);color:var(--sb-text-faint)">Marketing · 9:16 · 5 scenes</span>
+              </div>
+              <button class="sb-btn sb-btn--ghost sb-btn--sm" style="margin-left:auto">Change</button>
+            </div>
+          </div>
+
+          <div class="sb-field">
+            <label>What's the cut about?</label>
+            <textarea placeholder="One paragraph. The clearer the brief, the better the first cut.">Spring launch of the Acme Wearable Hub. Hero benefit: 7-day battery, twelve discreet health metrics, one tap. Audience: fitness-curious knowledge workers, 28–42, US/EU. Tone: confident, plainspoken. CTA: pre-order — first 1,000 ship free.</textarea>
+          </div>
+
+          <div class="sb-field__row">
+            <div class="sb-field"><label>Duration</label><select><option>15 s</option><option selected>30 s</option><option>60 s</option><option>90 s</option></select></div>
+            <div class="sb-field"><label>Aspect ratio</label><select><option selected>9:16 vertical</option><option>16:9 wide</option><option>1:1 square</option></select></div>
+          </div>
+
+          <div class="sb-field">
+            <label>Voice</label>
+            <select>
+              <option>Alloy · EN female · warm</option>
+              <option>Ember · EN male · grounded</option>
+              <option>Lumen · EN female · bright</option>
+              <option>Bring my own — upload .wav</option>
+            </select>
+          </div>
+
+          <div class="sb-field">
+            <label>Call to action</label>
+            <input value="Pre-order — first 1,000 ship free" />
+          </div>
+        </div>
+
+        <div class="sb-stack-form">
+          <div class="sb-eta-card">
+            <div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted);letter-spacing:0.1em;text-transform:uppercase">Estimated first cut</div>
+            <b>4 min 32 s</b>
+            <small>Based on template length, current cluster load (3 of 4 workers busy), and your render priority.</small>
+            <div class="sb-divider"></div>
+            <div class="row"><span>Cluster</span><b>eu-central-1 · 3 of 4 busy</b></div>
+            <div class="row"><span>Render priority</span><b>Normal</b></div>
+            <div class="row"><span>Cost estimate</span><b>$1.40</b></div>
+            <div class="row"><span>Renders left this month</span><b>613 of 1,000</b></div>
+          </div>
+
+          <article class="sb-card">
+            <header class="sb-card__head"><div class="sb-card__title">Smart suggestions</div></header>
+            <div class="sb-card__body sb-stack">
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(56,189,248,0.18);color:#38BDF8">★</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">Add an outro card</div>
+                  <div class="sb-stage__log">Same template — converted 22% more on TikTok last quarter</div>
+                </div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Add</button></div>
+              </div>
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(167,139,250,0.18);color:#a78bfa">✿</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">B-roll from "Founder keynote"</div>
+                  <div class="sb-stage__log">2 clips matched · brand-approved · CC license</div>
+                </div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Use</button></div>
+              </div>
+              <div class="sb-stage">
+                <span class="sb-stage__index" style="background:rgba(34,211,183,0.18);color:var(--sb-accent-300)">↻</span>
+                <div class="sb-stage__body">
+                  <div class="sb-stage__title">Auto-translate to ES, DE, JA</div>
+                  <div class="sb-stage__log">Voice cloned at -14 LUFS · adds 2:00 to first cut</div>
+                </div>
+                <div class="sb-stage__meta"><button class="sb-btn sb-btn--ghost sb-btn--sm">Plan</button></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <footer class="sb-wizard__foot">
+        <button class="sb-btn sb-btn--ghost">
+          <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back
+        </button>
+        <span class="spacer"></span>
+        <span style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">Step 2 of 4</span>
+        <button class="sb-btn sb-btn--ghost">Save as draft</button>
+        <button class="sb-btn sb-btn--primary">
+          Next · pick brand kit
+          <svg width="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </footer>
+    </article>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

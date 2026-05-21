@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pipeline run · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      .sb-run-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--sb-space-6);
+        align-items: start;
+      }
+      .sb-log {
+        font-family: var(--sb-font-mono);
+        font-size: 12px;
+        line-height: 1.6;
+        background: rgba(6,10,22,0.75);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        padding: var(--sb-space-4);
+        max-height: 420px;
+        overflow: auto;
+      }
+      .sb-log .ts { color: var(--sb-text-faint); margin-right: 8px; }
+      .sb-log .lvl { display: inline-block; width: 44px; font-weight: 700; margin-right: 8px; }
+      .sb-log .lvl-info { color: #38bdf8; }
+      .sb-log .lvl-ok   { color: var(--sb-accent-300); }
+      .sb-log .lvl-warn { color: #fbbf24; }
+      .sb-log .lvl-err  { color: #f87171; }
+
+      .sb-gantt {
+        display: grid; gap: 4px;
+        font-size: var(--sb-text-sm);
+      }
+      .sb-gantt__row {
+        display: grid;
+        grid-template-columns: 140px 1fr 80px;
+        align-items: center;
+        gap: var(--sb-space-3);
+      }
+      .sb-gantt__name { color: var(--sb-text-muted); }
+      .sb-gantt__track {
+        position: relative;
+        height: 16px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 4px;
+      }
+      .sb-gantt__bar {
+        position: absolute;
+        top: 0; bottom: 0;
+        background: linear-gradient(90deg, rgba(34,211,183,0.6), rgba(56,189,248,0.6));
+        border: 1px solid rgba(34,211,183,0.6);
+        border-radius: 4px;
+      }
+      .sb-gantt__bar--running {
+        background: linear-gradient(90deg, rgba(56,189,248,0.6), rgba(56,189,248,0.2));
+        border-color: rgba(56,189,248,0.7);
+      }
+      .sb-gantt__bar--queued {
+        background: rgba(255,255,255,0.06);
+        border-color: var(--sb-border-strong);
+      }
+      .sb-gantt__time {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        text-align: right;
+        color: var(--sb-text-faint);
+      }
+
+      .sb-stat {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.6);
+      }
+      .sb-stat .label { font-size: var(--sb-text-xs); color: var(--sb-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+      .sb-stat .v { font-family: var(--sb-font-display); font-size: var(--sb-text-2xl); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+      @media (max-width: 1100px) { .sb-run-layout { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-route="queue">
+    <div class="sb-shell">
+      <div data-shell="sidebar"></div>
+
+      <div class="sb-shell__main">
+        <header class="sb-topbar">
+          <div class="sb-breadcrumb">
+            <span>Acme</span>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <a href="render-queue.html" style="color:var(--sb-text-muted)">Render queue</a>
+            <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+            <b>Run #901 · wearable hub</b>
+          </div>
+          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">Running 62%</span>
+          <div class="sb-topbar__actions">
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12"/></svg>
+              Cancel run
+            </button>
+            <button class="sb-btn sb-btn--ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
+              Re-run from stage
+            </button>
+            <button class="sb-btn sb-btn--primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Approve when ready
+            </button>
+          </div>
+        </header>
+
+        <main class="sb-content">
+          <section class="sb-page-head">
+            <div class="sb-page-head__row">
+              <div>
+                <div class="sb-eyebrow">Pipeline run · #901 · gpu-cluster-3</div>
+                <h1>Spring product launch — wearable hub</h1>
+                <p class="sb-page-head__lead">
+                  Rush priority · 9:16 · 28 s · Acme · Core kit · Alloy EN female · Started 4 min 18 s ago. ETA 0:64.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="sb-kpi-grid">
+            <article class="sb-stat"><div class="label">Elapsed</div><div class="v">4:18</div></article>
+            <article class="sb-stat"><div class="label">ETA</div><div class="v">0:64</div></article>
+            <article class="sb-stat"><div class="label">Worker</div><div class="v" style="font-family:var(--sb-font-mono);font-size:var(--sb-text-md);color:var(--sb-text)">gpu-cluster-3 · L40S 48G</div><div style="font-size:var(--sb-text-xs);color:var(--sb-text-muted);margin-top:4px">GPU 88% · 71°C · 41 G / 48 G</div></article>
+            <article class="sb-stat"><div class="label">Cost so far</div><div class="v">$0.74</div></article>
+          </section>
+
+          <section class="sb-run-layout">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Gantt · stages</div>
+                <div class="sb-card__head-actions">
+                  <span class="sb-pill" style="color:var(--sb-text-muted)">0:00 → 0:300</span>
+                </div>
+              </header>
+              <div class="sb-card__body">
+                <div class="sb-gantt">
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">Script</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar" style="left:0%;width:3%"></div></div>
+                    <div class="sb-gantt__time">8.4s</div>
+                  </div>
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">Storyboard</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar" style="left:3%;width:4%"></div></div>
+                    <div class="sb-gantt__time">12.1s</div>
+                  </div>
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">TTS · voiceover</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar" style="left:7%;width:6%"></div></div>
+                    <div class="sb-gantt__time">18.6s</div>
+                  </div>
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">B-roll match</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar" style="left:13%;width:14%"></div></div>
+                    <div class="sb-gantt__time">41.0s</div>
+                  </div>
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">Composition</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar sb-gantt__bar--running" style="left:27%;width:48%"></div></div>
+                    <div class="sb-gantt__time">73s · running</div>
+                  </div>
+                  <div class="sb-gantt__row">
+                    <div class="sb-gantt__name">Render MP4</div>
+                    <div class="sb-gantt__track"><div class="sb-gantt__bar sb-gantt__bar--queued" style="left:75%;width:23%"></div></div>
+                    <div class="sb-gantt__time">queued</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Cluster activity</div>
+              </header>
+              <div class="sb-card__body sb-stack">
+                <div style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">GPU utilisation last 60 s</div>
+                <svg viewBox="0 0 320 80" style="width:100%">
+                  <defs>
+                    <linearGradient id="util" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.5"/>
+                      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 60 L20 50 L40 40 L60 32 L80 28 L100 24 L120 20 L140 18 L160 22 L180 18 L200 14 L220 12 L240 16 L260 12 L280 10 L300 10 L320 8 L320 80 L0 80 Z" fill="url(#util)"/>
+                  <path d="M0 60 L20 50 L40 40 L60 32 L80 28 L100 24 L120 20 L140 18 L160 22 L180 18 L200 14 L220 12 L240 16 L260 12 L280 10 L300 10 L320 8" fill="none" stroke="#22D3B7" stroke-width="1.5"/>
+                </svg>
+                <div class="sb-divider"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:var(--sb-text-sm);color:var(--sb-text-muted)">
+                  <div>VRAM peak<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">41 G</b></div>
+                  <div>Temp peak<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">73 °C</b></div>
+                  <div>Throttles<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">0</b></div>
+                  <div>Retries<br/><b style="color:var(--sb-text);font-family:var(--sb-font-display);font-size:var(--sb-text-lg)">0</b></div>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <article class="sb-card">
+            <header class="sb-card__head">
+              <div class="sb-card__title">Log stream</div>
+              <div class="sb-card__head-actions">
+                <span class="sb-pill" style="color:var(--sb-accent-300);background:rgba(34,211,183,0.12)">LIVE</span>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Download</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm">Tail in CLI</button>
+              </div>
+            </header>
+            <div class="sb-card__body">
+              <pre class="sb-log"><div><span class="ts">14:11:02.041</span><span class="lvl lvl-info">INFO</span>run #901 claimed by gpu-cluster-3 · priority=rush</div><div><span class="ts">14:11:02.044</span><span class="lvl lvl-info">INFO</span>brief 412 chars · brand=acme-core · voice=alloy-en-female</div><div><span class="ts">14:11:02.110</span><span class="lvl lvl-info">INFO</span>stage=script · scenes_target=6 · tone_constraint=14w/s</div><div><span class="ts">14:11:10.482</span><span class="lvl lvl-ok">OK  </span>script · 6 scenes · 142 words · tone_score=0.94</div><div><span class="ts">14:11:10.484</span><span class="lvl lvl-info">INFO</span>stage=storyboard · style=editorial</div><div><span class="ts">14:11:22.601</span><span class="lvl lvl-ok">OK  </span>storyboard · 6/6 boards · 1.4 s/board avg</div><div><span class="ts">14:11:22.605</span><span class="lvl lvl-info">INFO</span>stage=tts · model=alloy-en-female · loudness_target=-14LUFS</div><div><span class="ts">14:11:41.270</span><span class="lvl lvl-ok">OK  </span>tts · 4 takes · winner=take_03 · -14.1 LUFS · 18.6 s</div><div><span class="ts">14:11:41.272</span><span class="lvl lvl-info">INFO</span>stage=b_roll · license_filter=CC,paid_stock</div><div><span class="ts">14:12:22.310</span><span class="lvl lvl-warn">WARN</span>b_roll · scene_04 candidates limited · expanding to internal library</div><div><span class="ts">14:12:22.318</span><span class="lvl lvl-ok">OK  </span>b_roll · 18 clips · all CC-BY · scene_04 matched 2 internal</div><div><span class="ts">14:12:22.320</span><span class="lvl lvl-info">INFO</span>stage=compose · res=1080x1920 · fps=60</div><div><span class="ts">14:12:55.001</span><span class="lvl lvl-info">INFO</span>compose · overlay_3 dependency loaded · brand_drift=0.02</div><div><span class="ts">14:13:24.802</span><span class="lvl lvl-info">INFO</span>compose · 62% · waiting on caption layer · ETA 64 s</div></pre>
+            </div>
+          </article>
+
+          <section class="sb-grid-2-1">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Inputs</div>
+              </header>
+              <div class="sb-card__body" style="font-size:var(--sb-text-sm);color:var(--sb-text-muted)">
+                <div style="display:grid;grid-template-columns:120px 1fr;gap:8px 16px">
+                  <div>Template</div><div><b style="color:var(--sb-text)">hero-launch</b> v3.1</div>
+                  <div>Brand kit</div><div><b style="color:var(--sb-text)">Acme · Core</b> v3</div>
+                  <div>Aspect ratio</div><div>9:16 vertical</div>
+                  <div>Duration</div><div>28 s</div>
+                  <div>Voice</div><div>Alloy · EN female · warm</div>
+                  <div>Loudness</div><div>-14 LUFS · EBU R128</div>
+                  <div>License filter</div><div>CC · paid stock · internal</div>
+                  <div>Webhook</div><div style="font-family:var(--sb-font-mono);font-size:11px;color:var(--sb-accent-300);word-break:break-all">https://acme.example.com/hooks/sb/901</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">Audit trail</div>
+              </header>
+              <div class="sb-card__body sb-stack">
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(34,211,183,0.18);color:var(--sb-accent-300)">AC</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Ava Chen · started run</div>
+                    <div class="sb-stage__log">14:11:02 · CLI · client_ip=ofc-vpn</div>
+                  </div>
+                </div>
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(56,189,248,0.18);color:#38BDF8">PR</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Priya Rao · changed CTA copy</div>
+                    <div class="sb-stage__log">14:09:18 · "Order now" → "Pre-order — first 1,000 ship free"</div>
+                  </div>
+                </div>
+                <div class="sb-stage">
+                  <span class="sb-stage__index" style="background:rgba(167,139,250,0.18);color:#a78bfa">DA</span>
+                  <div class="sb-stage__body">
+                    <div class="sb-stage__title">Diego Alvarez · requested rush</div>
+                    <div class="sb-stage__log">14:08:02 · approved by Ava Chen</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+
+        <footer class="sb-footer">
+          <span>Run logs retained 7 years · SOC 2 Type II</span>
+          <span>Live tail · last event 0.2s ago</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="scripts/shell.js"></script>
+  </body>
+</html>

@@ -30,6 +30,7 @@
   --sb-accent-50:  #e6fbf6;
   --sb-accent-100: #c5f4e8;
   --sb-accent-300: #6ee2c5;
+  --sb-accent-400: #2ee2c4;
   --sb-accent-500: #22d3b7;     /* primary cyan-green action */
   --sb-accent-600: #14b59a;
   --sb-accent-700: #0d8f7a;
@@ -54,7 +55,7 @@
 
   --sb-text:         #f7f9fc;
   --sb-text-muted:   var(--sb-graphite-300);
-  --sb-text-faint:   var(--sb-graphite-400);
+  --sb-text-faint:   #7d88a0; /* tightened from graphite-400 #5a667f for >=4.5:1 on body bg */
   --sb-text-invert:  var(--sb-navy-900);
 
   /* ── Type ────────────────────────────────────────────────────────────── */

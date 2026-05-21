@@ -8,6 +8,12 @@
       name="description"
       content="ShadowBlade turns a brief into a ready-to-ship marketing, training or product video in minutes. Built for enterprise."
     />
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="ShadowBlade · Enterprise AI Video Cloud" />
+    <meta property="og:description" content="From brief to broadcast-ready video in 4 minutes. The AI pipeline behind enterprise video factories." />
+    <meta property="og:image" content="/showcase/hero/hero-cover.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/hero/hero-cover.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,10 +62,18 @@
         font-weight: 600;
       }
       .sb-hero__copy h1 span {
-        background: linear-gradient(90deg, #22d3b7 0%, #38bdf8 100%);
+        background: linear-gradient(90deg, var(--sb-accent-500) 0%, var(--sb-status-running) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+      }
+      @media (forced-colors: active) {
+        .sb-hero__copy h1 span {
+          color: CanvasText;
+          background: none;
+          -webkit-background-clip: initial;
+          background-clip: initial;
+        }
       }
       .sb-hero__lead {
         color: var(--sb-text-muted);
@@ -167,16 +181,19 @@
       }
 
       @media (max-width: 920px) {
-        .sb-hero { grid-template-columns: 1fr; padding: var(--sb-space-8); }
+        .sb-marketing__nav { flex-wrap: wrap; row-gap: var(--sb-space-3); padding: var(--sb-space-4) var(--sb-space-6); }
+        .sb-marketing__links { display: none; }
+        .sb-hero { grid-template-columns: 1fr; padding: var(--sb-space-8); gap: var(--sb-space-8); }
+        .sb-hero__proof { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
         .sb-features { grid-template-columns: 1fr; padding: 0 var(--sb-space-8) var(--sb-space-12); }
         .sb-logos__row { grid-template-columns: repeat(3, 1fr); }
       }
     </style>
   </head>
   <body>
-    <main class="sb-marketing">
+    <div class="sb-marketing">
       <header class="sb-marketing__nav">
-        <a class="sb-brand" href="index.html">
+        <a class="sb-brand" href="index.html" aria-label="ShadowBlade home">
           <div class="sb-brand__mark">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M4 4L20 12L4 20V14L12 12L4 10V4Z" fill="url(#m-grad)" />
@@ -191,11 +208,13 @@
           <div class="sb-brand__name"><b>ShadowBlade</b><span>Video Cloud</span></div>
         </a>
         <span class="spacer"></span>
-        <a class="link" href="#">Product</a>
-        <a class="link" href="#">Templates</a>
-        <a class="link" href="#">Customers</a>
-        <a class="link" href="#">Pricing</a>
-        <a class="link" href="#">Docs</a>
+        <nav class="sb-marketing__links" aria-label="Primary">
+          <a class="link" href="#">Product</a>
+          <a class="link" href="#">Templates</a>
+          <a class="link" href="#">Customers</a>
+          <a class="link" href="#">Pricing</a>
+          <a class="link" href="#">Docs</a>
+        </nav>
         <a class="sb-btn sb-btn--ghost" href="dashboard.html">Sign in</a>
         <a class="sb-btn sb-btn--primary" href="dashboard.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -203,15 +222,16 @@
         </a>
       </header>
 
+      <main>
       <section class="sb-hero">
         <div class="sb-hero__copy">
           <span class="sb-eyebrow">Enterprise AI video cloud</span>
           <h1>From brief to broadcast-ready video in <span>4 minutes</span>.</h1>
           <p class="sb-hero__lead">
-            ShadowBlade is the AI pipeline marketing, training, and product teams
-            run their video factory on. Write a brief, choose a template, and
-            the studio scripts, voices, edits, captions, and renders the cut —
-            on brand, on guideline, on schedule.
+            ShadowBlade is the AI pipeline behind enterprise video factories.
+            Marketing, training, and product teams write a brief, pick a template,
+            and the studio writes the script, records the voice, edits, captions,
+            and renders the cut — on brand, on schedule.
           </p>
           <div class="sb-hero__cta">
             <a class="sb-btn sb-btn--primary" href="dashboard.html">
@@ -220,7 +240,7 @@
             </a>
             <a class="sb-btn sb-btn--ghost" href="studio.html">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-              Watch a 90-second tour
+              Open the Studio
             </a>
           </div>
 
@@ -323,13 +343,14 @@
         </div>
       </section>
 
-      <section class="sb-features">
+      <section class="sb-features" aria-labelledby="why-sb-heading">
+        <h2 id="why-sb-heading" class="visually-hidden">Why ShadowBlade</h2>
         <article class="sb-feature">
           <div class="sb-feature__icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
           </div>
           <h3>Brand-locked output</h3>
-          <p>Every cut is rendered against your brand kit — colour, type, voice, intro, outro, legal — so nothing off-guideline ever reaches review.</p>
+          <p>Every cut is rendered against your brand kit — color, type, voice, intro, outro, legal — so nothing off-brand ever reaches review.</p>
         </article>
         <article class="sb-feature">
           <div class="sb-feature__icon">
@@ -347,10 +368,12 @@
         </article>
       </section>
 
+      </main>
+
       <footer class="sb-footer">
         <span>© 2026 ShadowBlade Labs</span>
         <span>Status · all systems normal · v0.1</span>
       </footer>
-    </main>
+    </div>
   </body>
 </html>

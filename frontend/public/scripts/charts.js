@@ -3,6 +3,13 @@
 // without bringing in a charting framework.
 
 (function () {
+  const ACCENT =
+    (typeof getComputedStyle === 'function' &&
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--sb-accent-500')
+        .trim()) ||
+    '#22D3B7';
+
   function inject(svg, points, opts = {}) {
     const ns = 'http://www.w3.org/2000/svg';
     const w = opts.width || 600;

@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dashboard · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="Dashboard · ShadowBlade" />
+    <meta property="og:description" content="ShadowBlade workspace — KPI, live pipeline, approvals, recent projects." />
+    <meta property="og:image" content="/showcase/screens/screen-dashboard.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/showcase/screens/screen-dashboard.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -22,7 +28,7 @@
           </div>
           <label class="sb-topbar__search" aria-label="Search">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-            <input type="search" placeholder="Search projects, assets, templates…" />
+            <input type="search" aria-label="Search projects, assets, templates" placeholder="Search projects, assets, templates…" />
             <kbd>⌘K</kbd>
           </label>
           <div class="sb-topbar__actions">
@@ -210,9 +216,9 @@
                 </div>
                 <div class="sb-divider"></div>
                 <div class="sb-stage">
-                  <span class="sb-stage__index">📌</span>
+                  <span class="sb-stage__index" aria-hidden="true">📌</span>
                   <div class="sb-stage__body">
-                    <div class="sb-stage__title">Brand guideline drift</div>
+                    <div class="sb-stage__title"><span class="visually-hidden">Pinned: </span>Brand guideline drift</div>
                     <div class="sb-stage__log">2 cuts use #20D2B5 — should be #22D3B7. Auto-fix available.</div>
                   </div>
                   <div class="sb-stage__meta">
@@ -325,7 +331,8 @@
           pill.classList.add(`sb-pill--${p.status}`);
           pill.textContent = p.status;
           node.querySelector('.sb-aspect-tag').textContent = `${p.aspect_ratio} · ${p.duration_seconds}s`;
-          node.querySelector('.sb-meter i').style.width = `${Math.round(p.progress * 100)}%`;
+          const pct = Math.max(0, Math.min(1, p.progress ?? 0));
+          node.querySelector('.sb-meter i').style.width = `${Math.round(pct * 100)}%`;
           node.querySelector('.meta-owner').textContent = p.owner;
           node.querySelector('.meta-time').textContent = fmtUpdated(p.updated_at);
           node.querySelector('svg').innerHTML = COVERS[p.cover] || '';
