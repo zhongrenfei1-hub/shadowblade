@@ -41,6 +41,12 @@ from app.services.video.audio import (
 )
 from app.services.video.beat import BeatGrid, detect_beats
 from app.services.video.color import compose_color_chain
+from app.services.video.ken_burns import (
+    KenBurnsMode,
+    KenBurnsSpec,
+    auto_mode as ken_burns_auto_mode,
+    build_ken_burns,
+)
 from app.services.video.speed import SpeedSpec, atempo_chain, setpts_expr
 from app.services.video.brand import BrandKit, default_kit
 from app.services.video.covers import CoverSpec, generate_cover
@@ -122,6 +128,24 @@ class MixRequest:
     lut_path: str | None = None
     auto_white_balance: bool = False
     adaptive_bgm_mix: bool = False
+    # Ken Burns slow zoom/pan
+    ken_burns_enabled: bool = False
+    ken_burns_intensity: str = "subtle"  # subtle | medium | strong
+    ken_burns_direction: str = "auto"  # in | out | pan_left | pan_right | auto
+    ken_burns_max_zoom: float | None = None
+    ken_burns_apply_to: str = "all"  # all | low_motion
+    # Cover layout (templated)
+    cover_title_position: str = "bottom-center"
+    cover_title_max_chars: int | None = None
+    cover_show_brand_strip: bool = False
+    cover_brand_strip_color: str | None = None
+    cover_brand_strip_position: str = "left"
+    cover_brand_strip_width_pct: float = 0.04
+    # Subtitle keyword highlight ([词] markers in cue.text)
+    highlight_enabled: bool = False
+    highlight_color: str | None = None  # hex; falls back to brand.accent_color
+    highlight_bold: bool = False
+    highlight_underline: bool = False
 
 
 @dataclass(slots=True)
@@ -195,6 +219,13 @@ class MixPipeline:
             style = kit.subtitle_style()
             style.size = self._scale_subtitle_size(preset, style.size)
             style.margin_v = self._scale_subtitle_margin(preset, style.margin_v)
+            # Keyword highlight colour falls back to brand.accent when the
+            # template enabled highlighting but didn't pin a colour.
+            hl_color = (
+                (request.highlight_color or kit.accent_color)
+                if request.highlight_enabled
+                else None
+            )
             # Always write SRT + ASS sidecars
             sub_dir.mkdir(parents=True, exist_ok=True)
             write_srt(segmented, sub_dir / f"subtitles_{request.preset}.srt")
@@ -205,6 +236,8 @@ class MixPipeline:
                 style=style,
                 video_w=preset.width,
                 video_h=preset.height,
+                highlight_color=hl_color,
+                highlight_bold=request.highlight_bold,
             )
             if not features.can_burn_subtitles:
                 # Pillow PNG fallback: render each cue once, overlay later
@@ -217,6 +250,9 @@ class MixPipeline:
                     font_size=self._scale_subtitle_size(preset, kit.subtitle_size),
                     fill_hex=kit.secondary_color,
                     outline_hex=kit.primary_color,
+                    highlight_color=hl_color,
+                    highlight_bold=request.highlight_bold,
+                    highlight_underline=request.highlight_underline,
                 )
                 png_cues = render.cues
                 if not png_cues:
@@ -295,7 +331,17 @@ class MixPipeline:
         graph_parts: list[str] = []
         for i, clip in enumerate(request.clips):
             speed_v = setpts_expr(clip.speed)
-            v_filter = norm_filter + (f",{color_chain}" if color_chain else "")
+            kb_chain = self._ken_burns_for_clip(
+                clip=clip,
+                clip_index=i,
+                duration=durations[i],
+                request=request,
+                preset=preset,
+            )
+            # Ken Burns supersedes normalize because it already does
+            # scale + crop + setsar + sets output size via zoompan(s=...).
+            head = kb_chain if kb_chain else norm_filter
+            v_filter = head + (f",{color_chain}" if color_chain else "")
             if speed_v:
                 v_filter = f"{v_filter},{speed_v}"
             graph_parts.append(f"[{i}:v]{v_filter}[v{i}]")
@@ -430,6 +476,12 @@ class MixPipeline:
                     primary=kit.primary_color,
                     accent=kit.accent_color,
                     title=request.title,
+                    title_position=request.cover_title_position,
+                    title_max_chars=request.cover_title_max_chars,
+                    show_brand_strip=request.cover_show_brand_strip,
+                    brand_strip_color=request.cover_brand_strip_color,
+                    brand_strip_position=request.cover_brand_strip_position,
+                    brand_strip_width_pct=request.cover_brand_strip_width_pct,
                 ),
             )
         except RuntimeError as exc:
@@ -480,6 +532,59 @@ class MixPipeline:
             )
         return plans
 
+    # ---- Ken Burns -------------------------------------------------------
+
+    _INTENSITY_ZOOM: dict[str, float] = {
+        "subtle": 1.08,
+        "medium": 1.18,
+        "strong": 1.30,
+    }
+
+    def _ken_burns_for_clip(
+        self,
+        *,
+        clip: ClipSpec,
+        clip_index: int,
+        duration: float,
+        request: MixRequest,
+        preset: EncodePreset,
+    ) -> str | None:
+        """Return the Ken Burns filter chain for one clip, or ``None`` if
+        the clip should keep the plain ``normalize_clip_filter`` chain.
+
+        Resolution order:
+            1. ``request.ken_burns_enabled`` gate
+            2. ``apply_to`` filter (``low_motion`` skips clips with motion ≥ 0.35)
+            3. zoom range from explicit ``max_zoom`` or intensity preset
+            4. direction from explicit value or ``auto_mode`` per index
+        """
+        if not request.ken_burns_enabled:
+            return None
+        if request.ken_burns_apply_to == "low_motion" and clip.motion >= 0.35:
+            return None
+
+        max_zoom = request.ken_burns_max_zoom
+        if max_zoom is None:
+            max_zoom = self._INTENSITY_ZOOM.get(request.ken_burns_intensity, 1.08)
+
+        direction = (request.ken_burns_direction or "auto").lower()
+        if direction == "auto":
+            mode = ken_burns_auto_mode(clip_index)
+        else:
+            try:
+                mode = KenBurnsMode(direction)
+            except ValueError:
+                mode = KenBurnsMode.IN
+
+        spec = KenBurnsSpec(mode=mode, zoom_start=1.0, zoom_end=max_zoom)
+        return build_ken_burns(
+            duration=duration,
+            fps=preset.fps,
+            width=preset.width,
+            height=preset.height,
+            spec=spec,
+        )
+
     def _scale_subtitle_size(self, preset: EncodePreset, base_size: int) -> int:
         """Scale subtitle size to the preset height (baseline = 1920p)."""
         return max(28, int(round(base_size * preset.height / 1920)))
@@ -500,10 +605,21 @@ class MixPipeline:
         warnings: list[str],
         voice_loudness: float | None = None,
     ) -> str:
-        """Wire audio inputs into the filter graph; return final audio label."""
+        """Wire audio inputs into the filter graph; return final audio label.
+
+        AudioBus is fully driven by the BrandKit so templates that fold
+        bgm_gain_db / duck_threshold_db / duck_ratio / fade_in / fade_out
+        into the brand take effect end-to-end.
+        """
         bus = AudioBus(
             target_lufs=target_lufs if target_lufs is not None else kit.target_lufs,
             target_tp=kit.target_tp,
+            voice_gain_db=kit.voice_gain_db,
+            bgm_gain_db=kit.bgm_gain_db,
+            duck_threshold_db=kit.duck_threshold_db,
+            duck_ratio=kit.duck_ratio,
+            fade_in=kit.fade_in,
+            fade_out=kit.fade_out,
         )
         if voice_loudness is not None:
             bus = adapt_bus_to_voice_loudness(bus, voice_loudness)

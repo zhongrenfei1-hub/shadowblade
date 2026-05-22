@@ -30,6 +30,13 @@ class CoverSpec:
     title: str | None = None
     font: str | None = None
     quality: int = 4  # 2..6, lower is better for mjpeg
+    # Layout — templated via TemplateCover
+    title_position: str = "bottom-center"
+    title_max_chars: int | None = None
+    show_brand_strip: bool = False
+    brand_strip_color: str | None = None  # None → use primary
+    brand_strip_position: str = "left"  # left | right | top | bottom
+    brand_strip_width_pct: float = 0.04
 
 
 async def generate_cover(
@@ -64,27 +71,49 @@ async def generate_cover(
     filter_parts.append(
         f"drawbox=x=0:y=0:w=iw:h=ih:color={accent}@{spec.gradient_alpha * 0.4:.2f}:t=fill"
     )
+
+    # Brand strip — a solid colour bar on one edge of the frame
+    if spec.show_brand_strip:
+        strip_color = _hex_to_ffcolor(spec.brand_strip_color or spec.primary)
+        sw = max(0.005, min(0.25, spec.brand_strip_width_pct))
+        pos = spec.brand_strip_position
+        if pos == "right":
+            box = f"x=iw*(1-{sw}):y=0:w=iw*{sw}:h=ih"
+        elif pos == "top":
+            box = f"x=0:y=0:w=iw:h=ih*{sw}"
+        elif pos == "bottom":
+            box = f"x=0:y=ih*(1-{sw}):w=iw:h=ih*{sw}"
+        else:  # left (default)
+            box = f"x=0:y=0:w=iw*{sw}:h=ih"
+        filter_parts.append(f"drawbox={box}:color={strip_color}@0.95:t=fill")
+
     inputs: list[str] = ["-i", str(source_video)]
     title_overlay_path: Path | None = None
 
     if spec.title:
+        title_text = spec.title
+        if spec.title_max_chars and len(title_text) > spec.title_max_chars:
+            title_text = title_text[: max(1, spec.title_max_chars - 1)] + "…"
+
         if features.has_drawtext:
             font_arg = f":fontfile={spec.font}" if spec.font else ""
-            safe_title = spec.title.replace(":", r"\:").replace("'", r"\'")
+            safe_title = title_text.replace(":", r"\:").replace("'", r"\'")
+            x_expr, y_expr = _title_xy(spec.title_position)
             filter_parts.append(
                 f"drawtext=text='{safe_title}'{font_arg}:fontcolor=white:"
-                f"fontsize=h*0.06:x=(w-text_w)/2:y=h-th-h*0.12:"
+                f"fontsize=h*0.06:x={x_expr}:y={y_expr}:"
                 f"box=1:boxcolor={primary}@0.55:boxborderw=24"
             )
         else:
             # Pillow fallback: render title to PNG, overlay it
             title_img = render_cover_title(
-                spec.title,
+                title_text,
                 width=spec.width,
                 height=spec.height,
                 font_name=spec.font or "PingFang SC",
                 primary_hex=spec.primary,
                 accent_hex=spec.accent,
+                title_position=spec.title_position,
             )
             title_overlay_path = out.with_suffix(".title.png")
             title_img.save(title_overlay_path, "PNG")
@@ -132,6 +161,21 @@ def _hex_to_ffcolor(hex_color: str) -> str:
     if len(h) not in (6, 8):
         return "0x000000"
     return f"0x{h.upper()}"
+
+
+def _title_xy(position: str) -> tuple[str, str]:
+    """Return (x_expr, y_expr) for ffmpeg drawtext given a position keyword."""
+    pos = (position or "bottom-center").lower()
+    if pos == "left-center":
+        return ("w*0.07", "(h-text_h)/2")
+    if pos == "right-center":
+        return ("w-text_w-w*0.07", "(h-text_h)/2")
+    if pos == "center":
+        return ("(w-text_w)/2", "(h-text_h)/2")
+    if pos == "top-left":
+        return ("w*0.07", "h*0.10")
+    # bottom-center fallback (the previous default)
+    return ("(w-text_w)/2", "h-th-h*0.12")
 
 
 __all__ = ["CoverSpec", "generate_cover"]

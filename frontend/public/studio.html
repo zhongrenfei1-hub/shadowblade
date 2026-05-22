@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>编辑器 · ShadowBlade</title>
+    <title>工作台 · ShadowBlade</title>
     <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
-    <meta property="og:title" content="编辑器 · ShadowBlade" />
-    <meta property="og:description" content="编辑场景、查看时间线、实时审阅。" />
+    <meta property="og:title" content="工作台 · ShadowBlade" />
+    <meta property="og:description" content="新建视频、追踪渲染、跳回最近项目 — 你的指挥中心。" />
     <meta property="og:image" content="/showcase/screens/screen-studio.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/showcase/screens/screen-studio.svg" />
@@ -15,159 +15,388 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/app.css" />
     <style>
-      .sb-studio {
+      /* === Workbench layout =================================================== */
+      .wb-hero {
         display: grid;
-        grid-template-columns: 280px 1fr 320px;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: var(--sb-space-5);
+        align-items: stretch;
+      }
+      @media (max-width: 1080px) {
+        .wb-hero { grid-template-columns: 1fr; }
+      }
+      .wb-hero__primary {
+        border-radius: var(--sb-radius-lg);
+        background:
+          radial-gradient(120% 100% at 90% -20%, rgba(34,211,183,0.25), transparent 55%),
+          linear-gradient(160deg, #112646 0%, #050a18 75%);
+        border: 1px solid var(--sb-border-strong);
+        padding: var(--sb-space-6);
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        gap: var(--sb-space-4);
+        min-height: 280px;
+      }
+      .wb-hero__eyebrow {
+        font-family: var(--sb-font-mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--sb-accent-300);
+        text-transform: uppercase;
+      }
+      .wb-hero__title {
+        font-family: var(--sb-font-display);
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0;
+      }
+      .wb-hero__lead {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-md);
+        max-width: 52ch;
+        margin: 0;
+      }
+      .wb-hero__cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sb-space-3);
+      }
+      .wb-hero__cta .sb-btn { min-width: 156px; justify-content: center; }
+      .wb-hero__brandcard {
+        border-radius: var(--sb-radius-lg);
+        background: var(--sb-surface);
+        border: 1px solid var(--sb-border);
+        padding: var(--sb-space-5);
+        display: grid;
+        gap: var(--sb-space-3);
+        align-content: start;
+      }
+      .wb-hero__brandcard h3 {
+        font-size: var(--sb-text-sm);
+        font-weight: 600;
+        color: var(--sb-text-muted);
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .wb-brand-swatch {
+        display: grid;
+        grid-template-columns: 44px 44px 44px 1fr;
+        gap: var(--sb-space-2);
+        align-items: center;
+      }
+      .wb-brand-swatch i {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--sb-radius);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      }
+      .wb-brand-name {
+        font-family: var(--sb-font-display);
+        font-weight: 600;
+        font-size: var(--sb-text-md);
+      }
+      .wb-brand-meta {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        font-family: var(--sb-font-mono);
+      }
+      .wb-brand-fallback {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-sm);
+      }
+
+      /* === KPI grid ============================================================= */
+      .wb-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--sb-space-4);
+      }
+      @media (max-width: 980px) { .wb-kpis { grid-template-columns: repeat(2, 1fr); } }
+      .wb-kpi {
+        background: var(--sb-surface);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-4) var(--sb-space-5);
+        display: grid;
+        gap: 6px;
+      }
+      .wb-kpi__label {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+      .wb-kpi__value {
+        font-family: var(--sb-font-display);
+        font-size: 36px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+      }
+      .wb-kpi__unit {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        font-family: var(--sb-font-mono);
+      }
+
+      /* === Two-column grid for tasks + actions ================================= */
+      .wb-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
         gap: var(--sb-space-5);
         align-items: start;
       }
-      .sb-stage-canvas {
-        aspect-ratio: 9/16;
-        max-height: 70vh;
-        border-radius: var(--sb-radius-lg);
-        background: linear-gradient(160deg, #112646, #050a18);
-        border: 1px solid var(--sb-border);
-        position: relative;
-        overflow: hidden;
+      @media (max-width: 1080px) { .wb-grid { grid-template-columns: 1fr; } }
+
+      /* === Active task list ==================================================== */
+      .wb-task {
         display: grid;
-        place-items: center;
-      }
-      .sb-stage-canvas__inner svg { width: 100%; height: 100%; }
-      .sb-stage-canvas__overlay {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        align-content: end;
-        padding: var(--sb-space-5);
-        background: linear-gradient(180deg, transparent 60%, rgba(6, 10, 22, 0.8));
-        color: var(--sb-text);
-      }
-      .sb-stage-canvas__caption {
-        font-family: var(--sb-font-display);
-        font-size: var(--sb-text-xl);
-        font-weight: 600;
-        line-height: 1.2;
-        max-width: 86%;
-        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-      }
-      .sb-stage-canvas__corner {
-        position: absolute;
-        top: var(--sb-space-4);
-        right: var(--sb-space-4);
-        background: rgba(8, 14, 28, 0.7);
-        backdrop-filter: blur(8px);
-        border: 1px solid var(--sb-border-strong);
-        padding: 6px 10px;
-        border-radius: var(--sb-radius);
-        font-family: var(--sb-font-mono);
-        font-size: 11px;
-        color: var(--sb-text);
-      }
-      .sb-transport {
-        display: flex;
+        grid-template-columns: auto 1fr auto;
         align-items: center;
         gap: var(--sb-space-3);
         padding: var(--sb-space-3) var(--sb-space-4);
         border-radius: var(--sb-radius);
         border: 1px solid var(--sb-border);
-        background: var(--sb-surface);
-      }
-      .sb-transport__time {
-        font-family: var(--sb-font-mono);
-        font-size: var(--sb-text-md);
-        font-variant-numeric: tabular-nums;
-        color: var(--sb-text-muted);
-      }
-      .sb-transport__bar {
-        flex: 1;
-        height: 6px;
-        border-radius: 99px;
-        background: rgba(255,255,255,0.06);
-        position: relative;
-        overflow: hidden;
-      }
-      .sb-transport__bar i {
-        position: absolute;
-        inset: 0 60% 0 0;
-        background: linear-gradient(90deg, var(--sb-accent-500), var(--sb-status-running));
-        border-radius: 99px;
-      }
-      .sb-transport__bar .markers {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-      }
-      .sb-transport__bar .markers i {
-        position: relative;
-        height: 2px;
-        background: rgba(255,255,255,0.18);
-      }
-      .sb-brief-fields { display: grid; gap: var(--sb-space-4); }
-      .sb-field { display: grid; gap: 6px; }
-      .sb-field label {
-        font-size: var(--sb-text-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--sb-text-faint);
-        font-weight: 600;
-      }
-      .sb-field input, .sb-field textarea, .sb-field select {
-        padding: 10px 12px;
-        border-radius: var(--sb-radius-sm);
-        border: 1px solid var(--sb-border);
-        background: rgba(11,18,32,0.7);
-        color: var(--sb-text);
-        font-size: var(--sb-text-md);
-        outline: none;
-        transition: border-color var(--sb-dur);
-      }
-      .sb-field input:focus, .sb-field textarea:focus, .sb-field select:focus {
-        border-color: var(--sb-accent-500);
-        box-shadow: 0 0 0 3px rgba(34,211,183,0.18);
-      }
-      .sb-field textarea { resize: vertical; min-height: 92px; font-family: var(--sb-font-body); }
-      .sb-field__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sb-space-3); }
-      .sb-tabs {
-        display: flex;
-        gap: var(--sb-space-1);
-        padding: 4px;
-        border-radius: var(--sb-radius-sm);
-        background: rgba(255,255,255,0.04);
-        margin-bottom: var(--sb-space-4);
-        width: max-content;
-      }
-      .sb-tab {
-        padding: 6px 12px;
-        border-radius: var(--sb-radius-xs);
-        font-size: var(--sb-text-sm);
-        font-weight: 500;
-        color: var(--sb-text-muted);
-      }
-      .sb-tab--active { background: rgba(34,211,183,0.16); color: var(--sb-text); }
-      .sb-comment {
-        padding: var(--sb-space-3);
-        border-radius: var(--sb-radius);
         background: rgba(11,18,32,0.55);
-        border: 1px solid var(--sb-border);
-        display: grid;
-        gap: 6px;
       }
-      .sb-comment__head {
-        display: flex; align-items: center; gap: var(--sb-space-2);
-        font-size: var(--sb-text-sm);
-      }
-      .sb-comment__head b { font-weight: 600; }
-      .sb-comment__head time { color: var(--sb-text-faint); font-size: var(--sb-text-xs); }
-      .sb-comment__body { font-size: var(--sb-text-sm); color: var(--sb-text-muted); }
-      .sb-comment__cite {
+      .wb-task--running { border-color: rgba(34,211,183,0.4); }
+      .wb-task__source {
         font-family: var(--sb-font-mono);
         font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--sb-text-faint);
+        padding: 4px 8px;
+        border-radius: var(--sb-radius-sm);
+        background: rgba(255,255,255,0.04);
+      }
+      .wb-task__name {
+        font-weight: 600;
+        font-size: var(--sb-text-md);
+      }
+      .wb-task__meta {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-muted);
+        font-family: var(--sb-font-mono);
+      }
+      .wb-task__bar {
+        margin-top: 8px;
+        height: 4px;
+        border-radius: 99px;
+        background: rgba(255,255,255,0.06);
+        overflow: hidden;
+        position: relative;
+      }
+      .wb-task__bar i {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, var(--sb-accent-500), var(--sb-status-running));
+        border-radius: 99px;
+        transform-origin: left;
+      }
+      .wb-task__pct {
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-sm);
+        font-variant-numeric: tabular-nums;
+        color: var(--sb-text);
+      }
+      .wb-empty {
+        padding: var(--sb-space-5);
+        border: 1px dashed var(--sb-border-strong);
+        border-radius: var(--sb-radius);
+        text-align: center;
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-sm);
+      }
+      .wb-empty b { color: var(--sb-text); font-weight: 600; }
+
+      /* === Quick actions ======================================================= */
+      .wb-actions {
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .wb-action {
+        display: grid;
+        grid-template-columns: 36px 1fr auto;
+        align-items: center;
+        gap: var(--sb-space-3);
+        padding: var(--sb-space-3) var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(255,255,255,0.02);
+        color: var(--sb-text);
+        text-decoration: none;
+        transition: transform var(--sb-dur), border-color var(--sb-dur);
+      }
+      .wb-action:hover {
+        transform: translateY(-1px);
+        border-color: var(--sb-accent-500);
+      }
+      .wb-action__icon {
+        width: 36px; height: 36px;
+        display: grid; place-items: center;
+        border-radius: var(--sb-radius);
+        background: rgba(34,211,183,0.12);
         color: var(--sb-accent-300);
       }
+      .wb-action__title { font-weight: 600; font-size: var(--sb-text-md); }
+      .wb-action__desc {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-xs);
+      }
+      .wb-action__endpoint {
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        color: var(--sb-text-faint);
+      }
 
-      @media (max-width: 1200px) {
-        .sb-studio { grid-template-columns: 1fr; }
+      /* === Templates strip ===================================================== */
+      .wb-tpl-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--sb-space-3);
+      }
+      @media (max-width: 880px) { .wb-tpl-grid { grid-template-columns: repeat(2, 1fr); } }
+      .wb-tpl {
+        display: grid;
+        gap: 6px;
+        padding: var(--sb-space-3) var(--sb-space-4);
+        border-radius: var(--sb-radius);
+        border: 1px solid var(--sb-border);
+        background: rgba(11,18,32,0.4);
+        text-decoration: none;
+        color: var(--sb-text);
+        transition: transform var(--sb-dur), border-color var(--sb-dur);
+      }
+      .wb-tpl:hover { transform: translateY(-2px); border-color: var(--sb-accent-500); }
+      .wb-tpl__name { font-weight: 600; font-size: var(--sb-text-md); }
+      .wb-tpl__desc {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-xs);
+        line-height: 1.45;
+      }
+      .wb-tpl__tags {
+        display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px;
+      }
+      .wb-tpl__tags span {
+        padding: 2px 8px;
+        font-size: 10px;
+        font-family: var(--sb-font-mono);
+        color: var(--sb-accent-300);
+        background: rgba(34,211,183,0.08);
+        border-radius: 99px;
+      }
+      .wb-tpl__badge {
+        font-size: 10px;
+        color: var(--sb-text-faint);
+        font-family: var(--sb-font-mono);
+        margin-left: 6px;
+      }
+
+      /* === Recent projects ===================================================== */
+      .wb-proj-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--sb-space-4);
+      }
+      .wb-proj {
+        padding: var(--sb-space-4);
+        border-radius: var(--sb-radius-lg);
+        background: var(--sb-surface);
+        border: 1px solid var(--sb-border);
+        display: grid;
+        gap: var(--sb-space-2);
+        text-decoration: none;
+        color: var(--sb-text);
+        transition: transform var(--sb-dur), border-color var(--sb-dur);
+      }
+      .wb-proj:hover { transform: translateY(-2px); border-color: var(--sb-accent-500); }
+      .wb-proj__head {
+        display: flex; align-items: center; justify-content: space-between; gap: var(--sb-space-2);
+      }
+      .wb-proj__name {
+        font-weight: 600;
+        font-size: var(--sb-text-md);
+        line-height: 1.3;
+      }
+      .wb-proj__brief {
+        color: var(--sb-text-muted);
+        font-size: var(--sb-text-sm);
+        line-height: 1.5;
+      }
+      .wb-proj__meta {
+        display: flex; gap: var(--sb-space-3);
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        font-family: var(--sb-font-mono);
+      }
+      .wb-proj__status {
+        font-size: 10px;
+        font-family: var(--sb-font-mono);
+        padding: 2px 8px;
+        border-radius: 99px;
+        background: rgba(255,255,255,0.04);
+        color: var(--sb-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .wb-proj__status--rendering { background: rgba(34,211,183,0.12); color: var(--sb-accent-300); }
+      .wb-proj__status--done { background: rgba(34,211,183,0.18); color: var(--sb-accent-300); }
+      .wb-proj__status--review { background: rgba(255,179,71,0.16); color: #FFC078; }
+      .wb-proj__status--draft, .wb-proj__status--scripting { background: rgba(255,255,255,0.06); color: var(--sb-text-muted); }
+
+      /* === Section utilities =================================================== */
+      .wb-section {
+        display: grid;
+        gap: var(--sb-space-4);
+      }
+      .wb-section__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--sb-space-3);
+      }
+      .wb-section__head h2 {
+        margin: 0;
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .wb-section__head a {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-muted);
+        text-decoration: none;
+        font-family: var(--sb-font-mono);
+      }
+      .wb-section__head a:hover { color: var(--sb-accent-300); }
+      .wb-skeleton {
+        height: 16px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+        background-size: 200% 100%;
+        animation: wb-skel 1.4s ease-in-out infinite;
+      }
+      @keyframes wb-skel {
+        from { background-position: 200% 0; }
+        to   { background-position: -200% 0; }
+      }
+      .wb-live-dot {
+        display: inline-block;
+        width: 8px; height: 8px;
+        background: var(--sb-accent-500);
+        border-radius: 99px;
+        margin-right: 6px;
+        box-shadow: 0 0 0 0 rgba(34,211,183,0.6);
+        animation: wb-pulse 2s infinite;
+      }
+      @keyframes wb-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(34,211,183,0.5); }
+        70%  { box-shadow: 0 0 0 10px rgba(34,211,183,0); }
+        100% { box-shadow: 0 0 0 0 rgba(34,211,183,0); }
       }
     </style>
   </head>
@@ -180,324 +409,149 @@
           <div class="sb-breadcrumb">
             <span>Acme</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <span>项目</span>
+            <span>制作</span>
             <svg class="sb-breadcrumb-sep" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-            <b>春季产品发布 — 智能腕环</b>
+            <b>工作台</b>
           </div>
-          <span class="sb-pill sb-pill--running" style="margin-left:var(--sb-space-3)">渲染中 62%</span>
+          <span class="sb-pill sb-pill--running" id="wb-live-pill" style="margin-left:var(--sb-space-3);display:none">
+            <span class="wb-live-dot"></span><span id="wb-live-count">0</span> 进行中
+          </span>
           <div class="sb-topbar__actions">
-            <button class="sb-btn sb-btn--ghost">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              导出 MP4
-            </button>
-            <button class="sb-btn sb-btn--ghost">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-              分享给审核员
-            </button>
-            <button class="sb-btn sb-btn--primary">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1015-6.7L21 8M21 3v5h-5"/></svg>
-              重新渲染含修改
-            </button>
+            <a class="sb-btn sb-btn--ghost" href="/projects.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              全部项目
+            </a>
+            <a class="sb-btn sb-btn--ghost" href="/templates.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              浏览模板
+            </a>
+            <a class="sb-btn sb-btn--primary" href="/new-video.html" id="wb-cta-new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              新建视频
+            </a>
           </div>
         </header>
 
-        <main class="sb-content">
-          <section class="sb-page-head">
-            <div class="sb-page-head__row">
-              <div>
-                <div class="sb-eyebrow">编辑器 · 营销 · 9:16 · 28 秒</div>
-                <h1>春季产品发布 — 智能腕环</h1>
-                <p class="sb-page-head__lead">
-                  6 个场景。配音：Alloy · EN 女声。品牌套件：Acme · Core。合成已到 62%——字幕与音乐将在阶段 5 完成时锁定。
-                </p>
+        <main class="sb-content sb-stack" style="gap:var(--sb-space-6)">
+
+          <!-- ============ Hero + Brand Card ============ -->
+          <section class="wb-hero">
+            <div class="wb-hero__primary">
+              <span class="wb-hero__eyebrow">WORKBENCH · STUDIO</span>
+              <h1 class="wb-hero__title">今天我们来做点什么？</h1>
+              <p class="wb-hero__lead" id="wb-lead">
+                选模板、写一行简报、按下「生成」—— ShadowBlade 会替你拼好镜头、配乐和字幕。
+              </p>
+              <div class="wb-hero__cta">
+                <a class="sb-btn sb-btn--primary" href="/new-video.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                  新建视频
+                </a>
+                <a class="sb-btn sb-btn--ghost" href="/new-video.html?mode=preview">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                  快速预览
+                </a>
+                <a class="sb-btn sb-btn--ghost" href="/assets.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M5 10l7 7 7-7M5 21h14"/></svg>
+                  上传素材
+                </a>
               </div>
             </div>
+
+            <aside class="wb-hero__brandcard" aria-labelledby="wb-brandkit-title">
+              <h3 id="wb-brandkit-title">当前品牌套件</h3>
+              <div id="wb-brand-body">
+                <div class="wb-skeleton" style="width:60%"></div>
+                <div class="wb-skeleton" style="width:80%; margin-top:8px"></div>
+                <div class="wb-skeleton" style="width:40%; margin-top:8px"></div>
+              </div>
+              <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+                <a class="sb-btn sb-btn--ghost sb-btn--sm" href="/brand-kit-compare.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                  切换 / 比较
+                </a>
+                <span class="wb-brand-meta" id="wb-brand-scope-pill">—</span>
+              </div>
+            </aside>
           </section>
 
-          <section class="sb-studio">
-            <!-- 左 · 场景导航 + 简报 -->
-            <div class="sb-stack">
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">场景</div>
-                  <div class="sb-card__head-actions">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                      新增
-                    </button>
-                  </div>
-                </header>
-                <div class="sb-card__body sb-stack" id="scene-list"></div>
-              </article>
+          <!-- ============ KPIs ============ -->
+          <section class="wb-kpis" id="wb-kpis" aria-label="关键指标">
+            <article class="wb-kpi"><span class="wb-kpi__label">今日已渲染</span><span class="wb-kpi__value">—</span><span class="wb-kpi__unit">videos</span></article>
+            <article class="wb-kpi"><span class="wb-kpi__label">本周已渲染</span><span class="wb-kpi__value">—</span><span class="wb-kpi__unit">videos</span></article>
+            <article class="wb-kpi"><span class="wb-kpi__label">进行中任务</span><span class="wb-kpi__value">—</span><span class="wb-kpi__unit">tasks</span></article>
+            <article class="wb-kpi"><span class="wb-kpi__label">项目总数</span><span class="wb-kpi__value">—</span><span class="wb-kpi__unit">projects</span></article>
+          </section>
 
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">简报</div>
-                </header>
-                <div class="sb-card__body sb-brief-fields">
-                  <div class="sb-field">
-                    <label for="sb-studio-goal">目标</label>
-                    <select id="sb-studio-goal">
-                      <option>带动新款腕环预订</option>
-                      <option>提升认知</option>
-                    </select>
-                  </div>
-                  <div class="sb-field">
-                    <label for="sb-studio-audience">受众</label>
-                    <input id="sb-studio-audience" value="对健身感兴趣的知识工作者，28–42 岁，美国/欧盟" />
-                  </div>
-                  <div class="sb-field__row">
-                    <div class="sb-field">
-                      <label for="sb-studio-ratio">画幅</label>
-                      <select id="sb-studio-ratio"><option>9:16 竖屏</option><option>16:9 宽屏</option><option>1:1 方形</option></select>
-                    </div>
-                    <div class="sb-field">
-                      <label for="sb-studio-length">时长</label>
-                      <select id="sb-studio-length"><option>15 秒</option><option selected>28 秒</option><option>45 秒</option><option>60 秒</option></select>
-                    </div>
-                  </div>
-                  <div class="sb-field">
-                    <label for="sb-studio-tone">语态</label>
-                    <input id="sb-studio-tone" value="自信、直白、不浮夸" />
-                  </div>
-                  <div class="sb-field">
-                    <label for="sb-studio-cta">行动指令</label>
-                    <input id="sb-studio-cta" value="预订——前 1,000 名免运费" />
-                  </div>
+          <!-- ============ Tasks + Actions side-by-side ============ -->
+          <section class="wb-grid">
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">进行中任务</div>
+                <div class="sb-card__head-actions">
+                  <span class="sb-pill" id="wb-task-pill" style="display:none">
+                    <span class="wb-live-dot"></span>实时
+                  </span>
+                  <a class="sb-btn sb-btn--ghost sb-btn--sm" href="/render-queue.html">
+                    渲染队列
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </a>
                 </div>
-              </article>
+              </header>
+              <div class="sb-card__body sb-stack" id="wb-tasks">
+                <div class="wb-empty"><b>暂无进行中任务。</b><br/>按下「新建视频」开始第一个渲染。</div>
+              </div>
+            </article>
+
+            <article class="sb-card">
+              <header class="sb-card__head">
+                <div class="sb-card__title">快捷操作</div>
+              </header>
+              <div class="sb-card__body wb-actions" id="wb-actions">
+                <div class="wb-skeleton" style="height:60px"></div>
+                <div class="wb-skeleton" style="height:60px"></div>
+                <div class="wb-skeleton" style="height:60px"></div>
+                <div class="wb-skeleton" style="height:60px"></div>
+              </div>
+            </article>
+          </section>
+
+          <!-- ============ Featured templates ============ -->
+          <section class="wb-section" aria-label="常用模板">
+            <div class="wb-section__head">
+              <h2>常用模板</h2>
+              <a href="/templates.html">查看全部 →</a>
             </div>
-
-            <!-- 中 · 预览画布 -->
-            <div class="sb-stack">
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">预览 · 场景 04 / 06</div>
-                  <div class="sb-card__head-actions">
-                    <div class="sb-tabs">
-                      <button class="sb-tab sb-tab--active">预览</button>
-                      <button class="sb-tab">脚本</button>
-                      <button class="sb-tab">字幕</button>
-                      <button class="sb-tab">音乐</button>
-                    </div>
-                  </div>
-                </header>
-                <div class="sb-card__body" style="display:grid;gap:var(--sb-space-4);justify-items:center">
-                  <div class="sb-stage-canvas" style="width:340px">
-                    <div class="sb-stage-canvas__inner">
-                      <svg viewBox="0 0 340 605" preserveAspectRatio="xMidYMid slice">
-                        <defs>
-                          <linearGradient id="prevbg" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#15376a"/>
-                            <stop offset="100%" stop-color="#050a18"/>
-                          </linearGradient>
-                          <radialGradient id="prevglow" cx="0.7" cy="0.3" r="0.7">
-                            <stop offset="0%" stop-color="rgba(34,211,183,0.45)"/>
-                            <stop offset="100%" stop-color="rgba(34,211,183,0)"/>
-                          </radialGradient>
-                        </defs>
-                        <rect width="340" height="605" fill="url(#prevbg)"/>
-                        <rect width="340" height="605" fill="url(#prevglow)"/>
-
-                        <!-- product hero shape -->
-                        <g transform="translate(170 280)">
-                          <circle r="120" fill="none" stroke="rgba(34,211,183,0.25)" stroke-width="1" stroke-dasharray="2 5"/>
-                          <circle r="78" fill="rgba(34,211,183,0.18)"/>
-                          <circle r="46" fill="rgba(34,211,183,0.35)"/>
-                          <circle r="20" fill="#22D3B7"/>
-                        </g>
-
-                        <!-- bottom text block -->
-                        <g transform="translate(28 460)">
-                          <rect width="284" height="110" rx="14" fill="rgba(8,14,28,0.75)" stroke="rgba(255,255,255,0.08)"/>
-                          <text x="20" y="34" fill="#22D3B7" font-family="Inter" font-size="11" letter-spacing="2">ACME WEARABLE · HUB</text>
-                          <text x="20" y="64" fill="#F7F9FC" font-family="Inter Display" font-size="22" font-weight="700">Your day, on time</text>
-                          <text x="20" y="92" fill="#8590A8" font-family="Inter" font-size="12">12 metrics. 7-day battery. One discreet tap.</text>
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="sb-stage-canvas__corner">9:16 · 1080×1920</div>
-                  </div>
-                  <div class="sb-transport">
-                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="上一场景">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5v14M5 12l9-7v14l-9-7z"/></svg>
-                    </button>
-                    <button class="sb-btn sb-btn--primary sb-btn--icon" aria-label="播放">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="7 4 20 12 7 20 7 4"/></svg>
-                    </button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--icon" aria-label="下一场景">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5v14M19 12l-9-7v14l9-7z"/></svg>
-                    </button>
-                    <span class="sb-transport__time">0:16.8</span>
-                    <div class="sb-transport__bar"><i></i></div>
-                    <span class="sb-transport__time">0:28.0</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">时间线</div>
-                  <div class="sb-card__head-actions">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">吸附</button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">连锁</button>
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">缩放 100%</button>
-                  </div>
-                </header>
-                <div class="sb-card__body">
-                  <div class="sb-timeline" style="padding-left:104px">
-                    <div class="sb-timeline__ruler">
-                      <span>0:00</span><span>0:04</span><span>0:08</span><span>0:12</span><span>0:16</span><span>0:20</span><span>0:24</span><span>0:28</span>
-                    </div>
-                    <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">视频</span>
-                      <div class="sb-timeline__block" style="width:14%">开场</div>
-                      <div class="sb-timeline__block" style="width:18%">主镜头</div>
-                      <div class="sb-timeline__block" style="width:16%">细节 · 屏幕</div>
-                      <div class="sb-timeline__block" style="width:18%">生活场景</div>
-                      <div class="sb-timeline__block" style="width:18%">电量 + 点击</div>
-                      <div class="sb-timeline__block" style="width:14%">CTA</div>
-                      <div class="sb-timeline__playhead" style="left:60%"></div>
-                    </div>
-                    <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">配音</span>
-                      <div class="sb-timeline__block sb-timeline__block--voice" style="width:96%">Alloy · EN 女声 · -14 LUFS · 「Your day, on time…」</div>
-                    </div>
-                    <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">字幕</span>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">12pt · Inter</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">加粗强调</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:16%">数字弹出</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:18%">行内</div>
-                      <div class="sb-timeline__block sb-timeline__block--captions" style="width:14%">CTA 揭示</div>
-                    </div>
-                    <div class="sb-timeline__track">
-                      <span class="sb-timeline__track-label">音乐</span>
-                      <div class="sb-timeline__block sb-timeline__block--music" style="width:96%">Pulse · 上扬节奏 · 配音下方 duck -8 dB</div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <!-- 右 · 详情面板 + 审阅 -->
-            <div class="sb-stack">
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">详情 · 场景 04</div>
-                </header>
-                <div class="sb-card__body sb-brief-fields">
-                  <div class="sb-field">
-                    <label for="sb-studio-scene-script">场景脚本</label>
-                    <textarea id="sb-studio-scene-script">续航 8 小时，一次充电。十二项指标。三次点击。Your day, on time — without lifting a wrist.</textarea>
-                  </div>
-                  <div class="sb-field__row">
-                    <div class="sb-field">
-                      <label for="sb-studio-visual-style">视觉风格</label>
-                      <select id="sb-studio-visual-style"><option>编辑 · 静态</option><option>电影感推拉</option><option>UI 动效</option></select>
-                    </div>
-                    <div class="sb-field">
-                      <label for="sb-studio-pace">节奏</label>
-                      <select id="sb-studio-pace"><option>平稳</option><option>快剪</option><option>停留</option></select>
-                    </div>
-                  </div>
-                  <div class="sb-field">
-                    <label id="sb-studio-broll-label">空镜素材</label>
-                    <div role="group" aria-labelledby="sb-studio-broll-label" style="display:flex;gap:6px;flex-wrap:wrap">
-                      <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">wrist-shot.mp4</span>
-                      <span class="sb-pill" style="background:rgba(34,211,183,0.1);color:var(--sb-accent-300)">desk-scene.mp4</span>
-                      <button class="sb-btn sb-btn--ghost sb-btn--sm">+ 替换</button>
-                    </div>
-                  </div>
-                  <div class="sb-field">
-                    <label for="sb-studio-caption">画面字幕</label>
-                    <input id="sb-studio-caption" value="Your day, on time" />
-                  </div>
-                </div>
-              </article>
-
-              <article class="sb-card">
-                <header class="sb-card__head">
-                  <div class="sb-card__title">审阅讨论</div>
-                  <div class="sb-card__head-actions">
-                    <span class="sb-pill sb-pill--review">2 条未决</span>
-                  </div>
-                </header>
-                <div class="sb-card__body sb-stack">
-                  <div class="sb-comment">
-                    <div class="sb-comment__head">
-                      <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px">PR</div>
-                      <b>Priya Rao</b>
-                      <time>3 分钟前</time>
-                    </div>
-                    <div class="sb-comment__body">
-                      把「without lifting a wrist」换掉——在美国受众测试中表现不佳。试试「without breaking stride」。
-                    </div>
-                    <div class="sb-comment__cite">场景 04 · 脚本 · 词 18-22</div>
-                  </div>
-                  <div class="sb-comment">
-                    <div class="sb-comment__head">
-                      <div class="sb-workspace-card__avatar" style="width:24px;height:24px;font-size:10px;background:linear-gradient(135deg,#3d2c5f,#1b1230);color:var(--sb-status-review)">DA</div>
-                      <b>Diego Alvarez</b>
-                      <time>11 分钟前</time>
-                    </div>
-                    <div class="sb-comment__body">
-                      CTA 处的音乐 duck 有点过——提到 -6 dB？
-                    </div>
-                    <div class="sb-comment__cite">音乐 · 0:24 → 0:28</div>
-                  </div>
-                  <div class="sb-divider"></div>
-                  <textarea aria-label="回复审阅讨论" class="sb-field" style="padding:10px 12px;border-radius:8px;border:1px solid var(--sb-border);background:rgba(11,18,32,0.7);color:var(--sb-text);font-family:var(--sb-font-body);font-size:var(--sb-text-md);min-height:60px" placeholder="回复，或 @ 提及分派…"></textarea>
-                  <div style="display:flex;justify-content:flex-end;gap:8px">
-                    <button class="sb-btn sb-btn--ghost sb-btn--sm">存为草稿</button>
-                    <button class="sb-btn sb-btn--primary sb-btn--sm">发送回复</button>
-                  </div>
-                </div>
-              </article>
+            <div class="wb-tpl-grid" id="wb-templates">
+              <div class="wb-skeleton" style="height:96px"></div>
+              <div class="wb-skeleton" style="height:96px"></div>
+              <div class="wb-skeleton" style="height:96px"></div>
             </div>
           </section>
+
+          <!-- ============ Recent projects ============ -->
+          <section class="wb-section" aria-label="最近项目">
+            <div class="wb-section__head">
+              <h2>最近项目</h2>
+              <a href="/projects.html">查看全部 →</a>
+            </div>
+            <div class="wb-proj-grid" id="wb-projects">
+              <div class="wb-skeleton" style="height:140px"></div>
+              <div class="wb-skeleton" style="height:140px"></div>
+              <div class="wb-skeleton" style="height:140px"></div>
+            </div>
+          </section>
+
         </main>
 
         <footer class="sb-footer">
-          <span>自动保存于 12 秒前 · v17 由 Ava Chen 编辑</span>
-          <span>品牌套件 · Acme · Core · 偏移评分 0.02</span>
+          <span id="wb-footer-status">就绪 · 工作台数据自动刷新中</span>
+          <span id="wb-footer-meta">—</span>
         </footer>
       </div>
     </div>
 
-    <template id="scene-tpl">
-      <button class="sb-stage" style="text-align:left;width:100%">
-        <span class="sb-stage__index"></span>
-        <div class="sb-stage__body">
-          <div class="sb-stage__title"></div>
-          <div class="sb-stage__log"></div>
-        </div>
-        <div class="sb-stage__meta"></div>
-      </button>
-    </template>
-
     <script src="scripts/shell.js"></script>
-    <script>
-      const SCENES = [
-        { i: '01', t: '开场', log: '黑屏 → Logo 闪现', dur: '4.0 秒', state: 'succeeded' },
-        { i: '02', t: '主镜头', log: '腕环 360° 旋转', dur: '5.0 秒', state: 'succeeded' },
-        { i: '03', t: '细节 · 屏幕', log: 'UI 微距 · 健康环', dur: '4.5 秒', state: 'succeeded' },
-        { i: '04', t: '生活场景', log: '知识工作者桌面主观视角', dur: '5.0 秒', state: 'running' },
-        { i: '05', t: '电量 + 点击', log: '7 天续航弧 + 点击演示', dur: '5.0 秒', state: '' },
-        { i: '06', t: 'CTA', log: '「预订——前 1,000 名免运费」', dur: '4.5 秒', state: '' },
-      ];
-      const tpl = document.getElementById('scene-tpl');
-      const list = document.getElementById('scene-list');
-      SCENES.forEach((s, i) => {
-        const node = tpl.content.firstElementChild.cloneNode(true);
-        if (s.state) node.classList.add(`sb-stage--${s.state}`);
-        if (i === 3) node.classList.add('sb-scene--active');
-        node.querySelector('.sb-stage__index').textContent = s.i;
-        node.querySelector('.sb-stage__title').textContent = s.t;
-        node.querySelector('.sb-stage__log').textContent = s.log;
-        node.querySelector('.sb-stage__meta').textContent = s.dur;
-        list.appendChild(node);
-      });
-    </script>
+    <script src="scripts/workbench.js"></script>
   </body>
 </html>

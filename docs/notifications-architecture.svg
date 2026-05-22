@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 460" width="320" height="460" font-family="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,4 L0,8 z" fill="#0F2A4A"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,4 L0,8 z" fill="#22D3B7"/>
+    </marker>
+    <style>
+      .box { fill: #FFFFFF; stroke: #0F2A4A; stroke-width: 1.5; rx: 6; }
+      .boxTeal { fill: #E6FBF6; stroke: #22D3B7; stroke-width: 1.5; rx: 6; }
+      .boxDark { fill: #0F2A4A; stroke: #0F2A4A; stroke-width: 1.5; rx: 6; }
+      .label { font-size: 11px; fill: #0F2A4A; font-weight: 600; }
+      .labelWhite { font-size: 11px; fill: #FFFFFF; font-weight: 600; }
+      .sub { font-size: 9px; fill: #5A6B85; }
+      .subWhite { font-size: 9px; fill: #BDE9DE; }
+      .flow { stroke: #0F2A4A; stroke-width: 1.2; fill: none; }
+      .flowTeal { stroke: #22D3B7; stroke-width: 1.4; fill: none; }
+      .title { font-size: 13px; fill: #0F2A4A; font-weight: 700; }
+    </style>
+  </defs>
+
+  <text class="title" x="160" y="22" text-anchor="middle">ShadowBlade · Notifications Data Flow</text>
+
+  <!-- Frontend -->
+  <rect class="box" x="20" y="40" width="280" height="54"/>
+  <text class="label" x="160" y="58" text-anchor="middle">Frontend · /(app)/notifications</text>
+  <text class="sub" x="160" y="74" text-anchor="middle">page.tsx · 6 tabs · 6 kinds · 未读徽章</text>
+  <text class="sub" x="160" y="86" text-anchor="middle">SWR polling unread-count（5–15s）</text>
+
+  <!-- arrow down to API -->
+  <path class="flow" d="M160,94 L160,114" marker-end="url(#arrow)"/>
+  <text class="sub" x="166" y="108">HTTP</text>
+
+  <!-- API Router -->
+  <rect class="box" x="20" y="116" width="280" height="64"/>
+  <text class="label" x="160" y="134" text-anchor="middle">FastAPI Router · /api/v1/notifications</text>
+  <text class="sub" x="160" y="150" text-anchor="middle">GET / · GET /unread-count · GET /types</text>
+  <text class="sub" x="160" y="162" text-anchor="middle">PUT /{id}/read · PUT /read-all</text>
+  <text class="sub" x="160" y="174" text-anchor="middle">PUT /{id}/archive · DELETE /{id}</text>
+
+  <!-- arrow down to Service -->
+  <path class="flow" d="M160,180 L160,200" marker-end="url(#arrow)"/>
+
+  <!-- Service Layer -->
+  <rect class="box" x="20" y="202" width="280" height="76"/>
+  <text class="label" x="160" y="220" text-anchor="middle">Service Layer · services/notifications.py</text>
+  <text class="sub" x="160" y="236" text-anchor="middle">CRUD: create / list / mark_read / delete</text>
+  <text class="sub" x="160" y="250" text-anchor="middle">Helpers: notify_video_*, notify_brand_*</text>
+  <text class="sub" x="160" y="262" text-anchor="middle">notify_mention, notify_approval_*, ...</text>
+  <text class="sub" x="160" y="274" text-anchor="middle">TYPE_CATEGORY · TYPE_DEFAULT_KIND</text>
+
+  <!-- arrow down to ORM -->
+  <path class="flow" d="M160,278 L160,298" marker-end="url(#arrow)"/>
+
+  <!-- ORM -->
+  <rect class="box" x="20" y="300" width="280" height="46"/>
+  <text class="label" x="160" y="318" text-anchor="middle">SQLAlchemy ORM · Notification</text>
+  <text class="sub" x="160" y="334" text-anchor="middle">workspace_id + user_id 隔离 + 3 复合索引</text>
+
+  <!-- arrow down to DB -->
+  <path class="flow" d="M160,346 L160,362" marker-end="url(#arrow)"/>
+
+  <!-- DB -->
+  <rect class="boxDark" x="80" y="364" width="160" height="40"/>
+  <text class="labelWhite" x="160" y="382" text-anchor="middle">notifications 表</text>
+  <text class="subWhite" x="160" y="396" text-anchor="middle">SQLite / Postgres</text>
+
+  <!-- Trigger sources on the right -->
+  <rect class="boxTeal" x="20" y="420" width="280" height="34"/>
+  <text class="label" x="160" y="437" text-anchor="middle" fill="#0F2A4A">触发源</text>
+  <text class="sub" x="160" y="450" text-anchor="middle">mix-video · brand-kit · template · team · billing</text>
+
+  <!-- Trigger arrow back into service (loop) -->
+  <path class="flowTeal" d="M40,420 Q14,360 14,240 L18,240" marker-end="url(#arrowTeal)"/>
+  <text class="sub" x="20" y="332" fill="#22D3B7" transform="rotate(-90, 20, 332)">notify_*（best-effort）</text>
+</svg>

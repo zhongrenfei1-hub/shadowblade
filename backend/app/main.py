@@ -13,13 +13,18 @@ from app.api import (
     brand_kits,
     generate,
     health,
+    integrations,
     jobs,
     keys,
     mix_video,
+    notifications,
+    organizations,
     projects,
     render_queue,
+    settings as settings_api,
     stock,
     templates,
+    workbench,
     workspaces,
 )
 from app.core import secrets
@@ -57,6 +62,7 @@ for router in (
     health.router,
     auth.router,
     workspaces.router,
+    organizations.router,
     projects.router,
     jobs.router,
     assets.router,
@@ -68,6 +74,10 @@ for router in (
     generate.router,
     stock.router,
     keys.router,
+    notifications.router,
+    integrations.router,
+    settings_api.router,
+    workbench.router,
 ):
     app.include_router(router, prefix="/api/v1")
 

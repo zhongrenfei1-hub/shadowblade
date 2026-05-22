@@ -1,20 +1,43 @@
 /**
  * 调 FastAPI 后端的薄客户端。
- * 走 next.config.mjs 的 rewrite，所以 client 侧统一用相对路径 /api/v1/*。
- * 服务端组件直接打 backend；客户端组件用相对路径即可。
+ *
+ * 关键约束：node 端 fetch 不支持相对 URL，否则报
+ *   TypeError: Failed to parse URL from /api/v1/...
+ * 所以 server component (Node 运行时) 必须走绝对 URL，
+ * client component (浏览器) 才能用相对路径走 next rewrite。
  */
 
-const BASE = process.env.NEXT_PUBLIC_API_BASE || "/api/v1";
+const IS_SERVER = typeof window === "undefined";
+const SERVER_BASE = process.env.BACKEND_URL || "http://localhost:8000";
+
+const BASE = IS_SERVER
+  ? `${SERVER_BASE}/api/v1`
+  : process.env.NEXT_PUBLIC_API_BASE_URL ||
+    process.env.NEXT_PUBLIC_API_BASE ||
+    "/api/v1";
+
+// demo workspace / user — 后续接 SSO 后从 session 取。
+// 兜底让需要鉴权的端点 (organizations / brand-kit / settings / notifications)
+// 在没登录态时也能拿到 demo workspace 的数据。
+const DEMO_AUTH_HEADERS: Record<string, string> = {
+  "X-Workspace-Id": "1",
+  "X-User-Id": "1",
+};
 
 async function get<T>(path: string, fallback?: T, init?: RequestInit): Promise<T> {
   try {
-    const res = await fetch(`${BASE}${path}`, { cache: "no-store", ...init });
+    const res = await fetch(`${BASE}${path}`, {
+      cache: "no-store",
+      ...init,
+      headers: {
+        ...DEMO_AUTH_HEADERS,
+        ...(init?.headers as Record<string, string> | undefined),
+      },
+    });
     if (!res.ok) throw new Error(`${res.status}`);
     return res.json();
   } catch (err) {
     if (fallback !== undefined) {
-      // 开发环境：明确告诉作者后端没接通，正在用 fallback。
-      // 生产环境：静默回退，避免噪音。
       if (process.env.NODE_ENV !== "production") {
         // eslint-disable-next-line no-console
         console.warn(`[api] ${path} 走 fallback：`, err);

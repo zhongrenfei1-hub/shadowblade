@@ -1,54 +1,112 @@
 import Link from "next/link";
-import { Video, Clock, CheckCircle2, DollarSign, RefreshCw, Sparkles, AlertTriangle } from "lucide-react";
-import { api } from "@/lib/api";
+import {
+  Sparkles,
+  RefreshCw,
+  Video,
+  Calendar,
+  Activity,
+  FolderKanban,
+  PlayCircle,
+} from "lucide-react";
+import { headers } from "next/headers";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { KpiTile } from "@/components/workspace/kpi-tile";
-import { PipelineStage } from "@/components/workspace/pipeline-stage";
-import { ProjectCard } from "@/components/workspace/project-card";
-import { StatusBadge } from "@/components/workspace/status-badge";
-import { ProjectFilter } from "@/components/workspace/project-filter";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  getOverview,
+  listActiveTasks,
+  listRecentProjects,
+  type ActiveTask,
+  type RecentProject,
+  type WorkbenchKpi,
+  type WorkbenchOverview,
+} from "@/lib/api/workbench";
 
-/**
- * 标准 6 步流水线 · 与 components/workspace/create-wizard.tsx 的 PIPELINE 对齐：
- * 脚本 → 语音 → 字幕 → 混剪 → 封面 → 品牌水印
- */
-const STAGES = [
-  { idx: 1, title: "脚本", log: "6 个场景 · 142 字 · 品牌语态评分 0.94", meta: "8.4 秒", state: "succeeded" as const },
-  { idx: 2, title: "语音", log: "灵韵女声 · 4 个版本 · -14 LUFS · 已选 take_03", meta: "18.6 秒", state: "succeeded" as const },
-  { idx: 3, title: "字幕", log: "6 个场景 · 自动断句 · 已校对", meta: "12.1 秒", state: "succeeded" as const },
-  { idx: 4, title: "混剪", log: "62% · 6 个分镜 + 18 段空镜 · 等待叠加层 #3", meta: "预计 0:64", state: "running" as const, progress: 62 },
-  { idx: 5, title: "封面", log: "等待混剪完成 · 将自动选 0:04 / 0:12 / 0:24 三帧候选", meta: "排队中" },
-  { idx: 6, title: "品牌水印", log: "套 Acme · 核心版 · 输出 1080×1920 · H.264 high · 60 fps", meta: "排队中" },
-];
+const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  renders_today: Video,
+  renders_this_week: Calendar,
+  in_progress: Activity,
+  total_projects: FolderKanban,
+};
 
-const APPROVALS = [
-  { initials: "SE", title: "入职培训 · 销售工程师训练营", log: "Marcus Lee · 2 条评论 · 96 秒", action: "审核", primary: true },
-  { initials: "CP", title: "AI Copilot · 产品演示", log: "Priya Rao · 第 3 版 · 60 秒", action: "打开" },
-  { initials: "SR", title: "C 轮预告 · TikTok", log: "Diego Alvarez · 待发布", action: "批准", primary: true },
-];
+async function loadDashboard(): Promise<{
+  overview: WorkbenchOverview | null;
+  recent: RecentProject[];
+  active: ActiveTask[];
+  error: string | null;
+}> {
+  headers();
+  try {
+    const [overview, recentRes, activeRes] = await Promise.all([
+      getOverview(),
+      listRecentProjects(),
+      listActiveTasks(),
+    ]);
+    return {
+      overview,
+      recent: recentRes.items,
+      active: activeRes.items,
+      error: null,
+    };
+  } catch (err) {
+    return {
+      overview: null,
+      recent: [],
+      active: [],
+      error: err instanceof Error ? err.message : String(err),
+    };
+  }
+}
 
 export default async function DashboardPage() {
-  const { items: projects } = await api.projects();
+  const { overview, recent, active, error } = await loadDashboard();
+
+  if (error || !overview) {
+    return (
+      <section className="grid gap-4">
+        <h1 className="font-display text-2xl font-semibold">工作台</h1>
+        <Card className="border-destructive/40 bg-destructive/5">
+          <CardHeader>
+            <CardTitle className="text-destructive">无法加载工作台</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="font-mono text-xs text-destructive">{error}</p>
+          </CardContent>
+        </Card>
+      </section>
+    );
+  }
 
   return (
     <>
       <section className="grid gap-3">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">工作台概览</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">
+          工作台概览 · 实时
+        </span>
         <div className="flex flex-wrap items-end gap-4 md:gap-6">
           <div className="min-w-0 flex-1">
-            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">Ava，欢迎回来。</h1>
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">
+              workspace #{overview.workspace_id} 全景
+            </h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
-              本周已交付 6 条成片，当前 2 条在跑。流水线按周二产品发布日程推进中。
+              数据来自 /api/v1/workbench/overview · 生成于{" "}
+              {new Date(overview.generated_at).toLocaleString("zh-CN")}
             </p>
           </div>
           <div className="flex gap-2 md:gap-3">
-            <Button variant="outline" aria-label="刷新数据">
-              <RefreshCw className="h-3.5 w-3.5" aria-hidden />
-              <span className="hidden sm:inline">刷新</span>
+            <Button variant="outline" asChild>
+              <Link href="/dashboard">
+                <RefreshCw className="h-3.5 w-3.5" aria-hidden />
+                <span className="hidden sm:inline">刷新</span>
+              </Link>
             </Button>
             <Button asChild>
-              <Link href="/create">
+              <Link href="/studio">
                 <Sparkles className="h-4 w-4" aria-hidden />
                 <span className="hidden sm:inline">新建视频</span>
                 <span className="sm:hidden">新建</span>
@@ -58,80 +116,253 @@ export default async function DashboardPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4" aria-label="关键指标">
-        <KpiTile icon={Video} label="本月渲染次数" value="387" suffix="/ 1,000" delta="12.4% 较上月" trend={[210, 240, 260, 290, 310, 340, 387]} />
-        <KpiTile icon={Clock} label="首版成片耗时" value="4.8" suffix="分钟" delta="提速 31%" trend={[7.0, 6.6, 6.0, 5.6, 5.1, 5.0, 4.8]} />
-        <KpiTile icon={CheckCircle2} label="一次审核通过率" value="92" suffix="%" delta="6 个百分点" trend={[78, 80, 83, 86, 88, 90, 92]} />
-        <KpiTile icon={DollarSign} label="较外包代理节省" value="$168k" suffix="/季度" delta="21%" trend={[110, 120, 130, 142, 150, 160, 168]} />
+      <section
+        className="grid grid-cols-2 gap-4 lg:grid-cols-4"
+        aria-label="关键指标 · 实时"
+      >
+        {overview.kpis.map((k) => (
+          <KpiCard key={k.key} kpi={k} />
+        ))}
       </section>
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
         <Card>
-          <CardHeader className="flex flex-row items-center gap-3">
-            <div className="flex-1">
-              <CardTitle>进行中 · 流程运行</CardTitle>
-              <p className="mt-0.5 text-sm text-muted-foreground">春季产品发布 — 智能腕环 · 28 秒 · 9:16</p>
-            </div>
-            <StatusBadge status="rendering" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/projects/101">在编辑器中打开</Link>
-            </Button>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>进行中 · {active.length} 个任务</CardTitle>
+            <Badge variant="rendering">live · render queue</Badge>
           </CardHeader>
-          <CardContent className="grid gap-2.5">
-            {STAGES.map((s) => (
-              <PipelineStage
-                key={s.idx}
-                index={s.idx}
-                title={s.title}
-                log={s.log}
-                meta={s.meta}
-                state={s.state}
-                progress={"progress" in s ? (s as { progress?: number }).progress : undefined}
-              />
-            ))}
+          <CardContent>
+            {active.length === 0 ? (
+              <p className="rounded-md border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
+                当前没有进行中的任务。
+              </p>
+            ) : (
+              <div className="grid gap-2">
+                {active.map((t) => (
+                  <ActiveTaskRow key={t.task_id} task={t} />
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>等你审批</CardTitle>
-            <Button variant="outline" size="sm">查看全部</Button>
+          <CardHeader>
+            <CardTitle>当前品牌套件</CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-3">
-            {APPROVALS.map((a) => (
-              <div key={a.title} className="grid grid-cols-[28px_1fr_auto] items-center gap-3 rounded-md border border-border bg-card/40 px-4 py-3">
-                <span className="grid h-6 w-6 place-items-center rounded-md bg-accent-500/15 font-mono text-[11px] text-accent-300">
-                  {a.initials}
-                </span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold">{a.title}</div>
-                  <div className="truncate font-mono text-[11px] text-muted-foreground">{a.log}</div>
+          <CardContent>
+            {overview.brand_kit ? (
+              <div className="grid gap-3">
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    className="h-12 w-12 rounded-md border border-border"
+                    style={{
+                      background: `linear-gradient(135deg,${overview.brand_kit.primary_color},${overview.brand_kit.accent_color})`,
+                    }}
+                  />
+                  <div className="leading-tight">
+                    <b className="text-sm">{overview.brand_kit.name}</b>
+                    <span className="block font-mono text-[11px] text-muted-foreground">
+                      kit #{overview.brand_kit.id} · scope{" "}
+                      {overview.brand_kit.scope}
+                    </span>
+                  </div>
                 </div>
-                <Button size="sm" variant={a.primary ? "default" : "outline"}>{a.action}</Button>
+                <div className="grid grid-cols-3 gap-2 text-[10px]">
+                  <Swatch label="主" color={overview.brand_kit.primary_color} />
+                  <Swatch
+                    label="强"
+                    color={overview.brand_kit.accent_color}
+                  />
+                  <Swatch
+                    label="辅"
+                    color={overview.brand_kit.secondary_color}
+                  />
+                </div>
+                <p className="text-[11px] text-muted-foreground">
+                  字体 {overview.brand_kit.font_heading} ·{" "}
+                  {overview.brand_kit.voice}
+                </p>
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/brand">编辑套件</Link>
+                </Button>
               </div>
-            ))}
-            <div className="h-px bg-border" />
-            <div className="grid grid-cols-[28px_1fr_auto] items-center gap-3 rounded-md border border-amber-500/25 bg-amber-500/[0.04] px-4 py-3">
-              <span className="grid h-6 w-6 place-items-center rounded-md bg-amber-500/15 text-amber-300">
-                <AlertTriangle className="h-3.5 w-3.5" aria-hidden />
-              </span>
-              <div className="min-w-0">
-                <div className="text-sm font-semibold">品牌规范偏移</div>
-                <div className="truncate text-xs text-muted-foreground">2 条成片使用了 #20D2B5——应为 #22D3B7。</div>
-              </div>
-              <Button size="sm" variant="outline">解决</Button>
-            </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">未配置品牌套件。</p>
+            )}
           </CardContent>
         </Card>
       </section>
 
-      <section className="grid gap-4">
-        <div>
-          <h2 className="font-display text-xl font-semibold">最近项目</h2>
-          <p className="mt-1 text-sm text-muted-foreground">共 38 个 · 按最近编辑排序</p>
+      <section className="grid gap-3">
+        <div className="flex items-end justify-between">
+          <div>
+            <h2 className="font-display text-xl font-semibold">最近项目</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              来自 /workbench/recent-projects · {recent.length} 个
+            </p>
+          </div>
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/projects">全部项目</Link>
+          </Button>
         </div>
-        <ProjectFilter projects={projects} />
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {recent.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
+        </div>
       </section>
+
+      {overview.featured_templates.length > 0 && (
+        <section className="grid gap-3">
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-xl font-semibold">推荐模板</h2>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/templates">所有模板</Link>
+            </Button>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {overview.featured_templates.slice(0, 4).map((t) => (
+              <Card key={t.name}>
+                <CardHeader>
+                  <CardTitle className="text-sm">{t.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-[11px] text-muted-foreground">
+                    {t.description}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {t.tags.slice(0, 3).map((tag) => (
+                      <Badge key={tag} variant="draft">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
     </>
+  );
+}
+
+function KpiCard({ kpi }: { kpi: WorkbenchKpi }) {
+  const Icon = ICONS[kpi.key] ?? Activity;
+  return (
+    <Card>
+      <CardContent className="grid gap-2 p-5">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            {kpi.label}
+          </span>
+          <Icon className="h-4 w-4 text-accent-300" />
+        </div>
+        <div className="flex items-baseline gap-2">
+          <span className="font-display text-3xl font-semibold">
+            {kpi.value}
+          </span>
+          <span className="text-xs text-muted-foreground">{kpi.unit}</span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function ActiveTaskRow({ task }: { task: ActiveTask }) {
+  const progressPct = Math.round(task.progress * 100);
+  return (
+    <div className="grid gap-2 rounded-md border border-border bg-card/40 p-3">
+      <div className="flex items-center justify-between">
+        <div className="min-w-0">
+          <b className="block truncate text-sm">{task.project_name}</b>
+          <span className="font-mono text-[11px] text-muted-foreground">
+            {task.task_id} · {task.source} · {task.priority}
+            {task.worker ? ` · ${task.worker}` : ""}
+          </span>
+        </div>
+        <Badge
+          variant={
+            task.status === "running"
+              ? "rendering"
+              : task.status === "succeeded"
+                ? "done"
+                : task.status === "failed"
+                  ? "failed"
+                  : "queued"
+          }
+        >
+          {task.status}
+        </Badge>
+      </div>
+      {task.status === "running" && (
+        <div className="grid gap-1">
+          <div className="h-1.5 overflow-hidden rounded-full bg-border">
+            <div
+              className="h-full bg-accent-500 transition-all"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+          <span className="font-mono text-[10px] text-muted-foreground">
+            {progressPct}% · ETA {Math.round(task.estimated_seconds)}s
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProjectCard({ project }: { project: RecentProject }) {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-start gap-2">
+        <PlayCircle className="mt-0.5 h-4 w-4 text-accent-300" aria-hidden />
+        <div className="grid leading-tight">
+          <CardTitle className="text-sm">{project.name}</CardTitle>
+          <span className="text-[11px] text-muted-foreground">
+            {project.purpose} · {project.aspect_ratio} ·{" "}
+            {project.duration_seconds}s
+          </span>
+        </div>
+      </CardHeader>
+      <CardContent className="grid gap-3">
+        <p className="line-clamp-2 text-[11px] text-muted-foreground">
+          {project.brief}
+        </p>
+        <div className="flex items-center justify-between">
+          <Badge
+            variant={
+              project.status === "done" || project.status === "succeeded"
+                ? "done"
+                : project.status === "rendering"
+                  ? "rendering"
+                  : "draft"
+            }
+          >
+            {project.status}
+          </Badge>
+          <span className="text-[10px] text-muted-foreground">
+            {new Date(project.updated_at).toLocaleString("zh-CN")}
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function Swatch({ label, color }: { label: string; color: string }) {
+  return (
+    <div className="grid gap-1">
+      <div
+        className="h-8 rounded-md border border-border"
+        style={{ background: color }}
+        aria-label={`${label} ${color}`}
+      />
+      <span className="text-center font-mono text-muted-foreground">
+        {label}
+      </span>
+    </div>
   );
 }

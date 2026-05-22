@@ -1,0 +1,60 @@
+{
+  "name": "product-demo-vertical",
+  "version": "1.0.0",
+  "description": "竖屏产品演示模板 — TikTok / Instagram Reels / YouTube Shorts 等 9:16 短视频。继承 product-demo 的企业级风格 + 深蓝/青绿配色,适配竖屏的快节奏、大字幕、顶部色条、紧凑过渡。",
+  "extends": "product-demo",
+  "tags": ["product-demo", "vertical", "tiktok", "reels", "shorts", "9x16", "short-form"],
+
+  "transition": {
+    "max_duration": 0.4
+  },
+
+  "subtitle": {
+    "max_chars_per_line": 14,
+    "max_lines": 2,
+    "cps_warn": 13.0,
+    "cps_fail": 17.0,
+    "size_baseline": 88,
+    "margin_v_baseline": 260
+  },
+
+  "pacing": {
+    "target_shot": 2.5,
+    "min_shot": 1.2,
+    "max_shot": 5.0
+  },
+
+  "audio": {
+    "target_lufs": -14.0,
+    "fade_in": 0.3,
+    "fade_out": 0.8
+  },
+
+  "cover": {
+    "title_position": "center",
+    "title_max_chars": 16,
+    "brand_strip_position": "top",
+    "brand_strip_color": "#22D3B7",
+    "brand_strip_width_pct": 0.018
+  },
+
+  "watermark": {
+    "position": "br",
+    "opacity": 0.55,
+    "width_pct": 0.18
+  },
+
+  "encode": {
+    "preset": "social_9x16"
+  },
+
+  "extras": {
+    "purpose": "product_demo_vertical",
+    "recommended_duration_seconds": [15, 60],
+    "platforms": ["tiktok", "instagram_reels", "youtube_shorts", "wechat_channels"],
+    "editor_notes": "竖屏更紧凑节奏 2.5s/shot · 大字幕 88baseline · 顶部青绿强调条让冷启动 0.5s 内出现品牌识别 · 字幕 margin_v 260 避开 TikTok/Reels 底部 UI",
+    "compat": {
+      "inherits_from": ["base", "product-demo"]
+    }
+  }
+}

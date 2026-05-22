@@ -1,0 +1,52 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "通用基础模板 — 中文社媒友好默认值,作为所有自定义模板的骨架父级。",
+  "tags": ["builtin", "base", "social"],
+  "transition": {
+    "style": "editorial",
+    "max_duration": 0.45
+  },
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 22,
+    "max_lines": 2,
+    "cps_warn": 14.0,
+    "cps_fail": 18.0
+  },
+  "pacing": {
+    "target_shot": 3.5,
+    "min_shot": 1.4,
+    "max_shot": 6.0,
+    "snap_to_beats": false,
+    "must_include_hero": true
+  },
+  "audio": {
+    "target_lufs": -14.0,
+    "target_tp": -1.0,
+    "adaptive_bgm_mix": false,
+    "fade_in": 0.4,
+    "fade_out": 0.6
+  },
+  "cover": {
+    "enabled": true,
+    "style": "gradient",
+    "title_required": false,
+    "timestamp_strategy": "hero"
+  },
+  "watermark": {
+    "enabled": true,
+    "position": "br",
+    "opacity": 0.78,
+    "width_pct": 0.16,
+    "require_logo": false
+  },
+  "color": {
+    "look": null,
+    "auto_white_balance": false
+  },
+  "encode": {
+    "preset": "social_9x16"
+  },
+  "extras": {}
+}

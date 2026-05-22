@@ -157,6 +157,27 @@ POST /api/v1/stock/from-url            yt-dlp 抓任意 URL
 POST /api/v1/stock/pexels/search       Pexels 搜索（需 key）
 POST /api/v1/stock/pexels/auto         Pexels 自动下载 top N
 GET  /api/v1/stock/status              哪些素材源已配置
+GET  /api/v1/notifications             工作空间收件箱（分页 + tab 过滤）
+GET  /api/v1/notifications/unread-count  Header 未读徽章计数
+GET  /api/v1/notifications/types       枚举可用 type/category/kind
+PUT  /api/v1/notifications/{id}/read   单条标记已读
+PUT  /api/v1/notifications/read-all    一次清空（可按 category）
+PUT  /api/v1/notifications/{id}/archive 软归档（保留审计）
+DELETE /api/v1/notifications/{id}      硬删除
+```
+
+### 📬 工作空间通知
+
+收件箱聚合 6 类事件：流水线（混剪成功/失败）、审批、@ 提及、品牌偏移、计费、系统。已接入触发：
+
+- mix-video 渲染成功 / 失败 → `notify_video_generated` / `notify_video_failed`
+- brand-kit 字段变更 + logo 上传 → `notify_brand_kit_changed`
+
+helper 已就位待接入：模板发布、团队邀请、@ 提及、审批、计费。完整开发文档与扩展指引见 [docs/notifications.md](docs/notifications.md)。一键 seed demo 数据：
+
+```bash
+cd backend && .venv/bin/python -m app.services.notifications_demo
+# → 写入 14 条覆盖全部 6 类的真实示例到 workspace_id=1
 ```
 
 ### 数据流（一键生成）

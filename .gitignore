@@ -12,9 +12,16 @@ shadowblade.db
 # Mix render outputs (regenerated on demand)
 storage/mix/
 storage/cache/
+backend/storage/
+mix/
+storage/
+work/
 
 # Sample assets (test fixtures)
 storage/samples/
+
+# CCD session metadata (per-machine)
+.claude/
 
 # OS
 .DS_Store

@@ -1,70 +1,108 @@
-import { Plus, Check } from "lucide-react";
-import { api } from "@/lib/api";
+import { Plus } from "lucide-react";
+import { headers } from "next/headers";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { BrandKitEditor } from "@/components/workspace/brand-kit-editor";
+import type { BrandKit } from "@/lib/api/brand-kit";
 
-const KIT_META: Record<number, string> = {
-  1: "187 条成片 · v3 启用中",
-  2: "32 条成片 · v1",
-};
-
-const PALETTE = [
-  { label: "主色", hex: "#0F2A4A", text: "#F7F9FC" },
-  { label: "强调", hex: "#22D3B7", text: "#06101F" },
-  { label: "石墨", hex: "#11161F", text: "#F7F9FC" },
-  { label: "灰白", hex: "#F7F9FC", text: "#0F2A4A" },
-  { label: "信息", hex: "#38BDF8", text: "#06101F" },
-  { label: "提示", hex: "#FBBF24", text: "#06101F" },
-  { label: "禁止", hex: "#F87171", text: "#06101F" },
-  { label: "审核", hex: "#A78BFA", text: "#06101F" },
-];
+async function loadBrandData(): Promise<{
+  active: BrandKit | null;
+  list: BrandKit[];
+  error: string | null;
+}> {
+  // server component 直接打 backend — 走绝对地址绕过 next rewrite。
+  const base = process.env.BACKEND_URL || "http://localhost:8000";
+  const auth = { "X-Workspace-Id": "1", "X-User-Id": "1" } as const;
+  // 即使 server 端用 headers() 强制 dynamic，这里只是为了 Next 不要静态化。
+  headers();
+  try {
+    const [activeRes, listRes] = await Promise.all([
+      fetch(`${base}/api/v1/brand-kit`, { headers: auth, cache: "no-store" }),
+      fetch(`${base}/api/v1/brand-kits`, { headers: auth, cache: "no-store" }),
+    ]);
+    if (!activeRes.ok)
+      throw new Error(`/brand-kit ${activeRes.status}`);
+    if (!listRes.ok) throw new Error(`/brand-kits ${listRes.status}`);
+    const active: BrandKit = await activeRes.json();
+    const list: { items: BrandKit[] } = await listRes.json();
+    return { active, list: list.items, error: null };
+  } catch (err) {
+    return {
+      active: null,
+      list: [],
+      error: err instanceof Error ? err.message : String(err),
+    };
+  }
+}
 
 export default async function BrandPage() {
-  const { items: kits } = await api.brandKits();
+  const { active, list, error } = await loadBrandData();
+
+  if (error || !active) {
+    return (
+      <section className="grid gap-4">
+        <h1 className="font-display text-2xl font-semibold">品牌套件</h1>
+        <Card className="border-destructive/40 bg-destructive/5 p-6">
+          <h2 className="font-semibold text-destructive">
+            无法加载后端 /api/v1/brand-kit
+          </h2>
+          <p className="mt-2 font-mono text-xs text-destructive/80">
+            {error ?? "active kit 为空"}
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            请确认 backend 已在 :8000 启动（make backend 或 make next）。
+          </p>
+        </Card>
+      </section>
+    );
+  }
 
   return (
     <>
       <section className="grid gap-3">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">品牌套件</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300">
+          品牌套件
+        </span>
         <div className="flex flex-wrap items-end gap-4 md:gap-6">
           <div className="min-w-0 flex-1">
-            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">Acme · 核心版</h1>
+            <h1 className="font-display text-[28px] font-semibold tracking-tight md:text-[34px]">
+              {active.name}
+            </h1>
             <p className="mt-1 max-w-prose text-sm text-muted-foreground">
-              每条成片都对照这套渲染。改一次——所有项目重新渲染。偏移会被自动检测，可一键修正。
+              每条成片都对照这套渲染。改一次——所有项目重新渲染。本套件 ID #{active.id}，
+              workspace #{active.workspace_id}，作用域 {active.scope}。
             </p>
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3">
-            <Button variant="outline" className="hidden sm:inline-flex">复制</Button>
-            <Button variant="outline" className="hidden sm:inline-flex">导出 ZIP</Button>
-            <Button>
-              <Check className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">发布 v4</span><span className="sm:hidden">发布</span>
-            </Button>
+            <Button variant="outline">导出 ZIP</Button>
+            <Button variant="outline">复制为新版本</Button>
           </div>
         </div>
       </section>
 
       <section className="grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr] items-start">
         <div className="grid gap-3">
-          {kits.map((k, i) => {
-            const active = i === 0;
+          {list.map((k) => {
+            const isActive = k.id === active.id;
             return (
               <Card
                 key={k.id}
                 className={`cursor-pointer p-3 transition-colors ${
-                  active ? "border-accent-500/40 bg-accent-500/[0.06]" : ""
+                  isActive ? "border-accent-500/40 bg-accent-500/[0.06]" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <span
                     aria-hidden
                     className="h-9 w-9 rounded-md border border-border"
-                    style={{ background: `linear-gradient(135deg,${k.primary_color},${k.accent_color})` }}
+                    style={{
+                      background: `linear-gradient(135deg,${k.primary_color},${k.accent_color})`,
+                    }}
                   />
                   <div className="leading-tight">
                     <b className="text-sm">{k.name}</b>
                     <span className="block text-[11px] text-muted-foreground">
-                      {KIT_META[k.id] ?? `${k.tone.voice_profile.slice(0, 10)}…`}
+                      {k.scope} · {k.is_active ? "启用" : "停用"}
                     </span>
                   </div>
                 </div>
@@ -76,81 +114,7 @@ export default async function BrandPage() {
           </Button>
         </div>
 
-        <div className="grid gap-6">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>调色板</CardTitle>
-              <Badge variant="done">WCAG AA 已校验</Badge>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-                {PALETTE.map((p) => (
-                  <div
-                    key={p.label}
-                    className="grid h-[92px] content-end rounded-md border border-border p-4"
-                    style={{ background: p.hex, color: p.text }}
-                  >
-                    <b className="font-display text-sm font-semibold">{p.label}</b>
-                    <span className="font-mono text-[11px] opacity-80">{p.hex}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>排版</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-              <div className="rounded-md border border-border bg-card/50 p-4">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Display · Inter Display 600</span>
-                <div className="mt-2 font-display text-4xl font-semibold tracking-tight">像做产品一样交付视频。</div>
-                <div className="mt-2 font-display text-xl font-semibold">副标 — Inter Display 600 · 24 / 32</div>
-              </div>
-              <div className="rounded-md border border-border bg-card/50 p-4">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Body · Inter 400</span>
-                <p className="mt-2 max-w-prose text-sm text-muted-foreground">
-                  ShadowBlade 把这里发布的品牌套件应用到每一个场景。改一个 token，整批成片按计划重新渲染。
-                </p>
-                <code className="mt-2 block font-mono text-xs text-accent-300">
-                  $ shadowblade render --kit acme-core --project wearable-hub
-                </code>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>语态 · 该做 / 不该做</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="max-w-prose text-sm text-muted-foreground">
-                自信、平实、不夸张。先讲客户得到了什么。屏幕上每句话不超过 14 字。
-              </div>
-              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="grid gap-2 rounded-md border border-border bg-card/50 p-4">
-                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-accent-300">该做</h4>
-                  <ul className="list-disc pl-5 text-sm text-muted-foreground">
-                    <li>先讲客户得到了什么</li>
-                    <li>用单音节动词</li>
-                    <li>屏幕上每句话不超过 14 字</li>
-                    <li>结尾一句明确的行动号召</li>
-                  </ul>
-                </div>
-                <div className="grid gap-2 rounded-md border border-border bg-card/50 p-4">
-                  <h4 className="text-[10px] font-semibold uppercase tracking-[0.1em] text-amber-300">不要</h4>
-                  <ul className="list-disc pl-5 text-sm text-muted-foreground">
-                    <li>行业黑话（赋能、抓手、闭环）</li>
-                    <li>陈词滥调（旅程、阶梯、北极星）</li>
-                    <li>感叹号</li>
-                    <li>连续超过两个形容词</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <BrandKitEditor initial={active} />
       </section>
     </>
   );

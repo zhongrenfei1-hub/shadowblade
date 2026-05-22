@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 600" width="300" height="600" role="img" aria-label="ShadowBlade 通知 kind 六种状态视觉对照：done / mention / info / warn / fail / billing">
+  <defs>
+    <linearGradient id="sb-notif-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F2A4A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#06101F"/>
+    </linearGradient>
+    <linearGradient id="sb-notif-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(22,30,48,0.95)"/>
+      <stop offset="100%" stop-color="rgba(15,22,38,0.85)"/>
+    </linearGradient>
+    <linearGradient id="sb-notif-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#22D3B7"/>
+    </linearGradient>
+    <radialGradient id="sb-notif-glow" cx="0.5" cy="0.1" r="0.65">
+      <stop offset="0%" stop-color="#22D3B7" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#22D3B7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="300" height="600" fill="#06101F"/>
+  <rect width="300" height="600" fill="url(#sb-notif-bg)"/>
+  <rect width="300" height="600" fill="url(#sb-notif-glow)"/>
+
+  <!-- Dot grid -->
+  <g fill="rgba(255,255,255,0.04)">
+    <circle cx="40"  cy="60" r="0.9"/><circle cx="100" cy="60" r="0.9"/><circle cx="160" cy="60" r="0.9"/><circle cx="220" cy="60" r="0.9"/><circle cx="280" cy="60" r="0.9"/>
+    <circle cx="40"  cy="160" r="0.9"/><circle cx="100" cy="160" r="0.9"/><circle cx="160" cy="160" r="0.9"/><circle cx="220" cy="160" r="0.9"/><circle cx="280" cy="160" r="0.9"/>
+    <circle cx="40"  cy="260" r="0.9"/><circle cx="100" cy="260" r="0.9"/><circle cx="160" cy="260" r="0.9"/><circle cx="220" cy="260" r="0.9"/><circle cx="280" cy="260" r="0.9"/>
+    <circle cx="40"  cy="360" r="0.9"/><circle cx="100" cy="360" r="0.9"/><circle cx="160" cy="360" r="0.9"/><circle cx="220" cy="360" r="0.9"/><circle cx="280" cy="360" r="0.9"/>
+    <circle cx="40"  cy="460" r="0.9"/><circle cx="100" cy="460" r="0.9"/><circle cx="160" cy="460" r="0.9"/><circle cx="220" cy="460" r="0.9"/><circle cx="280" cy="460" r="0.9"/>
+    <circle cx="40"  cy="560" r="0.9"/><circle cx="100" cy="560" r="0.9"/><circle cx="160" cy="560" r="0.9"/><circle cx="220" cy="560" r="0.9"/><circle cx="280" cy="560" r="0.9"/>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(20 24)">
+    <rect width="40" height="3" rx="1.5" fill="url(#sb-notif-rule)"/>
+    <text y="22" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#22D3B7" letter-spacing="2.4">通知类型对照</text>
+    <text y="44" font-family="Inter Display, Inter, sans-serif" font-size="16" font-weight="700" fill="#F7F9FC" letter-spacing="-0.4">六种 kind 一览</text>
+  </g>
+
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- 1 · done -->
+  <g transform="translate(20 84)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <!-- Unread dot indicator on the left edge -->
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="#22D3B7"/>
+    <!-- Glyph -->
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(34,211,183,0.16)" stroke="rgba(34,211,183,0.40)"/>
+    <path d="M22 34 L29 41 L40 27" stroke="#22D3B7" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Label -->
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">done · 完成</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">渲染、审批通过、模板发布</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#22D3B7" letter-spacing="0.6">#22D3B7</text>
+  </g>
+
+  <!-- 2 · mention -->
+  <g transform="translate(20 164)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="#A78BFA"/>
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.40)"/>
+    <text x="30" y="40" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#A78BFA" text-anchor="middle">@</text>
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">mention · @ 提及</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">评论里被点名、审批被指派</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#A78BFA" letter-spacing="0.6">#A78BFA</text>
+  </g>
+
+  <!-- 3 · info -->
+  <g transform="translate(20 244)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="#38BDF8"/>
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.40)"/>
+    <circle cx="30" cy="28" r="1.6" fill="#38BDF8"/>
+    <rect x="29" y="32" width="2" height="11" rx="1" fill="#38BDF8"/>
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">info · 状态变更</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">流水线启动、Worker 上线、邀请</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#38BDF8" letter-spacing="0.6">#38BDF8</text>
+  </g>
+
+  <!-- 4 · warn -->
+  <g transform="translate(20 324)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="#FBBF24"/>
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(251,191,36,0.16)" stroke="rgba(251,191,36,0.40)"/>
+    <path d="M30 22 L40 40 L20 40 Z" stroke="#FBBF24" stroke-width="2" fill="none" stroke-linejoin="round"/>
+    <rect x="29.2" y="29" width="1.6" height="6" rx="0.8" fill="#FBBF24"/>
+    <circle cx="30" cy="37.5" r="0.9" fill="#FBBF24"/>
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">warn · 品牌偏移</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">配色越界、字体替换、可一键修</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#FBBF24" letter-spacing="0.6">#FBBF24</text>
+  </g>
+
+  <!-- 5 · fail -->
+  <g transform="translate(20 404)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="#F87171"/>
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(248,113,113,0.16)" stroke="rgba(248,113,113,0.40)"/>
+    <circle cx="30" cy="34" r="9" fill="none" stroke="#F87171" stroke-width="2"/>
+    <line x1="25" y1="29" x2="35" y2="39" stroke="#F87171" stroke-width="2" stroke-linecap="round"/>
+    <line x1="35" y1="29" x2="25" y2="39" stroke="#F87171" stroke-width="2" stroke-linecap="round"/>
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">fail · 失败</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">渲染失败、配音错配、需重跑</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#F87171" letter-spacing="0.6">#F87171</text>
+  </g>
+
+  <!-- 6 · billing -->
+  <g transform="translate(20 484)">
+    <rect width="260" height="68" rx="10" fill="url(#sb-notif-card)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="0" y="0" width="3" height="68" rx="1.5" fill="rgba(255,255,255,0.32)"/>
+    <rect x="14" y="18" width="32" height="32" rx="9" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)"/>
+    <text x="30" y="40" font-family="Inter Display, Inter, sans-serif" font-size="16" font-weight="700" fill="#D8DDE5" text-anchor="middle">¥</text>
+    <text x="58" y="28" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#F7F9FC">billing · 计费</text>
+    <text x="58" y="44" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#8590A8">用量检查点、超额预警、对账</text>
+    <text x="58" y="58" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#D8DDE5" letter-spacing="0.6">graphite-100</text>
+  </g>
+
+  <!-- Footer note -->
+  <g transform="translate(20 572)" font-family="JetBrains Mono, monospace">
+    <text font-size="8" font-weight="500" fill="#5A667F" letter-spacing="1.2">每种 kind → 一个色值 → 一种语义。共 6 种。</text>
+  </g>
+</svg>

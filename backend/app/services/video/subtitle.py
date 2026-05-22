@@ -233,7 +233,13 @@ def render_ass(
     video_w: int = 1080,
     video_h: int = 1920,
     fade_ms: int = 80,
+    highlight_color: str | None = None,
+    highlight_bold: bool = False,
 ) -> str:
+    """Render cues as ASS. When ``highlight_color`` is provided, ``[词]``
+    markers in cue text are converted to inline ``{\\1c&HBBGGRR&}`` colour
+    overrides so libass renders them in the brand accent colour.
+    """
     style = style or SubtitleStyle()
     header = f"""[Script Info]
 ScriptType: v4.00+
@@ -253,7 +259,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     fade = f"{{\\fad({fade_ms},{fade_ms})}}"
     rows: list[str] = []
     for c in cues:
-        ass_text = c.text.replace("\n", "\\N")
+        if highlight_color:
+            from app.services.video.highlight import to_ass_color_override
+
+            transformed = to_ass_color_override(c.text, highlight_color, bold=highlight_bold)
+        else:
+            from app.services.video.highlight import strip_markers
+
+            transformed = strip_markers(c.text)
+        ass_text = transformed.replace("\n", "\\N")
         rows.append(
             f"Dialogue: 0,{_ass_ts(c.start)},{_ass_ts(c.end)},Default,,0,0,0,,{fade}{ass_text}"
         )
@@ -267,11 +281,20 @@ def write_ass(
     style: SubtitleStyle | None = None,
     video_w: int = 1080,
     video_h: int = 1920,
+    highlight_color: str | None = None,
+    highlight_bold: bool = False,
 ) -> Path:
     p = Path(out_path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(
-        render_ass(cues, style=style, video_w=video_w, video_h=video_h),
+        render_ass(
+            cues,
+            style=style,
+            video_w=video_w,
+            video_h=video_h,
+            highlight_color=highlight_color,
+            highlight_bold=highlight_bold,
+        ),
         encoding="utf-8",
     )
     return p

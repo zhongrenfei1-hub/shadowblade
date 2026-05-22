@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>集成管理 · ShadowBlade</title>
+    <link rel="icon" type="image/svg+xml" href="/showcase/brand/favicon.svg" />
+    <meta property="og:title" content="集成管理 · ShadowBlade" />
+    <meta property="og:description" content="API Keys、Webhooks、第三方集成、审计日志——把 ShadowBlade 焊死在你的技术栈里。" />
+    <meta property="og:image" content="/showcase/brand/og-image.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <style>
+      :root {
+        --sb-int-row-hover: rgba(34, 211, 183, 0.06);
+      }
+      .sb-ia-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: var(--sb-space-6);
+      }
+      .sb-ia-nav {
+        display: grid;
+        gap: var(--sb-space-2);
+        align-content: start;
+        position: sticky;
+        top: var(--sb-space-6);
+      }
+      .sb-ia-nav button {
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--sb-text-faint);
+        text-align: left;
+        padding: 10px 12px;
+        border-radius: var(--sb-radius);
+        font-size: var(--sb-text-sm);
+        cursor: pointer;
+        font-family: var(--sb-font-body);
+        transition: color var(--sb-dur), background var(--sb-dur), border-color var(--sb-dur);
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .sb-ia-nav button:hover { color: var(--sb-text); }
+      .sb-ia-nav button[aria-current="page"] {
+        background: rgba(34, 211, 183, 0.08);
+        border-color: rgba(34, 211, 183, 0.32);
+        color: var(--sb-text);
+      }
+      .sb-ia-nav .count {
+        font-size: var(--sb-text-xs);
+        font-family: var(--sb-font-mono);
+        color: var(--sb-text-faint);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1px 7px;
+        border-radius: 999px;
+      }
+      .sb-ia-pane { display: none; gap: var(--sb-space-5); }
+      .sb-ia-pane[data-active="1"] { display: grid; }
+      .sb-card {
+        border: 1px solid var(--sb-border);
+        background: rgba(11, 18, 32, 0.6);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-5);
+      }
+      .sb-card__head {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        gap: var(--sb-space-3);
+        margin-bottom: var(--sb-space-4);
+      }
+      .sb-card__title {
+        font-family: var(--sb-font-display);
+        font-size: var(--sb-text-lg);
+        font-weight: 600;
+      }
+      .sb-card__sub {
+        margin-top: 2px;
+        font-size: var(--sb-text-sm);
+        color: var(--sb-text-faint);
+      }
+      .sb-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: var(--sb-accent);
+        color: #001513;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-family: var(--sb-font-body);
+        font-weight: 600;
+        font-size: var(--sb-text-sm);
+        cursor: pointer;
+        transition: filter var(--sb-dur), transform var(--sb-dur);
+      }
+      .sb-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+      .sb-btn--ghost {
+        background: transparent;
+        color: var(--sb-text);
+        border: 1px solid var(--sb-border);
+      }
+      .sb-btn--ghost:hover { border-color: rgba(34, 211, 183, 0.4); }
+      .sb-btn--danger {
+        background: rgba(239, 68, 68, 0.12);
+        color: #fca5a5;
+        border: 1px solid rgba(239, 68, 68, 0.4);
+      }
+      .sb-btn--danger:hover { background: rgba(239, 68, 68, 0.2); }
+      .sb-btn--sm { padding: 5px 10px; font-size: var(--sb-text-xs); }
+      .sb-table { width: 100%; border-collapse: collapse; }
+      .sb-table th, .sb-table td {
+        padding: 10px 12px;
+        text-align: left;
+        font-size: var(--sb-text-sm);
+        border-bottom: 1px solid var(--sb-border);
+      }
+      .sb-table th {
+        font-size: var(--sb-text-xs);
+        font-weight: 600;
+        color: var(--sb-text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .sb-table tr:hover td { background: var(--sb-int-row-hover); }
+      .sb-mask { font-family: var(--sb-font-mono); font-size: var(--sb-text-sm); }
+      .sb-chip {
+        display: inline-flex; align-items: center;
+        font-family: var(--sb-font-mono);
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--sb-border);
+        color: var(--sb-text-faint);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .sb-chip--ok { color: #6ee7b7; border-color: rgba(110, 231, 183, 0.32); }
+      .sb-chip--err { color: #fca5a5; border-color: rgba(252, 165, 165, 0.32); }
+      .sb-chip--off { color: var(--sb-text-faint); }
+      .sb-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--sb-space-3);
+        margin-bottom: var(--sb-space-5);
+      }
+      .sb-stat {
+        padding: var(--sb-space-4);
+        background: rgba(11, 18, 32, 0.5);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius);
+      }
+      .sb-stat__label { font-size: var(--sb-text-xs); color: var(--sb-text-faint); }
+      .sb-stat__val {
+        font-family: var(--sb-font-display);
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 4px;
+      }
+      .sb-stat__split {
+        font-size: var(--sb-text-xs);
+        color: var(--sb-text-faint);
+        margin-top: 4px;
+      }
+      .sb-key-banner {
+        background: linear-gradient(120deg, rgba(34, 211, 183, 0.12), rgba(15, 42, 74, 0.4));
+        border: 1px solid rgba(34, 211, 183, 0.4);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-4);
+        display: grid;
+        gap: 8px;
+        margin-bottom: var(--sb-space-4);
+      }
+      .sb-key-banner b { font-family: var(--sb-font-display); }
+      .sb-key-banner code {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-sm);
+        user-select: all;
+        word-break: break-all;
+      }
+      .sb-empty {
+        display: grid; gap: 6px;
+        place-items: center;
+        padding: 60px 0;
+        color: var(--sb-text-faint);
+        font-size: var(--sb-text-sm);
+      }
+      .sb-form { display: grid; gap: var(--sb-space-3); }
+      .sb-form label { font-size: var(--sb-text-xs); color: var(--sb-text-faint); display: block; margin-bottom: 4px; }
+      .sb-form input, .sb-form select, .sb-form textarea {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--sb-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--sb-text);
+        font-family: var(--sb-font-body);
+        font-size: var(--sb-text-sm);
+        width: 100%;
+        transition: border-color var(--sb-dur);
+      }
+      .sb-form input:focus, .sb-form select:focus, .sb-form textarea:focus {
+        border-color: rgba(34, 211, 183, 0.6);
+        outline: none;
+      }
+      .sb-scope-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .sb-scope-grid label {
+        display: flex; align-items: center; gap: 8px;
+        padding: 6px 10px;
+        border: 1px solid var(--sb-border);
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        margin-bottom: 0;
+        color: var(--sb-text);
+      }
+      .sb-scope-grid label.checked {
+        background: rgba(34, 211, 183, 0.08);
+        border-color: rgba(34, 211, 183, 0.4);
+      }
+      .sb-log-row {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--sb-border);
+        font-family: var(--sb-font-mono);
+        font-size: var(--sb-text-xs);
+        display: grid;
+        grid-template-columns: 130px 100px 100px 1fr;
+        gap: var(--sb-space-3);
+        align-items: center;
+      }
+      .sb-log-row:hover { background: var(--sb-int-row-hover); }
+      .sb-log-row time { color: var(--sb-text-faint); }
+      .sb-log-row .ev { color: var(--sb-text); }
+      .sb-modal-backdrop {
+        position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        place-items: center;
+        z-index: 50;
+      }
+      .sb-modal-backdrop.open { display: grid; }
+      .sb-modal {
+        background: var(--sb-bg);
+        border: 1px solid var(--sb-border);
+        border-radius: var(--sb-radius-lg);
+        padding: var(--sb-space-5);
+        max-width: 520px;
+        width: calc(100% - 32px);
+        display: grid;
+        gap: var(--sb-space-3);
+      }
+      .sb-modal h3 { font-family: var(--sb-font-display); font-size: var(--sb-text-lg); font-weight: 600; }
+      .sb-modal .row { display: flex; gap: 8px; justify-content: flex-end; }
+      .sb-flash {
+        position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+        background: rgba(34, 211, 183, 0.15);
+        color: #6ee7b7;
+        border: 1px solid rgba(34, 211, 183, 0.4);
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: var(--sb-text-sm);
+        z-index: 100;
+        opacity: 0; pointer-events: none;
+        transition: opacity 200ms ease;
+      }
+      .sb-flash.show { opacity: 1; }
+      .sb-flash--err {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        border-color: rgba(239, 68, 68, 0.4);
+      }
+      .sb-pill-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    </style>
+  </head>
+  <body class="sb-app">
+    <header class="sb-topbar">
+      <a class="sb-topbar__brand" href="/">
+        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+          <rect x="2" y="2" width="28" height="28" rx="8" fill="#22D3B7" />
+          <path d="M10 22V10h6l5 6-5 6h-6z" fill="#001513" />
+        </svg>
+        <b>ShadowBlade</b>
+      </a>
+      <nav class="sb-topbar__nav" aria-label="主导航">
+        <a href="dashboard.html">概览</a>
+        <a href="new-video.html">新建</a>
+        <a href="queue.html">队列</a>
+        <a href="brand-kit.html">品牌</a>
+        <a href="team.html">团队</a>
+        <a aria-current="page" href="integrations-admin.html">集成</a>
+      </nav>
+      <div class="sb-topbar__actions">
+        <button class="sb-btn sb-btn--ghost sb-btn--sm" id="btn-emit-test" type="button">发送测试事件</button>
+      </div>
+    </header>
+
+    <main class="sb-main">
+      <section class="sb-hero">
+        <span class="sb-eyebrow">工作空间 · 集成管理</span>
+        <h1 class="sb-hero__title">把 ShadowBlade 焊在你的技术栈上。</h1>
+        <p class="sb-hero__lede">
+          API Keys、Webhooks、第三方集成、审计日志。所有出站事件都签名加固，所有 Key 都只展示一次明文。
+        </p>
+      </section>
+
+      <section class="sb-stat-grid" id="overview">
+        <div class="sb-stat">
+          <div class="sb-stat__label">API Keys</div>
+          <div class="sb-stat__val" id="stat-keys">—</div>
+          <div class="sb-stat__split" id="stat-keys-split">活跃 / 总数</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-stat__label">Webhooks</div>
+          <div class="sb-stat__val" id="stat-hooks">—</div>
+          <div class="sb-stat__split" id="stat-hooks-split">活跃 / 总数</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-stat__label">第三方集成</div>
+          <div class="sb-stat__val" id="stat-3p">—</div>
+          <div class="sb-stat__split" id="stat-3p-split">活跃 / 总数</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-stat__label">最近 24h 事件</div>
+          <div class="sb-stat__val" id="stat-events">—</div>
+          <div class="sb-stat__split">webhook + third_party</div>
+        </div>
+      </section>
+
+      <section class="sb-ia-layout">
+        <aside class="sb-ia-nav" aria-label="模块导航">
+          <button data-tab="api-keys" aria-current="page">
+            API Keys <span class="count" id="cnt-keys">0</span>
+          </button>
+          <button data-tab="webhooks">
+            Webhooks <span class="count" id="cnt-hooks">0</span>
+          </button>
+          <button data-tab="third-party">
+            第三方集成 <span class="count" id="cnt-3p">0</span>
+          </button>
+          <button data-tab="logs">
+            审计日志
+          </button>
+          <button data-tab="docs">
+            开发者文档
+          </button>
+        </aside>
+
+        <div>
+          <!-- API Keys pane -->
+          <div class="sb-ia-pane" data-pane="api-keys" data-active="1">
+            <div class="sb-key-banner" id="key-flash" style="display: none">
+              <b>新 API Key 生成成功 — 这是它唯一一次显示明文。</b>
+              <code id="key-flash-value"></code>
+              <div style="display: flex; gap: 8px;">
+                <button class="sb-btn sb-btn--sm" type="button" onclick="copyText(document.getElementById('key-flash-value').textContent)">复制</button>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm" type="button" onclick="document.getElementById('key-flash').style.display='none'">关闭</button>
+              </div>
+            </div>
+
+            <div class="sb-card">
+              <div class="sb-card__head">
+                <div>
+                  <div class="sb-card__title">API Keys</div>
+                  <div class="sb-card__sub">用 Bearer / X-API-Key 头部调用 mix-video、templates、brand-kit 端点。</div>
+                </div>
+                <button class="sb-btn" type="button" id="btn-new-key">+ 生成新 Key</button>
+              </div>
+              <table class="sb-table">
+                <thead>
+                  <tr>
+                    <th>名称</th>
+                    <th>Key</th>
+                    <th>权限</th>
+                    <th>状态</th>
+                    <th>最后使用</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-keys">
+                  <tr><td colspan="6"><div class="sb-empty">加载中...</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Webhooks pane -->
+          <div class="sb-ia-pane" data-pane="webhooks">
+            <div class="sb-card">
+              <div class="sb-card__head">
+                <div>
+                  <div class="sb-card__title">Webhooks</div>
+                  <div class="sb-card__sub">视频生成、品牌套件变更等事件发到任意 HTTPS 端点，HMAC-SHA256 签名。</div>
+                </div>
+                <button class="sb-btn" type="button" id="btn-new-hook">+ 添加 Webhook</button>
+              </div>
+              <table class="sb-table">
+                <thead>
+                  <tr>
+                    <th>名称</th>
+                    <th>目标 URL</th>
+                    <th>订阅事件</th>
+                    <th>状态</th>
+                    <th>最近触发</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-hooks">
+                  <tr><td colspan="6"><div class="sb-empty">加载中...</div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Third-party pane -->
+          <div class="sb-ia-pane" data-pane="third-party">
+            <div class="sb-card">
+              <div class="sb-card__head">
+                <div>
+                  <div class="sb-card__title">第三方集成</div>
+                  <div class="sb-card__sub">Slack / Discord / Notion / Zapier / 通用 Webhook — 选适配器，填配置即可。</div>
+                </div>
+                <button class="sb-btn" type="button" id="btn-new-3p">+ 新建集成</button>
+              </div>
+              <div id="grid-3p" style="display: grid; gap: var(--sb-space-3);"></div>
+            </div>
+          </div>
+
+          <!-- Logs pane -->
+          <div class="sb-ia-pane" data-pane="logs">
+            <div class="sb-card">
+              <div class="sb-card__head">
+                <div>
+                  <div class="sb-card__title">审计日志</div>
+                  <div class="sb-card__sub">每一次出站调用都留痕。失败 4xx/5xx / 超时都看得到。</div>
+                </div>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm" type="button" id="btn-refresh-logs">刷新</button>
+              </div>
+              <div id="logs">
+                <div class="sb-empty">加载中...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Docs pane -->
+          <div class="sb-ia-pane" data-pane="docs">
+            <div class="sb-card">
+              <div class="sb-card__title">开发者文档</div>
+              <div class="sb-card__sub" style="margin-bottom: 16px">把 ShadowBlade 接进你的 CI/CD 或者其它服务。</div>
+              <h4 style="margin-top: 16px; font-family: var(--sb-font-display)">用 API Key 调用 mix-video</h4>
+              <pre style="background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 8px; overflow-x: auto; font-family: var(--sb-font-mono); font-size: var(--sb-text-xs); margin-top: 8px"><code>curl -X POST https://api.shadowblade.io/api/v1/mix-video \
+  -H "X-API-Key: sb_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "demo-1",
+    "clips": [{"path": "/storage/raw/a.mp4"}],
+    "template": "product-demo"
+  }'</code></pre>
+
+              <h4 style="margin-top: 24px; font-family: var(--sb-font-display)">校验 Webhook 签名</h4>
+              <pre style="background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 8px; overflow-x: auto; font-family: var(--sb-font-mono); font-size: var(--sb-text-xs); margin-top: 8px"><code># Python
+import hmac, hashlib
+
+def verify(secret: str, body: bytes, signature_header: str) -> bool:
+    expected = "sha256=" + hmac.new(
+        secret.encode(), body, hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)</code></pre>
+
+              <h4 style="margin-top: 24px; font-family: var(--sb-font-display)">事件类型</h4>
+              <div class="sb-pill-row" style="margin-top: 8px">
+                <span class="sb-chip">video_generated</span>
+                <span class="sb-chip">video_failed</span>
+                <span class="sb-chip">template_updated</span>
+                <span class="sb-chip">brand_kit_updated</span>
+                <span class="sb-chip">api_key_created</span>
+                <span class="sb-chip">api_key_revoked</span>
+                <span class="sb-chip">webhook_test</span>
+                <span class="sb-chip">ping</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- New API Key modal -->
+    <div class="sb-modal-backdrop" id="modal-key">
+      <div class="sb-modal">
+        <h3>生成新 API Key</h3>
+        <form class="sb-form" id="form-new-key" onsubmit="return false">
+          <div>
+            <label for="key-name">名称</label>
+            <input id="key-name" required maxlength="120" placeholder="例如：deploy-bot" />
+          </div>
+          <div>
+            <label>权限范围 (Scopes)</label>
+            <div class="sb-scope-grid" id="scope-grid">
+              <label><input type="checkbox" value="*" checked>* 全部权限</label>
+              <label><input type="checkbox" value="mix:write">mix:write</label>
+              <label><input type="checkbox" value="mix:read">mix:read</label>
+              <label><input type="checkbox" value="templates:read">templates:read</label>
+              <label><input type="checkbox" value="brand-kit:read">brand-kit:read</label>
+              <label><input type="checkbox" value="brand-kit:write">brand-kit:write</label>
+            </div>
+          </div>
+          <div class="row">
+            <button class="sb-btn sb-btn--ghost" type="button" onclick="closeModal('modal-key')">取消</button>
+            <button class="sb-btn" type="button" id="submit-new-key">生成</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- New Webhook modal -->
+    <div class="sb-modal-backdrop" id="modal-hook">
+      <div class="sb-modal">
+        <h3>添加 Webhook</h3>
+        <form class="sb-form" onsubmit="return false">
+          <div>
+            <label for="hook-name">名称</label>
+            <input id="hook-name" required maxlength="120" placeholder="例如：deploy-notif" />
+          </div>
+          <div>
+            <label for="hook-url">目标 URL (HTTPS)</label>
+            <input id="hook-url" required type="url" placeholder="https://api.example.com/webhooks/sb" />
+          </div>
+          <div>
+            <label>订阅事件 (全选表示订阅全部)</label>
+            <div class="sb-scope-grid" id="event-grid">
+              <label><input type="checkbox" value="video_generated">video_generated</label>
+              <label><input type="checkbox" value="video_failed">video_failed</label>
+              <label><input type="checkbox" value="brand_kit_updated">brand_kit_updated</label>
+              <label><input type="checkbox" value="template_updated">template_updated</label>
+              <label><input type="checkbox" value="api_key_created">api_key_created</label>
+              <label><input type="checkbox" value="api_key_revoked">api_key_revoked</label>
+            </div>
+          </div>
+          <div class="row">
+            <button class="sb-btn sb-btn--ghost" type="button" onclick="closeModal('modal-hook')">取消</button>
+            <button class="sb-btn" type="button" id="submit-new-hook">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- New third-party modal -->
+    <div class="sb-modal-backdrop" id="modal-3p">
+      <div class="sb-modal">
+        <h3>新建第三方集成</h3>
+        <form class="sb-form" onsubmit="return false">
+          <div>
+            <label for="tp-name">名称</label>
+            <input id="tp-name" required maxlength="120" placeholder="例如：#engineering 频道" />
+          </div>
+          <div>
+            <label for="tp-provider">服务商</label>
+            <select id="tp-provider">
+              <option value="slack">Slack</option>
+              <option value="discord">Discord</option>
+              <option value="notion">Notion</option>
+              <option value="zapier">Zapier</option>
+              <option value="generic_webhook">通用 Webhook</option>
+            </select>
+          </div>
+          <div id="tp-config-area">
+            <label for="tp-webhook-url">Webhook URL</label>
+            <input id="tp-webhook-url" type="url" placeholder="服务商提供的 URL" />
+          </div>
+          <div class="row">
+            <button class="sb-btn sb-btn--ghost" type="button" onclick="closeModal('modal-3p')">取消</button>
+            <button class="sb-btn" type="button" id="submit-new-3p">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="sb-flash" id="flash"></div>
+
+    <script>
+      // ===== 全局状态 =====
+      const API = ""; // 同源 (默认连本机的 /api/v1)
+      const HEADERS = { "Content-Type": "application/json", "X-Workspace-Id": "1" };
+
+      let LAST_OVERVIEW = null;
+
+      // ===== Utils =====
+      function flash(msg, kind) {
+        const el = document.getElementById("flash");
+        el.textContent = msg;
+        el.className = "sb-flash show" + (kind === "err" ? " sb-flash--err" : "");
+        setTimeout(() => el.classList.remove("show"), 2400);
+      }
+      function copyText(t) {
+        navigator.clipboard.writeText(t).then(() => flash("已复制到剪贴板"));
+      }
+      function openModal(id) { document.getElementById(id).classList.add("open"); }
+      function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+      function api(path, opts) {
+        return fetch(`${API}/api/v1${path}`, { ...opts, headers: { ...HEADERS, ...(opts?.headers || {}) } })
+          .then(async (r) => {
+            const txt = await r.text();
+            const body = txt ? (txt.startsWith("{") || txt.startsWith("[") ? JSON.parse(txt) : txt) : null;
+            if (!r.ok) {
+              const detail = (body && body.detail) || `HTTP ${r.status}`;
+              throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+            }
+            return body;
+          });
+      }
+      function fmtTime(iso) {
+        if (!iso) return "—";
+        try {
+          const d = new Date(iso);
+          return d.toLocaleString("zh-CN", { hour12: false });
+        } catch {
+          return iso;
+        }
+      }
+
+      // ===== Tab nav =====
+      document.querySelectorAll(".sb-ia-nav button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".sb-ia-nav button").forEach((b) => b.removeAttribute("aria-current"));
+          btn.setAttribute("aria-current", "page");
+          document.querySelectorAll(".sb-ia-pane").forEach((p) => p.setAttribute("data-active", "0"));
+          const pane = document.querySelector(`[data-pane="${btn.dataset.tab}"]`);
+          if (pane) pane.setAttribute("data-active", "1");
+          if (btn.dataset.tab === "logs") loadLogs();
+        });
+      });
+
+      // Scope checkbox styling
+      document.querySelectorAll(".sb-scope-grid").forEach((grid) => {
+        grid.addEventListener("change", () => {
+          grid.querySelectorAll("label").forEach((lb) => {
+            lb.classList.toggle("checked", lb.querySelector("input").checked);
+          });
+        });
+        // initial
+        grid.querySelectorAll("label").forEach((lb) => {
+          lb.classList.toggle("checked", lb.querySelector("input").checked);
+        });
+      });
+
+      // ===== Overview =====
+      async function loadOverview() {
+        try {
+          const body = await api("/integrations/overview");
+          LAST_OVERVIEW = body;
+          document.getElementById("stat-keys").textContent = body.api_keys_active;
+          document.getElementById("stat-keys-split").textContent = `${body.api_keys_active} / ${body.api_keys_total}`;
+          document.getElementById("stat-hooks").textContent = body.webhooks_active;
+          document.getElementById("stat-hooks-split").textContent = `${body.webhooks_active} / ${body.webhooks_total}`;
+          document.getElementById("stat-3p").textContent = body.third_party_active;
+          document.getElementById("stat-3p-split").textContent = `${body.third_party_active} / ${body.third_party_total}`;
+          document.getElementById("stat-events").textContent = (body.recent_events || []).length;
+          document.getElementById("cnt-keys").textContent = body.api_keys_total;
+          document.getElementById("cnt-hooks").textContent = body.webhooks_total;
+          document.getElementById("cnt-3p").textContent = body.third_party_total;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // ===== API Keys =====
+      async function loadKeys() {
+        try {
+          const body = await api("/integrations/api-keys");
+          const rows = body.items || [];
+          const tbody = document.getElementById("tbody-keys");
+          if (rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6"><div class="sb-empty">还没有 API Key。生成第一个吧。</div></td></tr>`;
+            return;
+          }
+          tbody.innerHTML = rows.map((k) => `
+            <tr>
+              <td><b>${escapeHtml(k.name)}</b></td>
+              <td><span class="sb-mask">${k.masked}</span></td>
+              <td><div class="sb-pill-row">${(k.scopes || []).map((s) => `<span class="sb-chip">${escapeHtml(s)}</span>`).join("")}</div></td>
+              <td>${k.is_active
+                ? '<span class="sb-chip sb-chip--ok">活跃</span>'
+                : '<span class="sb-chip sb-chip--off">已撤销</span>'}</td>
+              <td>${fmtTime(k.last_used_at)}</td>
+              <td>${k.is_active
+                ? `<button class="sb-btn sb-btn--danger sb-btn--sm" onclick="revokeKey(${k.id})">撤销</button>`
+                : ""}</td>
+            </tr>
+          `).join("");
+        } catch (e) {
+          flash(`加载 API Keys 失败: ${e.message}`, "err");
+        }
+      }
+      async function revokeKey(id) {
+        if (!confirm("撤销这个 API Key？所有使用它的脚本都会立刻失效。")) return;
+        try {
+          await api(`/integrations/api-keys/${id}`, { method: "DELETE" });
+          flash("已撤销");
+          await Promise.all([loadKeys(), loadOverview()]);
+        } catch (e) {
+          flash(`撤销失败: ${e.message}`, "err");
+        }
+      }
+
+      document.getElementById("btn-new-key").addEventListener("click", () => {
+        document.getElementById("key-name").value = "";
+        document.querySelectorAll("#scope-grid input").forEach((i) => (i.checked = i.value === "*"));
+        document.querySelectorAll("#scope-grid label").forEach((lb) => {
+          lb.classList.toggle("checked", lb.querySelector("input").checked);
+        });
+        openModal("modal-key");
+      });
+
+      document.getElementById("submit-new-key").addEventListener("click", async () => {
+        const name = document.getElementById("key-name").value.trim();
+        if (!name) { flash("请输入名称", "err"); return; }
+        const scopes = [...document.querySelectorAll("#scope-grid input:checked")].map((i) => i.value);
+        if (scopes.length === 0) { flash("至少勾一个权限", "err"); return; }
+        try {
+          const body = await api("/integrations/api-keys", {
+            method: "POST",
+            body: JSON.stringify({ name, scopes }),
+          });
+          closeModal("modal-key");
+          document.getElementById("key-flash-value").textContent = body.key;
+          document.getElementById("key-flash").style.display = "grid";
+          flash("Key 生成成功 — 请立即复制");
+          await Promise.all([loadKeys(), loadOverview()]);
+        } catch (e) {
+          flash(`创建失败: ${e.message}`, "err");
+        }
+      });
+
+      // ===== Webhooks =====
+      async function loadHooks() {
+        try {
+          const body = await api("/integrations/webhooks");
+          const rows = body.items || [];
+          const tbody = document.getElementById("tbody-hooks");
+          if (rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6"><div class="sb-empty">还没有 Webhook。</div></td></tr>`;
+            return;
+          }
+          tbody.innerHTML = rows.map((w) => `
+            <tr>
+              <td><b>${escapeHtml(w.name)}</b></td>
+              <td><span class="sb-mask">${escapeHtml(w.target_url)}</span></td>
+              <td>${(w.event_types || []).length === 0
+                ? '<span class="sb-chip">全部事件</span>'
+                : (w.event_types || []).map((s) => `<span class="sb-chip">${escapeHtml(s)}</span>`).join(" ")}</td>
+              <td>${w.is_active
+                ? (w.last_status === "error"
+                   ? '<span class="sb-chip sb-chip--err">最近失败</span>'
+                   : '<span class="sb-chip sb-chip--ok">活跃</span>')
+                : '<span class="sb-chip sb-chip--off">已停用</span>'}</td>
+              <td>${fmtTime(w.last_triggered_at)}</td>
+              <td>
+                <button class="sb-btn sb-btn--ghost sb-btn--sm" onclick="testHook(${w.id})">测试</button>
+                <button class="sb-btn sb-btn--danger sb-btn--sm" onclick="deleteHook(${w.id})">删除</button>
+              </td>
+            </tr>
+          `).join("");
+        } catch (e) {
+          flash(`加载 Webhooks 失败: ${e.message}`, "err");
+        }
+      }
+      async function testHook(id) {
+        try {
+          const body = await api(`/integrations/webhooks/${id}/test`, { method: "POST" });
+          flash(body.ok ? `测试成功 — HTTP ${body.status_code} in ${body.duration_ms}ms` : `测试失败 — ${body.error || "non-2xx"}`, body.ok ? "ok" : "err");
+          await Promise.all([loadHooks(), loadOverview()]);
+        } catch (e) {
+          flash(`测试失败: ${e.message}`, "err");
+        }
+      }
+      async function deleteHook(id) {
+        if (!confirm("删除这个 Webhook？")) return;
+        try {
+          await api(`/integrations/webhooks/${id}`, { method: "DELETE" });
+          flash("已删除");
+          await Promise.all([loadHooks(), loadOverview()]);
+        } catch (e) {
+          flash(`删除失败: ${e.message}`, "err");
+        }
+      }
+
+      document.getElementById("btn-new-hook").addEventListener("click", () => {
+        document.getElementById("hook-name").value = "";
+        document.getElementById("hook-url").value = "";
+        document.querySelectorAll("#event-grid input").forEach((i) => (i.checked = false));
+        document.querySelectorAll("#event-grid label").forEach((lb) => lb.classList.remove("checked"));
+        openModal("modal-hook");
+      });
+
+      document.getElementById("submit-new-hook").addEventListener("click", async () => {
+        const name = document.getElementById("hook-name").value.trim();
+        const target_url = document.getElementById("hook-url").value.trim();
+        if (!name || !target_url) { flash("名称和 URL 必填", "err"); return; }
+        const events = [...document.querySelectorAll("#event-grid input:checked")].map((i) => i.value);
+        try {
+          await api("/integrations/webhooks", {
+            method: "POST",
+            body: JSON.stringify({ name, target_url, event_types: events }),
+          });
+          closeModal("modal-hook");
+          flash("Webhook 添加成功");
+          await Promise.all([loadHooks(), loadOverview()]);
+        } catch (e) {
+          flash(`创建失败: ${e.message}`, "err");
+        }
+      });
+
+      // ===== Third-party =====
+      async function loadThirdParty() {
+        try {
+          const body = await api("/integrations/third-party");
+          const rows = body.items || [];
+          const grid = document.getElementById("grid-3p");
+          if (rows.length === 0) {
+            grid.innerHTML = `<div class="sb-empty">还没有第三方集成。</div>`;
+            return;
+          }
+          grid.innerHTML = rows.map((i) => `
+            <div style="display: flex; align-items: center; gap: 16px; padding: 14px; border: 1px solid var(--sb-border); border-radius: 12px;">
+              <span class="sb-chip" style="background: rgba(34,211,183,0.08); color: #6ee7b7; border-color: rgba(34,211,183,0.3); font-size: 11px; padding: 4px 10px">${escapeHtml(i.provider)}</span>
+              <div style="flex: 1">
+                <b>${escapeHtml(i.name)}</b>
+                <div style="font-size: 12px; color: var(--sb-text-faint); margin-top: 3px">${i.description ? escapeHtml(i.description) : "—"}</div>
+              </div>
+              <div>${i.is_active
+                ? '<span class="sb-chip sb-chip--ok">活跃</span>'
+                : '<span class="sb-chip sb-chip--off">已停用</span>'}</div>
+              <button class="sb-btn sb-btn--danger sb-btn--sm" onclick="delete3p(${i.id})">删除</button>
+            </div>
+          `).join("");
+        } catch (e) {
+          flash(`加载第三方集成失败: ${e.message}`, "err");
+        }
+      }
+      async function delete3p(id) {
+        if (!confirm("删除这个集成？")) return;
+        try {
+          await api(`/integrations/third-party/${id}`, { method: "DELETE" });
+          flash("已删除");
+          await Promise.all([loadThirdParty(), loadOverview()]);
+        } catch (e) {
+          flash(`删除失败: ${e.message}`, "err");
+        }
+      }
+      document.getElementById("btn-new-3p").addEventListener("click", () => {
+        document.getElementById("tp-name").value = "";
+        document.getElementById("tp-webhook-url").value = "";
+        openModal("modal-3p");
+      });
+      document.getElementById("submit-new-3p").addEventListener("click", async () => {
+        const name = document.getElementById("tp-name").value.trim();
+        const provider = document.getElementById("tp-provider").value;
+        const url = document.getElementById("tp-webhook-url").value.trim();
+        if (!name) { flash("请输入名称", "err"); return; }
+        const config = url ? { webhook_url: url } : {};
+        try {
+          await api("/integrations/third-party", {
+            method: "POST",
+            body: JSON.stringify({ name, provider, config, event_types: [] }),
+          });
+          closeModal("modal-3p");
+          flash("集成添加成功");
+          await Promise.all([loadThirdParty(), loadOverview()]);
+        } catch (e) {
+          flash(`创建失败: ${e.message}`, "err");
+        }
+      });
+
+      // ===== Logs =====
+      async function loadLogs() {
+        try {
+          const body = await api("/integrations/logs?limit=50");
+          const rows = body.items || [];
+          const el = document.getElementById("logs");
+          if (rows.length === 0) {
+            el.innerHTML = `<div class="sb-empty">还没有事件触发。试试「发送测试事件」按钮。</div>`;
+            return;
+          }
+          el.innerHTML = rows.map((r) => `
+            <div class="sb-log-row">
+              <time>${fmtTime(r.created_at)}</time>
+              <span class="sb-chip">${escapeHtml(r.kind)}</span>
+              <span class="${r.status === 'success' ? 'sb-chip sb-chip--ok' : 'sb-chip sb-chip--err'}">${escapeHtml(r.status)}${r.status_code ? ' · ' + r.status_code : ''}${r.duration_ms ? ' · ' + r.duration_ms + 'ms' : ''}</span>
+              <span class="ev">${escapeHtml(r.event_type)}${r.error_message ? ' — ' + escapeHtml(r.error_message.slice(0, 80)) : ''}</span>
+            </div>
+          `).join("");
+        } catch (e) {
+          flash(`加载日志失败: ${e.message}`, "err");
+        }
+      }
+      document.getElementById("btn-refresh-logs").addEventListener("click", loadLogs);
+      document.getElementById("btn-emit-test").addEventListener("click", async () => {
+        try {
+          await api("/integrations/events/emit?event_type=ping", {
+            method: "POST",
+            body: JSON.stringify({ from: "ui", ts: Date.now() }),
+          });
+          flash("测试事件已发送 — 看看日志");
+          loadLogs();
+          loadOverview();
+        } catch (e) {
+          flash(`发送失败: ${e.message}`, "err");
+        }
+      });
+
+      function escapeHtml(str) {
+        if (typeof str !== "string") return String(str);
+        return str.replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+      }
+
+      // ===== Boot =====
+      (async function boot() {
+        await Promise.all([loadOverview(), loadKeys(), loadHooks(), loadThirdParty()]);
+      })();
+    </script>
+  </body>
+</html>
