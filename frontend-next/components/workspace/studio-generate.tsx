@@ -367,7 +367,7 @@ export function StudioGenerate() {
             {script ? (
               <div className="grid gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3 text-xs">
                 <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="bg-accent-500/15 text-accent-200">
+                  <Badge variant="draft" className="bg-accent-500/15 text-accent-200">
                     {script.scenario}
                   </Badge>
                   <span className="text-muted-foreground">

@@ -8,7 +8,10 @@
  * 生产环境会被真正的 SSO + cookie session 替换。
  */
 
-export type Role = "owner" | "admin" | "editor" | "viewer";
+// Backend canonical roles (see app/core/permissions.py). `editor`/`viewer`
+// are kept as legacy aliases on the backend for cross-version safety but
+// new code should emit `member`/`guest`.
+export type Role = "owner" | "admin" | "member" | "guest";
 
 export interface Organization {
   id: number;
