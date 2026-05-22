@@ -21,6 +21,9 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
         "http://localhost:3001",
         "http://127.0.0.1:3001",
+        # Vercel preview + production. Override via
+        # SHADOWBLADE_CORS_ORIGINS='["https://your-app.vercel.app"]'
+        "https://frontend-next-two-lac.vercel.app",
     ]
     # Default storage path — anchored to the repo root, not the CWD, so it
     # behaves the same whether uvicorn is started from `./` or from `backend/`.

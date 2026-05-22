@@ -1,0 +1,24 @@
+# Render.com blueprint — `render.com/blueprints` then connect this repo.
+# Free tier sleeps after 15 min idle (acceptable for a demo project).
+
+services:
+  - type: web
+    name: shadowblade-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: SHADOWBLADE_STORAGE_ROOT
+        value: /data/storage
+      - key: SHADOWBLADE_JWT_SECRET
+        generateValue: true
+      # Optional — leave blank, set via Render dashboard after deploy
+      # - key: PEXELS_API_KEY
+      #   sync: false
+    disk:
+      name: shadowblade-storage
+      mountPath: /data
+      sizeGB: 1

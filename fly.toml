@@ -1,0 +1,39 @@
+# fly.toml — Fly.io app configuration.
+# `fly launch --copy-config --name shadowblade-backend` from repo root.
+
+app = "shadowblade-backend"
+primary_region = "nrt"  # Tokyo — closest to China users; sjc for US west
+
+[build]
+  dockerfile = "backend/Dockerfile"
+
+[env]
+  SHADOWBLADE_STORAGE_ROOT = "/data/storage"
+  PORT = "8000"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[http_service.concurrency]
+  type = "requests"
+  soft_limit = 20
+  hard_limit = 25
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
+  cpus = 1
+
+[mounts]
+  source = "shadowblade_data"
+  destination = "/data"
+  initial_size = "1gb"
+
+[[services.tcp_checks]]
+  interval = "15s"
+  timeout = "2s"
+  grace_period = "30s"

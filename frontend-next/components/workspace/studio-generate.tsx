@@ -617,14 +617,32 @@ function statusLabel(status: string) {
   return "等待";
 }
 
+// Static-files prefix. In dev / same-origin Vercel rewrites it stays "/static".
+// When you deploy frontend (Vercel) separately from backend (Railway/Render/
+// Fly), set NEXT_PUBLIC_STATIC_BASE=https://your-backend so the <video> tag
+// hits the backend's StaticFiles mount directly without an extra hop.
+const STATIC_PREFIX = process.env.NEXT_PUBLIC_STATIC_BASE || "";
+
+function staticUrl(backendRel: string | null | undefined): string {
+  if (!backendRel) return "";
+  if (backendRel.startsWith("http://") || backendRel.startsWith("https://")) return backendRel;
+  if (!STATIC_PREFIX) return backendRel;
+  // backendRel looks like "/static/storage/mix/.../*.mp4". Rebase onto the
+  // remote base, stripping the leading "/static" so we don't double it.
+  const stripped = backendRel.replace(/^\/static\/?/, "/");
+  return `${STATIC_PREFIX.replace(/\/$/, "")}${stripped}`;
+}
+
 function Output({ job }: { job: GenerateVideoResponse }) {
   const o = job.output!;
+  const videoUrl = staticUrl(o.video_url);
+  const coverUrl = staticUrl(o.cover_url);
   return (
     <>
       <video
         className="w-full rounded-md border border-white/10 bg-black"
-        src={o.video_url}
-        poster={o.cover_url ?? undefined}
+        src={videoUrl}
+        poster={coverUrl || undefined}
         controls
         playsInline
       />
@@ -645,7 +663,7 @@ function Output({ job }: { job: GenerateVideoResponse }) {
 
       <a
         className="inline-flex items-center gap-2 self-start text-xs text-accent-300 hover:underline"
-        href={o.video_url}
+        href={videoUrl}
         download
       >
         <Download size={12} /> 下载 MP4

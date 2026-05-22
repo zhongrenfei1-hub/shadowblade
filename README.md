@@ -33,7 +33,7 @@
 
 ---
 
-## 🚀 30 秒上手
+## 🚀 30 秒本地跑
 
 ```bash
 git clone https://github.com/zhongrenfei1-hub/shadowblade.git
@@ -45,6 +45,12 @@ make next            # 同时起后端 :8000 + 前端 :3001
 ```
 
 浏览器开 **http://localhost:3001/studio**，输入主题，点 **「立即生成视频」**。
+
+## ☁️ 部署到生产
+
+前端 **Vercel** + 后端 **Railway / Render / Fly** 三选一。完整 5 分钟流程见 [DEPLOY.md](DEPLOY.md)。
+
+> Vercel 不能跑后端（serverless 60s 超时 + 没 ffmpeg + 没持久 storage）。本仓库带了 `backend/Dockerfile`、`railway.json`、`render.yaml`、`fly.toml`，三家任选一家点一下就部署完。
 
 ---
 
