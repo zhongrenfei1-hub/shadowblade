@@ -76,6 +76,24 @@ class RegisterResponse(LoginResponse):
     email_verification_token: str | None = None
 
 
+class GoogleCallbackResponse(LoginResponse):
+    """Response shape for ``GET /auth/google/callback?intent=json``.
+
+    Same fields as the password-login response so client code that
+    handles ``LoginResponse`` doesn't need a branch. Adds two
+    Google-specific flags:
+
+    * ``is_new_user``           — True iff this callback created a new
+                                   User row + personal workspace.
+    * ``provider``              — always ``"google"`` here; kept as a
+                                   field so future GitHub/Microsoft
+                                   responses can reuse the schema.
+    """
+
+    is_new_user: bool = False
+    provider: str = "google"
+
+
 # ---------------------------------------------------------------------------
 # Refresh
 # ---------------------------------------------------------------------------
@@ -197,6 +215,7 @@ class MessageResponse(BaseModel):
 __all__ = [
     "EmailVerificationRequest",
     "EmailVerificationResendResponse",
+    "GoogleCallbackResponse",
     "LoginRequest",
     "LoginResponse",
     "MessageResponse",

@@ -10,6 +10,7 @@ from app.models.brand_kit import BrandKit
 from app.models.invitation import WorkspaceInvite
 from app.models.job import Job
 from app.models.membership import WorkspaceMember
+from app.models.oauth_account import OAuthAccount
 from app.models.project import Project
 from app.models.render import RenderTask
 from app.models.settings import AppSetting, OrganizationSettings, UserProfileSettings
@@ -22,6 +23,7 @@ __all__ = [
     "Asset",
     "BrandKit",
     "Job",
+    "OAuthAccount",
     "OrganizationSettings",
     "Project",
     "RenderTask",

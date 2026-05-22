@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.sessions import SessionMiddleware
 
 from app.api import (
     analytics,
@@ -12,6 +13,7 @@ from app.api import (
     auth,
     brand_kits,
     generate,
+    google_auth,
     health,
     integrations,
     jobs,
@@ -58,9 +60,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# SessionMiddleware backs Authlib's OAuth flow — it stashes ``state`` and
+# the PKCE ``code_verifier`` in a signed cookie between the
+# ``/auth/google/login`` redirect and the ``/auth/google/callback``
+# return trip. ``session_secret_key`` defaults to ``jwt_secret`` (see
+# config.get_settings); production deployments can split them by setting
+# SHADOWBLADE_SESSION_SECRET_KEY.
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=settings.session_secret_key,
+    https_only=settings.environment == "production",
+    same_site="lax",  # the cross-site Google → us redirect needs lax, not strict
+    max_age=10 * 60,  # the dance completes in seconds; 10 min covers slow consent
+)
+
 for router in (
     health.router,
     auth.router,
+    google_auth.router,
     workspaces.router,
     organizations.router,
     projects.router,

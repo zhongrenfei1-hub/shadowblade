@@ -132,6 +132,7 @@ async def init_db() -> None:
         job,
         membership,
         notification,
+        oauth_account,
         project,
         render,
         settings as settings_model,

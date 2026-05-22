@@ -9,6 +9,7 @@ directly — the routers translate to/from ORM objects.
 from app.schemas.auth import (
     EmailVerificationRequest,
     EmailVerificationResendResponse,
+    GoogleCallbackResponse,
     LoginRequest,
     LoginResponse,
     MessageResponse,
@@ -90,6 +91,7 @@ __all__ = [
     "EmailVerificationRequest",
     "EmailVerificationResendResponse",
     "EventType",
+    "GoogleCallbackResponse",
     "IntegrationLogRead",
     "IntegrationsOverview",
     "InvitationAcceptResponse",

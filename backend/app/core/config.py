@@ -47,10 +47,61 @@ class Settings(BaseSettings):
     storage_root: str = str(_REPO_ROOT / "storage")
     render_concurrency: int = 4
 
+    # -----------------------------------------------------------------
+    # Google OAuth — env via SHADOWBLADE_GOOGLE_CLIENT_ID / _SECRET /
+    # _REDIRECT_URI.
+    #
+    # The dance:
+    # 1. GET /api/v1/auth/google/login → 302 to Google with state +
+    #    PKCE verifier stashed in the signed session cookie.
+    # 2. User consents → Google 302s to ``google_redirect_uri``.
+    # 3. GET /api/v1/auth/google/callback consumes the state, exchanges
+    #    the code for an id_token + access_token, fetches userinfo, and
+    #    redirects back to ``google_post_login_redirect`` with a
+    #    short-lived auth code that the frontend swaps for a JWT pair.
+    #
+    # ``google_redirect_uri`` is registered as an "authorised redirect
+    # URI" inside the Google Cloud Console for the OAuth client — it
+    # MUST exactly match what's sent in the authorize step.
+    # ``google_post_login_redirect`` is where the frontend lives.
+    # -----------------------------------------------------------------
+    google_client_id: str = ""
+    google_client_secret: str = ""
+    google_redirect_uri: str = (
+        "http://localhost:8000/api/v1/auth/google/callback"
+    )
+    # Where the callback ultimately bounces the browser once auth is
+    # complete. The token pair is appended as a URL fragment so it never
+    # touches the server log (fragment isn't sent over the wire after the
+    # initial GET). The frontend's auth boot extracts it from
+    # ``window.location.hash``.
+    google_post_login_redirect: str = "http://localhost:3000/auth/callback"
+    # Scopes for the consent screen. ``openid email profile`` is the
+    # minimal set that returns email + name + picture without asking for
+    # contact lists or drive access — keep it tight.
+    google_oauth_scopes: str = "openid email profile"
+    # Discovery URL — Google's OIDC well-known document. Pulled in once
+    # per process start by Authlib, then cached.
+    google_oidc_metadata_url: str = (
+        "https://accounts.google.com/.well-known/openid-configuration"
+    )
+    # Used to sign the SessionMiddleware cookie that carries the OAuth
+    # state across the login → callback hop. Defaults to ``jwt_secret``
+    # so a single env var pins the whole crypto surface; prod deployments
+    # can split the two.
+    session_secret_key: str = ""
+
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
-    return Settings()
+    s = Settings()
+    # If the operator didn't override session_secret_key, fall back to
+    # jwt_secret. Centralising the "one secret for everything" default
+    # here means the rest of the code can treat ``session_secret_key``
+    # as always populated.
+    if not s.session_secret_key:
+        s.session_secret_key = s.jwt_secret
+    return s
 
 
 settings = get_settings()

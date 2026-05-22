@@ -48,7 +48,13 @@ class User(Base):
     # Legacy system-role; not the org-scoped role. Kept for back-compat with
     # the brand-kit demo and the /workspaces/me fixture endpoint.
     role: Mapped[str] = mapped_column(String(32), default="member")
-    hashed_password: Mapped[str] = mapped_column(String(255))
+    # Nullable since OAuth-only users (signed up via Google) never set a
+    # password. The password endpoints all guard against this — see
+    # ``verify_password`` returning False on None-ish hashes, plus the
+    # ``/auth/password/change`` early-return that 400s when ``hashed_password
+    # is None`` so an attacker can't probe "is this account a Google-only
+    # account?" via timing.
+    hashed_password: Mapped[str | None] = mapped_column(String(255), nullable=True)
     avatar_url: Mapped[str | None] = mapped_column(String(512), nullable=True)
 
     # Account status flags (added for Team feature).

@@ -529,6 +529,23 @@ async def change_password(
     401 (not 400) on wrong current-password so it can't be used to probe
     a borrowed token's validity.
     """
+    # OAuth-only accounts have no password — surface a clear 400 instead
+    # of letting verify_password silently fail with "current password is
+    # incorrect" (which would be misleading).
+    from app.core.security import OAUTH_ONLY_PASSWORD_HASH
+
+    if (
+        not user.hashed_password
+        or user.hashed_password == OAUTH_ONLY_PASSWORD_HASH
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "this account signed in via a social provider; "
+                "set a password through /auth/password/recover first"
+            ),
+        )
+
     if not verify_password(payload.current_password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

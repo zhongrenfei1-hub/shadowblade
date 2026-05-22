@@ -54,6 +54,15 @@ REFRESH_TOKEN_TYPE = "refresh"
 PASSWORD_RESET_TOKEN_TYPE = "password_reset"
 EMAIL_VERIFY_TOKEN_TYPE = "email_verify"
 
+# Sentinel stored in ``users.hashed_password`` for accounts that signed up
+# via OAuth (Google, etc.) and never set a password. ``verify_password``
+# treats anything that doesn't start with the bcrypt prefix as
+# unmatchable, so attempting to log in with *any* password against an
+# OAuth-only account silently fails — equivalent to "no such user". The
+# value is a single ``!`` because that's a byte bcrypt would never emit
+# (a valid bcrypt hash starts with ``$2`` for any cost factor).
+OAUTH_ONLY_PASSWORD_HASH = "!"
+
 
 class TokenError(Exception):
     """Raised when a JWT fails verification.
@@ -88,14 +97,20 @@ def hash_password(plain: str) -> str:
     return bcrypt.hashpw(encoded, salt).decode("utf-8")
 
 
-def verify_password(plain: str, hashed: str) -> bool:
+def verify_password(plain: str, hashed: str | None) -> bool:
     """Constant-time check of ``plain`` against a stored bcrypt hash.
 
     Returns ``False`` on any internal failure (malformed hash, oversize
     input, library error) — verifying a password should never distinguish
     between *wrong password* and *implementation error*.
+
+    Returns ``False`` immediately when ``hashed`` is the OAuth-only
+    sentinel (``"!"``) or any other non-bcrypt string — Google-only
+    accounts can never be logged into via the password flow.
     """
     try:
+        if not hashed or hashed == OAUTH_ONLY_PASSWORD_HASH:
+            return False
         encoded = plain.encode("utf-8")
         if len(encoded) > _BCRYPT_MAX_BYTES:
             # Bcrypt would raise; treat as auth failure rather than crash.
@@ -313,6 +328,7 @@ def verify_email_verification_token(token: str) -> str:
 __all__ = [
     "ACCESS_TOKEN_TYPE",
     "EMAIL_VERIFY_TOKEN_TYPE",
+    "OAUTH_ONLY_PASSWORD_HASH",
     "PASSWORD_RESET_TOKEN_TYPE",
     "REFRESH_TOKEN_TYPE",
     "TokenError",
