@@ -1,3 +1,4 @@
+import { ApiKeysButton } from "@/components/workspace/api-keys-panel";
 import { StudioModeSwitch } from "@/components/workspace/studio-mode-switch";
 
 export default function StudioPage() {
@@ -19,6 +20,7 @@ export default function StudioPage() {
               智能混剪 → 品牌封面，10–20 秒拿到能直接发抖音/小红书的 MP4。
             </p>
           </div>
+          <ApiKeysButton />
         </div>
       </section>
 

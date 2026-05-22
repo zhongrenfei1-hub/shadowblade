@@ -14,6 +14,7 @@ from app.api import (
     generate,
     health,
     jobs,
+    keys,
     mix_video,
     projects,
     render_queue,
@@ -21,8 +22,12 @@ from app.api import (
     templates,
     workspaces,
 )
+from app.core import secrets
 from app.core.config import settings
 from app.core.db import engine, init_db
+
+# Mirror persisted secrets into os.environ before anything reads them.
+secrets.load_into_env()
 
 
 @asynccontextmanager
@@ -62,6 +67,7 @@ for router in (
     mix_video.router,
     generate.router,
     stock.router,
+    keys.router,
 ):
     app.include_router(router, prefix="/api/v1")
 
