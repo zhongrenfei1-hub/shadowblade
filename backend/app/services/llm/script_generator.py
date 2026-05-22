@@ -30,6 +30,11 @@ class Scenario:
     benefits: tuple[str, ...]
     ctas: tuple[str, ...]
     hashtags: tuple[str, ...]
+    # Voice intent → resolved at TTS time via tts.resolve_voice_style().
+    # See backend/app/services/audio/tts.py :: THEME_VOICE_STYLES for the
+    # full list. Keep this as a *string label*, not a VoiceStyle, so the
+    # template + override layers can still re-pick.
+    voice_intent: str = "default"
 
 
 SCENARIOS: dict[str, Scenario] = {
@@ -55,6 +60,7 @@ SCENARIOS: dict[str, Scenario] = {
             "进店前两小时预约，免排队直接上钟。",
         ),
         hashtags=("#美容护肤", "#深层补水", "#新客体验", "#到店变美", "#小红书探店"),
+        voice_intent="warm",  # 晓晓，亲切感
     ),
     "nail": Scenario(
         slug="nail",
@@ -78,6 +84,7 @@ SCENARIOS: dict[str, Scenario] = {
             "工作日下午时段额外送一次免费补色。",
         ),
         hashtags=("#美甲", "#手部护理", "#日系美甲", "#七夕款", "#个人风格"),
+        voice_intent="energetic",  # 晓伊，明亮节奏感
     ),
     "spa": Scenario(
         slug="spa",
@@ -101,6 +108,7 @@ SCENARIOS: dict[str, Scenario] = {
             "扫码加我，备注「放空」预约下班后档期。",
         ),
         hashtags=("#SPA放松", "#肩颈舒缓", "#职场养生", "#自我犒赏", "#泰式按摩"),
+        voice_intent="calm",  # 云扬慢节奏，放空感
     ),
     "fitness": Scenario(
         slug="fitness",
@@ -124,6 +132,7 @@ SCENARIOS: dict[str, Scenario] = {
             "扫码先做线上体测问卷，约课更精准。",
         ),
         hashtags=("#健身私教", "#减脂塑形", "#自律变好", "#新手友好", "#一对一指导"),
+        voice_intent="energetic",  # 晓伊，带氧气感
     ),
     "cafe": Scenario(
         slug="cafe",
@@ -147,6 +156,7 @@ SCENARIOS: dict[str, Scenario] = {
             "公众号点单可预约座位，到店即坐。",
         ),
         hashtags=("#咖啡馆", "#一个人也很好", "#精品咖啡", "#街角小店", "#早 C 晚 A"),
+        voice_intent="lyrical",  # 晓晓稍慢，氛围感
     ),
     "consult": Scenario(
         slug="consult",
@@ -170,6 +180,7 @@ SCENARIOS: dict[str, Scenario] = {
             "约咨询前请阅读公众号置顶文章「咨询前准备清单」。",
         ),
         hashtags=("#职业咨询", "#一对一指导", "#个人成长", "#方案落地", "#少走弯路"),
+        voice_intent="professional",  # 云扬，可信任
     ),
     "opening": Scenario(
         slug="opening",
@@ -193,6 +204,7 @@ SCENARIOS: dict[str, Scenario] = {
             "带朋友来还能再叠一张「闺蜜券」。",
         ),
         hashtags=("#新店开业", "#探店日记", "#限时优惠", "#周末去哪儿", "#本地生活"),
+        voice_intent="marketing",  # 晓伊，开业活力
     ),
     "default": Scenario(
         slug="default",
@@ -216,6 +228,7 @@ SCENARIOS: dict[str, Scenario] = {
             "门店在公众号置顶，路过别错过。",
         ),
         hashtags=("#本地探店", "#真诚做事", "#新店打卡", "#周末去哪儿", "#好店推荐"),
+        voice_intent="warm",  # 兜底亲切
     ),
 }
 
@@ -227,6 +240,11 @@ class Script:
     scenario: str
     estimated_seconds: float
     cues: list[dict] = field(default_factory=list)
+    # Voice intent label resolved from the detected scenario. Downstream TTS
+    # converts this to a concrete :class:`VoiceStyle` via
+    # ``audio.tts.resolve_voice_style``. The chain lets templates and request
+    # overrides still take precedence — see ``api.generate`` for the order.
+    voice_intent: str = "default"
 
 
 def _stable_pick(values: tuple[str, ...], seed: str, salt: str = "") -> str:
@@ -322,6 +340,7 @@ def generate_script(
         scenario=scenario.slug,
         estimated_seconds=round(estimated_seconds, 2),
         cues=cues,
+        voice_intent=scenario.voice_intent,
     )
 
 

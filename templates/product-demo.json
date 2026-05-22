@@ -1,0 +1,111 @@
+{
+  "name": "product-demo",
+  "version": "1.0.0",
+  "description": "企业级产品演示模板 — 30–90 秒 SaaS/硬件/软件 demo。平滑过渡 · 大字幕 · 人声优先 · 深蓝主色 + 青绿强调。借鉴 mifi/editly 的产品演示节奏(慢镜 · Ken Burns · 干净叠加),映射到 ShadowBlade pipeline。",
+  "extends": "base",
+  "tags": ["product-demo", "saas", "enterprise", "demo", "tech", "horizontal"],
+
+  "transition": {
+    "style": "editorial",
+    "max_duration": 0.6
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 18,
+    "max_lines": 2,
+    "cps_warn": 12.0,
+    "cps_fail": 16.0,
+    "size_baseline": 72,
+    "margin_v_baseline": 132,
+    "fill_color": "#F5F7FB",
+    "outline_color": "#0F2A4A"
+  },
+
+  "pacing": {
+    "target_shot": 4.5,
+    "min_shot": 2.0,
+    "max_shot": 8.0,
+    "snap_to_beats": false,
+    "must_include_hero": true
+  },
+
+  "audio": {
+    "target_lufs": -16.0,
+    "target_tp": -1.5,
+    "adaptive_bgm_mix": true,
+    "bgm_gain_db": -8.0,
+    "duck_threshold_db": -28.0,
+    "duck_ratio": 8.0,
+    "fade_in": 0.6,
+    "fade_out": 1.2
+  },
+
+  "voice": {
+    "intent": "product_demo",
+    "rate": "+4%",
+    "pitch": "+0Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "photo",
+    "title_required": true,
+    "timestamp_strategy": "hero",
+    "title_position": "left-center",
+    "title_max_chars": 22,
+    "show_brand_strip": true,
+    "brand_strip_color": "#0F2A4A",
+    "brand_strip_position": "left",
+    "brand_strip_width_pct": 0.04
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "br",
+    "opacity": 0.62,
+    "width_pct": 0.13,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "cinematic",
+    "auto_white_balance": true
+  },
+
+  "encode": {
+    "preset": "hero_16x9"
+  },
+
+  "ken_burns": {
+    "enabled": true,
+    "intensity": "subtle",
+    "default_direction": "auto",
+    "max_zoom": 1.08,
+    "apply_to": "low_motion"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#22D3B7",
+    "weight_bold": true,
+    "underline_keywords": false
+  },
+
+  "extras": {
+    "purpose": "product_demo",
+    "recommended_duration_seconds": [30, 90],
+    "use_cases": ["saas_dashboard", "hardware_unboxing", "software_walkthrough", "feature_tutorial"],
+    "brand_palette": {
+      "primary":    "#0F2A4A",
+      "secondary":  "#F5F7FB",
+      "accent":     "#22D3B7",
+      "neutral":    "#5A6B85",
+      "background": "#FFFFFF"
+    },
+    "editor_notes": "人声优先;BGM 主动 ducking 至 -28 dB · 慢镜 4.5s/shot · 关键词青绿高亮 · 暗角晕光让深蓝更沉",
+    "compat": {
+      "editly_inspired_by": ["commonFeatures", "kenBurns", "subtitle", "transitions"]
+    }
+  }
+}

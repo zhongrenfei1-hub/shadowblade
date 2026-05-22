@@ -1,0 +1,108 @@
+{
+  "name": "tutorial",
+  "version": "1.0.0",
+  "description": "教程模板 — How-to / 步骤分解 / 软件教学。亲切女声 + 稍慢清晰 + 关键词高亮,目标是看完一遍就会做。",
+  "extends": "base",
+  "tags": ["tutorial", "how-to", "step-by-step", "education", "horizontal"],
+
+  "transition": {
+    "style": "calm",
+    "max_duration": 0.5
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 16,
+    "max_lines": 2,
+    "cps_warn": 11.0,
+    "cps_fail": 15.0,
+    "size_baseline": 78,
+    "margin_v_baseline": 148,
+    "fill_color": "#FFFFFF",
+    "outline_color": "#0F2A4A"
+  },
+
+  "pacing": {
+    "target_shot": 5.0,
+    "min_shot": 2.5,
+    "max_shot": 10.0,
+    "snap_to_beats": false,
+    "must_include_hero": false
+  },
+
+  "audio": {
+    "target_lufs": -16.0,
+    "target_tp": -1.5,
+    "adaptive_bgm_mix": true,
+    "bgm_gain_db": -12.0,
+    "duck_threshold_db": -30.0,
+    "duck_ratio": 10.0,
+    "fade_in": 0.6,
+    "fade_out": 1.2
+  },
+
+  "voice": {
+    "intent": "tutorial",
+    "rate": "-4%",
+    "pitch": "+0Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "minimal",
+    "title_required": true,
+    "timestamp_strategy": "first",
+    "title_position": "left-center",
+    "title_max_chars": 24,
+    "show_brand_strip": true,
+    "brand_strip_color": "#22D3B7",
+    "brand_strip_position": "left",
+    "brand_strip_width_pct": 0.04
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "br",
+    "opacity": 0.6,
+    "width_pct": 0.12,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "natural",
+    "auto_white_balance": true
+  },
+
+  "encode": {
+    "preset": "hero_16x9"
+  },
+
+  "ken_burns": {
+    "enabled": true,
+    "intensity": "medium",
+    "default_direction": "in",
+    "max_zoom": 1.18,
+    "apply_to": "all"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#FF7849",
+    "weight_bold": true,
+    "underline_keywords": true
+  },
+
+  "extras": {
+    "purpose": "tutorial",
+    "recommended_duration_seconds": [60, 240],
+    "use_cases": ["how_to_video", "software_walkthrough", "skill_demo", "diy"],
+    "step_numbering": {
+      "enabled": true,
+      "format": "Step {n}/{total}",
+      "position": "top-left"
+    },
+    "editor_notes": "晓晓亲切女声 -4% 稍慢 · 步骤间 0.5s 平淡转场不抢戏 · medium ken_burns 推近重点区域 · 橙色高亮 + 加粗 + 下划线让关键操作跳出来 · 自然色温 + 步骤编号",
+    "voice_persona": "清晰示范、像耐心的同事手把手教",
+    "tone_keywords": ["clear", "patient", "stepwise", "approachable"]
+  }
+}

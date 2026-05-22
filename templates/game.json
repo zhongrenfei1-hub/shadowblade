@@ -1,0 +1,103 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "游戏 / 电竞模板 — 直播切片 / 高光时刻 / 攻略实况。年轻男声 + 快节奏 + 暗调饱和,目标是拉住电竞观众的注意力。",
+  "extends": "base",
+  "tags": ["game", "esports", "streaming-clip", "tutorial-gameplay", "horizontal"],
+
+  "transition": {
+    "style": "energetic",
+    "max_duration": 0.3
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 14,
+    "max_lines": 2,
+    "cps_warn": 14.0,
+    "cps_fail": 19.0,
+    "size_baseline": 82,
+    "margin_v_baseline": 152,
+    "fill_color": "#F5F7FB",
+    "outline_color": "#00E0FF"
+  },
+
+  "pacing": {
+    "target_shot": 2.0,
+    "min_shot": 0.8,
+    "max_shot": 4.0,
+    "snap_to_beats": true,
+    "must_include_hero": false
+  },
+
+  "audio": {
+    "target_lufs": -12.0,
+    "target_tp": -0.8,
+    "adaptive_bgm_mix": true,
+    "bgm_gain_db": -6.0,
+    "duck_threshold_db": -22.0,
+    "duck_ratio": 6.0,
+    "fade_in": 0.2,
+    "fade_out": 0.5
+  },
+
+  "voice": {
+    "intent": "game",
+    "rate": "+16%",
+    "pitch": "+5Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "photo",
+    "title_required": true,
+    "timestamp_strategy": "hero",
+    "title_position": "bottom-center",
+    "title_max_chars": 22,
+    "show_brand_strip": true,
+    "brand_strip_color": "#00E0FF",
+    "brand_strip_position": "bottom",
+    "brand_strip_width_pct": 0.04
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "tl",
+    "opacity": 0.7,
+    "width_pct": 0.13,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "cinematic",
+    "auto_white_balance": false
+  },
+
+  "encode": {
+    "preset": "hero_16x9"
+  },
+
+  "ken_burns": {
+    "enabled": false,
+    "intensity": "subtle",
+    "default_direction": "auto",
+    "max_zoom": 1.05,
+    "apply_to": "low_motion"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#00E0FF",
+    "weight_bold": true,
+    "underline_keywords": false
+  },
+
+  "extras": {
+    "purpose": "game",
+    "recommended_duration_seconds": [20, 90],
+    "use_cases": ["esports_highlight", "stream_cutdown", "gameplay_tutorial", "boss_kill"],
+    "editor_notes": "云夏年轻男声 +16% 语速 +5Hz · 2s/shot 紧凑节奏 · 节拍 snap 切点压点 · 青色描边字幕呼应 esports UI · 暗调 cinematic LUT 让 HDR 高光更突出",
+    "voice_persona": "活力、专业解说、像主播",
+    "tone_keywords": ["youthful", "punchy", "esports", "fast"]
+  }
+}

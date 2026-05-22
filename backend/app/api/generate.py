@@ -20,8 +20,16 @@ from pydantic import BaseModel, Field
 
 from app.core.config import settings
 from app.services.audio.asr import transcribe
-from app.services.audio.tts import EDGE_TTS_VOICES, generate_audio
+from app.services.audio.tts import (
+    EDGE_TTS_VOICES,
+    THEME_VOICE_STYLES,
+    VoiceStyle,
+    generate_audio,
+    resolve_voice_style,
+)
 from app.services.llm.script_generator import SCENARIOS, generate_script
+from app.services.template import load_template
+from app.services.template.schema import Template, TemplateVoice
 from app.services.video.covers import CoverSpec, generate_cover
 from app.services.video.pipeline import ClipSpec, MixPipeline, MixRequest
 from app.services.video.subtitle import Cue
@@ -249,8 +257,32 @@ class GenerateVideoRequest(BaseModel):
         default_factory=list,
         description="本地视频素材路径列表；当 stock_source!='manual' 时可空",
     )
-    voice: str = "xiaoxiao-zh-f"
-    rate: str = "+0%"
+    # ── voice / TTS personality ──────────────────────────────────────────
+    # When ``voice``/``rate``/``pitch`` are left at defaults, the
+    # resolution chain takes over (template → scenario → default).
+    # Explicit values always win.
+    voice: str | None = Field(
+        default=None,
+        description="边缘 TTS 音色别名（xiaoxiao-zh-f 等）。空时按 voice_intent/template/scenario 决定",
+    )
+    rate: str | None = Field(
+        default=None,
+        description="语速 (-50%..+100%)。空时由 voice_intent 决定",
+    )
+    pitch: str | None = Field(
+        default=None,
+        description="音调 (-50Hz..+50Hz)。空时由 voice_intent 决定",
+    )
+    voice_intent: str | None = Field(
+        default=None,
+        description="主题驱动声音：marketing / product_demo / training / tutorial / dance / "
+        "game / news / lyrical / energetic / professional / warm / calm / "
+        "intellectual / youthful。空时按 template → scenario 自动选",
+    )
+    template: str | None = Field(
+        default=None,
+        description="可选 — 加载 templates/*.json 模板（产品演示/教学/营销等）",
+    )
     asr_model: str = "base"
     skip_asr: bool = Field(
         default=False,
@@ -319,16 +351,99 @@ async def get_video_job(job_id: str):
     )
 
 
+def _resolve_voice_style_for_request(
+    body: GenerateVideoRequest,
+    *,
+    scenario_intent: str | None,
+    template: Template | None,
+) -> tuple[VoiceStyle, str]:
+    """Pick the final :class:`VoiceStyle` for this generation request.
+
+    Precedence (highest first):
+        1. explicit ``body.voice`` / ``rate`` / ``pitch``
+        2. explicit ``body.voice_intent``
+        3. ``template.voice`` (intent + per-field overrides)
+        4. ``scenario_intent`` from the detected script scenario
+        5. ``"default"`` preset
+
+    Returns ``(style, source_label)``. ``source_label`` is just for logs /
+    the API response so the user can see *why* a particular voice was chosen.
+    """
+    # Layer 5 — fallback baseline
+    style = THEME_VOICE_STYLES["default"]
+    source = "default"
+
+    # Layer 4 — scenario hint from the LLM script generator
+    if scenario_intent:
+        style = resolve_voice_style(scenario_intent)
+        source = f"scenario:{scenario_intent}"
+
+    # Layer 3 — template
+    if template is not None:
+        tv: TemplateVoice = template.voice
+        if tv.intent:
+            style = resolve_voice_style(tv.intent)
+            source = f"template:{template.name}:{tv.intent}"
+        # Per-field overrides from the template
+        if tv.voice or tv.rate or tv.pitch:
+            style = VoiceStyle(
+                voice=tv.voice or style.voice,
+                rate=tv.rate or style.rate,
+                pitch=tv.pitch or style.pitch,
+                intent=style.intent,
+            )
+            source = f"template:{template.name}"
+
+    # Layer 2 — explicit voice_intent on the request body
+    if body.voice_intent:
+        style = resolve_voice_style(body.voice_intent)
+        source = f"request_intent:{body.voice_intent}"
+
+    # Layer 1 — explicit voice/rate/pitch
+    if body.voice or body.rate or body.pitch:
+        style = VoiceStyle(
+            voice=body.voice or style.voice,
+            rate=body.rate or style.rate,
+            pitch=body.pitch or style.pitch,
+            intent=body.voice_intent or style.intent,
+        )
+        source = "request_explicit"
+
+    return style, source
+
+
 async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
     import math
 
     job = _JOBS[job_id]
     job["status"] = "running"
     try:
+        # ---- 0a. optional template load ----
+        template_obj: Template | None = None
+        if body.template:
+            try:
+                template_obj = load_template(body.template)
+                log.info("loaded template %s for job %s", body.template, job_id)
+            except (FileNotFoundError, ValueError) as exc:
+                log.warning("template %r load failed (%s) — continuing without",
+                            body.template, exc)
+                template_obj = None
+
         # ---- 1. script (first, so we know how many clips we need) ----
         job["steps"]["script"] = "running"
         script = generate_script(body.topic, length=body.length)
         job["steps"]["script"] = "succeeded"
+
+        # ---- 1b. resolve voice style via the precedence chain ----
+        voice_style, voice_source = _resolve_voice_style_for_request(
+            body,
+            scenario_intent=script.voice_intent,
+            template=template_obj,
+        )
+        log.info(
+            "job %s voice: %s rate=%s pitch=%s (source=%s)",
+            job_id, voice_style.voice, voice_style.rate, voice_style.pitch, voice_source,
+        )
 
         # ---- 0. fetch stock footage (auto-scaling clip count) ----
         clip_paths = list(body.clip_paths)
@@ -384,11 +499,13 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
                 "no clips provided (stock_source=manual but clip_paths is empty)"
             )
 
-        # ---- 2. tts ----
+        # ---- 2. tts (with theme-resolved voice style) ----
         job["steps"]["tts"] = "running"
         voice_path = _work_dir(f"video_{job_id}") / "voice.wav"
         tts_result = await generate_audio(
-            script.content, voice_path, voice=body.voice, rate=body.rate
+            script.content,
+            voice_path,
+            style=voice_style,
         )
         job["steps"]["tts"] = "succeeded"
 
@@ -475,6 +592,16 @@ async def _run_video_job(job_id: str, body: GenerateVideoRequest) -> None:
             "keywords": script.keywords,
             "transitions": mix_result.transitions,
             "warnings": mix_result.warnings,
+            # Theme-driven voice resolution — exposes *why* this video sounds
+            # the way it does so the UI can show a chip / debug panel.
+            "voice": {
+                "voice": voice_style.voice,
+                "rate": voice_style.rate,
+                "pitch": voice_style.pitch,
+                "intent": voice_style.intent,
+                "source": voice_source,
+                "tts_duration": tts_result.duration,
+            },
         }
         job["status"] = "succeeded"
     except Exception as exc:  # noqa: BLE001

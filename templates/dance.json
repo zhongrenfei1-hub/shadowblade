@@ -1,0 +1,103 @@
+{
+  "name": "dance",
+  "version": "1.0.0",
+  "description": "舞蹈 / 律动 / 节奏类模板 — TikTok / 抖音 vlog / 健身舞蹈。明亮女声 + 极快节奏 + 节拍同步切点,目标是 BGM 一响立刻起范儿。",
+  "extends": "base",
+  "tags": ["dance", "vlog", "tiktok", "rhythm", "fitness-dance", "vertical"],
+
+  "transition": {
+    "style": "energetic",
+    "max_duration": 0.25
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 12,
+    "max_lines": 1,
+    "cps_warn": 16.0,
+    "cps_fail": 22.0,
+    "size_baseline": 92,
+    "margin_v_baseline": 192,
+    "fill_color": "#FFFFFF",
+    "outline_color": "#FF007F"
+  },
+
+  "pacing": {
+    "target_shot": 1.4,
+    "min_shot": 0.6,
+    "max_shot": 2.5,
+    "snap_to_beats": true,
+    "must_include_hero": false
+  },
+
+  "audio": {
+    "target_lufs": -10.0,
+    "target_tp": -0.5,
+    "adaptive_bgm_mix": false,
+    "bgm_gain_db": -2.0,
+    "duck_threshold_db": -18.0,
+    "duck_ratio": 4.0,
+    "fade_in": 0.1,
+    "fade_out": 0.3
+  },
+
+  "voice": {
+    "intent": "dance",
+    "rate": "+28%",
+    "pitch": "+8Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "photo",
+    "title_required": false,
+    "timestamp_strategy": "mid",
+    "title_position": "bottom-center",
+    "title_max_chars": 14,
+    "show_brand_strip": false,
+    "brand_strip_color": "#FF007F",
+    "brand_strip_position": "top",
+    "brand_strip_width_pct": 0.03
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "tr",
+    "opacity": 0.5,
+    "width_pct": 0.1,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "punchy",
+    "auto_white_balance": false
+  },
+
+  "encode": {
+    "preset": "social_9x16"
+  },
+
+  "ken_burns": {
+    "enabled": false,
+    "intensity": "subtle",
+    "default_direction": "auto",
+    "max_zoom": 1.04,
+    "apply_to": "low_motion"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#FF007F",
+    "weight_bold": true,
+    "underline_keywords": false
+  },
+
+  "extras": {
+    "purpose": "dance",
+    "recommended_duration_seconds": [15, 60],
+    "use_cases": ["tiktok_dance", "abs_30day", "rhythm_vlog", "music_video_short"],
+    "editor_notes": "晓伊极亮女声 +28% 快语速 +8Hz 拔高 · 1.4s/shot 极短切 · 节拍 snap 同步 · 高 LUFS -10 推满响度 · BGM 不 duck 让音乐撑场 · 粉红描边字幕配 punchy LUT",
+    "voice_persona": "高能、感染力强、像主播喊口令",
+    "tone_keywords": ["high-energy", "rhythmic", "fast", "intense"]
+  }
+}

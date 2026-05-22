@@ -1,0 +1,103 @@
+{
+  "name": "training",
+  "version": "1.0.0",
+  "description": "企业培训模板 — 2–8 分钟内训 / 合规课程 / 入职引导。知性女声 + 慢节奏 + 偏冷调色,沉稳可信。",
+  "extends": "base",
+  "tags": ["training", "education", "compliance", "onboarding", "horizontal"],
+
+  "transition": {
+    "style": "calm",
+    "max_duration": 0.8
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 20,
+    "max_lines": 2,
+    "cps_warn": 10.0,
+    "cps_fail": 14.0,
+    "size_baseline": 64,
+    "margin_v_baseline": 120,
+    "fill_color": "#F5F7FB",
+    "outline_color": "#11161F"
+  },
+
+  "pacing": {
+    "target_shot": 7.0,
+    "min_shot": 3.5,
+    "max_shot": 14.0,
+    "snap_to_beats": false,
+    "must_include_hero": false
+  },
+
+  "audio": {
+    "target_lufs": -18.0,
+    "target_tp": -2.0,
+    "adaptive_bgm_mix": true,
+    "bgm_gain_db": -14.0,
+    "duck_threshold_db": -34.0,
+    "duck_ratio": 12.0,
+    "fade_in": 1.0,
+    "fade_out": 2.0
+  },
+
+  "voice": {
+    "intent": "training",
+    "rate": "-8%",
+    "pitch": "-3Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "minimal",
+    "title_required": true,
+    "timestamp_strategy": "first",
+    "title_position": "left-center",
+    "title_max_chars": 28,
+    "show_brand_strip": true,
+    "brand_strip_color": "#0F2A4A",
+    "brand_strip_position": "left",
+    "brand_strip_width_pct": 0.05
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "br",
+    "opacity": 0.55,
+    "width_pct": 0.12,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "cool",
+    "auto_white_balance": true
+  },
+
+  "encode": {
+    "preset": "hero_16x9"
+  },
+
+  "ken_burns": {
+    "enabled": true,
+    "intensity": "subtle",
+    "default_direction": "in",
+    "max_zoom": 1.08,
+    "apply_to": "low_motion"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#22D3B7",
+    "weight_bold": false,
+    "underline_keywords": true
+  },
+
+  "extras": {
+    "purpose": "training",
+    "recommended_duration_seconds": [120, 480],
+    "use_cases": ["compliance_course", "internal_training", "onboarding", "skill_certification"],
+    "editor_notes": "晓萱知性女声 -8% 语速 -3Hz 偏低音调 · 慢节奏 7s/shot 留思考时间 · 冷调色温显专业 · 关键词青绿下划线辅助记忆 · 1s 长 fade-in 让画面有呼吸感",
+    "voice_persona": "稳重、清晰、像大学讲师",
+    "tone_keywords": ["calm", "intellectual", "slow", "trustworthy"]
+  }
+}

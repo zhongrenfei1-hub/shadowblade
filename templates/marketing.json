@@ -1,0 +1,103 @@
+{
+  "name": "marketing",
+  "version": "1.0.0",
+  "description": "营销推广模板 — 15–45 秒社媒推广 / 落地页头图 / 信息流广告。明亮女声 + 快节奏 + 高对比度调色,目标是 3 秒内抓眼球。",
+  "extends": "base",
+  "tags": ["marketing", "social", "ads", "promo", "vertical"],
+
+  "transition": {
+    "style": "energetic",
+    "max_duration": 0.4
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "max_chars_per_line": 14,
+    "max_lines": 2,
+    "cps_warn": 14.0,
+    "cps_fail": 18.0,
+    "size_baseline": 84,
+    "margin_v_baseline": 168,
+    "fill_color": "#FFFFFF",
+    "outline_color": "#0F2A4A"
+  },
+
+  "pacing": {
+    "target_shot": 2.2,
+    "min_shot": 1.0,
+    "max_shot": 4.0,
+    "snap_to_beats": true,
+    "must_include_hero": true
+  },
+
+  "audio": {
+    "target_lufs": -13.0,
+    "target_tp": -1.0,
+    "adaptive_bgm_mix": true,
+    "bgm_gain_db": -10.0,
+    "duck_threshold_db": -24.0,
+    "duck_ratio": 6.0,
+    "fade_in": 0.3,
+    "fade_out": 0.6
+  },
+
+  "voice": {
+    "intent": "marketing",
+    "rate": "+18%",
+    "pitch": "+5Hz"
+  },
+
+  "cover": {
+    "enabled": true,
+    "style": "photo",
+    "title_required": true,
+    "timestamp_strategy": "hero",
+    "title_position": "center",
+    "title_max_chars": 18,
+    "show_brand_strip": true,
+    "brand_strip_color": "#22D3B7",
+    "brand_strip_position": "bottom",
+    "brand_strip_width_pct": 0.04
+  },
+
+  "watermark": {
+    "enabled": true,
+    "position": "br",
+    "opacity": 0.75,
+    "width_pct": 0.14,
+    "require_logo": false
+  },
+
+  "color": {
+    "look": "punchy",
+    "auto_white_balance": true
+  },
+
+  "encode": {
+    "preset": "social_9x16"
+  },
+
+  "ken_burns": {
+    "enabled": false,
+    "intensity": "subtle",
+    "default_direction": "auto",
+    "max_zoom": 1.06,
+    "apply_to": "low_motion"
+  },
+
+  "highlight": {
+    "enabled": true,
+    "color": "#FFD400",
+    "weight_bold": true,
+    "underline_keywords": false
+  },
+
+  "extras": {
+    "purpose": "marketing",
+    "recommended_duration_seconds": [15, 45],
+    "use_cases": ["social_promo", "info_feed_ad", "landing_hero", "launch_teaser"],
+    "editor_notes": "晓伊明亮女声 +18% 语速 +5Hz pitch · 节拍同步切点 · 高对比 punchy LUT · 黄色 highlight 突出 CTA · 短促 0.4s 转场",
+    "voice_persona": "热情、有感染力、像朋友极力推荐",
+    "tone_keywords": ["energetic", "bright", "fast", "感染力"]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "name": "product-demo-tutorial",
+  "version": "1.0.0",
+  "description": "教程型产品演示模板 — 软件/SaaS 步骤化教学。继承 product-demo 的企业风格,放慢节奏 + 加强 Ken Burns 强调步骤 + 字幕高亮关键词,适合 60–180 秒'How-to'内容。",
+  "extends": "product-demo",
+  "tags": ["product-demo", "tutorial", "how-to", "saas", "step-by-step", "horizontal"],
+
+  "transition": {
+    "style": "calm",
+    "max_duration": 0.7
+  },
+
+  "subtitle": {
+    "max_chars_per_line": 16,
+    "size_baseline": 78,
+    "margin_v_baseline": 148,
+    "cps_warn": 11.0,
+    "cps_fail": 15.0
+  },
+
+  "pacing": {
+    "target_shot": 6.0,
+    "min_shot": 3.0,
+    "max_shot": 12.0
+  },
+
+  "audio": {
+    "fade_in": 0.8,
+    "fade_out": 1.6,
+    "duck_threshold_db": -32.0,
+    "duck_ratio": 10.0
+  },
+
+  "voice": {
+    "intent": "tutorial",
+    "rate": "-4%",
+    "pitch": "+0Hz"
+  },
+
+  "cover": {
+    "title_position": "left-center",
+    "title_max_chars": 26,
+    "brand_strip_width_pct": 0.05
+  },
+
+  "ken_burns": {
+    "intensity": "medium",
+    "default_direction": "in",
+    "max_zoom": 1.18,
+    "apply_to": "all"
+  },
+
+  "highlight": {
+    "weight_bold": true,
+    "underline_keywords": true
+  },
+
+  "extras": {
+    "purpose": "product_demo_tutorial",
+    "recommended_duration_seconds": [60, 180],
+    "use_cases": ["software_walkthrough", "saas_onboarding", "feature_tutorial", "how_to"],
+    "step_numbering": {
+      "enabled": true,
+      "format": "{n}/{total}",
+      "position": "top-left"
+    },
+    "editor_notes": "慢节奏 6s/shot 让步骤看得清 · medium ken_burns 1.18× 模拟摄影机推近重点区域 · 关键词青绿下划线 + 加粗 · 字幕 16 字/行更易读 · BGM 深度 ducking -32dB 保人声清晰",
+    "compat": {
+      "inherits_from": ["base", "product-demo"]
+    }
+  }
+}
